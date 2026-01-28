@@ -153,3 +153,67 @@ class Weight_Button extends Button{
     println("Not implemented 9");
   }
 }
+
+class File_Button extends Button{
+  File_Button(int _x_pos, int _y_pos, int _x_size, int _y_size, String _text){
+    super(_x_pos, _y_pos, _x_size, _y_size, _text);
+  }
+  
+  void click(){
+    file_clicked = !file_clicked;
+  }
+}
+
+/**
+* Unique type knap til knapper under file, som skal gemmes væk når man ikke har klikket på file.
+*/
+
+class File_Type_Buttons extends Button{
+  
+  File_Type_Buttons(int _x_pos, int _y_pos, int _x_size, int _y_size, String _text){
+    super(_x_pos, _y_pos, _x_size, _y_size, _text);
+  }
+  
+  void draw(){
+    if (file_clicked){
+      int changeVal = 2;
+      
+      if (mouse_Over()){
+        fill(#000000);
+        rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
+        fill(#FFFFFF); //Text color
+        textSize((x_size-changeVal)/5);
+        textAlign(CENTER);
+        text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2, (y_pos+changeVal)+(y_size-changeVal*2)/2+10);
+      } else {
+        fill(#505050);
+        rect(x_pos,y_pos, x_size, y_size);
+        fill(#FFFFFF);
+        textSize(x_size/5);
+        textAlign(CENTER);
+        text(text, (x_pos)+(x_size)/2, (y_pos)+(y_size)/2+10);
+      } 
+    }
+  }
+
+}
+
+class Export_Button extends File_Type_Buttons{
+  Export_Button(int _x_pos, int _y_pos, int _x_size, int _y_size, String _text){
+    super(_x_pos, _y_pos, _x_size, _y_size, _text);
+  }
+  
+  void click(){
+    println("Not implemented 9");
+  }
+}
+
+class Import_Button extends File_Type_Buttons{
+  Import_Button(int _x_pos, int _y_pos, int _x_size, int _y_size, String _text){
+    super(_x_pos, _y_pos, _x_size, _y_size, _text);
+  }
+  
+  void click(){
+    println("Not implemented 9");
+  }
+}

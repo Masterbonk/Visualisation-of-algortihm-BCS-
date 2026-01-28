@@ -2,6 +2,8 @@ float x = 10;
 
 Button[] button_array;
 
+boolean file_clicked = false;
+
 void setup() //This will ONLY run when the program start and never again
 {
   fullScreen(); //Is the size of the canvas
@@ -11,7 +13,7 @@ void setup() //This will ONLY run when the program start and never again
   // "data" directory to load successfully
   font = createFont("Arial-Black-48.vlw", 128);
   textFont(font);
-  button_array = new Button[9];
+  button_array = new Button[12];
   Make_UI();
 }
 
@@ -23,9 +25,6 @@ void draw() { //This will run frameRate times per second and repeat continuesly
   }
 } 
 
-void mousePressed(){
-  
-}
 
 
 void Make_UI(){
@@ -49,4 +48,12 @@ void Make_UI(){
   button_array[7] = flag_b;
   Button weight = new Weight_Button(width/9*8, height-50, width/9, 50,"Weight"); //Weight
   button_array[8] = weight;
+  
+  //Make top left UI
+  Button file = new File_Button(0, 0, width/9, 50,"File"); //File
+  button_array[9] = file;
+  Button export = new Export_Button(0, 55, width/10, 45,"Export"); //Export
+  button_array[10] = export;
+  Button b_import = new Import_Button(0, 105, width/10, 45,"Import"); //Import
+  button_array[11] = b_import;
 }
