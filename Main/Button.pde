@@ -20,7 +20,10 @@ class Button{
   */
   
   void draw(){
-    int changeVal = 2;
+    fill(#A2A2A2);
+    rect(x_pos,y_pos, x_size, y_size);
+    
+    int changeVal = 5;
     
     if (mouse_Over()){
       fill(#000000);
@@ -176,7 +179,10 @@ class File_Type_Buttons extends Button{
   
   void draw(){
     if (file_clicked){
-      int changeVal = 2;
+      fill(#A2A2A2);
+      rect(x_pos,y_pos, x_size, y_size);
+      
+      int changeVal = 5;
       
       if (mouse_Over()){
         fill(#000000);
