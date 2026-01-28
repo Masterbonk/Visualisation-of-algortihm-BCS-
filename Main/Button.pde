@@ -2,19 +2,19 @@ void button(int _x_pos, int _y_pos, int _x_size, int _y_size, String _text){
   int changeVal = 2;
   
   if (mouseOver(_x_pos, _y_pos, _x_size, _y_size)){
-    fill(#585858);
+    fill(#000000);
     rect(_x_pos+changeVal,_y_pos+changeVal, _x_size-changeVal*2, _y_size-changeVal*2);
-    fill(#000000);
-    textSize((_x_size-changeVal)/7);
+    fill(#FFFFFF); //Text color
+    textSize((_x_size-changeVal)/5);
     textAlign(CENTER);
-    text(_text, (_x_pos+changeVal)+(_x_size-changeVal*2)/2, (_y_pos+changeVal)+(_y_size-changeVal*2)/2+5);
+    text(_text, (_x_pos+changeVal)+(_x_size-changeVal*2)/2, (_y_pos+changeVal)+(_y_size-changeVal*2)/2+10);
   } else {
-    fill(#898989);
+    fill(#505050);
     rect(_x_pos,_y_pos, _x_size, _y_size);
-    fill(#000000);
-    textSize(_x_size/7);
+    fill(#FFFFFF);
+    textSize(_x_size/5);
     textAlign(CENTER);
-    text(_text, (_x_pos)+(_x_size)/2, (_y_pos)+(_y_size)/2+5);
+    text(_text, (_x_pos)+(_x_size)/2, (_y_pos)+(_y_size)/2+10);
   } 
 }
 
