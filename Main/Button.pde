@@ -71,12 +71,19 @@ class Back_Button extends Button{
 }
 
 class Pause_Button extends Button{
+  boolean paused = false;
+  
   Pause_Button(int _x_pos, int _y_pos, int _x_size, int _y_size, String _text){
     super(_x_pos, _y_pos, _x_size, _y_size, _text);
   }
   
   void click(){
-    println("Not implemented 2");
+    
+    if (!paused) {
+      text = "⏸"; //start
+    } else text = "⏯"; //Pause
+    paused = !paused;
+    println("Not fully implemented 2");
   }
 }
 
