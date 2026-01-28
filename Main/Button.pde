@@ -1,4 +1,12 @@
-
+/**
+* Button class is used to make all buttons in the program. They have their size, position and a text inside them all built in.
+*  
+*  
+* @param x_pos The x_pos is the x position of the square that makes up the button. Effectively where on x axis the left side of the button is.
+* @param y_pos The y_pos is the y position of the square that makes up the button. Effectively where on y axis the top side of the button is.
+* @param x_size How wide the button is.
+* @param x_pos How high the buttom is.
+*/
 class Button{
   int x_pos, y_pos, x_size, y_size; 
   String text;
@@ -6,6 +14,10 @@ class Button{
   Button(int _x_pos, int _y_pos, int _x_size, int _y_size, String _text){
     x_pos = _x_pos; y_pos = _y_pos; x_size = _x_size; y_size = _y_size; text = _text;
   }
+  
+  /**
+  * Draw is used to draw the button at the end of every draw loop. ALso makes it change size and color if the mosue button hovers over it.
+  */
   
   void draw(){
     int changeVal = 2;
@@ -27,6 +39,10 @@ class Button{
     } 
   }
   
+  /**
+  * @return is true if the mouse is currently hovering over the button.
+  */
+  
   boolean mouse_Over(){
   if (mouseX >= x_pos && mouseX <= x_pos+x_size && 
       mouseY >= y_pos && mouseY <= y_pos+y_size){
@@ -36,6 +52,9 @@ class Button{
      }
   }
   
+  /**
+  * Click is extended to all subclass of buttons and is used to activate the functionality of the button once it's clicked.
+  */
   void click(){
     println("Not implemented");
   }
@@ -47,7 +66,7 @@ class Back_Button extends Button{
   }
   
   void click(){
-    println("Not implemented");
+    println("Not implemented 1");
   }
 }
 
@@ -57,7 +76,7 @@ class Pause_Button extends Button{
   }
   
   void click(){
-    println("Not implemented");
+    println("Not implemented 2");
   }
 }
 
@@ -67,7 +86,7 @@ class Forward_Button extends Button{
   }
   
   void click(){
-    println("Not implemented");
+    println("Not implemented 3");
   }
 }
 
@@ -77,7 +96,7 @@ class Cut_Button extends Button{
   }
   
   void click(){
-    println("Not implemented");
+    println("Not implemented 4");
   }
 }
 
@@ -87,7 +106,7 @@ class Circle_Button extends Button{
   }
   
   void click(){
-    println("Not implemented");
+    println("Not implemented 5");
   }
 }
 
@@ -97,7 +116,7 @@ class Line_Button extends Button{
   }
   
   void click(){
-    println("Not implemented");
+    println("Not implemented 6");
   }
 }
 class Flag_A_Button extends Button{
@@ -106,7 +125,7 @@ class Flag_A_Button extends Button{
   }
   
   void click(){
-    println("Not implemented");
+    println("Not implemented 7");
   }
 }
 class Flag_B_Button extends Button{
@@ -115,7 +134,7 @@ class Flag_B_Button extends Button{
   }
   
   void click(){
-    println("Not implemented");
+    println("Not implemented 8");
   }
 }
 class Weight_Button extends Button{
@@ -124,6 +143,6 @@ class Weight_Button extends Button{
   }
   
   void click(){
-    println("Not implemented");
+    println("Not implemented 9");
   }
 }
