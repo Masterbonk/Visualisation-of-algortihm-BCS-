@@ -1,7 +1,10 @@
 float x = 10;
 
+
+
 void setup() //This will ONLY run when the program start and never again
 {
+  Logic.MyMath.plus(10,10);
   fullScreen(); //Is the size of the canvas
   frameRate(120); //Decides how many times per second the draw function is called
 }
