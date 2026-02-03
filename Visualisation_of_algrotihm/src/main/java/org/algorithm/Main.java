@@ -66,21 +66,21 @@ public class Main extends PApplet{
         //Make bottom part of UI
         Button back = new Back_Button(this,0, displayHeight-button_height, displayWidth/9, button_height,"⏴"); //Step back
         button_array[0] = back;
-        Button pause = new Pause_Button(this, displayWidth/9, displayHeight-button_height, displayWidth/9, button_height,"⏯"); //pause
+        Button pause = new Pause_Button(this, (displayWidth)/9f, displayHeight-button_height, displayWidth/9, button_height,"⏯"); //pause
         button_array[1] = pause;
-        Button forward = new Forward_Button(this, displayWidth/9*2, displayHeight-button_height, displayWidth/9, button_height,"⏵"); //Step forward
+        Button forward = new Forward_Button(this, displayWidth/9f*2f, displayHeight-button_height, displayWidth/9, button_height,"⏵"); //Step forward
         button_array[2] = forward;
-        Button cut = new Cut_Button(this, displayWidth/9*3, displayHeight-button_height, displayWidth/9, button_height,"✂"); //Cut
+        Button cut = new Cut_Button(this, displayWidth/9f*3f, displayHeight-button_height, displayWidth/9, button_height,"✂"); //Cut
         button_array[3] = cut;
-        Button circle = new Circle_Button(this, displayWidth/9*4, displayHeight-button_height, displayWidth/9, button_height,"⏺"); //Create circle
+        Button circle = new Circle_Button(this, displayWidth/9f*4f, displayHeight-button_height, displayWidth/9, button_height,"⏺"); //Create circle
         button_array[4] = circle;
-        Button line = new Line_Button(this, displayWidth/9*5, displayHeight-button_height, displayWidth/9, button_height,"\\"); //Create line
+        Button line = new Line_Button(this, displayWidth/9f*5f, displayHeight-button_height, displayWidth/9, button_height,"\\"); //Create line
         button_array[5] = line;
-        Button flag_a = new Flag_A_Button(this, displayWidth/9*6, displayHeight-button_height, displayWidth/9, button_height,"⚐"); //Set flag A
+        Button flag_a = new Flag_A_Button(this, displayWidth/9f*6f, displayHeight-button_height, displayWidth/9, button_height,"⚐"); //Set flag A
         button_array[6] = flag_a;
-        Button flag_b = new Flag_B_Button(this, displayWidth/9*7, displayHeight-button_height, displayWidth/9, button_height,"⚑"); //Set flag B
+        Button flag_b = new Flag_B_Button(this, displayWidth/9f*7f, displayHeight-button_height, displayWidth/9, button_height,"⚑"); //Set flag B
         button_array[7] = flag_b;
-        Button weight = new Weight_Button(this, displayWidth/9*8, displayHeight-button_height, displayWidth/9, button_height,"Weight"); //Weight
+        Button weight = new Weight_Button(this, displayWidth/9f*8f, displayHeight-button_height, displayWidth/9, button_height,"Weight"); //Weight
         button_array[8] = weight;
 
         //Make top left UI

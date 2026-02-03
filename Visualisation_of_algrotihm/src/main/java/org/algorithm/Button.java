@@ -4,7 +4,8 @@ import processing.core.PApplet;
 
 
 class Button {
-    int x_pos, y_pos, x_size, y_size;
+    float x_pos, y_pos;
+    int x_size, y_size;
     String text;
 
     public PApplet sketch;
@@ -17,7 +18,7 @@ class Button {
      * @param _x_size How wide the button is.
      * @param _x_pos How high the buttom is.
      */
-    Button(PApplet _sketch,int _x_pos, int _y_pos, int _x_size, int _y_size, String _text){
+    Button(PApplet _sketch,float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
         sketch = _sketch; x_pos = _x_pos; y_pos = _y_pos; x_size = _x_size; y_size = _y_size; text = _text;
     }
 
@@ -70,7 +71,7 @@ class Button {
 }
 
 class Back_Button extends Button{
-    Back_Button(PApplet _sketch, int _x_pos, int _y_pos, int _x_size, int _y_size, String _text){
+    Back_Button(PApplet _sketch, float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
         super(_sketch,_x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -82,7 +83,7 @@ class Back_Button extends Button{
 class Pause_Button extends Button{
     boolean paused = false;
 
-    Pause_Button(PApplet _sketch,int _x_pos, int _y_pos, int _x_size, int _y_size, String _text){
+    Pause_Button(PApplet _sketch,float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
         super(_sketch,_x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -97,7 +98,7 @@ class Pause_Button extends Button{
 }
 
 class Forward_Button extends Button{
-    Forward_Button(PApplet _sketch,int _x_pos, int _y_pos, int _x_size, int _y_size, String _text){
+    Forward_Button(PApplet _sketch,float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
         super(_sketch,_x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -107,7 +108,7 @@ class Forward_Button extends Button{
 }
 
 class Cut_Button extends Button{
-    Cut_Button(PApplet _sketch,int _x_pos, int _y_pos, int _x_size, int _y_size, String _text){
+    Cut_Button(PApplet _sketch,float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
         super(_sketch,_x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -117,7 +118,7 @@ class Cut_Button extends Button{
 }
 
 class Circle_Button extends Button{
-    Circle_Button(PApplet _sketch,int _x_pos, int _y_pos, int _x_size, int _y_size, String _text){
+    Circle_Button(PApplet _sketch,float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
         super(_sketch,_x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -127,7 +128,7 @@ class Circle_Button extends Button{
 }
 
 class Line_Button extends Button{
-    Line_Button(PApplet _sketch,int _x_pos, int _y_pos, int _x_size, int _y_size, String _text){
+    Line_Button(PApplet _sketch,float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
         super(_sketch,_x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -136,7 +137,7 @@ class Line_Button extends Button{
     }
 }
 class Flag_A_Button extends Button{
-    Flag_A_Button(PApplet _sketch, int _x_pos, int _y_pos, int _x_size, int _y_size, String _text){
+    Flag_A_Button(PApplet _sketch, float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -145,7 +146,7 @@ class Flag_A_Button extends Button{
     }
 }
 class Flag_B_Button extends Button{
-    Flag_B_Button(PApplet _sketch, int _x_pos, int _y_pos, int _x_size, int _y_size, String _text){
+    Flag_B_Button(PApplet _sketch, float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -154,7 +155,7 @@ class Flag_B_Button extends Button{
     }
 }
 class Weight_Button extends Button{
-    Weight_Button(PApplet _sketch, int _x_pos, int _y_pos, int _x_size, int _y_size, String _text){
+    Weight_Button(PApplet _sketch, float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -164,7 +165,7 @@ class Weight_Button extends Button{
 }
 
 class File_Button extends Button{
-    File_Button(PApplet _sketch, int _x_pos, int _y_pos, int _x_size, int _y_size, String _text){
+    File_Button(PApplet _sketch, float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -179,7 +180,7 @@ class File_Button extends Button{
 
 class File_Type_Buttons extends Button{
 
-    File_Type_Buttons(PApplet _sketch, int _x_pos, int _y_pos, int _x_size, int _y_size, String _text){
+    File_Type_Buttons(PApplet _sketch, float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -211,7 +212,7 @@ class File_Type_Buttons extends Button{
 }
 
 class Export_Button extends File_Type_Buttons{
-    Export_Button(PApplet _sketch, int _x_pos, int _y_pos, int _x_size, int _y_size, String _text){
+    Export_Button(PApplet _sketch, float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -221,7 +222,7 @@ class Export_Button extends File_Type_Buttons{
 }
 
 class Import_Button extends File_Type_Buttons{
-    Import_Button(PApplet _sketch, int _x_pos, int _y_pos, int _x_size, int _y_size, String _text){
+    Import_Button(PApplet _sketch, float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
