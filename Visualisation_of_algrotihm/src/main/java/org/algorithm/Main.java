@@ -39,8 +39,11 @@ public class Main extends PApplet{
     }
 
     public void draw(){
-        text("\uD83D\uDF82", 100, 100);
-        //ellipse(200,200,200,200);
+        background(204); //Draws over everything on screen clearing it for the next frame
+
+        for(int i = 0; i < button_array.length; i++){
+            button_array[i].drawing();
+        }
     }
 
     public void mousePressed(){
@@ -58,31 +61,31 @@ public class Main extends PApplet{
     void Make_UI(){
 
         //Make bottom part of UI
-        Button back = new Back_Button(this,width/9*0, height-50, width/9, 50,"⏴"); //Step back
+        Button back = new Back_Button(this,0, displayHeight-50, displayWidth/9, 50,"⏴"); //Step back
         button_array[0] = back;
-        Button pause = new Pause_Button(this, width/9*1, height-50, width/9, 50,"⏯"); //pause
+        Button pause = new Pause_Button(this, displayWidth/9, displayHeight-50, displayWidth/9, 50,"⏯"); //pause
         button_array[1] = pause;
-        Button forward = new Forward_Button(this, width/9*2, height-50, width/9, 50,"⏵"); //Step forward
+        Button forward = new Forward_Button(this, displayWidth/9*2, displayHeight-50, displayWidth/9, 50,"⏵"); //Step forward
         button_array[2] = forward;
-        Button cut = new Cut_Button(this, width/9*3, height-50, width/9, 50,"✂"); //Cut
+        Button cut = new Cut_Button(this, displayWidth/9*3, displayHeight-50, displayWidth/9, 50,"✂"); //Cut
         button_array[3] = cut;
-        Button circle = new Circle_Button(this, width/9*4, height-50, width/9, 50,"⏺"); //Create circle
+        Button circle = new Circle_Button(this, displayWidth/9*4, displayHeight-50, displayWidth/9, 50,"⏺"); //Create circle
         button_array[4] = circle;
-        Button line = new Line_Button(this, width/9*5, height-50, width/9, 50,"\\"); //Create line
+        Button line = new Line_Button(this, displayWidth/9*5, displayHeight-50, displayWidth/9, 50,"\\"); //Create line
         button_array[5] = line;
-        Button flag_a = new Flag_A_Button(this, width/9*6, height-50, width/9, 50,"⚐"); //Set flag A
+        Button flag_a = new Flag_A_Button(this, displayWidth/9*6, displayHeight-50, displayWidth/9, 50,"⚐"); //Set flag A
         button_array[6] = flag_a;
-        Button flag_b = new Flag_B_Button(this, width/9*7, height-50, width/9, 50,"⚑"); //Set flag B
+        Button flag_b = new Flag_B_Button(this, displayWidth/9*7, displayHeight-50, displayWidth/9, 50,"⚑"); //Set flag B
         button_array[7] = flag_b;
-        Button weight = new Weight_Button(this, width/9*8, height-50, width/9, 50,"Weight"); //Weight
+        Button weight = new Weight_Button(this, displayWidth/9*8, displayHeight-50, displayWidth/9, 50,"Weight"); //Weight
         button_array[8] = weight;
 
         //Make top left UI
-        Button file = new File_Button(this, 0, 0, width/9, 50,"File"); //File
+        Button file = new File_Button(this, 0, 0, displayWidth/9, 50,"File"); //File
         button_array[9] = file;
-        Button export = new Export_Button(this, 0, 55, width/10, 45,"Export"); //Export
+        Button export = new Export_Button(this, 0, 55, displayWidth/10, 45,"Export"); //Export
         button_array[10] = export;
-        Button b_import = new Import_Button(this, 0, 105, width/10, 45,"Import"); //Import
+        Button b_import = new Import_Button(this, 0, 105, displayWidth/10, 45,"Import"); //Import
         button_array[11] = b_import;
     }
 }
