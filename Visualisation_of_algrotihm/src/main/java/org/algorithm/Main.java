@@ -1,6 +1,7 @@
 package org.algorithm;
 import processing.core.PApplet;
 import processing.core.PFont;
+import processing.core.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -12,22 +13,28 @@ public class Main extends PApplet{
         PApplet.runSketch(processingArgs, main);
     }
 
-    float x = 10;
+    float x = 10; //x
 
     Button[] button_array;
 
     public static boolean file_clicked = false;
 
-    public void settings(){ //Setup
-        fullScreen(); //Is the size of the canvas
+    public void setup(){
         //frameRate(30); //Decides how many times per second the draw function is called
         PFont font;
         // The font must be located in the sketch's
         // "data" directory to load successfully
-        font = createFont("Arial-Black-48.vlw", 128);
+        font = createFont("./../../data/Arial-Black-48.vlw", 128);
         textFont(font);
+    }
+
+    public void settings(){ //Setup
+        fullScreen(); //Is the size of the canvas
+
+        //frameRate(30); //Decides how many times per second the draw function is called
         button_array = new Button[12];
         Make_UI();
+
     }
 
     public void draw(){

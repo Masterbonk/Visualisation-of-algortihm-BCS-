@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="caf5e388-23a7-4ebb-90e6-c88d8a8c10cd" name="Changes" comment="" />
+    <list default="true" id="cb502b02-0bb6-48fd-91df-73f02bdaa8a4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Visualisation_of_algrotihm/src/main/data/Arial-Black-48.vlw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Visualisation_of_algrotihm/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Visualisation_of_algrotihm/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Visualisation_of_algrotihm/src/main/java/org/algorithm/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Visualisation_of_algrotihm/src/main/java/org/algorithm/Main.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -11,9 +19,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
   "associatedIndex": 7
 }]]></component>
-  <component name="ProjectId" id="38yZzjpvva5UyASl6PjGuD48p2H" />
+  <component name="ProjectId" id="399saypjWq48ybW6IBw2vnEFAJT" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -22,10 +31,13 @@
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "7__Intellij",
     "kotlin-language-version-configured": "true",
-    "onboarding.tips.debug.path": "C:/Users/adria/Desktop/Visualisation-of-algortihm-BCS-/Visualisation_of_algorithm/src/Main.java",
+    "last_opened_file_path": "C:/Users/adria/Desktop/Visualisation-of-algortihm-BCS-/Visualisation_of_algorithm",
+    "onboarding.tips.debug.path": "C:/Users/adria/Desktop/Visualisation-of-algortihm-BCS-/Visualisation_of_algorithm/src/main/java/org/algorithm/Main.java",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -39,12 +51,12 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="caf5e388-23a7-4ebb-90e6-c88d8a8c10cd" name="Changes" comment="" />
-      <created>1769774040204</created>
+      <changelist id="cb502b02-0bb6-48fd-91df-73f02bdaa8a4" name="Changes" comment="" />
+      <created>1770119701110</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1769774040204</updated>
-      <workItem from="1769774043099" duration="342000" />
+      <updated>1770119701110</updated>
+      <workItem from="1770119705454" duration="93000" />
     </task>
     <servers />
   </component>
