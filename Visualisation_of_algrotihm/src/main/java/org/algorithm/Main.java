@@ -15,6 +15,8 @@ public class Main extends PApplet{
 
     float x = 10;
 
+    int button_height = 50;
+
     Button[] button_array;
 
     public static boolean file_clicked = false;
@@ -24,10 +26,12 @@ public class Main extends PApplet{
         PFont font;
         // The font must be located in the sketch's
         // "data" directory to load successfully
-        printArray(PFont.list());
 
         font = createFont("Arial-Black-48", 128);
         textFont(font);
+        button_height = displayHeight*10/144;
+        Make_UI();
+
     }
 
     public void settings(){ //Setup
@@ -35,7 +39,6 @@ public class Main extends PApplet{
 
         //frameRate(30); //Decides how many times per second the draw function is called
         button_array = new Button[12];
-        Make_UI();
     }
 
     public void draw(){
@@ -61,27 +64,27 @@ public class Main extends PApplet{
     void Make_UI(){
 
         //Make bottom part of UI
-        Button back = new Back_Button(this,0, displayHeight-50, displayWidth/9, 50,"⏴"); //Step back
+        Button back = new Back_Button(this,0, displayHeight-button_height, displayWidth/9, button_height,"⏴"); //Step back
         button_array[0] = back;
-        Button pause = new Pause_Button(this, displayWidth/9, displayHeight-50, displayWidth/9, 50,"⏯"); //pause
+        Button pause = new Pause_Button(this, displayWidth/9, displayHeight-button_height, displayWidth/9, button_height,"⏯"); //pause
         button_array[1] = pause;
-        Button forward = new Forward_Button(this, displayWidth/9*2, displayHeight-50, displayWidth/9, 50,"⏵"); //Step forward
+        Button forward = new Forward_Button(this, displayWidth/9*2, displayHeight-button_height, displayWidth/9, button_height,"⏵"); //Step forward
         button_array[2] = forward;
-        Button cut = new Cut_Button(this, displayWidth/9*3, displayHeight-50, displayWidth/9, 50,"✂"); //Cut
+        Button cut = new Cut_Button(this, displayWidth/9*3, displayHeight-button_height, displayWidth/9, button_height,"✂"); //Cut
         button_array[3] = cut;
-        Button circle = new Circle_Button(this, displayWidth/9*4, displayHeight-50, displayWidth/9, 50,"⏺"); //Create circle
+        Button circle = new Circle_Button(this, displayWidth/9*4, displayHeight-button_height, displayWidth/9, button_height,"⏺"); //Create circle
         button_array[4] = circle;
-        Button line = new Line_Button(this, displayWidth/9*5, displayHeight-50, displayWidth/9, 50,"\\"); //Create line
+        Button line = new Line_Button(this, displayWidth/9*5, displayHeight-button_height, displayWidth/9, button_height,"\\"); //Create line
         button_array[5] = line;
-        Button flag_a = new Flag_A_Button(this, displayWidth/9*6, displayHeight-50, displayWidth/9, 50,"⚐"); //Set flag A
+        Button flag_a = new Flag_A_Button(this, displayWidth/9*6, displayHeight-button_height, displayWidth/9, button_height,"⚐"); //Set flag A
         button_array[6] = flag_a;
-        Button flag_b = new Flag_B_Button(this, displayWidth/9*7, displayHeight-50, displayWidth/9, 50,"⚑"); //Set flag B
+        Button flag_b = new Flag_B_Button(this, displayWidth/9*7, displayHeight-button_height, displayWidth/9, button_height,"⚑"); //Set flag B
         button_array[7] = flag_b;
-        Button weight = new Weight_Button(this, displayWidth/9*8, displayHeight-50, displayWidth/9, 50,"Weight"); //Weight
+        Button weight = new Weight_Button(this, displayWidth/9*8, displayHeight-button_height, displayWidth/9, button_height,"Weight"); //Weight
         button_array[8] = weight;
 
         //Make top left UI
-        Button file = new File_Button(this, 0, 0, displayWidth/9, 50,"File"); //File
+        Button file = new File_Button(this, 0, 0, displayWidth/9, button_height,"File"); //File
         button_array[9] = file;
         Button export = new Export_Button(this, 0, 55, displayWidth/10, 45,"Export"); //Export
         button_array[10] = export;
