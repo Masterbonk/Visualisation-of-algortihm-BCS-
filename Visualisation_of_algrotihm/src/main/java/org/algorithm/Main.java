@@ -86,9 +86,9 @@ public class Main extends PApplet{
         //Make top left UI
         Button file = new File_Button(this, 0, 0, displayWidth/9, button_height,"File"); //File
         button_array[9] = file;
-        Button export = new Export_Button(this, 0, 55, displayWidth/10, 45,"Export"); //Export
+        Button export = new Export_Button(this, 0, button_height+button_height/10, displayWidth/10 ,button_height-button_height/10,"Export"); //Export
         button_array[10] = export;
-        Button b_import = new Import_Button(this, 0, 105, displayWidth/10, 45,"Import"); //Import
+        Button b_import = new Import_Button(this, 0, button_height*2+button_height/10, displayWidth/10, button_height-button_height/10,"Import"); //Import
         button_array[11] = b_import;
     }
 }
