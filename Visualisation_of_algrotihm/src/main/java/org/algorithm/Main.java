@@ -24,8 +24,8 @@ public class Main extends PApplet{
         PFont font;
         // The font must be located in the sketch's
         // "data" directory to load successfully
-        font = createFont("Arial-Black-48.vlw", 128);
-        textFont(font);
+        //font = createFont("Arial-Black-48.vlw", 128);
+        //textFont(font);
         button_array = new Button[12];
         Make_UI();
     }
