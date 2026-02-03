@@ -13,7 +13,7 @@ public class Main extends PApplet{
         PApplet.runSketch(processingArgs, main);
     }
 
-    float x = 10; //x
+    float x = 10;
 
     Button[] button_array;
 
@@ -34,7 +34,6 @@ public class Main extends PApplet{
         //frameRate(30); //Decides how many times per second the draw function is called
         button_array = new Button[12];
         Make_UI();
-
     }
 
     public void draw(){
