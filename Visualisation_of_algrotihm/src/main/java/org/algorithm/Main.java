@@ -24,7 +24,9 @@ public class Main extends PApplet{
         PFont font;
         // The font must be located in the sketch's
         // "data" directory to load successfully
-        font = createFont("./../../data/Arial-Black-48.vlw", 128);
+        printArray(PFont.list());
+
+        font = createFont("Arial-Black-48", 128);
         textFont(font);
     }
 
@@ -37,7 +39,8 @@ public class Main extends PApplet{
     }
 
     public void draw(){
-        ellipse(200,200,200,200);
+        text("\uD83D\uDF82", 100, 100);
+        //ellipse(200,200,200,200);
     }
 
     public void mousePressed(){
