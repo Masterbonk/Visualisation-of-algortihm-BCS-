@@ -24,4 +24,14 @@ public class Node {
         sketch.pop();
     }
 
+    boolean mouse_Over(){
+        float offset = dim/2;
+        if (sketch.mouseX >= x-offset && sketch.mouseX <= x+dim-offset &&
+                sketch.mouseY >= y-offset && sketch.mouseY <= y+dim-offset){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

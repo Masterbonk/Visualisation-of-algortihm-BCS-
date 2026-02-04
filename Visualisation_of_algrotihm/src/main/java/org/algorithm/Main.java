@@ -73,6 +73,13 @@ public class Main extends PApplet{
     }
 
     public void mousePressed(){
+        for(Node n: node_array){
+            if(n.mouse_Over()){
+                node_array.remove(n);
+                println("Clicked on node at point "+n.x+", "+n.y);
+                break;
+            }
+        }
 
         for(String s: button_map.keySet()){
             if(button_map.get(s).mouse_Over()){
