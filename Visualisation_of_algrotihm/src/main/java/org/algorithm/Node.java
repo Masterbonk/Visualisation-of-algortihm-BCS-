@@ -16,8 +16,12 @@ public class Node {
     }
 
     public void render(){
+        sketch.push();
+        sketch.fill(204, 24, 24);
         dim = 50;
         sketch.circle(x,y,dim);
+
+        sketch.pop();
     }
 
 }

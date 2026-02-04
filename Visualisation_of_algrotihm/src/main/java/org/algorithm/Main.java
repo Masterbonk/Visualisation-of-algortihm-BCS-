@@ -3,6 +3,8 @@ import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.*;
 
+import java.util.ArrayList;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main extends PApplet{
@@ -19,6 +21,9 @@ public class Main extends PApplet{
 
     Button[] button_array;
 
+    ArrayList<Edge> edge_array = new ArrayList<>();
+    ArrayList<Node> node_array = new ArrayList<>();
+
     public static boolean file_clicked = false;
 
     public void setup(){
@@ -29,8 +34,11 @@ public class Main extends PApplet{
 
         font = createFont("Arial-Black-48", 128);
         textFont(font);
+
+
         button_height = displayHeight*10/144;
         Make_UI();
+        Make_Graph();
 
     }
 
@@ -43,6 +51,18 @@ public class Main extends PApplet{
 
     public void draw(){
         background(204); //Draws over everything on screen clearing it for the next frame
+
+        push();
+        strokeWeight(10);
+        textSize(30);
+        for(int i = 0; i < edge_array.size(); i++){
+            edge_array.get(i).render();
+        }
+        pop();
+
+        for(int i = 0; i < node_array.size(); i++){
+            node_array.get(i).render();
+        }
 
         for(int i = 0; i < button_array.length; i++){
             button_array[i].render();
@@ -59,6 +79,32 @@ public class Main extends PApplet{
         if (!button_array[9].mouse_Over() && !button_array[10].mouse_Over() && !button_array[11].mouse_Over() && file_clicked){ //Lukker file menuen hvis man klikker uden for den mens den er åben.
             file_clicked = false;
         }
+    }
+
+    void Make_Graph(){
+
+        Node x, y;
+        BiEdge e;
+        x = new Node(this, 400, 200);
+        y = new Node(this, 200, 400);
+        e = new BiEdge(this, x, y, 5);
+
+
+        node_array.add(x);
+        node_array.add(y);
+        edge_array.add(e);
+
+        x = new Node(this, 600, 625);
+
+        e = new BiEdge(this, x, y, 15);
+        edge_array.add(e);
+
+        y = new Node(this, 200, 625);
+        e = new BiEdge(this, x, y, 5);
+
+        node_array.add(x);
+        node_array.add(y);
+        edge_array.add(e);
     }
 
     void Make_UI(){
