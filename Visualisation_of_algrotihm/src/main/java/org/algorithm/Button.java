@@ -4,8 +4,7 @@ import processing.core.PApplet;
 
 
 class Button {
-    float x_pos, y_pos;
-    int x_size, y_size;
+    float x_pos, y_pos, x_size, y_size;
     String text;
     boolean clicked = false;
 
@@ -19,7 +18,7 @@ class Button {
      * @param _x_size How wide the button is.
      * @param _y_size How high the button is.
      */
-    Button(PApplet _sketch,float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
+    Button(PApplet _sketch,float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         sketch = _sketch; x_pos = _x_pos; y_pos = _y_pos; x_size = _x_size; y_size = _y_size; text = _text;
     }
 
@@ -54,6 +53,14 @@ class Button {
         }
     }
 
+    void resize(float _x_pos, float _y_pos, float _x_size, float _y_size){
+        x_pos = _x_pos;
+        y_pos = _y_pos;
+        x_size = _x_size;
+        y_size = _y_size;
+
+    }
+
     /**
      * @return is true if the mouse is currently hovering over the button.
      */
@@ -82,7 +89,7 @@ class Back_Button extends Button{
     }
 
     void click(){
-        sketch.println("Not implemented 1");
+        sketch.println("Not implemented Back");
     }
 }
 
@@ -99,7 +106,7 @@ class Pause_Button extends Button{
             text = "⏸"; //start
         } else text = "⏯"; //Pause
         paused = !paused;
-        sketch.println("Not fully implemented 2");
+        sketch.println("Not fully implemented Pause");
     }
 }
 
@@ -109,7 +116,7 @@ class Forward_Button extends Button{
     }
 
     void click(){
-        sketch.println("Not implemented 3");
+        sketch.println("Not implemented Forward");
     }
 }
 
@@ -119,7 +126,7 @@ class Cut_Button extends Button{
     }
 
     void click(){super.click();
-        sketch.println("Not implemented 4");
+        sketch.println("Not implemented Cut");
     }
 }
 
@@ -142,7 +149,7 @@ class Line_Button extends Button{
     }
 
     void click(){super.click();
-        sketch.println("Not implemented 6");
+        sketch.println("Not implemented Line");
     }
 }
 class Flag_A_Button extends Button{
@@ -151,7 +158,7 @@ class Flag_A_Button extends Button{
     }
 
     void click(){super.click();
-        sketch.println("Not implemented 7");
+        sketch.println("Not implemented Flag A");
     }
 }
 class Flag_B_Button extends Button{
@@ -160,7 +167,7 @@ class Flag_B_Button extends Button{
     }
 
     void click(){super.click();
-        sketch.println("Not implemented 8");
+        sketch.println("Not implemented Flag B");
     }
 }
 class Weight_Button extends Button{
@@ -169,7 +176,7 @@ class Weight_Button extends Button{
     }
 
     void click(){super.click();
-        sketch.println("Not implemented 9");
+        sketch.println("Not implemented Weight");
     }
 }
 
@@ -230,7 +237,7 @@ class Export_Button extends File_Type_Buttons{
     }
 
     void click(){super.click();
-        sketch.println("Not implemented 9");
+        sketch.println("Not implemented Export");
     }
 }
 
@@ -240,6 +247,6 @@ class Import_Button extends File_Type_Buttons{
     }
 
     void click(){super.click();
-        sketch.println("Not implemented 9");
+        sketch.println("Not implemented Import");
     }
 }

@@ -10,17 +10,26 @@ import java.util.HashMap;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main extends PApplet{
 
+    public static boolean fullscreen = false;
+
+    public static String[] processingArgs = {"Main"};
+    public static Main main = new Main();
+
     public static void main(String[] args){
-        String[] processingArgs = {"Main"};
-        Main main = new Main();
+
         PApplet.runSketch(processingArgs, main);
     }
 
     float x = 10;
 
     int button_height = 50;
+    int dWidth, dHeight;
+
 
     public static HashMap<String, Button> button_map;
+    String[] bottom_ui = {"back", "pause", "forward", "cut", "circle", "line", "flag_a", "flag_b", "weight"};
+    String[] top_ui = {"file", "export", "import"};
+
 
     ArrayList<Edge> edge_array = new ArrayList<>();
     ArrayList<Node> node_array = new ArrayList<>();
@@ -35,6 +44,9 @@ public class Main extends PApplet{
         // The font must be located in the sketch's
         // "data" directory to load successfully
 
+        surface.setResizable(true);
+        surface.setLocation(0,0);
+
         font = createFont("Arial-Black-48", 128);
         textFont(font);
 
@@ -46,7 +58,16 @@ public class Main extends PApplet{
     }
 
     public void settings(){ //Setup
-        fullScreen(); //Is the size of the canvas
+
+        String[] modeFile = loadStrings("mode.txt");
+        fullscreen = modeFile != null && modeFile[0].equals("fullscreen");
+
+        if (fullscreen) {
+            fullScreen();
+        } else {
+            size(900, 600);
+        }
+        //fullScreen(); //Is the size of the canvas
 
         //frameRate(30); //Decides how many times per second the draw function is called
         button_map = new HashMap<>();
@@ -58,6 +79,9 @@ public class Main extends PApplet{
         push();
         strokeWeight(10);
         textSize(30);
+
+        rescale();
+
         for(int i = 0; i < edge_array.size(); i++){
             edge_array.get(i).render();
         }
@@ -72,6 +96,79 @@ public class Main extends PApplet{
         }
     }
 
+    public void rescale(){
+
+        if (dWidth != width || dHeight != height){
+            dWidth = width;
+            dHeight = height;
+            //button_height = dHeight*10/144;
+
+
+            for(int i = 0; i < bottom_ui.length; i++){
+                button_map.get(bottom_ui[i]).resize(i*(width/9f),dHeight-button_height,dWidth/9f, button_height);
+            }
+
+            for(int i = 0; i < top_ui.length; i++){
+                int a = 0;
+                if (i != 0) {
+                    a = 1;
+                } else {
+                    a = 0;
+                }
+                button_map.get(top_ui[i]).resize(0,i*button_height,dWidth/9f - (a * (dWidth/9f)/10f ), button_height);
+            }
+
+        }
+
+    }
+
+    public void keyPressed(){
+
+        if (key == CODED){
+            if (keyCode == 122) {
+                print("key pressed f11 ");
+                toggleAndRestart();
+                //PApplet.runSketch(processingArgs, main);
+            }
+        }
+    }
+
+    void toggleAndRestart() {
+        // Write new mode
+        String newMode = fullscreen ? "windowed" : "fullscreen";
+        saveStrings("mode.txt", new String[]{ newMode });
+
+        // Relaunch the sketch
+        relaunchSketch();
+
+        // Exit current instance
+        exit();
+    }
+
+    void relaunchSketch() {
+        try {
+            String javaBin = System.getProperty("java.home") +
+                    java.io.File.separator + "bin" +
+                    java.io.File.separator + "java";
+
+            String classPath = System.getProperty("java.class.path");
+            String className = this.getClass().getName();
+
+            ProcessBuilder builder = new ProcessBuilder(
+                    javaBin,
+                    "-cp",
+                    classPath,
+                    className
+            );
+
+            builder.start();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    
     public void mousePressed(){
         for(Node n: node_array){
             if(n.mouse_Over()){
@@ -155,9 +252,9 @@ public class Main extends PApplet{
         //Make top left UI
         Button file = new File_Button(this, 0, 0, displayWidth/9, button_height,"File"); //File
         button_map.put("file",file);
-        Button export = new Export_Button(this, 0, button_height+button_height/10, displayWidth/10 ,button_height-button_height/10,"Export"); //Export
+        Button export = new Export_Button(this, 0, button_height+button_height/10f, displayWidth/10 ,button_height-button_height/10,"Export"); //Export
         button_map.put("export",export);
-        Button b_import = new Import_Button(this, 0, button_height*2+button_height/10, displayWidth/10, button_height-button_height/10,"Import"); //Import
+        Button b_import = new Import_Button(this, 0, button_height*2+button_height/10f, displayWidth/10, button_height-button_height/10,"Import"); //Import
         button_map.put("import",b_import);
     }
 }
