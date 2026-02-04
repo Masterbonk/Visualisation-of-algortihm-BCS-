@@ -45,7 +45,7 @@ public class Main extends PApplet{
         background(204); //Draws over everything on screen clearing it for the next frame
 
         for(int i = 0; i < button_array.length; i++){
-            button_array[i].drawing();
+            button_array[i].render();
         }
     }
 

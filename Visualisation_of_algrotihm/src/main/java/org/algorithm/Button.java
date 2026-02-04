@@ -16,7 +16,7 @@ class Button {
      * @param _x_pos The x_pos is the x position of the square that makes up the button. Effectively where on x axis the left side of the button is.
      * @param _y_pos The y_pos is the y position of the square that makes up the button. Effectively where on y axis the top side of the button is.
      * @param _x_size How wide the button is.
-     * @param _x_pos How high the buttom is.
+     * @param _y_size How high the button is.
      */
     Button(PApplet _sketch,float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
         sketch = _sketch; x_pos = _x_pos; y_pos = _y_pos; x_size = _x_size; y_size = _y_size; text = _text;
@@ -26,7 +26,7 @@ class Button {
      * Draw is used to draw the button at the end of every draw loop. ALso makes it change size and color if the mosue button hovers over it.
      */
 
-    void drawing(){
+    void render(){
         sketch.fill(162f,162f,162f);
         sketch.rect(x_pos,y_pos, x_size, y_size);
 
@@ -36,16 +36,16 @@ class Button {
             sketch.fill(0f);
             sketch.rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
             sketch.fill(255f); //Text color
-            sketch.textSize((x_size-changeVal)/5);
+            sketch.textSize((x_size-changeVal)/5f);
             sketch.textAlign(sketch.CENTER);
-            sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2, (y_pos+changeVal)+(y_size-changeVal*2)/2+10);
+            sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
         } else {
             sketch.fill(80f);
             sketch.rect(x_pos,y_pos, x_size, y_size);
             sketch.fill(255f);
-            sketch.textSize(x_size/5);
+            sketch.textSize(x_size/5f);
             sketch.textAlign(sketch.CENTER);
-            sketch.text(text, (x_pos)+(x_size)/2, (y_pos)+(y_size)/2+10);
+            sketch.text(text, (x_pos)+(x_size)/2f, (y_pos)+(y_size)/2f+10);
         }
     }
 
@@ -184,7 +184,7 @@ class File_Type_Buttons extends Button{
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
-    void drawing(){
+    void render(){
         if (Main.file_clicked){
             sketch.fill(162f);
             sketch.rect(x_pos,y_pos, x_size, y_size);
@@ -195,16 +195,16 @@ class File_Type_Buttons extends Button{
                 sketch.fill(0f);
                 sketch.rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
                 sketch.fill(255f); //Text color
-                sketch.textSize((x_size-changeVal)/5);
+                sketch.textSize((x_size-changeVal)/5f);
                 sketch.textAlign(sketch.CENTER);
-                sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2, (y_pos+changeVal)+(y_size-changeVal*2)/2+10);
+                sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
             } else {
                 sketch.fill(80f);
                 sketch.rect(x_pos,y_pos, x_size, y_size);
                 sketch.fill(255f);
-                sketch.textSize(x_size/5);
+                sketch.textSize(x_size/5f);
                 sketch.textAlign(sketch.CENTER);
-                sketch.text(text, (x_pos)+(x_size)/2, (y_pos)+(y_size)/2+10);
+                sketch.text(text, (x_pos)+(x_size)/2f, (y_pos)+(y_size)/2f+10);
             }
         }
     }
