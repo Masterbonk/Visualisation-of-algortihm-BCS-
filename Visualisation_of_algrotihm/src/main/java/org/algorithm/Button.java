@@ -5,7 +5,7 @@ import processing.core.PApplet;
 
 class Button {
     float x_pos, y_pos;
-    int x_size, y_size;
+    float x_size, y_size;
     String text;
 
     public PApplet sketch;
@@ -18,7 +18,7 @@ class Button {
      * @param _x_size How wide the button is.
      * @param _x_pos How high the buttom is.
      */
-    Button(PApplet _sketch,float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
+    Button(PApplet _sketch,float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         sketch = _sketch; x_pos = _x_pos; y_pos = _y_pos; x_size = _x_size; y_size = _y_size; text = _text;
     }
 
@@ -38,15 +38,22 @@ class Button {
             sketch.fill(255f); //Text color
             sketch.textSize((x_size-changeVal)/5);
             sketch.textAlign(sketch.CENTER);
-            sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2, (y_pos+changeVal)+(y_size-changeVal*2)/2+10);
+            sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2, (y_pos+changeVal)+(y_size-changeVal*2)/2+(y_size/5f));
         } else {
             sketch.fill(80f);
             sketch.rect(x_pos,y_pos, x_size, y_size);
             sketch.fill(255f);
             sketch.textSize(x_size/5);
             sketch.textAlign(sketch.CENTER);
-            sketch.text(text, (x_pos)+(x_size)/2, (y_pos)+(y_size)/2+10);
+            sketch.text(text, (x_pos)+(x_size)/2, (y_pos)+(y_size)/2+(y_size/5f));
         }
+    }
+
+    void resize(float _x_pos, float _y_pos, float _x_size, float _y_size){
+            x_pos = _x_pos;
+            y_pos = _y_pos;
+            x_size = _x_size;
+            y_size = _y_size;
     }
 
     /**
