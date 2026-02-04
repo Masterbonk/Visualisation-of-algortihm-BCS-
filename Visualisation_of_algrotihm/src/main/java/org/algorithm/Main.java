@@ -24,8 +24,6 @@ public class Main extends PApplet{
 
     public static boolean file_clicked = false;
 
-
-
     public void setup(){
 
         surface.setResizable(true);
@@ -41,8 +39,6 @@ public class Main extends PApplet{
         dHeight = height;
         button_height = dHeight*10/144;
         Make_UI();
-
-
 
     }
 
@@ -64,10 +60,10 @@ public class Main extends PApplet{
         rescale();
 
         for (Button button : bottom_button_array) {
-            button.drawing();
+            button.render();
         }
         for (Button button : top_button_array) {
-            button.drawing();
+            button.render();
         }
     }
 
@@ -82,7 +78,7 @@ public class Main extends PApplet{
             for(int i = 0; i < bottom_button_array.length; i++){
                 bottom_button_array[i].resize(i*(width/9f),dHeight-button_height,dWidth/9f, button_height);
             }
-            
+
             for(int i = 0; i < top_button_array.length; i++){
                 int a = 0;
                 if (i != 0) {

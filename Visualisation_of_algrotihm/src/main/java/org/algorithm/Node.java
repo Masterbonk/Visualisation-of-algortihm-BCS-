@@ -1,0 +1,23 @@
+package org.algorithm;
+
+import processing.core.PApplet;
+
+public class Node {
+
+    int x, y;
+    int dim;
+    Edge[] connected;
+    PApplet sketch;
+
+    public Node(PApplet _sketch, int _x, int _y){
+        x = _x;
+        y = _y;
+        sketch = _sketch;
+    }
+
+    public void render(){
+        dim = 50;
+        sketch.circle(x,y,dim);
+    }
+
+}
