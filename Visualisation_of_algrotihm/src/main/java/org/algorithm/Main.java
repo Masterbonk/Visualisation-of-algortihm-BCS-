@@ -12,13 +12,15 @@ public class Main extends PApplet{
 
     public static boolean fullscreen = true;
 
+    /**
+     * Main function starts the sketch
+     * @param args
+     */
     public static void main(String[] args){
         String[] processingArgs = {"Main"};
         Main main = new Main();
         PApplet.runSketch(processingArgs, main);
     }
-
-    float x = 10;
 
     int button_height = 50;
     int dWidth, dHeight;
@@ -34,8 +36,31 @@ public class Main extends PApplet{
 
     public static boolean add_node_active = false;
 
-    public static boolean file_clicked = false;
+    /**
+     * The settings are the first thing that runs, it is done before the
+     * sketch truly begin and some functions is therefor unable to be run in it.
+     */
+    public void settings(){ //Setup
 
+        String[] modeFile = loadStrings("mode.txt");
+        fullscreen = modeFile != null && modeFile[0].equals("fullscreen");
+
+        if (fullscreen) {
+            fullScreen();
+        } else {
+            size(900, 600);
+
+        }
+        //fullScreen(); //Is the size of the canvas
+
+        //frameRate(30); //Decides how many times per second the draw function is called
+        button_map = new HashMap<>();
+    }
+
+    /**
+     * Setup is run right after settings. It is used to setup the envioment before we truly begin drawing everything.
+     * Certain functions can only be called here, like create font.
+     */
     public void setup(){
         //frameRate(30); //Decides how many times per second the draw function is called
         PFont font;
@@ -55,22 +80,12 @@ public class Main extends PApplet{
 
     }
 
-    public void settings(){ //Setup
 
-        String[] modeFile = loadStrings("mode.txt");
-        fullscreen = modeFile != null && modeFile[0].equals("fullscreen");
-
-        if (fullscreen) {
-            fullScreen();
-        } else {
-            size(900, 600);
-
-        }
-        //fullScreen(); //Is the size of the canvas
-
-        //frameRate(30); //Decides how many times per second the draw function is called
-        button_map = new HashMap<>();
-    }
+    /**
+     * Draw is run repeatedly forever.
+     * It begins running as soon as setup has finished.
+     * It will run 60 times per second if the FPS is 60, but it might be unable to do 60 per second if too much needs to be drawn.
+     */
 
     public void draw(){
         background(204); //Draws over everything on screen clearing it for the next frame
@@ -121,6 +136,11 @@ public class Main extends PApplet{
 
     }
 
+    /**
+     * Runs everytime a key is pressed.
+     * Can be used with keycode to check if specific keys are clicked.
+     */
+
     public void keyPressed(){
 
         if (key == CODED){
@@ -167,6 +187,9 @@ public class Main extends PApplet{
     }
 
 
+    /**
+     * If the mouse is pressed. Used to check if the buttons are checked, and other similair effects started by mousepressed.
+     */
     public void mousePressed(){
         for(Node n: node_array){
             if(n.mouse_Over() && button_map.get("cut").clicked){
@@ -186,6 +209,10 @@ public class Main extends PApplet{
         }
     }
 
+    /**
+     * When the mosue is clicked, ie. the very moment the mouse is lifted from being pressed.
+     */
+
     public void mouseClicked(){
         boolean hovering_over_buttons = false;
         for(String s: button_map.keySet()){
@@ -198,6 +225,10 @@ public class Main extends PApplet{
             node_array.add(x);
         }
     }
+
+    /**
+     * Makes the base graph objects. All are added to the node and edge arrays so they are rendered.
+     */
 
     void Make_Graph(){
 
@@ -225,6 +256,9 @@ public class Main extends PApplet{
         edge_array.add(e);
     }
 
+    /**
+     * Makes the Ui elements, ie. all buttons All are added to the button arrays so they are rendered.
+     */
     void Make_UI(){
 
         //Make bottom part of UI
