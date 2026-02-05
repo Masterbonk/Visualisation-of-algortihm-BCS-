@@ -28,7 +28,7 @@ public class Main extends PApplet{
 
 
     public static HashMap<String, Button> button_map;
-    String[] bottom_ui = {"back", "pause", "forward", "cut", "circle", "line", "flag_a", "flag_b", "weight"};
+    public static String[] bottom_ui = {"back", "pause", "forward", "cut", "circle", "line", "flag_a", "flag_b", "weight"};
     String[] top_ui = {"file", "export", "import"};
 
 
@@ -251,6 +251,16 @@ public class Main extends PApplet{
         }
     }
 
+    public static void turn_Off_All_Buttons(Button _button){
+       for(int i = 0; i < bottom_ui.length; i++){
+          if(button_map.get(bottom_ui[i]) != _button){
+               button_map.get(bottom_ui[i]).clicked = false;
+          }
+       }
+
+
+    }
+
     /**
      * Makes the base graph objects. All are added to the node and edge arrays so they are rendered.
      */
@@ -314,4 +324,5 @@ public class Main extends PApplet{
         Button b_import = new Import_Button(this, 0, button_height*2+button_height/10f, displayWidth/10, button_height-button_height/10,"Import"); //Import
         button_map.put("import",b_import);
     }
+
 }

@@ -3,6 +3,7 @@ package org.algorithm;
 import processing.core.PApplet;
 
 import static org.algorithm.Main.node_1;
+import static org.algorithm.Main.turn_Off_All_Buttons;
 
 
 class Button {
@@ -44,6 +45,7 @@ class Button {
             sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
             sketch.pop();
         } else if (clicked){
+
             sketch.push();
             sketch.fill(127,178,96);
             sketch.rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
@@ -93,6 +95,7 @@ class Button {
      */
     void click(){
         clicked = !clicked;
+        turn_Off_All_Buttons(this);
         //sketch.println("Not implemented");
     }
 }
