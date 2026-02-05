@@ -98,6 +98,7 @@ public class Main extends PApplet{
 
         for(int i = 0; i < edge_array.size(); i++){
             edge_array.get(i).render();
+            //edge_array.get(i).color();
         }
         pop();
 

@@ -7,6 +7,7 @@ public class Edge {
     Node to;
     PApplet sketch;
     int weight;
+    float x = 0, y = 0;
 
     public Edge(PApplet _sketch, Node _from, Node _to, int _weight){
         sketch = _sketch;
@@ -27,6 +28,18 @@ public class Edge {
         sketch.rect((from.x+to.x)/2f-(weight>9?sketch.getGraphics().textSize*0.5f:sketch.getGraphics().textSize*0.25f), (from.y+to.y)/2f-sketch.getGraphics().textSize*0.5f, weight>9?sketch.getGraphics().textSize:sketch.getGraphics().textSize/2,sketch.getGraphics().textSize);
         sketch.fill(255);
         sketch.text(""+weight, (from.x+to.x)/2f, (from.y+to.y)/2f);
+        sketch.pop();
+
+    }
+
+    public void color(){
+        sketch.push();
+        sketch.stroke(237, 194, 109);
+        sketch.line(from.x,from.y, from.x+x, from.y+y);
+        if (x>(to.x-from.x)) {
+            x += (to.x - from.x) / 60f;
+            y += (to.y - from.y) / 60f;
+        }
         sketch.pop();
 
     }
