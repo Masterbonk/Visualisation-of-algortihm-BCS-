@@ -251,6 +251,9 @@ public class Main extends PApplet{
         }
     }
 
+    /**
+     *  The function to make sure no buttons can be clicked simultaneously
+     * */
     public static void turn_Off_All_Buttons(Button _button){
        for(int i = 0; i < bottom_ui.length; i++){
           if(button_map.get(bottom_ui[i]) != _button){

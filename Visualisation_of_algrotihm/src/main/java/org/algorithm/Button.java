@@ -26,7 +26,8 @@ class Button {
     }
 
     /**
-     * Draw is used to draw the button at the end of every draw loop. ALso makes it change size and color if the mosue button hovers over it.
+     * Draw is used to draw the button at the end of every draw loop. ALso makes it change size and color
+     * if the mouse button hovers over it, or clicks it
      */
 
     void render(){
