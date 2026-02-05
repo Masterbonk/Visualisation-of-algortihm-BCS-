@@ -169,7 +169,7 @@ public class Main extends PApplet{
 
     public void mousePressed(){
         for(Node n: node_array){
-            if(n.mouse_Over()){
+            if(n.mouse_Over() && button_map.get("cut").clicked){
                 node_array.remove(n);
                 println("Clicked on node at point "+n.x+", "+n.y);
                 break;
