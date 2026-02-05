@@ -24,6 +24,7 @@ public class Main extends PApplet{
 
     int button_height = 50;
     int dWidth, dHeight;
+    public static Node node_1;
 
 
     public static HashMap<String, Button> button_map;
@@ -98,7 +99,7 @@ public class Main extends PApplet{
 
         for(int i = 0; i < edge_array.size(); i++){
             edge_array.get(i).render();
-            //edge_array.get(i).color();
+            //edge_array.get(i).color(); //for animating
         }
         pop();
 
@@ -192,11 +193,34 @@ public class Main extends PApplet{
      * If the mouse is pressed. Used to check if the buttons are checked, and other similair effects started by mousepressed.
      */
     public void mousePressed(){
+
         for(Node n: node_array){
             if(n.mouse_Over() && button_map.get("cut").clicked){
                 node_array.remove(n);
                 println("Clicked on node at point "+n.x+", "+n.y);
                 break;
+            }
+            if (n.mouse_Over() && button_map.get("line").clicked){
+                if (node_1 == null){
+                   node_1 = n;
+
+
+                }  else {
+                    if (!(node_array.contains(node_1))){
+                        node_array.add(node_1);
+                    }
+                    // second node
+                    Edge new_edge = new BiEdge(this,node_1,n,1);
+                    node_1.connected.add(new_edge);
+                    n.connected.add(new_edge);
+
+                    edge_array.add(new_edge);
+                    node_1 = null;
+                }
+
+
+                //add line between clicked nodes
+
             }
         }
 

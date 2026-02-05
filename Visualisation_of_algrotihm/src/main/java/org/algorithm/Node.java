@@ -2,17 +2,20 @@ package org.algorithm;
 
 import processing.core.PApplet;
 
+import java.util.ArrayList;
+
 public class Node {
 
     int x, y;
     int dim;
-    Edge[] connected;
+    ArrayList<Edge> connected;
     PApplet sketch;
 
     public Node(PApplet _sketch, int _x, int _y){
         x = _x;
         y = _y;
         sketch = _sketch;
+        connected = new ArrayList<>();
     }
 
     public void render(){
