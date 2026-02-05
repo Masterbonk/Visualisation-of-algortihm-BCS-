@@ -10,13 +10,11 @@ import java.util.HashMap;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main extends PApplet{
 
-    public static boolean fullscreen = false;
-
-    public static String[] processingArgs = {"Main"};
-    public static Main main = new Main();
+    public static boolean fullscreen = true;
 
     public static void main(String[] args){
-
+        String[] processingArgs = {"Main"};
+        Main main = new Main();
         PApplet.runSketch(processingArgs, main);
     }
 
@@ -66,6 +64,7 @@ public class Main extends PApplet{
             fullScreen();
         } else {
             size(900, 600);
+
         }
         //fullScreen(); //Is the size of the canvas
 
@@ -128,7 +127,6 @@ public class Main extends PApplet{
             if (keyCode == 122) {
                 print("key pressed f11 ");
                 toggleAndRestart();
-                //PApplet.runSketch(processingArgs, main);
             }
         }
     }
@@ -168,7 +166,7 @@ public class Main extends PApplet{
         }
     }
 
-    
+
     public void mousePressed(){
         for(Node n: node_array){
             if(n.mouse_Over()){
