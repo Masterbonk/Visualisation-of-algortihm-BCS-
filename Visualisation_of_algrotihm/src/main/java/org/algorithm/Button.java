@@ -2,6 +2,8 @@ package org.algorithm;
 
 import processing.core.PApplet;
 
+import static org.algorithm.Main.node_1;
+
 
 class Button {
     float x_pos, y_pos, x_size, y_size;
@@ -32,7 +34,7 @@ class Button {
 
         int changeVal = 5;
 
-        if (mouse_Over() || clicked){
+        if (mouse_Over()){
             sketch.push();
             sketch.fill(0f);
             sketch.rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
@@ -41,17 +43,29 @@ class Button {
             sketch.textAlign(sketch.CENTER);
             sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
             sketch.pop();
-        } else {
+        } else if (clicked){
             sketch.push();
-            sketch.fill(80f);
-            sketch.rect(x_pos,y_pos, x_size, y_size);
-            sketch.fill(255f);
-            sketch.textSize(x_size/5f);
+            sketch.fill(127,178,96);
+            sketch.rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
+            sketch.fill(255f); //Text color
+            sketch.textSize((x_size-changeVal)/5f);
             sketch.textAlign(sketch.CENTER);
-            sketch.text(text, (x_pos)+(x_size)/2f, (y_pos)+(y_size)/2f+10);
+            sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
             sketch.pop();
+
+        } else {
+                sketch.push();
+                sketch.fill(80f);
+                sketch.rect(x_pos,y_pos, x_size, y_size);
+                sketch.fill(255f);
+                sketch.textSize(x_size/5f);
+                sketch.textAlign(sketch.CENTER);
+                sketch.text(text, (x_pos)+(x_size)/2f, (y_pos)+(y_size)/2f+10);
+                sketch.pop();
+
         }
     }
+
 
     void resize(float _x_pos, float _y_pos, float _x_size, float _y_size){
         x_pos = _x_pos;
@@ -148,8 +162,9 @@ class Line_Button extends Button{
         super(_sketch,_x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
-    void click(){super.click();
-        sketch.println("Not implemented Line");
+    void click() {
+        super.click();
+        node_1 = null;
     }
 }
 class Flag_A_Button extends Button{
