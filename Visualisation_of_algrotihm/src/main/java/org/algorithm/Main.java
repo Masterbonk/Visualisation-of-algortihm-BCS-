@@ -179,6 +179,7 @@ public class Main extends PApplet{
                 zoom_level -= zoom_increase;
             }
         } else {
+            zoom_level = 1;
         }
 
         System.out.println(zoom_level);
