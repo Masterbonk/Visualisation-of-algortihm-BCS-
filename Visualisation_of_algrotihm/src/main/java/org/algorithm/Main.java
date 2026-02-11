@@ -293,8 +293,12 @@ public class Main extends PApplet{
             }
         }
         if (add_node_active && !hovering_over_buttons) {
-            Node x = new Node(this, mouseX, mouseY);
+            //since scale changes the display screen, we must change the input from clicking on the screen
+            float tempX = mouseX/zoom_level;
+            float tempY = mouseY/zoom_level;
+            Node x = new Node(this, Math.round(tempX),Math.round(tempY));
             node_array.add(x);
+
         }
     }
 
