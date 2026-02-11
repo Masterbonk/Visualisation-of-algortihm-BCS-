@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class Main extends PApplet{
 
     public static boolean fullscreen = true;
-
+    public static boolean debug = true;
     /**
      * Main function starts the sketch
      * @param args
@@ -22,24 +22,21 @@ public class Main extends PApplet{
         PApplet.runSketch(processingArgs, main);
     }
 
-    int button_height = 50;
-    int dWidth, dHeight;
+    public int button_height = 50;
+    public static int dWidth, dHeight;
     public static Node node_1;
 
     //zoom functionality
     public static float zoom_level = 1f;
     final float zoom_increase = 0.1f;
 
+    Util util;
 
-    public static HashMap<String, Button> button_map;
-    public static String[] bottom_ui = {"back", "pause", "forward", "cut", "circle", "line", "flag_a", "flag_b", "weight"};
-    String[] top_ui = {"file", "export", "import"};
 
+    public static UI Ui;
 
     ArrayList<Edge> edge_array = new ArrayList<>();
     ArrayList<Node> node_array = new ArrayList<>();
-
-    public static boolean add_node_active = false;
 
     /**
      * The settings are the first thing that runs, it is done before the
@@ -56,10 +53,11 @@ public class Main extends PApplet{
             size(900, 600);
 
         }
+        util = new Util(this,button_height);
+
         //fullScreen(); //Is the size of the canvas
 
         //frameRate(30); //Decides how many times per second the draw function is called
-        button_map = new HashMap<>();
     }
 
     /**
@@ -77,10 +75,11 @@ public class Main extends PApplet{
 
         font = createFont("Arial-Black-48", 128);
         textFont(font);
-
+        Ui = new UI(this);
 
         button_height = displayHeight*10/144;
-        Make_UI();
+
+        Util.Make_UI(this, button_height);
         Make_Graph();
 
     }
@@ -116,12 +115,8 @@ public class Main extends PApplet{
         }
         pop();
 
-        for(String s: button_map.keySet()){
-            button_map.get(s).render();
-        }
-
+        Ui.render();
         rescale();
-
     }
 
     public void rescale(){
@@ -132,18 +127,18 @@ public class Main extends PApplet{
             //button_height = dHeight*10/144;
 
 
-            for(int i = 0; i < bottom_ui.length; i++){
-                button_map.get(bottom_ui[i]).resize(i*(width/9f),dHeight-button_height,dWidth/9f, button_height);
+            for(int i = 0; i < Ui.bottom_ui.size(); i++){
+                Ui.get_Map().get(Ui.bottom_ui.get(i)).resize(i*(width/9f),dHeight-button_height,dWidth/9f, button_height);
             }
 
-            for(int i = 0; i < top_ui.length; i++){
-                int a = 0;
+            for(int i = 0; i < Ui.top_ui.size(); i++){
+                int a;
                 if (i != 0) {
                     a = 1;
                 } else {
                     a = 0;
                 }
-                button_map.get(top_ui[i]).resize(0,i*button_height,dWidth/9f - (a * (dWidth/9f)/10f ), button_height);
+                Ui.get_Map().get(Ui.top_ui.get(i)).resize(0,i*button_height,dWidth/9f - (a * (dWidth/9f)/10f ), button_height);
             }
 
         }
@@ -190,12 +185,20 @@ public class Main extends PApplet{
 
         if (key == CODED){
             if (keyCode == 122) {
-                print("key pressed f11 ");
+                print("key pressed f11");
                 toggleAndRestart();
             }
         }
-    }
 
+        if (key == 'p'){
+            //print("key pressed p");
+            debug = !debug;
+        }
+    }
+    /**
+     * Toggles the value in mode.txt from windowed to fullscreen and vice versa
+     * Also relaunches the sketch, a closes the old sketch
+     */
     void toggleAndRestart() {
         // Write new mode
         String newMode = fullscreen ? "windowed" : "fullscreen";
@@ -208,6 +211,10 @@ public class Main extends PApplet{
         exit();
     }
 
+
+    /**
+     * Relaunches the current program by starting a new Java process running the same class
+     */
     void relaunchSketch() {
         try {
             String javaBin = System.getProperty("java.home") +
@@ -236,80 +243,119 @@ public class Main extends PApplet{
      * If the mouse is pressed. Used to check if the buttons are checked, and other similair effects started by mousepressed.
      */
     public void mousePressed(){
+        boolean clicked_on_node = false;
+        boolean clicked_on_button = false;
 
-        for(Node n: node_array){
-            if(n.mouse_Over() && button_map.get("cut").clicked){
-                node_array.remove(n);
-                println("Clicked on node at point "+n.x+", "+n.y);
-                break;
+        for(String s: Ui.get_Map().keySet()){
+            if(Ui.get_Button(s).mouse_Over()){
+                clicked_on_button = true;
+                Ui.get_Button(s).click();
             }
-            if (n.mouse_Over() && button_map.get("line").clicked){
-                if (node_1 == null){
-                   node_1 = n;
+        }
 
 
-                }  else {
-                    if (!(node_array.contains(node_1))){
-                        node_array.add(node_1);
+        if (!clicked_on_button) {
+            if (Ui.get_Button("circle").clicked) {
+                boolean over_any_nodes = false;
+                for (Node t: node_array){
+                    if(t.mouse_Over()){
+                        over_any_nodes = true;
                     }
-                    // second node
-                    Edge new_edge = new BiEdge(this,node_1,n,1);
-                    node_1.connected.add(new_edge);
-                    n.connected.add(new_edge);
+                }
+                if(!over_any_nodes) {
+                    Node x = new Node(this, mouseX, mouseY);
+                    node_array.add(x);
+                }
+            }
 
-                    edge_array.add(new_edge);
-                    node_1 = null;
+            for (Node n : node_array) {
+                if (n.mouse_Over() && Ui.get_Button("cut").clicked) {
+                    clicked_on_node = true;
+                    node_array.remove(n);
+                    for (Edge e: n.connected){
+                        Node tmp;
+                        if(e.from == n){
+                            tmp = e.to;
+                        } else tmp = e.from;
+                        tmp.connected.remove(e);
+                        edge_array.remove(e);
+                    }
+                    println("Clicked on node at point " + n.x + ", " + n.y);
+                    break;
                 }
 
+                if (n.mouse_Over() && Ui.get_Button("line").clicked) {
+                    clicked_on_node = true;
+                    //If we click on node with line buttom down we need to make an edge or connect it to
+                    if (node_1 == null) {
+                        node_1 = n;
+                    } else if (n != node_1) {
+                        boolean stop = false;
+                        for (Edge e: node_1.connected){
+                            if (e.to == n){
+                                stop = true;
+                                break;
+                            }
+                        }
+                        if(!stop) {
+                            // second node
+                            Edge new_edge = new BiEdge(this, node_1, n, 1);
 
-                //add line between clicked nodes
+                            edge_array.add(new_edge);
+                            node_1 = null;
+                        }
+                    }
+                    //add line between clicked nodes
 
+                    break;
+
+                }
+            }
+
+
+            //When we have line, and click outside a node
+            if (Ui.get_Button("line").clicked && !clicked_on_node) {
+                Node tmp = new Node(this, mouseX, mouseY);
+                node_array.add(tmp);
+                if (node_1 == null) {
+                    node_1 = tmp;
+                } else {
+                    Edge new_edge = new BiEdge(this, node_1, tmp, 1);
+                    edge_array.add(new_edge);
+
+                    node_1 = null;
+                }
+            }
+
+            if (Ui.get_Button("cut").clicked && !clicked_on_node) {
+                for (Edge e: edge_array){
+                    if (e.mouseOver()){
+                        println("Edge was deleted");
+                        edge_array.remove(e);
+                        break;
+                    }
+                }
             }
         }
 
-        for(String s: button_map.keySet()){
-            if(button_map.get(s).mouse_Over()){
-                button_map.get(s).click();
-            }
+        if (!Ui.get_Button("file").mouse_Over() && !Ui.get_Button("export").mouse_Over() && !Ui.get_Button("import").mouse_Over() && Ui.get_Button("file").clicked){ //Lukker file menuen hvis man klikker uden for den mens den er åben.
+            Ui.get_Button("file").clicked = false;
         }
-        if (!button_map.get("file").mouse_Over() && !button_map.get("export").mouse_Over() && !button_map.get("import").mouse_Over() && button_map.get("file").clicked){ //Lukker file menuen hvis man klikker uden for den mens den er åben.
-            button_map.get("file").clicked = false;
-        }
+
+
+
+
     }
 
     /**
-     * When the mosue is clicked, ie. the very moment the mouse is lifted from being pressed.
+     * When the mouse is clicked, ie. the very moment the mouse is lifted from being pressed.
      */
 
     public void mouseClicked(){
-        boolean hovering_over_buttons = false;
-        for(String s: button_map.keySet()){
-            if(button_map.get(s).mouse_Over()){
-                hovering_over_buttons = true;
-            }
-        }
-        if (add_node_active && !hovering_over_buttons) {
-            //since scale changes the display screen, we must change the input from clicking on the screen
-            //float tempX = mouseX/zoom_level;
-            //float tempY = mouseY/zoom_level;
-            Node x = new Node(this, mouseX,mouseY);
-            node_array.add(x);
-
-        }
-    }
-
-    /**
-     *  The function to make sure no buttons can be clicked simultaneously
-     * */
-    public static void turn_Off_All_Buttons(Button _button){
-       for(int i = 0; i < bottom_ui.length; i++){
-          if(button_map.get(bottom_ui[i]) != _button){
-               button_map.get(bottom_ui[i]).clicked = false;
-          }
-       }
-
 
     }
+
+
 
     /**
      * Makes the base graph objects. All are added to the node and edge arrays so they are rendered.
@@ -341,38 +387,6 @@ public class Main extends PApplet{
         edge_array.add(e);
     }
 
-    /**
-     * Makes the Ui elements, ie. all buttons All are added to the button arrays so they are rendered.
-     */
-    void Make_UI(){
 
-        //Make bottom part of UI
-        Button back = new Back_Button(this,0, displayHeight-button_height, displayWidth/9, button_height,"⏴"); //Step back
-        button_map.put("back",back);
-        Button pause = new Pause_Button(this, (displayWidth)/9f, displayHeight-button_height, displayWidth/9, button_height,"⏯"); //pause
-        button_map.put("pause",pause);
-        Button forward = new Forward_Button(this, displayWidth/9f*2f, displayHeight-button_height, displayWidth/9, button_height,"⏵"); //Step forward
-        button_map.put("forward",forward);
-        Button cut = new Cut_Button(this, displayWidth/9f*3f, displayHeight-button_height, displayWidth/9, button_height,"✂"); //Cut
-        button_map.put("cut",cut);
-        Button circle = new Circle_Button(this, displayWidth/9f*4f, displayHeight-button_height, displayWidth/9, button_height,"⏺"); //Create circle
-        button_map.put("circle",circle);
-        Button line = new Line_Button(this, displayWidth/9f*5f, displayHeight-button_height, displayWidth/9, button_height,"\\"); //Create line
-        button_map.put("line",line);
-        Button flag_a = new Flag_A_Button(this, displayWidth/9f*6f, displayHeight-button_height, displayWidth/9, button_height,"⚐"); //Set flag A
-        button_map.put("flag_a",flag_a);
-        Button flag_b = new Flag_B_Button(this, displayWidth/9f*7f, displayHeight-button_height, displayWidth/9, button_height,"⚑"); //Set flag B
-        button_map.put("flag_b",flag_b);
-        Button weight = new Weight_Button(this, displayWidth/9f*8f, displayHeight-button_height, displayWidth/9, button_height,"Weight"); //Weight
-        button_map.put("weight",weight);
-
-        //Make top left UI
-        Button file = new File_Button(this, 0, 0, displayWidth/9, button_height,"File"); //File
-        button_map.put("file",file);
-        Button export = new Export_Button(this, 0, button_height+button_height/10f, displayWidth/10 ,button_height-button_height/10,"Export"); //Export
-        button_map.put("export",export);
-        Button b_import = new Import_Button(this, 0, button_height*2+button_height/10f, displayWidth/10, button_height-button_height/10,"Import"); //Import
-        button_map.put("import",b_import);
-    }
 
 }
