@@ -14,6 +14,10 @@ public class Edge {
         from = _from;
         to = _to;
         weight = _weight;
+
+        from.connected.add(this);
+        to.connected.add(this);
+
     }
 
     public void render(){

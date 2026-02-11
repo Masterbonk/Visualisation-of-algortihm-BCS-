@@ -220,7 +220,16 @@ public class Main extends PApplet{
 
             for (Node n : node_array) {
                 if (n.mouse_Over() && button_map.get("cut").clicked) {
+                    clicked_on_node = true;
                     node_array.remove(n);
+                    for (Edge e: n.connected){
+                        Node tmp;
+                        if(e.from == n){
+                            tmp = e.to;
+                        } else tmp = e.from;
+                        tmp.connected.remove(e);
+                        edge_array.remove(e);
+                    }
                     println("Clicked on node at point " + n.x + ", " + n.y);
                     break;
                 }
@@ -233,13 +242,13 @@ public class Main extends PApplet{
                     } else {
                         // second node
                         Edge new_edge = new BiEdge(this, node_1, n, 1);
-                        node_1.connected.add(new_edge);
-                        n.connected.add(new_edge);
 
                         edge_array.add(new_edge);
                         node_1 = null;
                     }
                     //add line between clicked nodes
+
+                    break;
 
                 }
             }
@@ -252,9 +261,20 @@ public class Main extends PApplet{
                 if (node_1 == null) {
                     node_1 = tmp;
                 } else {
-                    Edge tmp_edge = new BiEdge(this, node_1, tmp, 1);
-                    edge_array.add(tmp_edge);
+                    Edge new_edge = new BiEdge(this, node_1, tmp, 1);
+                    edge_array.add(new_edge);
+
                     node_1 = null;
+                }
+            }
+
+            if (button_map.get("cut").clicked && !clicked_on_node) {
+                for (Edge e: edge_array){
+                    if (e.mouseOver()){
+                        println("Edge was deleted");
+                        edge_array.remove(e);
+                        break;
+                    }
                 }
             }
         }
