@@ -26,7 +26,9 @@ public class Node {
 
     public void render(){
         sketch.push();
-        sketch.fill(204, 24, 24);
+        if (mouse_Over()) {
+            sketch.fill(24,204,24);
+        } else sketch.fill(204, 24, 24);
         dim = 50;
         sketch.circle(x,y,dim);
 
