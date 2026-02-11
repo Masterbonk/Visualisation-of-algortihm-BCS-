@@ -243,12 +243,21 @@ public class Main extends PApplet{
                     //If we click on node with line buttom down we need to make an edge or connect it to
                     if (node_1 == null) {
                         node_1 = n;
-                    } else {
-                        // second node
-                        Edge new_edge = new BiEdge(this, node_1, n, 1);
+                    } else if (n != node_1) {
+                        boolean stop = false;
+                        for (Edge e: node_1.connected){
+                            if (e.to == n){
+                                stop = true;
+                                break;
+                            }
+                        }
+                        if(!stop) {
+                            // second node
+                            Edge new_edge = new BiEdge(this, node_1, n, 1);
 
-                        edge_array.add(new_edge);
-                        node_1 = null;
+                            edge_array.add(new_edge);
+                            node_1 = null;
+                        }
                     }
                     //add line between clicked nodes
 
@@ -282,12 +291,7 @@ public class Main extends PApplet{
                 }
             }
         }
-
-        for (Edge e: edge_array){
-            if (e.mouseOver()){
-                println("Edge was clicked.\n Start pos: ("+e.from.x+", "+e.from.y+"). End pos: ("+e.to.x+", "+e.to.y+").");
-            }
-        }
+        
         if (!Ui.get_Button("file").mouse_Over() && !Ui.get_Button("export").mouse_Over() && !Ui.get_Button("import").mouse_Over() && Ui.get_Button("file").clicked){ //Lukker file menuen hvis man klikker uden for den mens den er åben.
             Ui.get_Button("file").clicked = false;
         }
