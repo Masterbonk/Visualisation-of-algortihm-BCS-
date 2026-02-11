@@ -201,9 +201,7 @@ public class Main extends PApplet{
                 Ui.button_map.get(s).click();
             }
         }
-        if (!Ui.button_map.get("file").mouse_Over() && !button_map.get("export").mouse_Over() && !button_map.get("import").mouse_Over() && button_map.get("file").clicked){ //Lukker file menuen hvis man klikker uden for den mens den er åben.
-            Ui.button_map.get("file").clicked = false;
-        }
+
 
         if (!clicked_on_button) {
             if (Ui.button_map.get("circle").clicked) {
