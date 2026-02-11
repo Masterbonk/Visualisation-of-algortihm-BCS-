@@ -167,6 +167,24 @@ public class Main extends PApplet{
         }
     }
 
+    /** Zoom functionality works when scrolling the mouse wheel (on an actual mouse)
+     * */
+    public void mouseWheel(processing.event.MouseEvent _mouse_event){
+        float wheel_number = _mouse_event.getCount();
+
+        if(zoom_level > 0 && zoom_level < 3) {
+            if (wheel_number < 0) {
+                zoom_level += zoom_increase;
+            } else if (wheel_number > 0) {
+                zoom_level -= zoom_increase;
+            }
+        } else {
+        }
+
+        System.out.println(zoom_level);
+    }
+
+
     /**
      * Runs everytime a key is pressed.
      * Can be used with keycode to check if specific keys are clicked.
