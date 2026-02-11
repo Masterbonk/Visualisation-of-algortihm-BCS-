@@ -100,17 +100,18 @@ public class Main extends PApplet{
         strokeWeight(10);
         textSize(30);
 
-        if(keyPressed){
-            if (key == '+'){
+        if(keyPressed) {
+            if (key == '+') {
                 zoom_level += zoom_increase;
             } else if (key == '-') {
                 zoom_level -= zoom_increase;
             }
             System.out.println(zoom_level);
         }
+
         scale(zoom_level);
 
-        rescale();
+
 
         for(int i = 0; i < edge_array.size(); i++){
             edge_array.get(i).render();
@@ -118,13 +119,22 @@ public class Main extends PApplet{
         }
         pop();
 
+        push();
+
+        scale(zoom_level);
+
         for(int i = 0; i < node_array.size(); i++){
             node_array.get(i).render();
         }
 
+        pop();
+
         for(String s: button_map.keySet()){
             button_map.get(s).render();
         }
+
+
+        rescale();
 
 
     }
