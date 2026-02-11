@@ -27,10 +27,7 @@ public class Main extends PApplet{
     public static Node node_1;
 
 
-    public static HashMap<String, Button> button_map;
-    public static String[] bottom_ui = {"back", "pause", "forward", "cut", "circle", "line", "flag_a", "flag_b", "weight"};
-    String[] top_ui = {"file", "export", "import"};
-
+    public static UI Ui;
 
     ArrayList<Edge> edge_array = new ArrayList<>();
     ArrayList<Node> node_array = new ArrayList<>();
@@ -55,7 +52,6 @@ public class Main extends PApplet{
         //fullScreen(); //Is the size of the canvas
 
         //frameRate(30); //Decides how many times per second the draw function is called
-        button_map = new HashMap<>();
     }
 
     /**
@@ -73,7 +69,7 @@ public class Main extends PApplet{
 
         font = createFont("Arial-Black-48", 128);
         textFont(font);
-
+        Ui = new UI(this);
 
         button_height = displayHeight*10/144;
         Make_UI();
@@ -107,9 +103,7 @@ public class Main extends PApplet{
             node_array.get(i).render();
         }
 
-        for(String s: button_map.keySet()){
-            button_map.get(s).render();
-        }
+        Ui.render();
     }
 
     public void rescale(){
@@ -120,18 +114,18 @@ public class Main extends PApplet{
             //button_height = dHeight*10/144;
 
 
-            for(int i = 0; i < bottom_ui.length; i++){
-                button_map.get(bottom_ui[i]).resize(i*(width/9f),dHeight-button_height,dWidth/9f, button_height);
+            for(int i = 0; i < Ui.bottom_ui.size(); i++){
+                Ui.button_map.get(Ui.bottom_ui.get(i)).resize(i*(width/9f),dHeight-button_height,dWidth/9f, button_height);
             }
 
-            for(int i = 0; i < top_ui.length; i++){
+            for(int i = 0; i < Ui.top_ui.size(); i++){
                 int a = 0;
                 if (i != 0) {
                     a = 1;
                 } else {
                     a = 0;
                 }
-                button_map.get(top_ui[i]).resize(0,i*button_height,dWidth/9f - (a * (dWidth/9f)/10f ), button_height);
+                Ui.button_map.get(Ui.top_ui.get(i)).resize(0,i*button_height,dWidth/9f - (a * (dWidth/9f)/10f ), button_height);
             }
 
         }
@@ -202,12 +196,12 @@ public class Main extends PApplet{
     public void mousePressed(){
 
         for(Node n: node_array){
-            if(n.mouse_Over() && button_map.get("cut").clicked){
+            if(n.mouse_Over() && Ui.button_map.get("cut").clicked){
                 node_array.remove(n);
                 println("Clicked on node at point "+n.x+", "+n.y);
                 break;
             }
-            if (n.mouse_Over() && button_map.get("line").clicked){
+            if (n.mouse_Over() && Ui.button_map.get("line").clicked){
                 if (node_1 == null){
                    node_1 = n;
 
@@ -231,13 +225,13 @@ public class Main extends PApplet{
             }
         }
 
-        for(String s: button_map.keySet()){
-            if(button_map.get(s).mouse_Over()){
-                button_map.get(s).click();
+        for(String s: Ui.button_map.keySet()){
+            if(Ui.button_map.get(s).mouse_Over()){
+                Ui.button_map.get(s).click();
             }
         }
-        if (!button_map.get("file").mouse_Over() && !button_map.get("export").mouse_Over() && !button_map.get("import").mouse_Over() && button_map.get("file").clicked){ //Lukker file menuen hvis man klikker uden for den mens den er åben.
-            button_map.get("file").clicked = false;
+        if (!Ui.button_map.get("file").mouse_Over() && !Ui.button_map.get("export").mouse_Over() && !Ui.button_map.get("import").mouse_Over() && Ui.button_map.get("file").clicked){ //Lukker file menuen hvis man klikker uden for den mens den er åben.
+            Ui.button_map.get("file").clicked = false;
         }
     }
 
@@ -247,8 +241,8 @@ public class Main extends PApplet{
 
     public void mouseClicked(){
         boolean hovering_over_buttons = false;
-        for(String s: button_map.keySet()){
-            if(button_map.get(s).mouse_Over()){
+        for(String s: Ui.button_map.keySet()){
+            if(Ui.button_map.get(s).mouse_Over()){
                 hovering_over_buttons = true;
             }
         }
@@ -258,18 +252,7 @@ public class Main extends PApplet{
         }
     }
 
-    /**
-     *  The function to make sure no buttons can be clicked simultaneously
-     * */
-    public static void turn_Off_All_Buttons(Button _button){
-       for(int i = 0; i < bottom_ui.length; i++){
-          if(button_map.get(bottom_ui[i]) != _button){
-               button_map.get(bottom_ui[i]).clicked = false;
-          }
-       }
 
-
-    }
 
     /**
      * Makes the base graph objects. All are added to the node and edge arrays so they are rendered.
@@ -306,33 +289,32 @@ public class Main extends PApplet{
      */
     void Make_UI(){
 
-        //Make bottom part of UI
-        Button back = new Back_Button(this,0, displayHeight-button_height, displayWidth/9, button_height,"⏴"); //Step back
-        button_map.put("back",back);
-        Button pause = new Pause_Button(this, (displayWidth)/9f, displayHeight-button_height, displayWidth/9, button_height,"⏯"); //pause
-        button_map.put("pause",pause);
-        Button forward = new Forward_Button(this, displayWidth/9f*2f, displayHeight-button_height, displayWidth/9, button_height,"⏵"); //Step forward
-        button_map.put("forward",forward);
-        Button cut = new Cut_Button(this, displayWidth/9f*3f, displayHeight-button_height, displayWidth/9, button_height,"✂"); //Cut
-        button_map.put("cut",cut);
-        Button circle = new Circle_Button(this, displayWidth/9f*4f, displayHeight-button_height, displayWidth/9, button_height,"⏺"); //Create circle
-        button_map.put("circle",circle);
-        Button line = new Line_Button(this, displayWidth/9f*5f, displayHeight-button_height, displayWidth/9, button_height,"\\"); //Create line
-        button_map.put("line",line);
-        Button flag_a = new Flag_A_Button(this, displayWidth/9f*6f, displayHeight-button_height, displayWidth/9, button_height,"⚐"); //Set flag A
-        button_map.put("flag_a",flag_a);
-        Button flag_b = new Flag_B_Button(this, displayWidth/9f*7f, displayHeight-button_height, displayWidth/9, button_height,"⚑"); //Set flag B
-        button_map.put("flag_b",flag_b);
-        Button weight = new Weight_Button(this, displayWidth/9f*8f, displayHeight-button_height, displayWidth/9, button_height,"Weight"); //Weight
-        button_map.put("weight",weight);
+        //bottom ui
+        Ui.add_Button("back", 0, displayHeight-button_height, displayWidth/9f, button_height,"⏴", Back_Button.class, true);
 
-        //Make top left UI
-        Button file = new File_Button(this, 0, 0, displayWidth/9, button_height,"File"); //File
-        button_map.put("file",file);
-        Button export = new Export_Button(this, 0, button_height+button_height/10f, displayWidth/10 ,button_height-button_height/10,"Export"); //Export
-        button_map.put("export",export);
-        Button b_import = new Import_Button(this, 0, button_height*2+button_height/10f, displayWidth/10, button_height-button_height/10,"Import"); //Import
-        button_map.put("import",b_import);
+        Ui.add_Button("pause", (displayWidth)/9f, displayHeight-button_height, displayWidth/9f, button_height,"⏯", Pause_Button.class, true);
+
+        Ui.add_Button("forward", displayWidth/9f*2f, displayHeight-button_height, displayWidth/9f, button_height,"⏵", Forward_Button.class, true);
+
+        Ui.add_Button("cut", displayWidth/9f*3f, displayHeight-button_height, displayWidth/9f, button_height,"✂", Cut_Button.class, true);
+
+        Ui.add_Button("circle", displayWidth/9f*4f, displayHeight-button_height, displayWidth/9f, button_height,"⏺", Circle_Button.class, true);
+
+        Ui.add_Button("line", displayWidth/9f*5f, displayHeight-button_height, displayWidth/9f, button_height,"\\", Line_Button.class, true);
+
+        Ui.add_Button("flag_a", displayWidth/9f*6f, displayHeight-button_height, displayWidth/9f, button_height,"⚐", Flag_A_Button.class, true);
+
+        Ui.add_Button("flag_b", displayWidth/9f*7f, displayHeight-button_height, displayWidth/9f, button_height,"⚑", Flag_B_Button.class, true);
+
+        Ui.add_Button("weight", displayWidth/9f*8f, displayHeight-button_height, displayWidth/9f, button_height,"Weight", Weight_Button.class, true);
+
+        //top ui
+        Ui.add_Button("file", 0, 0, displayWidth/9f, button_height,"File", File_Button.class, false);
+
+        Ui.add_Button("export", 0, button_height+button_height/10f, displayWidth/10f ,button_height-button_height/10f,"Export", Export_Button.class, false);
+
+        Ui.add_Button("import", 0, button_height*2+button_height/10f, displayWidth/10f, button_height-button_height/10f,"Import", Import_Button.class, false);
+
     }
 
 }

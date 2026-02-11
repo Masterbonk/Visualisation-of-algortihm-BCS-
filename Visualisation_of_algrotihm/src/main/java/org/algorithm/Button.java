@@ -8,8 +8,9 @@ import static processing.core.PApplet.str;
 
 class Button {
     float x_pos, y_pos, x_size, y_size;
-    String text;
+    String text, name;
     boolean clicked = false;
+    boolean bottom;
 
     public PApplet sketch;
     /**
@@ -21,7 +22,7 @@ class Button {
      * @param _x_size How wide the button is.
      * @param _y_size How high the button is.
      */
-    Button(PApplet _sketch,float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
+    public Button(PApplet _sketch,float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         sketch = _sketch; x_pos = _x_pos; y_pos = _y_pos; x_size = _x_size; y_size = _y_size; text = _text;
     }
 
@@ -107,13 +108,13 @@ class Button {
      */
     void click(){
         clicked = !clicked;
-        turn_Off_All_Buttons(this);
+        Ui.turn_Off_All_Buttons(this);
         //sketch.println("Not implemented");
     }
 }
 
 class Back_Button extends Button{
-    Back_Button(PApplet _sketch, float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
+    public Back_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch,_x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -125,7 +126,7 @@ class Back_Button extends Button{
 class Pause_Button extends Button{
     boolean paused = false;
 
-    Pause_Button(PApplet _sketch,float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
+    public Pause_Button(PApplet _sketch,float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch,_x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -140,7 +141,7 @@ class Pause_Button extends Button{
 }
 
 class Forward_Button extends Button{
-    Forward_Button(PApplet _sketch,float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
+    public Forward_Button(PApplet _sketch,float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch,_x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -150,7 +151,7 @@ class Forward_Button extends Button{
 }
 
 class Cut_Button extends Button{
-    Cut_Button(PApplet _sketch,float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
+    public Cut_Button(PApplet _sketch,float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch,_x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -160,7 +161,7 @@ class Cut_Button extends Button{
 }
 
 class Circle_Button extends Button{
-    Circle_Button(PApplet _sketch,float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
+    public Circle_Button(PApplet _sketch,float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch,_x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -173,7 +174,7 @@ class Circle_Button extends Button{
 }
 
 class Line_Button extends Button{
-    Line_Button(PApplet _sketch,float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
+    public Line_Button(PApplet _sketch,float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch,_x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -183,7 +184,7 @@ class Line_Button extends Button{
     }
 }
 class Flag_A_Button extends Button{
-    Flag_A_Button(PApplet _sketch, float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
+    public Flag_A_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -192,7 +193,7 @@ class Flag_A_Button extends Button{
     }
 }
 class Flag_B_Button extends Button{
-    Flag_B_Button(PApplet _sketch, float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
+    public Flag_B_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -201,7 +202,7 @@ class Flag_B_Button extends Button{
     }
 }
 class Weight_Button extends Button{
-    Weight_Button(PApplet _sketch, float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
+    public Weight_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -211,7 +212,7 @@ class Weight_Button extends Button{
 }
 
 class File_Button extends Button{
-    File_Button(PApplet _sketch, float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
+    public File_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -226,12 +227,12 @@ class File_Button extends Button{
 
 class File_Type_Buttons extends Button{
 
-    File_Type_Buttons(PApplet _sketch, float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
+    public File_Type_Buttons(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
     void render(){
-        if (Main.button_map.get("file").clicked){
+        if (Ui.button_map.get("file").clicked){
             sketch.fill(162f);
             sketch.rect(x_pos,y_pos, x_size, y_size);
 
@@ -262,7 +263,7 @@ class File_Type_Buttons extends Button{
 }
 
 class Export_Button extends File_Type_Buttons{
-    Export_Button(PApplet _sketch, float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
+    public Export_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
@@ -272,7 +273,7 @@ class Export_Button extends File_Type_Buttons{
 }
 
 class Import_Button extends File_Type_Buttons{
-    Import_Button(PApplet _sketch, float _x_pos, float _y_pos, int _x_size, int _y_size, String _text){
+    public Import_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
