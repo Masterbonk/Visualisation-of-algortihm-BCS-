@@ -35,8 +35,6 @@ public class Main extends PApplet{
     ArrayList<Edge> edge_array = new ArrayList<>();
     ArrayList<Node> node_array = new ArrayList<>();
 
-    public static boolean add_node_active = false;
-
     /**
      * The settings are the first thing that runs, it is done before the
      * sketch truly begin and some functions is therefor unable to be run in it.
@@ -193,6 +191,8 @@ public class Main extends PApplet{
      * If the mouse is pressed. Used to check if the buttons are checked, and other similair effects started by mousepressed.
      */
     public void mousePressed(){
+        boolean clicked_on_node = false;
+        boolean clicked_on_button = false;
 
         for(Node n: node_array){
             if(n.mouse_Over() && button_map.get("cut").clicked){
@@ -205,9 +205,12 @@ public class Main extends PApplet{
                    node_1 = n;
 
 
-                }  else {
-                    if (!(node_array.contains(node_1))){
-                        node_array.add(node_1);
+        if (!clicked_on_button) {
+            if (button_map.get("circle").clicked) {
+                boolean over_any_nodes = false;
+                for (Node t: node_array){
+                    if(t.mouse_Over()){
+                        over_any_nodes = true;
                     }
                     // second node
                     Edge new_edge = new BiEdge(this,node_1,n,1);
@@ -217,6 +220,11 @@ public class Main extends PApplet{
                     edge_array.add(new_edge);
                     node_1 = null;
                 }
+                if(!over_any_nodes) {
+                    Node x = new Node(this, mouseX, mouseY);
+                    node_array.add(x);
+                }
+            }
 
 
                 //add line between clicked nodes
@@ -239,16 +247,6 @@ public class Main extends PApplet{
      */
 
     public void mouseClicked(){
-        boolean hovering_over_buttons = false;
-        for(String s: button_map.keySet()){
-            if(button_map.get(s).mouse_Over()){
-                hovering_over_buttons = true;
-            }
-        }
-        if (add_node_active && !hovering_over_buttons) {
-            Node x = new Node(this, mouseX, mouseY);
-            node_array.add(x);
-        }
     }
 
     /**
