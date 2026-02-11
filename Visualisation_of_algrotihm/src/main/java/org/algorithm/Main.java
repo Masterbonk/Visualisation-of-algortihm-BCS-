@@ -144,9 +144,14 @@ public class Main extends PApplet{
 
         if (key == CODED){
             if (keyCode == 122) {
-                print("key pressed f11 ");
+                print("key pressed f11");
                 toggleAndRestart();
             }
+        }
+
+        if (key == 'p'){
+            print("key pressed p");
+            debug = !debug;
         }
     }
     /**
