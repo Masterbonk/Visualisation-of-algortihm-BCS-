@@ -152,7 +152,10 @@ public class Main extends PApplet{
             }
         }
     }
-
+    /**
+     * Toggles the value in mode.txt from windowed to fullscreen and vice versa
+     * Also relaunches the sketch, a closes the old sketch
+     */
     void toggleAndRestart() {
         // Write new mode
         String newMode = fullscreen ? "windowed" : "fullscreen";
@@ -165,6 +168,10 @@ public class Main extends PApplet{
         exit();
     }
 
+
+    /**
+     * Relaunches the current program by starting a new Java process running the same class
+     */
     void relaunchSketch() {
         try {
             String javaBin = System.getProperty("java.home") +
