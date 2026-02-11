@@ -20,9 +20,11 @@ public class Main extends PApplet{
         PApplet.runSketch(processingArgs, main);
     }
 
-    int button_height = 50;
-    int dWidth, dHeight;
+    public int button_height = 50;
+    public static int dWidth, dHeight;
     public static Node node_1;
+
+    Util util;
 
 
     public static UI Ui;
@@ -45,6 +47,8 @@ public class Main extends PApplet{
             size(900, 600);
 
         }
+        util = new Util(this,button_height);
+
         //fullScreen(); //Is the size of the canvas
 
         //frameRate(30); //Decides how many times per second the draw function is called
@@ -68,7 +72,8 @@ public class Main extends PApplet{
         Ui = new UI(this);
 
         button_height = displayHeight*10/144;
-        Make_UI();
+
+        Util.Make_UI(this, button_height);
         Make_Graph();
 
     }
@@ -307,37 +312,6 @@ public class Main extends PApplet{
         edge_array.add(e);
     }
 
-    /**
-     * Makes the Ui elements, ie. all buttons All are added to the button arrays so they are rendered.
-     */
-    void Make_UI(){
 
-        //bottom ui
-        Ui.add_Button("back", 0, displayHeight-button_height, displayWidth/9f, button_height,"⏴", Back_Button.class, true);
-
-        Ui.add_Button("pause", (displayWidth)/9f, displayHeight-button_height, displayWidth/9f, button_height,"⏯", Pause_Button.class, true);
-
-        Ui.add_Button("forward", displayWidth/9f*2f, displayHeight-button_height, displayWidth/9f, button_height,"⏵", Forward_Button.class, true);
-
-        Ui.add_Button("cut", displayWidth/9f*3f, displayHeight-button_height, displayWidth/9f, button_height,"✂", Cut_Button.class, true);
-
-        Ui.add_Button("circle", displayWidth/9f*4f, displayHeight-button_height, displayWidth/9f, button_height,"⏺", Circle_Button.class, true);
-
-        Ui.add_Button("line", displayWidth/9f*5f, displayHeight-button_height, displayWidth/9f, button_height,"\\", Line_Button.class, true);
-
-        Ui.add_Button("flag_a", displayWidth/9f*6f, displayHeight-button_height, displayWidth/9f, button_height,"⚐", Flag_A_Button.class, true);
-
-        Ui.add_Button("flag_b", displayWidth/9f*7f, displayHeight-button_height, displayWidth/9f, button_height,"⚑", Flag_B_Button.class, true);
-
-        Ui.add_Button("weight", displayWidth/9f*8f, displayHeight-button_height, displayWidth/9f, button_height,"Weight", Weight_Button.class, true);
-
-        //top ui
-        Ui.add_Button("file", 0, 0, displayWidth/9f, button_height,"File", File_Button.class, false);
-
-        Ui.add_Button("export", 0, button_height+button_height/10f, displayWidth/10f ,button_height-button_height/10f,"Export", Export_Button.class, false);
-
-        Ui.add_Button("import", 0, button_height*2+button_height/10f, displayWidth/10f, button_height-button_height/10f,"Import", Import_Button.class, false);
-
-    }
 
 }

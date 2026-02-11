@@ -11,17 +11,28 @@ public class UI {
     ArrayList<String> top_ui = new ArrayList<>();
     PApplet sketch;
 
+    /**
+     * UI class is used to make all UI elements in the program.
+     * @param _sketch The _sketch is the sketch from main
+     */
     UI(PApplet _sketch){
         sketch = _sketch;
 
     }
-
+    /**
+     * render, calls render on all UI elements
+     * */
     public void render(){
         for(String s: button_map.keySet()){
             button_map.get(s).render();
         }
     }
-
+    /**
+     * add_Button takes a name, button and booolean describing if the button is on the top or bottom
+     * @param _name the name of the  button
+     * @param _button the button itself
+     * @param _bottom if true, then apart bottom UI, else apart of top UI
+     * */
     public void add_Button(String _name, Button _button, boolean _bottom){
         button_map.put(_name,_button);
         _button.name = _name;
@@ -35,6 +46,17 @@ public class UI {
 
     }
 
+    /**
+     * add_Button takes a name, button and booolean describing if the button is on the top or bottom
+     * @param _name the name of the  button
+     * @param _x the x pos of the button
+     * @param _y the y pos of the button
+     * @param _width the width of the button
+     * @param _height the height of the button
+     * @param _text the text the button displays
+     * @param buttonClass the class of the button
+     * @param _bottom if true, then apart bottom UI, else apart of top UI
+     * */
     public <T extends Button> void add_Button(String _name, float _x, float _y, float _width, float _height, String _text, Class<T> buttonClass, boolean _bottom) {
         Button tmp_button;
         try {
@@ -54,11 +76,18 @@ public class UI {
         }
 
     }
-
+    /**
+     * returns the button with the given name from the map
+     * @param _name name of the button we fetch
+     * @return Button
+     * */
     public Button get_Button(String _name){
         return button_map.get(_name);
     }
 
+    /**
+     * @return Map<String, Button>
+     * */
     public Map<String, Button> get_Map(){
         return button_map;
     }
@@ -72,7 +101,7 @@ public class UI {
                 button_map.get(s).clicked = false;
             }
         }
-
-
     }
+
+
 }
