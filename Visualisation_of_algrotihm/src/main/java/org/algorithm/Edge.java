@@ -2,6 +2,8 @@ package org.algorithm;
 
 import processing.core.PApplet;
 
+import static org.algorithm.Main.zoom_level;
+
 public class Edge {
     Node from;
     Node to;
@@ -22,10 +24,11 @@ public class Edge {
         sketch.push();
         sketch.fill(100);
         sketch.stroke(100);
-        sketch.strokeWeight(10);
+        sketch.strokeWeight(10*zoom_level);
         sketch.textAlign(sketch.RIGHT,sketch.BOTTOM);
         sketch.rectMode(sketch.CENTER);
-        sketch.rect((from.x+to.x)/2f-(weight>9?sketch.getGraphics().textSize*0.5f:sketch.getGraphics().textSize*0.25f), (from.y+to.y)/2f-sketch.getGraphics().textSize*0.5f, weight>9?sketch.getGraphics().textSize:sketch.getGraphics().textSize/2,sketch.getGraphics().textSize);
+        sketch.rect((from.x+to.x)/2f-(weight>9?sketch.getGraphics().textSize*0.5f:sketch.getGraphics().textSize*0.25f),
+                (from.y+to.y)/2f-sketch.getGraphics().textSize*0.5f, (weight>9?sketch.getGraphics().textSize:sketch.getGraphics().textSize/2)*zoom_level,(sketch.getGraphics().textSize)*zoom_level);
         sketch.fill(255);
         sketch.text(""+weight, (from.x+to.x)/2f, (from.y+to.y)/2f);
         sketch.pop();

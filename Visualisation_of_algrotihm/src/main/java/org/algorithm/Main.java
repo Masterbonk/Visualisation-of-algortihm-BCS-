@@ -26,6 +26,10 @@ public class Main extends PApplet{
     int dWidth, dHeight;
     public static Node node_1;
 
+    //zoom functionality
+    public static float zoom_level = 1f;
+    final float zoom_increase = 0.1f;
+
 
     public static HashMap<String, Button> button_map;
     public static String[] bottom_ui = {"back", "pause", "forward", "cut", "circle", "line", "flag_a", "flag_b", "weight"};
@@ -96,6 +100,19 @@ public class Main extends PApplet{
         textSize(30);
 
         rescale();
+
+        //zoom functionality
+        if(keyPressed){
+            if (key == '+'){
+                zoom_level += zoom_increase;
+            } else if (key == '-'){
+                zoom_level -= zoom_increase;
+            }
+            if(zoom_level <= 0){
+                zoom_level = 1;
+            }
+
+        }
 
         for(int i = 0; i < edge_array.size(); i++){
             edge_array.get(i).render();
