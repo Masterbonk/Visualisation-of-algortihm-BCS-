@@ -95,24 +95,14 @@ public class Main extends PApplet{
     public void draw(){
         background(204); //Draws over everything on screen clearing it for the next frame
 
+        zoom();
 
+        //line formatting
         push();
         strokeWeight(10);
         textSize(30);
 
-        if(keyPressed) {
-            if (key == '+') {
-                zoom_level += zoom_increase;
-            } else if (key == '-') {
-                zoom_level -= zoom_increase;
-            }
-            System.out.println(zoom_level);
-        }
-
         scale(zoom_level);
-
-
-
         for(int i = 0; i < edge_array.size(); i++){
             edge_array.get(i).render();
             //edge_array.get(i).color(); //for animating
@@ -120,22 +110,17 @@ public class Main extends PApplet{
         pop();
 
         push();
-
         scale(zoom_level);
-
         for(int i = 0; i < node_array.size(); i++){
             node_array.get(i).render();
         }
-
         pop();
 
         for(String s: button_map.keySet()){
             button_map.get(s).render();
         }
 
-
         rescale();
-
 
     }
 
@@ -165,11 +150,27 @@ public class Main extends PApplet{
 
     }
 
+    /** This function ensures that the zoom level updates
+     * and that there is min & max zoom
+     * */
+    public void zoom(){
+        if(keyPressed) {
+            if (key == '+') {
+                zoom_level += zoom_increase;
+            } else if (key == '-') {
+                zoom_level -= zoom_increase;
+            }
+            if (zoom_level < 0 || zoom_level > 3){
+                zoom_level = 1;
+            }
+            System.out.println(zoom_level);
+        }
+    }
+
     /**
      * Runs everytime a key is pressed.
      * Can be used with keycode to check if specific keys are clicked.
      */
-
     public void keyPressed(){
 
         if (key == CODED){
