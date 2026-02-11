@@ -194,16 +194,15 @@ public class Main extends PApplet{
         boolean clicked_on_node = false;
         boolean clicked_on_button = false;
 
-        for(Node n: node_array){
-            if(n.mouse_Over() && button_map.get("cut").clicked){
-                node_array.remove(n);
-                println("Clicked on node at point "+n.x+", "+n.y);
-                break;
+        for(String s: button_map.keySet()){
+            if(button_map.get(s).mouse_Over()){
+                clicked_on_button = true;
+                button_map.get(s).click();
             }
-            if (n.mouse_Over() && button_map.get("line").clicked){
-                if (node_1 == null){
-                   node_1 = n;
-
+        }
+        if (!button_map.get("file").mouse_Over() && !button_map.get("export").mouse_Over() && !button_map.get("import").mouse_Over() && button_map.get("file").clicked){ //Lukker file menuen hvis man klikker uden for den mens den er åben.
+            button_map.get("file").clicked = false;
+        }
 
         if (!clicked_on_button) {
             if (button_map.get("circle").clicked) {
@@ -212,13 +211,6 @@ public class Main extends PApplet{
                     if(t.mouse_Over()){
                         over_any_nodes = true;
                     }
-                    // second node
-                    Edge new_edge = new BiEdge(this,node_1,n,1);
-                    node_1.connected.add(new_edge);
-                    n.connected.add(new_edge);
-
-                    edge_array.add(new_edge);
-                    node_1 = null;
                 }
                 if(!over_any_nodes) {
                     Node x = new Node(this, mouseX, mouseY);
@@ -226,24 +218,53 @@ public class Main extends PApplet{
                 }
             }
 
+            for (Node n : node_array) {
+                if (n.mouse_Over() && button_map.get("cut").clicked) {
+                    node_array.remove(n);
+                    println("Clicked on node at point " + n.x + ", " + n.y);
+                    break;
+                }
 
-                //add line between clicked nodes
+                if (n.mouse_Over() && button_map.get("line").clicked) {
+                    clicked_on_node = true;
+                    //If we click on node with line buttom down we need to make an edge or connect it to
+                    if (node_1 == null) {
+                        node_1 = n;
+                    } else {
+                        // second node
+                        Edge new_edge = new BiEdge(this, node_1, n, 1);
+                        node_1.connected.add(new_edge);
+                        n.connected.add(new_edge);
 
+                        edge_array.add(new_edge);
+                        node_1 = null;
+                    }
+                    //add line between clicked nodes
+
+                }
+            }
+
+
+            //When we have line, and click outside a node
+            if (button_map.get("line").clicked && !clicked_on_node) {
+                Node tmp = new Node(this, mouseX, mouseY);
+                node_array.add(tmp);
+                if (node_1 == null) {
+                    node_1 = tmp;
+                } else {
+                    Edge tmp_edge = new BiEdge(this, node_1, tmp, 1);
+                    edge_array.add(tmp_edge);
+                    node_1 = null;
+                }
             }
         }
 
-        for(String s: button_map.keySet()){
-            if(button_map.get(s).mouse_Over()){
-                button_map.get(s).click();
-            }
-        }
-        if (!button_map.get("file").mouse_Over() && !button_map.get("export").mouse_Over() && !button_map.get("import").mouse_Over() && button_map.get("file").clicked){ //Lukker file menuen hvis man klikker uden for den mens den er åben.
-            button_map.get("file").clicked = false;
-        }
+
+
     }
 
     /**
-     * When the mosue is clicked, ie. the very moment the mouse is lifted from being pressed.
+     * When the mouse is clicked, ie. the very moment the mouse is lifted from being pressed.
      */
 
     public void mouseClicked(){
