@@ -32,8 +32,6 @@ public class Main extends PApplet{
     ArrayList<Edge> edge_array = new ArrayList<>();
     ArrayList<Node> node_array = new ArrayList<>();
 
-    public static boolean add_node_active = false;
-
     /**
      * The settings are the first thing that runs, it is done before the
      * sketch truly begin and some functions is therefor unable to be run in it.
@@ -194,34 +192,68 @@ public class Main extends PApplet{
      * If the mouse is pressed. Used to check if the buttons are checked, and other similair effects started by mousepressed.
      */
     public void mousePressed(){
+        boolean clicked_on_node = false;
+        boolean clicked_on_button = false;
 
-        for(Node n: node_array){
-            if(n.mouse_Over() && Ui.button_map.get("cut").clicked){
-                node_array.remove(n);
-                println("Clicked on node at point "+n.x+", "+n.y);
-                break;
+        for(String s: Ui.button_map.keySet()){
+            if(Ui.button_map.get(s).mouse_Over()){
+                clicked_on_button = true;
+                Ui.button_map.get(s).click();
             }
-            if (n.mouse_Over() && Ui.button_map.get("line").clicked){
-                if (node_1 == null){
-                   node_1 = n;
+        }
+        if (!Ui.button_map.get("file").mouse_Over() && !button_map.get("export").mouse_Over() && !button_map.get("import").mouse_Over() && button_map.get("file").clicked){ //Lukker file menuen hvis man klikker uden for den mens den er åben.
+            Ui.button_map.get("file").clicked = false;
+        }
 
-
-                }  else {
-                    if (!(node_array.contains(node_1))){
-                        node_array.add(node_1);
+        if (!clicked_on_button) {
+            if (Ui.button_map.get("circle").clicked) {
+                boolean over_any_nodes = false;
+                for (Node t: node_array){
+                    if(t.mouse_Over()){
+                        over_any_nodes = true;
                     }
-                    // second node
-                    Edge new_edge = new BiEdge(this,node_1,n,1);
-                    node_1.connected.add(new_edge);
-                    n.connected.add(new_edge);
+                }
+                if(!over_any_nodes) {
+                    Node x = new Node(this, mouseX, mouseY);
+                    node_array.add(x);
+                }
+            }
 
-                    edge_array.add(new_edge);
-                    node_1 = null;
+            for (Node n : node_array) {
+                if (n.mouse_Over() && Ui.button_map.get("cut").clicked) {
+                    node_array.remove(n);
+                    println("Clicked on node at point " + n.x + ", " + n.y);
+                    break;
                 }
 
+                if (n.mouse_Over() && Ui.button_map.get("line").clicked) {
+                    clicked_on_node = true;
+                    //If we click on node with line buttom down we need to make an edge or connect it to
+                    if (node_1 == null) {
+                        node_1 = n;
+                    } else {
+                        // second node
+                        Edge new_edge = new BiEdge(this, node_1, n, 1);
+                        node_1.connected.add(new_edge);
+                        n.connected.add(new_edge);
 
-                //add line between clicked nodes
+                        edge_array.add(new_edge);
+                        node_1 = null;
+                    }
+                    //add line between clicked nodes
 
+                }
+            }
+
+        if (Ui.button_map.get("line").clicked && !clicked_on_node) {
+            Node tmp = new Node(this, mouseX, mouseY);
+            node_array.add(tmp);
+            if (node_1 == null) {
+                node_1 = tmp;
+            } else {
+                Edge tmp_edge = new BiEdge(this, node_1, tmp, 1);
+                edge_array.add(tmp_edge);
+                node_1 = null;
             }
         }
 
@@ -233,23 +265,18 @@ public class Main extends PApplet{
         if (!Ui.button_map.get("file").mouse_Over() && !Ui.button_map.get("export").mouse_Over() && !Ui.button_map.get("import").mouse_Over() && Ui.button_map.get("file").clicked){ //Lukker file menuen hvis man klikker uden for den mens den er åben.
             Ui.button_map.get("file").clicked = false;
         }
+
+
+
+        }
     }
 
     /**
-     * When the mosue is clicked, ie. the very moment the mouse is lifted from being pressed.
+     * When the mouse is clicked, ie. the very moment the mouse is lifted from being pressed.
      */
 
     public void mouseClicked(){
-        boolean hovering_over_buttons = false;
-        for(String s: Ui.button_map.keySet()){
-            if(Ui.button_map.get(s).mouse_Over()){
-                hovering_over_buttons = true;
-            }
-        }
-        if (add_node_active && !hovering_over_buttons) {
-            Node x = new Node(this, mouseX, mouseY);
-            node_array.add(x);
-        }
+
     }
 
 
