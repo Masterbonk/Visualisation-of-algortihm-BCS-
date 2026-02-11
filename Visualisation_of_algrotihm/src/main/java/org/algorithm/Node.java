@@ -4,6 +4,8 @@ import processing.core.PApplet;
 
 import java.util.ArrayList;
 
+import static org.algorithm.Main.debug;
+
 public class Node {
 
     int x, y;
@@ -25,6 +27,14 @@ public class Node {
         sketch.circle(x,y,dim);
 
         sketch.pop();
+
+        if (debug){
+            sketch.push();
+            sketch.fill(50,10);
+            sketch.stroke(0, 0, 255);
+            sketch.square(x-dim/2,y-dim/2,dim);
+            sketch.pop();
+        }
     }
 
     boolean mouse_Over(){

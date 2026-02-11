@@ -150,7 +150,7 @@ public class Main extends PApplet{
         }
 
         if (key == 'p'){
-            print("key pressed p");
+            //print("key pressed p");
             debug = !debug;
         }
     }
