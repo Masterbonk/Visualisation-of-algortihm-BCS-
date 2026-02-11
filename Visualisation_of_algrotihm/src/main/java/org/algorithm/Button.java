@@ -2,8 +2,8 @@ package org.algorithm;
 
 import processing.core.PApplet;
 
-import static org.algorithm.Main.node_1;
-import static org.algorithm.Main.turn_Off_All_Buttons;
+import static org.algorithm.Main.*;
+import static processing.core.PApplet.str;
 
 
 class Button {
@@ -35,6 +35,16 @@ class Button {
         sketch.rect(x_pos,y_pos, x_size, y_size);
 
         int changeVal = 5;
+        if (debug) {
+            sketch.push();
+            sketch.fill(255, 255, 255); //Text color
+            sketch.textSize((x_size - changeVal) / 5f);
+            sketch.textAlign(sketch.CENTER);
+            sketch.text(str(clicked), (x_pos + changeVal) + (x_size - changeVal * 2) / 2f, (y_pos - 10));
+            sketch.pop();
+        }
+
+
 
         if (mouse_Over()){
             sketch.push();
@@ -45,6 +55,7 @@ class Button {
             sketch.textAlign(sketch.CENTER);
             sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
             sketch.pop();
+
         } else if (clicked){
 
             sketch.push();
