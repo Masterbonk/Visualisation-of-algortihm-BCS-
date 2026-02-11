@@ -123,7 +123,7 @@ public class Main extends PApplet{
             }
 
             for(int i = 0; i < top_ui.length; i++){
-                int a = 0;
+                int a;
                 if (i != 0) {
                     a = 1;
                 } else {
@@ -256,6 +256,12 @@ public class Main extends PApplet{
                     edge_array.add(tmp_edge);
                     node_1 = null;
                 }
+            }
+        }
+
+        for (Edge e: edge_array){
+            if (e.mouseOver()){
+                println("Edge was clicked.\n Start pos: ("+e.from.x+", "+e.from.y+"). End pos: ("+e.to.x+", "+e.to.y+").");
             }
         }
 
