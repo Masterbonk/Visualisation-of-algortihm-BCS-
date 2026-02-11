@@ -178,11 +178,7 @@ public class Main extends PApplet{
             } else if (wheel_number > 0) {
                 zoom_level -= zoom_increase;
             }
-        } else {
-            zoom_level = 1;
         }
-
-        System.out.println(zoom_level);
     }
 
 
@@ -294,9 +290,9 @@ public class Main extends PApplet{
         }
         if (add_node_active && !hovering_over_buttons) {
             //since scale changes the display screen, we must change the input from clicking on the screen
-            float tempX = mouseX/zoom_level;
-            float tempY = mouseY/zoom_level;
-            Node x = new Node(this, Math.round(tempX),Math.round(tempY));
+            //float tempX = mouseX/zoom_level;
+            //float tempY = mouseY/zoom_level;
+            Node x = new Node(this, mouseX,mouseY);
             node_array.add(x);
 
         }
