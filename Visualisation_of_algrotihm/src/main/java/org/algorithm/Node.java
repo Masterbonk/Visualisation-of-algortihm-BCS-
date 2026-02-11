@@ -47,8 +47,8 @@ public class Node {
         //float tempX = Math.round(sketch.mouseX/zoom_level);
         //float tempY = Math.round(sketch.mouseY/zoom_level);
         float offset = dim/2;
-        if (sketch.mouseX >= x-offset && sketch.mouseX <= x+dim-offset &&
-                sketch.mouseY >= y-offset && sketch.mouseY <= y+dim-offset){
+        if (sketch.mouseX >= (x-offset)*zoom_level && sketch.mouseX <= (x+dim-offset)*zoom_level &&
+                sketch.mouseY >= (y-offset)*zoom_level && sketch.mouseY <= (y+dim-offset)*zoom_level){
             return true;
         } else {
             return false;

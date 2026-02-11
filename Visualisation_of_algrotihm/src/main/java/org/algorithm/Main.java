@@ -150,13 +150,10 @@ public class Main extends PApplet{
      * */
     public void zoom(){
         if(keyPressed) {
-            if (key == '+') {
+            if (key == '+' && zoom_level < 3) {
                 zoom_level += zoom_increase;
-            } else if (key == '-') {
+            } else if (key == '-' && zoom_level > 0) {
                 zoom_level -= zoom_increase;
-            }
-            if (zoom_level < 0 || zoom_level > 3){
-                zoom_level = 1;
             }
             System.out.println(zoom_level);
         }
@@ -167,12 +164,11 @@ public class Main extends PApplet{
     public void mouseWheel(processing.event.MouseEvent _mouse_event){
         float wheel_number = _mouse_event.getCount();
 
-        if(zoom_level > 0 && zoom_level < 3) {
-            if (wheel_number < 0) {
+        if(zoom_level < 3 && wheel_number < 0) {
                 zoom_level += zoom_increase;
-            } else if (wheel_number > 0) {
-                zoom_level -= zoom_increase;
-            }
+        }
+        if(zoom_level > 0 && wheel_number > 0) {
+            zoom_level -= zoom_increase;
         }
     }
 
