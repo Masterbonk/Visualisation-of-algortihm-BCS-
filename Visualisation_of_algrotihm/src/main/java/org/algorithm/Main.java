@@ -1,10 +1,8 @@
 package org.algorithm;
 import processing.core.PApplet;
 import processing.core.PFont;
-import processing.core.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -113,7 +111,7 @@ public class Main extends PApplet{
 
 
             for(int i = 0; i < Ui.bottom_ui.size(); i++){
-                Ui.button_map.get(Ui.bottom_ui.get(i)).resize(i*(width/9f),dHeight-button_height,dWidth/9f, button_height);
+                Ui.get_Map().get(Ui.bottom_ui.get(i)).resize(i*(width/9f),dHeight-button_height,dWidth/9f, button_height);
             }
 
             for(int i = 0; i < Ui.top_ui.size(); i++){
@@ -123,7 +121,7 @@ public class Main extends PApplet{
                 } else {
                     a = 0;
                 }
-                Ui.button_map.get(Ui.top_ui.get(i)).resize(0,i*button_height,dWidth/9f - (a * (dWidth/9f)/10f ), button_height);
+                Ui.get_Map().get(Ui.top_ui.get(i)).resize(0,i*button_height,dWidth/9f - (a * (dWidth/9f)/10f ), button_height);
             }
 
         }
@@ -195,16 +193,16 @@ public class Main extends PApplet{
         boolean clicked_on_node = false;
         boolean clicked_on_button = false;
 
-        for(String s: Ui.button_map.keySet()){
-            if(Ui.button_map.get(s).mouse_Over()){
+        for(String s: Ui.get_Map().keySet()){
+            if(Ui.get_Button(s).mouse_Over()){
                 clicked_on_button = true;
-                Ui.button_map.get(s).click();
+                Ui.get_Button(s).click();
             }
         }
 
 
         if (!clicked_on_button) {
-            if (Ui.button_map.get("circle").clicked) {
+            if (Ui.get_Button("circle").clicked) {
                 boolean over_any_nodes = false;
                 for (Node t: node_array){
                     if(t.mouse_Over()){
@@ -218,13 +216,13 @@ public class Main extends PApplet{
             }
 
             for (Node n : node_array) {
-                if (n.mouse_Over() && Ui.button_map.get("cut").clicked) {
+                if (n.mouse_Over() && Ui.get_Button("cut").clicked) {
                     node_array.remove(n);
                     println("Clicked on node at point " + n.x + ", " + n.y);
                     break;
                 }
 
-                if (n.mouse_Over() && Ui.button_map.get("line").clicked) {
+                if (n.mouse_Over() && Ui.get_Button("line").clicked) {
                     clicked_on_node = true;
                     //If we click on node with line buttom down we need to make an edge or connect it to
                     if (node_1 == null) {
@@ -243,7 +241,7 @@ public class Main extends PApplet{
                 }
             }
 
-        if (Ui.button_map.get("line").clicked && !clicked_on_node) {
+        if (Ui.get_Button("line").clicked && !clicked_on_node) {
             Node tmp = new Node(this, mouseX, mouseY);
             node_array.add(tmp);
             if (node_1 == null) {
@@ -255,13 +253,13 @@ public class Main extends PApplet{
             }
         }
 
-        for(String s: Ui.button_map.keySet()){
-            if(Ui.button_map.get(s).mouse_Over()){
-                Ui.button_map.get(s).click();
+        for(String s: Ui.get_Map().keySet()){
+            if(Ui.get_Button(s).mouse_Over()){
+                Ui.get_Button(s).click();
             }
         }
-        if (!Ui.button_map.get("file").mouse_Over() && !Ui.button_map.get("export").mouse_Over() && !Ui.button_map.get("import").mouse_Over() && Ui.button_map.get("file").clicked){ //Lukker file menuen hvis man klikker uden for den mens den er åben.
-            Ui.button_map.get("file").clicked = false;
+        if (!Ui.get_Button("file").mouse_Over() && !Ui.get_Button("export").mouse_Over() && !Ui.get_Button("import").mouse_Over() && Ui.get_Button("file").clicked){ //Lukker file menuen hvis man klikker uden for den mens den er åben.
+            Ui.get_Button("file").clicked = false;
         }
 
 

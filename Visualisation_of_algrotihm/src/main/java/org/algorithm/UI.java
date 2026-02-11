@@ -6,7 +6,7 @@ import java.util.*;
 
 public class UI {
 
-    HashMap<String, Button> button_map = new HashMap<>();;
+    private HashMap<String, Button> button_map = new HashMap<>();;
     ArrayList<String> bottom_ui = new ArrayList<>();
     ArrayList<String> top_ui = new ArrayList<>();
     PApplet sketch;
@@ -53,6 +53,14 @@ public class UI {
             e.printStackTrace();
         }
 
+    }
+
+    public Button get_Button(String _name){
+        return button_map.get(_name);
+    }
+
+    public Map<String, Button> get_Map(){
+        return button_map;
     }
 
     /**

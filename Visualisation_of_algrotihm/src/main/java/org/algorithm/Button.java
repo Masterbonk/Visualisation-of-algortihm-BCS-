@@ -232,7 +232,7 @@ class File_Type_Buttons extends Button{
     }
 
     void render(){
-        if (Ui.button_map.get("file").clicked){
+        if (Ui.get_Button("file").clicked){
             sketch.fill(162f);
             sketch.rect(x_pos,y_pos, x_size, y_size);
 
