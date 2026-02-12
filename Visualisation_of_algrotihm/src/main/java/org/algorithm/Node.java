@@ -14,10 +14,10 @@ public class Node {
     PApplet sketch;
 
     public Node(PApplet _sketch, int _x, int _y){
-        x = Math.round(_x/zoom_level);
-        y = Math.round(_y/zoom_level);
-        g = 0;
-        rhs = 0;
+        //float tempX = mouseX/zoom_level;
+        //float tempY = mouseY/zoom_level;
+        x = Math.round((_x-translate_x)/zoom_level);
+        y = Math.round((_y-translate_y)/zoom_level);
         sketch = _sketch;
         connected = new ArrayList<>();
     }
@@ -65,9 +65,12 @@ public class Node {
     }
 
     boolean mouse_Over(){
+        //float tempX = Math.round(sketch.mouseX/zoom_level);
+        //float tempY = Math.round(sketch.mouseY/zoom_level);
+
         float offset = dim/2;
-        if (sketch.mouseX >= (x-offset)*zoom_level && sketch.mouseX <= (x+dim-offset)*zoom_level &&
-                sketch.mouseY >= (y-offset)*zoom_level && sketch.mouseY <= (y+dim-offset)*zoom_level){
+        if (sketch.mouseX >= (x-offset)*zoom_level+translate_x && sketch.mouseX <= (x+dim-offset)*zoom_level+translate_x &&
+                sketch.mouseY >= (y-offset)*zoom_level+translate_y && sketch.mouseY <= (y+dim-offset)*zoom_level+translate_y){
             return true;
         } else {
             return false;

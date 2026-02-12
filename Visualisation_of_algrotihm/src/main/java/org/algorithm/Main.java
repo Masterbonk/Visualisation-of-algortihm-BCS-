@@ -14,7 +14,6 @@ public class Main extends PApplet{
 
     public static boolean fullscreen = true;
     public static boolean debug = true;
-
     /**
      * Main function starts the sketch
      * @param args
@@ -32,6 +31,13 @@ public class Main extends PApplet{
     //zoom functionality
     public static float zoom_level = 1f;
     final float zoom_increase = 0.1f;
+
+    //Pan functionality
+    public static int translate_x = 0;
+    public static int translate_y = 0;
+    public int mouse_x_start_of_pan = -1;
+    public int mouse_y_start_of_pan = -1;
+
 
     Util util;
 
@@ -99,11 +105,12 @@ public class Main extends PApplet{
 
         zoom();
 
+        pushMatrix();
+        translate(translate_x,translate_y);
         //line formatting
         push();
         strokeWeight(10);
         textSize(30);
-
         scale(zoom_level);
         for(int i = 0; i < edge_array.size(); i++){
             edge_array.get(i).render();
@@ -111,12 +118,15 @@ public class Main extends PApplet{
         }
         pop();
 
+
         push();
         scale(zoom_level);
         for(int i = 0; i < node_array.size(); i++){
             node_array.get(i).render();
         }
         pop();
+        popMatrix();
+
 
         Ui.render();
         rescale();
@@ -244,115 +254,144 @@ public class Main extends PApplet{
         boolean clicked_on_node = false;
         boolean clicked_on_button = false;
 
-        for(String s: Ui.get_Map().keySet()){
-            if(Ui.get_Button(s).mouse_Over()){
-                clicked_on_button = true;
-                Ui.get_Button(s).click();
-            }
-        }
-
-
-        if (!clicked_on_button) {
-            if (Ui.get_Button("circle").clicked) {
-                boolean over_any_nodes = false;
-                for (Node t: node_array){
-                    if(t.mouse_Over()){
-                        over_any_nodes = true;
-                    }
-                }
-                if(!over_any_nodes) {
-                    Node x = new Node(this, mouseX, mouseY);
-                    node_array.add(x);
+        if(mouseButton == LEFT) {
+            for (String s : Ui.get_Map().keySet()) {
+                if (Ui.get_Button(s).mouse_Over()) {
+                    clicked_on_button = true;
+                    Ui.get_Button(s).click();
                 }
             }
 
-            for (Node n : node_array) {
-                if (n.mouse_Over() && Ui.get_Button("cut").clicked) {
-                    clicked_on_node = true;
-                    node_array.remove(n);
-                    for (Edge e: n.connected){
-                        Node tmp;
-                        if(e.from == n){
-                            tmp = e.to;
-                        } else tmp = e.from;
-                        tmp.connected.remove(e);
-                        edge_array.remove(e);
-                    }
-                    println("Clicked on node at point " + n.x + ", " + n.y);
-                    break;
-                }
 
-                if (n.mouse_Over() && Ui.get_Button("line").clicked) {
-                    clicked_on_node = true;
-                    //If we click on node with line buttom down we need to make an edge or connect it to
-                    if (node_1 == null) {
-                        node_1 = n;
-                    } else if (n != node_1) {
-                        boolean stop = false;
-                        for (Edge e: node_1.connected){
-                            if (e.to == n){
-                                stop = true;
-                                break;
-                            }
-                        }
-                        if(!stop) {
-                            // second node
-                            Edge new_edge = new BiEdge(this, node_1, n, 1);
-
-                            edge_array.add(new_edge);
-                            node_1 = null;
+            if (!clicked_on_button) {
+                if (Ui.get_Button("circle").clicked) {
+                    boolean over_any_nodes = false;
+                    for (Node t : node_array) {
+                        if (t.mouse_Over()) {
+                            over_any_nodes = true;
                         }
                     }
-                    //add line between clicked nodes
-
-                    break;
-
+                    if (!over_any_nodes) {
+                        Node x = new Node(this, mouseX, mouseY);
+                        node_array.add(x);
+                    }
                 }
-            }
 
-
-            //When we have line, and click outside a node
-            if (Ui.get_Button("line").clicked && !clicked_on_node) {
-                Node tmp = new Node(this, mouseX, mouseY);
-                node_array.add(tmp);
-                if (node_1 == null) {
-                    node_1 = tmp;
-                } else {
-                    Edge new_edge = new BiEdge(this, node_1, tmp, 1);
-                    edge_array.add(new_edge);
-
-                    node_1 = null;
-                }
-            }
-
-            if (Ui.get_Button("cut").clicked && !clicked_on_node) {
-                for (Edge e: edge_array){
-                    if (e.mouseOver()){
-                        println("Edge was deleted");
-                        edge_array.remove(e);
+                for (Node n : node_array) {
+                    if (n.mouse_Over() && Ui.get_Button("cut").clicked) {
+                        clicked_on_node = true;
+                        node_array.remove(n);
+                        for (Edge e : n.connected) {
+                            Node tmp;
+                            if (e.from == n) {
+                                tmp = e.to;
+                            } else tmp = e.from;
+                            tmp.connected.remove(e);
+                            edge_array.remove(e);
+                        }
+                        println("Clicked on node at point " + n.x + ", " + n.y);
                         break;
                     }
+
+                    if (n.mouse_Over() && Ui.get_Button("line").clicked) {
+                        clicked_on_node = true;
+                        //If we click on node with line buttom down we need to make an edge or connect it to
+                        if (node_1 == null) {
+                            node_1 = n;
+                        } else if (n != node_1) {
+                            boolean stop = false;
+                            for (Edge e : node_1.connected) {
+                                if (e.to == n) {
+                                    stop = true;
+                                    break;
+                                }
+                            }
+                            if (!stop) {
+                                // second node
+                                Edge new_edge = new BiEdge(this, node_1, n, 1);
+
+                                edge_array.add(new_edge);
+                                node_1 = null;
+                            }
+                        }
+                        //add line between clicked nodes
+
+                        break;
+
+                    }
+                }
+
+
+                //When we have line, and click outside a node
+                if (Ui.get_Button("line").clicked && !clicked_on_node) {
+                    Node tmp = new Node(this, mouseX, mouseY);
+                    node_array.add(tmp);
+                    if (node_1 == null) {
+                        node_1 = tmp;
+                    } else {
+                        Edge new_edge = new BiEdge(this, node_1, tmp, 1);
+                        edge_array.add(new_edge);
+
+                        node_1 = null;
+                    }
+                }
+
+                if (Ui.get_Button("cut").clicked && !clicked_on_node) {
+                    for (Edge e : edge_array) {
+                        if (e.mouseOver()) {
+                            println("Edge was deleted");
+                            edge_array.remove(e);
+                            break;
+                        }
+                    }
                 }
             }
 
+            if (!Ui.get_Button("file").mouse_Over() && !Ui.get_Button("export").mouse_Over() && !Ui.get_Button("import").mouse_Over() && Ui.get_Button("file").clicked) { //Lukker file menuen hvis man klikker uden for den mens den er åben.
+                Ui.get_Button("file").clicked = false;
+            }
+        } else if (mouseButton == RIGHT){
 
         }
+    }
+
+    public void mouseDragged(){
+        if(mouseButton == RIGHT) {
+            boolean is_over_ui = false;
+            for (String s : Ui.get_Map().keySet()) {
+                if (Ui.get_Button(s).mouse_Over()) {
+                    is_over_ui = true;
+                    break;
+                }
+            }
+            if (!is_over_ui) {
+                if (mouse_x_start_of_pan == -1 || mouse_y_start_of_pan == -1) {
+                    mouse_x_start_of_pan = mouseX;
+                    mouse_y_start_of_pan = mouseY;
+                } else {
 
 
-        if (!Ui.get_Button("file").mouse_Over() && !Ui.get_Button("export").mouse_Over() && !Ui.get_Button("import").mouse_Over() && Ui.get_Button("file").clicked){ //Lukker file menuen hvis man klikker uden for den mens den er åben.
-            Ui.get_Button("file").clicked = false;
+                    translate_x += mouseX - mouse_x_start_of_pan;
+                    translate_y += mouseY - mouse_y_start_of_pan;
+                    //println("Translate_x = " + translate_x + ". mouseX = " + mouseX + ". mouse_x_start_of_pan = " + mouse_x_start_of_pan);
+                    //println("Translate_y = " + translate_y + ". mouseY = " + mouseY + ". mouse_y_start_of_pan = " + mouse_y_start_of_pan);
+
+                    mouse_x_start_of_pan = mouseX;
+                    mouse_y_start_of_pan = mouseY;
+                }
+            }
         }
-
-
-
     }
 
     /**
      * When the mouse is clicked, ie. the very moment the mouse is lifted from being pressed.
      */
 
-    public void mouseClicked(){
-
+    public void mouseReleased(){
+        if (mouseButton == RIGHT){
+            mouse_x_start_of_pan = -1;
+            mouse_y_start_of_pan = -1;
+        }
     }
 
 
