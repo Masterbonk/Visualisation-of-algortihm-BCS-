@@ -32,7 +32,10 @@ public class Main extends PApplet{
     public static float zoom_level = 1f;
     final float zoom_increase = 0.1f;
 
+    //The start and end node for the graph
     public static Node start_node;
+    public static Node end_node;
+
 
     //Pan functionality
     public static int translate_x = 0;
@@ -283,6 +286,7 @@ public class Main extends PApplet{
                     if (Ui.get_Button("cut").clicked && n.mouse_Over()) {
                         clicked_on_node = true;
                         node_array.remove(n);
+                        if (start_node == n) start_node = null;
                         for (Edge e : n.connected) {
                             Node tmp;
                             if (e.from == n) {
@@ -293,9 +297,7 @@ public class Main extends PApplet{
                         }
                         println("Clicked on node at point " + n.x + ", " + n.y);
                         break;
-                    }
-
-                    if (Ui.get_Button("line").clicked && n.mouse_Over()) {
+                    } else if (Ui.get_Button("line").clicked && n.mouse_Over()) {
                         clicked_on_node = true;
                         //If we click on node with line buttom down we need to make an edge or connect it to
                         if (node_1 == null) {
@@ -320,15 +322,17 @@ public class Main extends PApplet{
 
                         break;
 
-                    }
-
-                    if(Ui.get_Button("flag_a").clicked && n.mouse_Over()){
+                    } else if(Ui.get_Button("flag_a").clicked && end_node != n && n.mouse_Over()){
                         clicked_on_node = true;
                         start_node = n;
+                    } else if(Ui.get_Button("flag_b").clicked && start_node != n && n.mouse_Over()){
+                        clicked_on_node = true;
+                        end_node = n;
                     }
                 }
 
                 if (!clicked_on_node && Ui.get_Button("flag_a").clicked) start_node = null;
+                if (!clicked_on_node && Ui.get_Button("flag_b").clicked) end_node = null;
 
 
                 //When we have line, and click outside a node

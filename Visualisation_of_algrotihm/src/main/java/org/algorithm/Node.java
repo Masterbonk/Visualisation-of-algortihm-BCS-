@@ -56,6 +56,14 @@ public class Node {
             sketch.fill(255);
             sketch.rect(x,y-20,10,10);
             sketch.pop();
+        } else if (end_node == this) {
+                sketch.push();
+                sketch.stroke(0);
+                sketch.line(x,y,x,y-20);
+                sketch.noStroke();
+                sketch.fill(0);
+                sketch.rect(x,y-20,10,10);
+                sketch.pop();
         }
 
 
