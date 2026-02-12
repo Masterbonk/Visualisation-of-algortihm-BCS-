@@ -33,8 +33,8 @@ public class Main extends PApplet{
     final float zoom_increase = 0.1f;
 
     //Pan functionality
-    public int translate_x = 0;
-    public int translate_y = 0;
+    public static int translate_x = 0;
+    public static int translate_y = 0;
     public int mouse_x_start_of_pan = -1;
     public int mouse_y_start_of_pan = -1;
 
@@ -374,8 +374,8 @@ public class Main extends PApplet{
 
                     translate_x += mouseX - mouse_x_start_of_pan;
                     translate_y += mouseY - mouse_y_start_of_pan;
-                    println("Translate_x = " + translate_x + ". mouseX = " + mouseX + ". mouse_x_start_of_pan = " + mouse_x_start_of_pan);
-                    println("Translate_y = " + translate_y + ". mouseY = " + mouseY + ". mouse_y_start_of_pan = " + mouse_y_start_of_pan);
+                    //println("Translate_x = " + translate_x + ". mouseX = " + mouseX + ". mouse_x_start_of_pan = " + mouse_x_start_of_pan);
+                    //println("Translate_y = " + translate_y + ". mouseY = " + mouseY + ". mouse_y_start_of_pan = " + mouse_y_start_of_pan);
 
                     mouse_x_start_of_pan = mouseX;
                     mouse_y_start_of_pan = mouseY;

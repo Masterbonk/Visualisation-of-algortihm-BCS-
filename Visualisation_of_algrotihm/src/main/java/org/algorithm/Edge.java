@@ -2,7 +2,7 @@ package org.algorithm;
 
 import processing.core.PApplet;
 
-import static org.algorithm.Main.zoom_level;
+import static org.algorithm.Main.*;
 
 
 public class Edge {
@@ -70,7 +70,7 @@ public class Edge {
         int box_size = 10; int box_x = sketch.mouseX-box_size/2; int box_y = sketch.mouseY-box_size/2;
 
         //The start and end points of the edge
-        double x1_tmp = from.x*zoom_level; double y1_tmp = from.y*zoom_level; double x2_tmp = to.x*zoom_level; double y2_tmp = to.y*zoom_level;
+        double x1_tmp = from.x*zoom_level+translate_x; double y1_tmp = from.y*zoom_level+translate_y; double x2_tmp = to.x*zoom_level+translate_x; double y2_tmp = to.y*zoom_level+translate_y;
 
         //The 2 outcodes that we save. Each one is a binary value that tells us if the point was over,
         // under, to the left or right of the box
