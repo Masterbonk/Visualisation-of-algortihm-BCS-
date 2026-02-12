@@ -11,15 +11,15 @@ import static org.algorithm.Main.zoom_level;
 public class Node {
 
     int x, y;
-    int dim;
+    int dim, g, rhs;
     ArrayList<Edge> connected;
     PApplet sketch;
 
     public Node(PApplet _sketch, int _x, int _y){
-        //float tempX = mouseX/zoom_level;
-        //float tempY = mouseY/zoom_level;
         x = Math.round(_x/zoom_level);
         y = Math.round(_y/zoom_level);
+        g = Integer.MAX_VALUE;
+        rhs = Integer.MAX_VALUE;
         sketch = _sketch;
         connected = new ArrayList<>();
     }
