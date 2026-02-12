@@ -260,6 +260,14 @@ class File_Type_Buttons extends Button{
         }
     }
 
+    @Override
+    boolean mouse_Over() {
+        if (Ui.get_Button("file").clicked) {
+            return super.mouse_Over();
+        } else {
+            return false;
+        }
+    }
 }
 
 class Export_Button extends File_Type_Buttons{
