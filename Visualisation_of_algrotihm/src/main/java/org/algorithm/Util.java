@@ -45,5 +45,7 @@ public class Util {
 
         Ui.add_Button("import", 0, _button_height*2+_button_height/10f, _sketch.displayWidth/10f, _button_height-_button_height/10f,"Import", Import_Button.class, false);
 
+        Ui.add_Button("Node display",(_sketch.displayWidth)/9f, _sketch.displayHeight-_button_height, _sketch.displayWidth/9f*2f, _button_height,"display", Node_Botton.class, false);
+
     }
 }

@@ -14,7 +14,7 @@ public class Main extends PApplet{
 
     public static boolean fullscreen = true;
     public static boolean debug = true;
-    public static boolean display_g_and_rhs_values = true;
+    public static boolean display_g_and_rhs_values = false;
     /**
      * Main function starts the sketch
      * @param args
@@ -335,12 +335,18 @@ public class Main extends PApplet{
                     }
                 }
             }
+
+            if (Ui.get_Button("Node display").clicked){
+                display_g_and_rhs_values = !display_g_and_rhs_values;
+            }
+
+
         }
+
 
         if (!Ui.get_Button("file").mouse_Over() && !Ui.get_Button("export").mouse_Over() && !Ui.get_Button("import").mouse_Over() && Ui.get_Button("file").clicked){ //Lukker file menuen hvis man klikker uden for den mens den er åben.
             Ui.get_Button("file").clicked = false;
         }
-
 
 
 
