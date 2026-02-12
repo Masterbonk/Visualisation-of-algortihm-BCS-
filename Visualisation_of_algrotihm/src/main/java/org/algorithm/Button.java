@@ -196,7 +196,6 @@ class Flag_B_Button extends Button{
     }
 
     void click(){super.click();
-        sketch.println("Not implemented Flag B");
     }
 }
 class Weight_Button extends Button{
