@@ -34,17 +34,19 @@ public class Edge {
         sketch.line(from.x,from.y, to.x, to.y);
         sketch.pop();
 
-        sketch.push();
-        sketch.fill(100);
-        sketch.stroke(100);
-        sketch.strokeWeight(10);
-        sketch.textAlign(sketch.RIGHT,sketch.BOTTOM);
-        sketch.rectMode(sketch.CENTER);
-        sketch.rect((from.x+to.x)/2f-(weight>9?sketch.getGraphics().textSize*0.5f:sketch.getGraphics().textSize*0.25f),
-                (from.y+to.y)/2f-sketch.getGraphics().textSize*0.5f, (weight>9?sketch.getGraphics().textSize:sketch.getGraphics().textSize/2),(sketch.getGraphics().textSize));
-        sketch.fill(255);
-        sketch.text(""+weight, ((from.x+to.x)/2f), ((from.y+to.y)/2f));
-        sketch.pop();
+        if (Ui.get_Button("Edge_display").clicked) {
+            sketch.push();
+            sketch.fill(100);
+            sketch.stroke(100);
+            sketch.strokeWeight(10);
+            sketch.textAlign(sketch.RIGHT, sketch.BOTTOM);
+            sketch.rectMode(sketch.CENTER);
+            sketch.rect((from.x + to.x) / 2f - (weight > 9 ? sketch.getGraphics().textSize * 0.5f : sketch.getGraphics().textSize * 0.25f),
+                    (from.y + to.y) / 2f - sketch.getGraphics().textSize * 0.5f, (weight > 9 ? sketch.getGraphics().textSize : sketch.getGraphics().textSize / 2), (sketch.getGraphics().textSize));
+            sketch.fill(255);
+            sketch.text("" + weight, ((from.x + to.x) / 2f), ((from.y + to.y) / 2f));
+            sketch.pop();
+        }
 
     }
 
