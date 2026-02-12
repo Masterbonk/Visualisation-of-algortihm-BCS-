@@ -14,7 +14,7 @@ public class Main extends PApplet{
 
     public static boolean fullscreen = true;
     public static boolean debug = true;
-    public static boolean display_g_and_rhs_values = false;
+
     /**
      * Main function starts the sketch
      * @param args
@@ -158,7 +158,6 @@ public class Main extends PApplet{
             } else if (key == '-' && zoom_level > 0) {
                 zoom_level -= zoom_increase;
             }
-            System.out.println(zoom_level);
         }
     }
 
@@ -334,10 +333,6 @@ public class Main extends PApplet{
                         break;
                     }
                 }
-            }
-
-            if (Ui.get_Button("Node display").clicked){
-                display_g_and_rhs_values = !display_g_and_rhs_values;
             }
 
 

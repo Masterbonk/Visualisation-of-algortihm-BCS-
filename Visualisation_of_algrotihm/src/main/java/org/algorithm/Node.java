@@ -55,7 +55,7 @@ public class Node {
             sketch.square(x-dim/2,y-dim/2,dim);
             sketch.pop();
         }
-        if (display_g_and_rhs_values){
+        if (Ui.get_Button("Node_display").clicked){
             sketch.push();
             sketch.fill(247,247,247);
             sketch.textSize(20);
