@@ -287,6 +287,7 @@ public class Main extends PApplet{
                         clicked_on_node = true;
                         node_array.remove(n);
                         if (start_node == n) start_node = null;
+                        if (end_node == n) end_node = null;
                         for (Edge e : n.connected) {
                             Node tmp;
                             if (e.from == n) {
