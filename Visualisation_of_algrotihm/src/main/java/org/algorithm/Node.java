@@ -24,6 +24,24 @@ public class Node {
         connected = new ArrayList<>();
     }
 
+    public int get_Rhs_Val(Node n){
+        return  n.rhs;
+    }
+
+    public int get_G_Val(Node n){
+        return n.g;
+    }
+
+    public void update_Rhs_Val(Node n, int _rhs){
+        n.rhs = _rhs;
+    }
+
+    public void update_G_Val(Node n, int _g) {
+        n.g = _g;
+    }
+
+    
+
     public void render(){
         sketch.push();
         if (mouse_Over()) {
