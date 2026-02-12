@@ -48,6 +48,17 @@ public class Node {
 
         sketch.pop();
 
+        if (start_node == this){ //Makes flag if startnode
+            sketch.push();
+            sketch.stroke(255);
+            sketch.line(x,y,x,y-20);
+            sketch.noStroke();
+            sketch.fill(255);
+            sketch.rect(x,y-20,10,10);
+            sketch.pop();
+        }
+
+
         if (debug){
             sketch.push();
             sketch.fill(50,10);
