@@ -32,6 +32,8 @@ public class Main extends PApplet{
     public static float zoom_level = 1f;
     final float zoom_increase = 0.1f;
 
+    public static Node start_node;
+
     //Pan functionality
     public static int translate_x = 0;
     public static int translate_y = 0;
@@ -279,7 +281,7 @@ public class Main extends PApplet{
                 }
 
                 for (Node n : node_array) {
-                    if (n.mouse_Over() && Ui.get_Button("cut").clicked) {
+                    if (Ui.get_Button("cut").clicked && n.mouse_Over()) {
                         clicked_on_node = true;
                         node_array.remove(n);
                         for (Edge e : n.connected) {
@@ -294,7 +296,7 @@ public class Main extends PApplet{
                         break;
                     }
 
-                    if (n.mouse_Over() && Ui.get_Button("line").clicked) {
+                    if (Ui.get_Button("line").clicked && n.mouse_Over()) {
                         clicked_on_node = true;
                         //If we click on node with line buttom down we need to make an edge or connect it to
                         if (node_1 == null) {
@@ -320,7 +322,14 @@ public class Main extends PApplet{
                         break;
 
                     }
+
+                    if(Ui.get_Button("flag_a").clicked && n.mouse_Over()){
+                        clicked_on_node = true;
+                        start_node = n;
+                    }
                 }
+
+                if (!clicked_on_node && Ui.get_Button("flag_a").clicked) start_node = null;
 
 
                 //When we have line, and click outside a node
