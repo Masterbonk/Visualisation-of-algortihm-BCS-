@@ -4,9 +4,7 @@ import processing.core.PApplet;
 
 import java.util.ArrayList;
 
-import static org.algorithm.Main.debug;
-
-import static org.algorithm.Main.zoom_level;
+import static org.algorithm.Main.*;
 
 public class Node {
 
@@ -18,8 +16,8 @@ public class Node {
     public Node(PApplet _sketch, int _x, int _y){
         x = Math.round(_x/zoom_level);
         y = Math.round(_y/zoom_level);
-        g = Integer.MAX_VALUE;
-        rhs = Integer.MAX_VALUE;
+        g = 0;
+        rhs = 0;
         sketch = _sketch;
         connected = new ArrayList<>();
     }
@@ -40,8 +38,6 @@ public class Node {
         n.g = _g;
     }
 
-    
-
     public void render(){
         sketch.push();
         if (mouse_Over()) {
@@ -59,11 +55,16 @@ public class Node {
             sketch.square(x-dim/2,y-dim/2,dim);
             sketch.pop();
         }
+        if (display_g_and_rhs_values){
+            sketch.push();
+            sketch.fill(247,247,247);
+            sketch.textSize(20);
+            sketch.text("g(" + g + "), rhs(" + rhs + ")",(x+dim/2)-35,(y+dim/2)+20);
+            sketch.pop();
+        }
     }
 
     boolean mouse_Over(){
-        //float tempX = Math.round(sketch.mouseX/zoom_level);
-        //float tempY = Math.round(sketch.mouseY/zoom_level);
         float offset = dim/2;
         if (sketch.mouseX >= (x-offset)*zoom_level && sketch.mouseX <= (x+dim-offset)*zoom_level &&
                 sketch.mouseY >= (y-offset)*zoom_level && sketch.mouseY <= (y+dim-offset)*zoom_level){

@@ -14,6 +14,7 @@ public class Main extends PApplet{
 
     public static boolean fullscreen = true;
     public static boolean debug = true;
+    public static boolean display_g_and_rhs_values = true;
     /**
      * Main function starts the sketch
      * @param args
