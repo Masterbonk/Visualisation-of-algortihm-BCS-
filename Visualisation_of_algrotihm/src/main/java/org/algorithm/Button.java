@@ -156,7 +156,6 @@ class Cut_Button extends Button{
     }
 
     void click(){super.click();
-        sketch.println("Not implemented Cut");
     }
 }
 
@@ -189,7 +188,6 @@ class Flag_A_Button extends Button{
     }
 
     void click(){super.click();
-        sketch.println("Not implemented Flag A");
     }
 }
 class Flag_B_Button extends Button{
