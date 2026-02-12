@@ -24,7 +24,15 @@ public class Edge {
     }
 
     public void render(){
+
+        sketch.push();
+        if (Ui.get_Button("cut").clicked){
+            if(mouseOver()){
+                sketch.stroke(73,0,0);
+            }
+        }
         sketch.line(from.x,from.y, to.x, to.y);
+        sketch.pop();
 
         sketch.push();
         sketch.fill(100);
