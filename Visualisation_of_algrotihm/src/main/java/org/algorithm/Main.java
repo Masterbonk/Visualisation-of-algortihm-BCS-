@@ -108,6 +108,12 @@ public class Main extends PApplet{
     public void draw(){
         background(204); //Draws over everything on screen clearing it for the next frame
 
+
+        push();
+        fill(237,171,253);
+        rect(displayWidth/9f*3f,0, 100,100);
+        pop();
+
         zoom();
 
         pushMatrix();
