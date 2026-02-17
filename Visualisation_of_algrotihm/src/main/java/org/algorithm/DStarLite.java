@@ -1,6 +1,7 @@
 package org.algorithm;
 
 public class DStarLite {
+    Node start;
 
     DStarLite(){
 
@@ -18,13 +19,18 @@ public class DStarLite {
 
     }
 
-    public Key calculate_Key(){
+    public Key calculate_Key(Node s){
         return null;
+    }
+
+    //Heurestic
+    public float h(Node x, Node y){
+        return -1f;
     }
 
 }
 
-class Key{
+class Key implements Comparable<Key> {
     public Node n;
     public float k1, k2;
 
@@ -33,6 +39,18 @@ class Key{
         n = _n;
         k1 = _k1;
         k2 = _k2;
+    }
+
+    @Override
+    public int compareTo(Key other) {
+        if (this.k1 < other.k1) return -1;
+        if (this.k1 > other.k1) return 1;
+
+
+        if (this.k2 < other.k2) return -1;
+        if (this.k2 > other.k2) return 1;
+
+        return 0;
     }
 
 
