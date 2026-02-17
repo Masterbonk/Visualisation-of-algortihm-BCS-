@@ -1,7 +1,5 @@
 package org.algorithm;
 
-import kotlin.Pair;
-
 public class DStarLite {
 
     DStarLite(){
@@ -28,12 +26,16 @@ public class DStarLite {
 
 class Key{
     public Node n;
-    public Pair<Float, Float> key_value_pair;
+    public float k1, k2;
 
-    Key(Node _n, float k1, float k2){
+
+    Key(Node _n, float _k1, float _k2){
         n = _n;
-        key_value_pair = new Pair<>(k1, k2);
+        k1 = _k1;
+        k2 = _k2;
     }
+
+
 }
 
 
