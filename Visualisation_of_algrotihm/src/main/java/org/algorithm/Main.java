@@ -108,12 +108,6 @@ public class Main extends PApplet{
     public void draw(){
         background(204); //Draws over everything on screen clearing it for the next frame
 
-
-        push();
-        fill(237,171,253);
-        rect(displayWidth/9f*3f,0, 100,100);
-        pop();
-
         zoom();
 
         pushMatrix();
@@ -156,6 +150,8 @@ public class Main extends PApplet{
             }
 
             for(int i = 0; i < Ui.top_ui.size(); i++){
+
+               // only do this if the buttons are file stuff
                 int a;
                 if (i != 0) {
                     a = 1;
@@ -163,6 +159,12 @@ public class Main extends PApplet{
                     a = 0;
                 }
                 Ui.get_Map().get(Ui.top_ui.get(i)).resize(0,i*button_height,dWidth/9f - (a * (dWidth/9f)/10f ), button_height);
+
+                //buttons are in the top bar not under file
+                if (i >2){
+                    Ui.get_Map().get(Ui.top_ui.get(i)).resize((i-2)*(width/9f),0,dWidth/9f, button_height);
+                }
+
             }
 
         }
