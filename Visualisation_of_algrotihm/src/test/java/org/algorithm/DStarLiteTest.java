@@ -57,7 +57,12 @@ class DStarLiteTest extends PApplet {
 
     }
 
-    //added to the queue
+    /***
+     * This test the core functionality of the update vertex function
+     * specifically updates the rhs value of a
+     * @assert that the rhs value is correct
+     * and that the node a is inserted into the priority queue
+     */
     @Test
     void update_Vertex() {
         Node a = new Node(this, 0,0);
@@ -65,10 +70,13 @@ class DStarLiteTest extends PApplet {
 
         Edge ab = new Edge(this,a,b,3);
 
-        a.update_G_Val(3);
-        a.update_Rhs_Val(4);
+        a.rhs = MAX_INT;
+        a.g = MAX_INT;
 
-        update_Vertex(); //a
+        b.update_G_Val(2);
+        b.update_Rhs_Val(2);
+
+        algorithm.update_Vertex(a); //a
 
         //Test that the key is added to priority queue, with the correct key
         //Test the correct rhs value is calculated
@@ -76,7 +84,12 @@ class DStarLiteTest extends PApplet {
 
     }
 
-    //not added to the queue
+    /***
+     * This test the core functionality of the update vertex function
+     * specifically updates the rhs value of a
+     * @assert that the rhs value is correct
+     * and that the node a is NOT inserted into the priority queue
+     */
     @Test
     void update_Vertex_Locally_Consistent() {
         Node a = new Node(this, 0,0);
@@ -95,14 +108,20 @@ class DStarLiteTest extends PApplet {
         start.update_G_Val(0);
         start.update_Rhs_Val(0);
 
-        update_Vertex(); //a
+        algorithm.update_Vertex(a);
 
-        //Test that the key is not added to priority queue
+        //Test that the key is not added to/in the priority queue
         //Test the correct rhs value is calculated
         assertEquals(4,a.get_Rhs_Val());
 
     }
 
+    /***
+     * This test the functionality of the update vertex function on a bigger graph
+     * with more edges and nodes with different values
+     * @assert that the rhs value is correct
+     * and that the node a is inserted into the priority queue
+     */
     @Test
     void update_Vertex_Calculate_Best_Rhs(){
         Node start = new Node(this,1,1);
@@ -145,7 +164,7 @@ class DStarLiteTest extends PApplet {
         Edge ad = new Edge(this,a,d,10);
         Edge ac = new Edge(this,a,c,1);
 
-        update_Vertex(); //a
+        algorithm.update_Vertex(a); 
 
         //Test that the key is added to priority queue
         //Test the correct rhs value is calculated
