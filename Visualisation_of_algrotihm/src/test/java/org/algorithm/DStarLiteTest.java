@@ -230,60 +230,80 @@ class DStarLiteTest extends PApplet {
      * Checks that the heuristic function is able to perform it's base functionality.
      * This means that it can take two nodes and find the length between the two nodes.
      *
-     * @assert 
+     * @assert That the distance between a node at 0,5 and 5,5 is 5.
      */
     @Test
-    void h_base(){
+    void heuristic_base(){
         algorithm.start = new Node(this, 0, 5);
 
         Node a = new Node(this, 5, 5);
 
-        float result = algorithm.h(algorithm.start,a);
+        float result = algorithm.heuristic(algorithm.start,a);
 
         float expected_result = 5f;
 
         assertEquals(expected_result, result);
     }
 
+    /**
+     * Checks that the heuristic function always give a positive number back,
+     * even if you take nodes in weird orders or place them in negative positions.
+     *
+     * @assert That we always get a positive value back if we have the following calls
+     * h([0,5],[5,5]), h([5,5],[0,5]), h([0,5],[0,-5]), h([0,5],[-5,0])
+     */
     @Test
-    void h_always_positive(){
+    void heuristic_always_positive(){
         algorithm.start = new Node(this, 0, 5);
 
         Node a = new Node(this, 5, 5);
 
-        float result = algorithm.h(a, algorithm.start);
+        float result = algorithm.heuristic(a, algorithm.start);
 
         float expected_result = 5f;
 
         assertEquals(expected_result, result);
 
-        result = algorithm.h(algorithm.start, a);
+        result = algorithm.heuristic(algorithm.start, a);
 
         assertEquals(expected_result, result);
 
         Node b = new Node (this, 0, -5);
-        result = algorithm.h(algorithm.start, b);
+        result = algorithm.heuristic(algorithm.start, b);
         assertEquals(expected_result, result);
 
         b = new Node (this, -5, 0);
-        result = algorithm.h(algorithm.start, b);
+        result = algorithm.heuristic(algorithm.start, b);
         assertEquals(expected_result, result);
-
     }
 
+    /**
+     * Checks that it can calculate the right value within 2 decimals,
+     * specifically when it has to calculate in regards to angles where the value won't be a solid one.
+     *
+     * @assert That two points a (0,0) and b (5,5) will result in a heuristic value of 7.07
+     */
+
     @Test
-    void h_hypotenuse_cal(){
+    void heuristic_hypotenuse_cal(){
         algorithm.start = new Node(this, 0, 0);
 
         Node a = new Node(this, 5, 5);
 
-        float result = algorithm.h(algorithm.start, a);
+        float result = algorithm.heuristic(algorithm.start, a);
 
         float expected_result = 7.07f;
 
         assertEquals(expected_result, result);
     }
 
+    /**
+     * The base initialize test, that the function sets up the envioment for the algorithm to run.
+     *
+     * Before it does so, it specifies the start and goal node.
+     * @assert That km = 0, that start.g = MAX_INT, that start.rhs = MAX_INT, that goal.g = MAX_INT,
+     * that goal.rhs = 0 and that the size of the queue is 1.
+     */
     @Test
     void initialize_base(){
         algorithm.start = new Node(this, 0, 0);
@@ -298,6 +318,11 @@ class DStarLiteTest extends PApplet {
         assertEquals(1, algorithm.U.size());
     }
 
+    /**
+     * Checks that the initialize code fails if the start and goal is null.
+     *
+     * @assert checks first if we get the start null exception, then the goal null exception.
+     */
     @Test
     void initialize_fail_if_no_start_and_goal_set(){
         Exception exception = assertThrows(NullPointerException.class, () -> {
@@ -317,6 +342,9 @@ class DStarLiteTest extends PApplet {
 
     }
 
+    /**
+     * Checks that our queue is null before we call initialize.
+     */
     @Test
     void initialize_no_values_set_before_initialize(){
         assertNull(algorithm.U);

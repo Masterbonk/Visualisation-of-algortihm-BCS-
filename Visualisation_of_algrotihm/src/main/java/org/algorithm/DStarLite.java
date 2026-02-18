@@ -33,8 +33,8 @@ public class DStarLite {
         return null;
     }
 
-    //Heurestic
-    public float h(Node x, Node y){
+
+    public float heuristic(Node x, Node y){
         return -1f;
     }
 
