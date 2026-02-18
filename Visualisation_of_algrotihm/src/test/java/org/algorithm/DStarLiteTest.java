@@ -31,6 +31,11 @@ class DStarLiteTest extends PApplet {
 
     }
 
+    /***
+     * This test the core functionality of the priority queue
+     * specifically the sorting of keys
+     * @assert the right key is at the top of the queue
+     */
     @Test
     void priority_Queue(){
 
@@ -54,6 +59,8 @@ class DStarLiteTest extends PApplet {
 
     @Test
     void compute_Shortest_Path() {
+
+
 
     }
 
