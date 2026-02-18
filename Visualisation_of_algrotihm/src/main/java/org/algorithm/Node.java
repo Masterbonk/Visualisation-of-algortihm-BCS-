@@ -22,20 +22,20 @@ public class Node {
         connected = new ArrayList<>();
     }
 
-    public int get_Rhs_Val(Node n){
-        return  n.rhs;
+    public int get_Rhs_Val(){
+        return  rhs;
     }
 
-    public int get_G_Val(Node n){
-        return n.g;
+    public int get_G_Val(){
+        return g;
     }
 
-    public void update_Rhs_Val(Node n, int _rhs){
-        n.rhs = _rhs;
+    public void update_Rhs_Val(int _rhs){
+        rhs = _rhs;
     }
 
-    public void update_G_Val(Node n, int _g) {
-        n.g = _g;
+    public void update_G_Val(int _g) {
+        g = _g;
     }
 
     public void render(){
