@@ -49,6 +49,13 @@ class DStarLiteTest {
      */
     @Test
     void update_Vertex() {
+        algorithm.start = new Node(sketch,0,0);
+        algorithm.goal = new Node(sketch,0,0);
+        try {
+            algorithm.initialize();
+        } catch (Exception e) {
+            assertTrue(false);
+        }
         Node a = new Node(sketch, 0,0);
         Node b = new Node(sketch, 2,2);
 
@@ -63,6 +70,7 @@ class DStarLiteTest {
         algorithm.update_Vertex(a); //a
 
         //Test that the key is added to priority queue, with the correct key
+        assertTrue(algorithm.U.contains(a));
         //Test the correct rhs value is calculated
         assertEquals(5,a.get_Rhs_Val());
 
@@ -76,6 +84,13 @@ class DStarLiteTest {
      */
     @Test
     void update_Vertex_Locally_Consistent() {
+        algorithm.start = new Node(sketch,0,0);
+        algorithm.goal = new Node(sketch,0,0);
+        try {
+            algorithm.initialize();
+        } catch (Exception e) {
+            assertTrue(false);
+        }
         Node a = new Node(sketch, 0,0);
         Node b = new Node(sketch, 2,2);
         Node start = new Node(sketch, 1,1);
@@ -95,6 +110,7 @@ class DStarLiteTest {
         algorithm.update_Vertex(a);
 
         //Test that the key is not added to/in the priority queue
+        assertFalse(algorithm.U.contains(a));
         //Test the correct rhs value is calculated
         assertEquals(4,a.get_Rhs_Val());
 
@@ -108,6 +124,9 @@ class DStarLiteTest {
      */
     @Test
     void update_Vertex_Calculate_Best_Rhs(){
+        algorithm.start = new Node(sketch,0,0);
+        algorithm.goal = new Node(sketch,0,0);
+
         Node start = new Node(sketch,1,1);
         Node a = new Node(sketch,1,1);
         Node b = new Node(sketch,1,1);
@@ -116,20 +135,13 @@ class DStarLiteTest {
         Node e = new Node(sketch,1,1);
         Node g = new Node(sketch,1,1);
 
+        try {
+            algorithm.initialize();
+        } catch (Exception exc) {
+            assertTrue(false);
+        }
         start.rhs = 0;
         start.g = 0;
-
-        a.rhs = MAX_INT;
-        a.g = MAX_INT;
-
-        b.rhs = MAX_INT;
-        b.g = MAX_INT;
-
-        c.rhs = MAX_INT;
-        c.g = MAX_INT;
-
-        d.rhs = MAX_INT;
-        d.g = MAX_INT;
 
         e.rhs = 3;
         e.g = 3;
@@ -137,16 +149,16 @@ class DStarLiteTest {
         g.rhs = 2;
         g.g = 2;
 
-        Edge startE = new Edge(sketch,start,e,3);
-        Edge startG = new Edge(sketch,start,g,2);
-        Edge startA = new Edge(sketch,start,a,10);
+        Edge startE = new BiEdge(sketch,start,e,3);
+        Edge startG = new BiEdge(sketch,start,g,2);
+        Edge startA = new BiEdge(sketch,start,a,10);
 
-        Edge ga = new Edge(sketch, g,a,2);
-        Edge ea = new Edge(sketch,e,a,5);
+        Edge ga = new BiEdge(sketch, g,a,5);
+        Edge ea = new BiEdge(sketch,e,a,3);
 
-        Edge ab = new Edge(sketch,a,b,3);
-        Edge ad = new Edge(sketch,a,d,10);
-        Edge ac = new Edge(sketch,a,c,1);
+        Edge ab = new BiEdge(sketch,a,b,3);
+        Edge ad = new BiEdge(sketch,a,d,10);
+        Edge ac = new BiEdge(sketch,a,c,1);
 
         algorithm.update_Vertex(a); 
 

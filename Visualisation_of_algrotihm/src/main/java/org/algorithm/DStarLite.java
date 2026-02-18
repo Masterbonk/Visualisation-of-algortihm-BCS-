@@ -53,10 +53,12 @@ public class DStarLite {
             for(Edge e: n.connected){
                 Node other_node = e.from;
                 if (e.from == n) other_node = e.to;
-
-                if (min > e.weight+other_node.get_G_Val()){
-                    min = e.weight+other_node.get_G_Val();
+                if (other_node.get_G_Val() != MAX_INT) {
+                    if (min > e.weight+other_node.get_G_Val()){
+                        min = e.weight+other_node.get_G_Val();
+                    }
                 }
+
             }
             n.update_Rhs_Val(min);
         }
