@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class Main extends PApplet{
 
     public static boolean fullscreen = true;
-    public static boolean debug = true;
+    public static boolean debug = false;
     /**
      * Main function starts the sketch
      * @param args
