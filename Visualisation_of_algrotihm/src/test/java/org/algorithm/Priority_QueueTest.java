@@ -35,9 +35,9 @@ class Priority_QueueTest {
 
         pq = new Priority_Queue();
 
-        Node a = new Node(sketch, 0,0);
-        Node b = new Node(sketch, 2,2);
-        Node c = new Node(sketch, 3,3);
+        a = new Node(sketch, 0,0);
+        b = new Node(sketch, 2,2);
+        c = new Node(sketch, 3,3);
 
 
         a1 = new Tupple(20, 5);
@@ -126,6 +126,18 @@ class Priority_QueueTest {
 
         assertEquals(c, pq.pop());
         assertEquals(2, pq.size());
+    }
+
+    @Test
+    void insert_not_null() {
+
+
+        pq.insert(a, a1);
+        pq.insert(c, c1);
+        pq.insert(b, b1);
+
+
+        assertNotEquals(null, pq.pop());
     }
 
     /** test that pop works
