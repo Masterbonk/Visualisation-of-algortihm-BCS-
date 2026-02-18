@@ -42,6 +42,30 @@ public class Priority_Queue {
         return heap.getFirst();
     }
 
+    public boolean contains(Node n){
+        for (Key k: heap){
+            if (k.n == n){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void remove(Node n) throws Exception{
+        boolean found = false;
+        for (Key k: heap){
+            if (k.n == n){
+                heap.remove(k);
+                found = true;
+                break;
+            }
+        }
+        if (!found){
+            throw new Exception("Not in set");
+        }
+
+    }
+
     /**
      * @return the size of the queue
      * */

@@ -4,12 +4,13 @@ import java.util.Collection;
 
 import static java.lang.Math.min;
 import static processing.core.PApplet.println;
+import static processing.core.PConstants.MAX_INT;
 
 public class DStarLite {
     Node start;
     Node goal;
     float km;
-    Collection U; //Queue placeholder type
+    Priority_Queue U; //Queue placeholder type
 
 
     DStarLite(){
@@ -17,7 +18,7 @@ public class DStarLite {
     }
 
     public void initialize(){
-
+        
     }
 
     public void D_Main(){
@@ -29,8 +30,30 @@ public class DStarLite {
     }
 
     public void update_Vertex(Node n){
+        if (n != goal){
+            int min = MAX_INT;
+            for(Edge e: n.connected){
+                Node other_node = e.from;
+                if (e.from == n) other_node = e.to;
 
+                if (min > e.weight+other_node.get_G_Val()){
+                    min = e.weight+other_node.get_G_Val();
+                }
+            }
+            n.update_Rhs_Val(min);
+        }
 
+        if(U.contains(n)){
+            try{
+                U.remove(n);
+            } catch (Exception e){
+                println(e.getMessage());
+            }
+        }
+
+        if(n.get_G_Val() != n.get_Rhs_Val()){
+            U.insert(calculate_Key(n));
+        }
     }
 
     public Key calculate_Key(Node s){
