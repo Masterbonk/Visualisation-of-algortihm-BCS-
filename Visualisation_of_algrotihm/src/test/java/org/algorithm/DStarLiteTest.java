@@ -16,8 +16,8 @@ class DStarLiteTest extends PApplet {
     @BeforeEach
     void setUp() {
         String[] processingArgs = {"Main"};
-        Main main = new Main();
-        PApplet.runSketch(processingArgs, main);
+        Main Dmain = new Main();
+        PApplet.runSketch(processingArgs, Dmain);
         algorithm = new DStarLite();
     }
 
