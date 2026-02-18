@@ -1,10 +1,19 @@
 package org.algorithm;
 
+import java.util.Collection;
+
 public class DStarLite {
     Node start;
-    float km = 0;
+    Node goal;
+    float km;
+    Collection U; //Queue placeholder type
+
 
     DStarLite(){
+
+    }
+
+    public void initialize(){
 
     }
 

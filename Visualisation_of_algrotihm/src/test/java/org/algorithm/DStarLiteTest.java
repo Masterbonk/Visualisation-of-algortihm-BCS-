@@ -261,4 +261,42 @@ class DStarLiteTest extends PApplet {
 
         assertEquals(expected_result, result);
     }
+
+    @Test
+    void initialize_base(){
+        algorithm.start = new Node(this, 0, 0);
+        algorithm.goal = new Node(this, 1, 1);
+
+        algorithm.initialize();
+        assertEquals(0,algorithm.km);
+        assertEquals(MAX_INT,algorithm.start.get_G_Val());
+        assertEquals(MAX_INT,algorithm.start.get_Rhs_Val());
+        assertEquals(MAX_INT,algorithm.goal.get_G_Val());
+        assertEquals(0,algorithm.goal.get_Rhs_Val());
+        assertEquals(1, algorithm.U.size());
+    }
+
+    @Test
+    void initialize_fail_if_no_start_and_goal_set(){
+        Exception exception = assertThrows(NullPointerException.class, () -> {
+            algorithm.initialize();
+        });
+
+        String expectedMessage = "Start not set!";
+        String actualMessage = exception.getMessage();
+
+        assertEquals(actualMessage, expectedMessage);
+
+
+        algorithm.start = new Node(this, 0, 0);
+        expectedMessage = "Goal not set!";
+        actualMessage = exception.getMessage();
+        assertEquals(actualMessage, expectedMessage);
+
+    }
+
+    @Test
+    void initialize_no_values_set_before_initialize(){
+        assertNull(algorithm.U);
+    }
 }
