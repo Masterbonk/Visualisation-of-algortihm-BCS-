@@ -48,7 +48,7 @@ public class Priority_Queue {
         return heap.isEmpty();
     }
 
-
+    //swim the key up the heap
     private void swim(int i) {
         while (i > 0 && greater(parent(i), i)) {
             exch(i, parent(i));
@@ -56,6 +56,7 @@ public class Priority_Queue {
         }
     }
 
+    //sink the key down the heap
     private void sink(int i) {
         while (left(i) < heap.size()) {
 
@@ -72,22 +73,26 @@ public class Priority_Queue {
         }
     }
 
+    //the get "parent" node
     private int parent(int i) {
         return (i - 1) / 2;
     }
-
+    //get the "left" node
     private int left(int i) {
         return 2 * i + 1;
     }
 
+    //get the "right" node
     private int right(int i) {
         return 2 * i + 2;
     }
 
+    //uisng the compareTo function of key to compare elements
     private boolean greater(int i, int j) {
         return heap.get(i).compareTo(heap.get(j)) > 0;
     }
 
+    //exchange 2 elements
     private void exch(int i, int j) {
         Key temp = heap.get(i);
         heap.set(i, heap.get(j));
