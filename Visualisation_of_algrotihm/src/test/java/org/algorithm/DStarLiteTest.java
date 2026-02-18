@@ -34,17 +34,6 @@ class DStarLiteTest {
 
     }
 
-    /***
-     * This test the core functionality of the priority queue
-     * specifically the sorting of keys
-     * @assert the right key is at the top of the queue
-     */
-    @Test
-    void priority_Queue(){
-
-
-    }
-
     @Test
     void compute_Shortest_Path() {
 
@@ -288,9 +277,9 @@ class DStarLiteTest {
      */
     @Test
     void heuristic_always_positive2(){
-        algorithm.start = new Node(this, 0, 5);
+        algorithm.start = new Node(sketch, 0, 5);
 
-        Node a = new Node(this, 5, 5);
+        Node a = new Node(sketch, 5, 5);
 
         float expected_result = 5f;
 
