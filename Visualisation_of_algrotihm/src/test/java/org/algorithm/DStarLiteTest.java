@@ -173,7 +173,7 @@ class DStarLiteTest {
 
         Key expected_result = new Key(a, 105, 100);
 
-        assertEquals(expected_result, result);
+        assertTrue(expected_result.same_Key(result));
     }
 
     /**
@@ -194,14 +194,14 @@ class DStarLiteTest {
 
         Key expected_result = new Key(a, 12, 7);
 
-        assertEquals(expected_result, result);
+        assertTrue(expected_result.same_Key(result));
 
         a.g = 100;
         a.rhs = 7;
 
         result = algorithm.calculate_Key(a);
 
-        assertEquals(expected_result, result);
+        assertTrue(expected_result.same_Key(result));
     }
 
     /**
@@ -225,7 +225,7 @@ class DStarLiteTest {
 
         Key expected_result = new Key(a, 110, 5);
 
-        assertEquals(expected_result, result);
+        assertTrue(expected_result.same_Key(result));
 
     }
 

@@ -23,6 +23,10 @@ public class Key implements Comparable<Key> {
         return 0;
     }
 
+    public boolean same_Key(Key other){
+        return this.n == other.n && this.k1 == other.k1 && this.k2 == other.k2;
+    }
+
 
 }
 

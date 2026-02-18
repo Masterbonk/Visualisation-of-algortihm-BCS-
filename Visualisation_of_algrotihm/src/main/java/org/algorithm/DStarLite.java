@@ -2,6 +2,7 @@ package org.algorithm;
 
 import java.util.Collection;
 
+import static java.lang.Math.min;
 import static processing.core.PApplet.println;
 
 public class DStarLite {
@@ -33,7 +34,13 @@ public class DStarLite {
     }
 
     public Key calculate_Key(Node s){
-        return null;
+        float k1, k2;
+
+        k1 = min(s.g,s.rhs) + heuristic(s, start) + km;
+
+        k2 = min(s.g,s.rhs);
+
+        return new Key(s, k1, k2);
     }
 
 
