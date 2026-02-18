@@ -268,11 +268,11 @@ class DStarLiteTest extends PApplet {
      * Checks that the heuristic function always give a positive number back,
      * even if you take nodes in weird orders or place them in negative positions.
      *
-     * @assert That we always get a positive value back if we have the following calls
-     * h([0,5],[5,5]), h([5,5],[0,5]), h([0,5],[0,-5]), h([0,5],[-5,0])
+     * @assert That we always get a positive value back if we have the following call
+     * h([0,5],[5,5])
      */
     @Test
-    void heuristic_always_positive(){
+    void heuristic_always_positive1(){
         algorithm.start = new Node(this, 0, 5);
 
         Node a = new Node(this, 5, 5);
@@ -282,19 +282,65 @@ class DStarLiteTest extends PApplet {
         float expected_result = 5f;
 
         assertEquals(expected_result, result);
+    }
 
-        result = algorithm.heuristic(algorithm.start, a);
+    /**
+     * Checks that the heuristic function always give a positive number back,
+     * even if you take nodes in weird orders or place them in negative positions.
+     *
+     * @assert That we always get a positive value back if we have the following call
+     * h([5,5],[0,5])
+     */
+    @Test
+    void heuristic_always_positive2(){
+        algorithm.start = new Node(this, 0, 5);
+
+        Node a = new Node(this, 5, 5);
+
+        float expected_result = 5f;
+
+        float result = algorithm.heuristic(algorithm.start, a);
 
         assertEquals(expected_result, result);
+    }
+
+    /**
+     * Checks that the heuristic function always give a positive number back,
+     * even if you take nodes in weird orders or place them in negative positions.
+     *
+     * @assert That we always get a positive value back if we have the following call
+     * h([0,5],[0,-5])
+     */
+    @Test
+    void heuristic_always_positive3(){
+        algorithm.start = new Node(this, 0, 5);
 
         Node b = new Node (this, 0, -5);
-        result = algorithm.heuristic(algorithm.start, b);
-        expected_result = 10;
+        float result = algorithm.heuristic(algorithm.start, b);
+        float expected_result = 10;
         assertEquals(expected_result, result);
 
         expected_result = 5;
         b = new Node (this, -5, 5);
         result = algorithm.heuristic(algorithm.start, b);
+        assertEquals(expected_result, result);
+    }
+
+    /**
+     * Checks that the heuristic function always give a positive number back,
+     * even if you take nodes in weird orders or place them in negative positions.
+     *
+     * @assert That we always get a positive value back if we have the following call
+     * h([0,5],[-5,0])
+     */
+
+    @Test
+    void heuristic_always_positive4(){
+        algorithm.start = new Node(this, 0, 5);
+
+        float expected_result = 5;
+        Node b = new Node (this, -5, 5);
+        float result = algorithm.heuristic(algorithm.start, b);
         assertEquals(expected_result, result);
     }
 
