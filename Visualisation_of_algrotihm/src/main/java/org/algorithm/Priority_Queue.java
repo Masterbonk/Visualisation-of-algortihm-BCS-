@@ -35,6 +35,14 @@ public class Priority_Queue {
     }
 
     /**
+     * Gives us the TopKey in the queue, without removing it
+     * @return The Key object with the highest priority
+     */
+    public Key TopKey(){
+        return heap.getFirst();
+    }
+
+    /**
      * @return the size of the queue
      * */
     int size(){
