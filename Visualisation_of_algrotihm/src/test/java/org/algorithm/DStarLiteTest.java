@@ -65,14 +65,14 @@ class DStarLiteTest extends PApplet {
 
         Edge ab = new Edge(this,a,b,3);
 
-        a.update_G_Val(a,3);
-        a.update_Rhs_Val(a,4);
+        a.update_G_Val(3);
+        a.update_Rhs_Val(4);
 
         update_Vertex(); //a
 
         //Test that the key is added to priority queue, with the correct key
         //Test the correct rhs value is calculated
-        assertEquals(5,a.get_Rhs_Val(a));
+        assertEquals(5,a.get_Rhs_Val());
 
     }
 
@@ -84,17 +84,17 @@ class DStarLiteTest extends PApplet {
 
         Edge ab = new Edge(this,a,b,3);
 
-        a.update_G_Val(a,4);
-        a.update_Rhs_Val(a,4);
+        a.update_G_Val(4);
+        a.update_Rhs_Val(4);
 
-        b.update_Rhs_Val(b, 5);
-        b.update_G_Val(b,5);
+        b.update_Rhs_Val(5);
+        b.update_G_Val(5);
 
         update_Vertex(); //a
 
         //Test that the key is not added to priority queue
         //Test the correct rhs value is calculated
-        assertEquals(8,a.get_Rhs_Val(a));
+        assertEquals(8,a.get_Rhs_Val());
 
     }
 
@@ -159,5 +159,57 @@ class DStarLiteTest extends PApplet {
 
         assertEquals(expected_result, result);
 
+    }
+
+    @Test
+    void heuristic_base(){
+        algorithm.start = new Node(this, 0, 5);
+
+        Node a = new Node(this, 5, 5);
+
+        float result = algorithm.h(algorithm.start,a);
+
+        float expected_result = 5f;
+
+        assertEquals(expected_result, result);
+    }
+
+    @Test
+    void heuristic_always_positive(){
+        algorithm.start = new Node(this, 0, 5);
+
+        Node a = new Node(this, 5, 5);
+
+        float result = algorithm.h(a, algorithm.start);
+
+        float expected_result = 5f;
+
+        assertEquals(expected_result, result);
+
+        result = algorithm.h(algorithm.start, a);
+
+        assertEquals(expected_result, result);
+
+        Node b = new Node (this, 0, -5);
+        result = algorithm.h(algorithm.start, b);
+        assertEquals(expected_result, result);
+
+        b = new Node (this, -5, 0);
+        result = algorithm.h(algorithm.start, b);
+        assertEquals(expected_result, result);
+
+    }
+
+    @Test
+    void heuristic_hypotenuse_cal(){
+        algorithm.start = new Node(this, 0, 0);
+
+        Node a = new Node(this, 5, 5);
+
+        float result = algorithm.h(algorithm.start, a);
+
+        float expected_result = 7.07f;
+
+        assertEquals(expected_result, result);
     }
 }
