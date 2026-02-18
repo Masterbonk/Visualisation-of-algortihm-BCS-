@@ -360,7 +360,11 @@ class DStarLiteTest {
         algorithm.start = new Node(sketch, 0, 0);
         algorithm.goal = new Node(sketch, 1, 1);
 
-        algorithm.initialize();
+        try {
+            algorithm.initialize();
+        } catch (Exception e){
+            assertTrue(false);
+        }
         assertEquals(0,algorithm.km);
         assertEquals(MAX_INT,algorithm.start.get_G_Val());
         assertEquals(MAX_INT,algorithm.start.get_Rhs_Val());
@@ -383,13 +387,16 @@ class DStarLiteTest {
         String expectedMessage = "Start not set!";
         String actualMessage = exception.getMessage();
 
-        assertEquals(actualMessage, expectedMessage);
+        assertEquals(expectedMessage, actualMessage);
 
 
         algorithm.start = new Node(sketch, 0, 0);
         expectedMessage = "Goal not set!";
+        exception = assertThrows(NullPointerException.class, () -> {
+            algorithm.initialize();
+        });
         actualMessage = exception.getMessage();
-        assertEquals(actualMessage, expectedMessage);
+        assertEquals(expectedMessage, actualMessage);
 
     }
 

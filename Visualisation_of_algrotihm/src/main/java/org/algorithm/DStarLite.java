@@ -1,6 +1,8 @@
 package org.algorithm;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import static java.lang.Math.min;
 import static processing.core.PApplet.println;
@@ -10,15 +12,31 @@ public class DStarLite {
     Node start;
     Node goal;
     float km;
-    Priority_Queue U; //Queue placeholder type
+    Priority_Queue U;
 
 
     DStarLite(){
-
+        Main.set_of_nodes = new HashSet<>();
     }
 
-    public void initialize(){
-        
+    public void initialize() throws  Exception{
+        if (start == null) throw new NullPointerException("Start not set!");
+        if (goal == null) throw new NullPointerException("Goal not set!");
+
+
+        U = new Priority_Queue();
+
+        km = 0;
+
+        for(Node n: Main.set_of_nodes){
+            n.update_G_Val(MAX_INT);
+            n.update_Rhs_Val(MAX_INT);
+        }
+
+        goal.update_Rhs_Val(0);
+
+        U.insert(calculate_Key(goal));
+
     }
 
     public void D_Main(){
@@ -72,6 +90,16 @@ public class DStarLite {
      * */
     public float heuristic(Node a, Node b){
         return (float) (Math.round(Math.sqrt((Math.pow(a.x - b.x,2)) + (Math.pow(a.y - b.y,2)))* 100.0) / 100.0);
+    }
+
+    public void remove_Node(Node n){
+        Main.set_of_nodes.remove(n);
+
+        try {
+            U.remove(n);
+        } catch (Exception e){
+            println(e.getMessage());
+        }
     }
 
 }

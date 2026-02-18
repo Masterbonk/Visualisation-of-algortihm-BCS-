@@ -5,6 +5,7 @@ import processing.core.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 //used this code to implement zoom feature https://forum.processing.org/one/topic/zooming-in-and-zooming-out.html
 
@@ -14,7 +15,9 @@ public class Main extends PApplet{
 
     public static boolean fullscreen = true;
     public static boolean debug = false;
-    Priority_Queue pq;
+
+    public static Set<Node> set_of_nodes;
+
     /**
      * Main function starts the sketch
      * @param args
@@ -95,7 +98,6 @@ public class Main extends PApplet{
         button_height = displayHeight*10/144;
 
         Util.Make_UI(this, button_height);
-        pq = new Priority_Queue();
         Make_Graph();
 
 
@@ -141,11 +143,6 @@ public class Main extends PApplet{
         Ui.render();
         rescale();
 
-        for (int i = 0; i > pq.size(); i++){
-            Key tmp = pq.pop();
-
-            print("node: " + tmp + " " + tmp.k1 + " " + tmp.k2);
-        }
     }
 
     public void rescale(){

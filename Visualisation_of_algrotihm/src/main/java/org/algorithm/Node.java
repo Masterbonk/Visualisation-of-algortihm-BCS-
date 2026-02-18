@@ -21,6 +21,8 @@ public class Node {
         y = Math.round((_y-translate_y)/zoom_level);
         sketch = _sketch;
         connected = new ArrayList<>();
+
+        set_of_nodes.add(this);
     }
 
     public int get_Rhs_Val(){
