@@ -8,7 +8,7 @@ import processing.core.PApplet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class Priority_QueueTest extends PApplet {
+class Priority_QueueTest {
 
     Node a;
     Node b;
@@ -18,13 +18,16 @@ class Priority_QueueTest extends PApplet {
     Key b1;
     Key c1;
 
+    PApplet sketch;
+
     /** Setup nodes & keys to use for each test
      * */
     @BeforeEach
     void setUp() {
-        Node a = new Node(this, 0,0);
-        Node b = new Node(this, 2,2);
-        Node c = new Node(this, 3,3);
+        sketch = new PApplet();
+        Node a = new Node(sketch, 0,0);
+        Node b = new Node(sketch, 2,2);
+        Node c = new Node(sketch, 3,3);
 
 
         a1 = new Key(a, 20, 5);
