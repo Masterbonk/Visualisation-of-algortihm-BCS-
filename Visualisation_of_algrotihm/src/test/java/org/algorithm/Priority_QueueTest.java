@@ -64,7 +64,7 @@ class Priority_QueueTest extends PApplet {
     }
 
     @Test
-    void pop() {
+    void popTest() {
 
         org.algorithm.Priority_Queue pq = new Priority_Queue();
 
