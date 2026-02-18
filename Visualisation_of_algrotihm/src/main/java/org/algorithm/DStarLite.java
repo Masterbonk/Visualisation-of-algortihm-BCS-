@@ -2,6 +2,7 @@ package org.algorithm;
 
 public class DStarLite {
     Node start;
+    float km = 0;
 
     DStarLite(){
 

@@ -104,30 +104,60 @@ class DStarLiteTest extends PApplet {
     }
 
     @Test
-    void calculate_Key() {
+    void calculate_Key_base_function_test() {
 
         algorithm.start = new Node(this, 0, 5);
 
         Node a = new Node(this, 5, 5);
         a.g = 100;
         a.rhs = 100;
-        Node b = new Node(this, 5, 10);
-        b.g = 8;
-        b.rhs = 8;
-        Node c = new Node(this, 11, 5);
-        c.g = 8;
-        c.rhs = 8;
-
-        Edge ab = new BiEdge(this, a, b, 5);
-        Edge bc = new BiEdge(this, b, c, 6);
 
         Key result = algorithm.calculate_Key(a);
 
-        Key expected_result = new Key(a, 18, 13);
+        Key expected_result = new Key(a, 105, 100);
+
+        assertEquals(expected_result, result);
+    }
+
+    @Test
+    void calculate_Key_pick_lowest_rhs_g() {
+
+        algorithm.start = new Node(this, 0, 5);
+
+        Node a = new Node(this, 5, 5);
+        a.g = 7;
+        a.rhs = 100;
+
+        Key result = algorithm.calculate_Key(a);
+
+        Key expected_result = new Key(a, 12, 7);
 
         assertEquals(expected_result, result);
 
+        a.g = 100;
+        a.rhs = 7;
 
+        result = algorithm.calculate_Key(a);
+
+        assertEquals(expected_result, result);
+    }
+
+    @Test
+    void calculate_Key_uses_km() {
+
+        algorithm.start = new Node(this, 0, 5);
+
+        algorithm.km = 100;
+
+        Node a = new Node(this, 5, 5);
+        a.g = 5;
+        a.rhs = 5;
+
+        Key result = algorithm.calculate_Key(a);
+
+        Key expected_result = new Key(a, 110, 5);
+
+        assertEquals(expected_result, result);
 
     }
 }
