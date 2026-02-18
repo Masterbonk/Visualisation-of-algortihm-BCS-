@@ -103,8 +103,13 @@ class DStarLiteTest extends PApplet {
 
     }
 
+    /** This test checks the base functionality of the calculate_Key function.
+     * It checks whether the calculations are able to find the heuristic value of 5,
+     * alongside the g and rhs values
+     * @assert That the key is the expected one
+     */
     @Test
-    void calculate_Key_base_function_test() {
+    void calculate_Key_base() {
 
         algorithm.start = new Node(this, 0, 5);
 
@@ -119,6 +124,11 @@ class DStarLiteTest extends PApplet {
         assertEquals(expected_result, result);
     }
 
+    /**
+     * Checks that calculate key always picks the lowest of g and rhs
+     *
+     * @assert that the key is built on the lower value of g or rhs in it's calculations.
+     */
     @Test
     void calculate_Key_pick_lowest_rhs_g() {
 
@@ -142,6 +152,12 @@ class DStarLiteTest extends PApplet {
         assertEquals(expected_result, result);
     }
 
+    /**
+     * Checks that the calculate key uses the km value when calculating
+     *
+     * @assert That the expected result builds on the algorithm km value which is artificially put at 100
+     */
+
     @Test
     void calculate_Key_uses_km() {
 
@@ -161,8 +177,14 @@ class DStarLiteTest extends PApplet {
 
     }
 
+    /**
+     * Checks that the heuristic function is able to perform it's base functionality.
+     * This means that it can take two nodes and find the length between the two nodes.
+     *
+     * @assert 
+     */
     @Test
-    void heuristic_base(){
+    void h_base(){
         algorithm.start = new Node(this, 0, 5);
 
         Node a = new Node(this, 5, 5);
@@ -175,7 +197,7 @@ class DStarLiteTest extends PApplet {
     }
 
     @Test
-    void heuristic_always_positive(){
+    void h_always_positive(){
         algorithm.start = new Node(this, 0, 5);
 
         Node a = new Node(this, 5, 5);
@@ -201,7 +223,7 @@ class DStarLiteTest extends PApplet {
     }
 
     @Test
-    void heuristic_hypotenuse_cal(){
+    void h_hypotenuse_cal(){
         algorithm.start = new Node(this, 0, 0);
 
         Node a = new Node(this, 5, 5);
