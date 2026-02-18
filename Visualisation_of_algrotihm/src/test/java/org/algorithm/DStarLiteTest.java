@@ -4,8 +4,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import processing.core.PApplet;
-import java.util.*;
-import processing.core.*;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -181,9 +179,9 @@ class DStarLiteTest {
         a.g = 100;
         a.rhs = 100;
 
-        Key result = algorithm.calculate_Key(a);
+        Tupple result = algorithm.calculate_Key(a);
 
-        Key expected_result = new Key(a, 105, 100);
+        Tupple expected_result = new Tupple(105, 100);
 
         assertTrue(expected_result.same_Key(result));
     }
@@ -202,9 +200,9 @@ class DStarLiteTest {
         a.g = 7;
         a.rhs = 100;
 
-        Key result = algorithm.calculate_Key(a);
+        Tupple result = algorithm.calculate_Key(a);
 
-        Key expected_result = new Key(a, 12, 7);
+        Tupple expected_result = new Tupple(12, 7);
 
         assertTrue(expected_result.same_Key(result));
 
@@ -233,9 +231,9 @@ class DStarLiteTest {
         a.g = 5;
         a.rhs = 5;
 
-        Key result = algorithm.calculate_Key(a);
+        Tupple result = algorithm.calculate_Key(a);
 
-        Key expected_result = new Key(a, 110, 5);
+        Tupple expected_result = new Tupple(110, 5);
 
         assertTrue(expected_result.same_Key(result));
 

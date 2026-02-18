@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import processing.core.PApplet;
 
 
+import java.util.HashSet;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class Priority_QueueTest {
@@ -14,9 +16,9 @@ class Priority_QueueTest {
     Node b;
     Node c;
 
-    Key a1;
-    Key b1;
-    Key c1;
+    Tupple a1;
+    Tupple b1;
+    Tupple c1;
 
     PApplet sketch;
 
@@ -29,6 +31,8 @@ class Priority_QueueTest {
     void setUp() {
         sketch = new PApplet();
 
+        Main.set_of_nodes = new HashSet<>();
+
         pq = new Priority_Queue();
 
         Node a = new Node(sketch, 0,0);
@@ -36,9 +40,11 @@ class Priority_QueueTest {
         Node c = new Node(sketch, 3,3);
 
 
-        a1 = new Key(a, 20, 5);
-        b1 = new Key(b, 30, 2);
-        c1 = new Key(c, 20, 2);
+        a1 = new Tupple(20, 5);
+        b1 = new Tupple(30, 2);
+        c1 = new Tupple(20, 2);
+
+
 
     }
 
@@ -54,9 +60,9 @@ class Priority_QueueTest {
     void insert() {
 
 
-        pq.insert(b1);
-        pq.insert(c1);
-        pq.insert(a1);
+        pq.insert(b, b1);
+        pq.insert(c, c1);
+        pq.insert(a, a1);
 
 
         assertEquals(3, pq.size());
@@ -68,12 +74,12 @@ class Priority_QueueTest {
     void insert_2() {
 
 
-        pq.insert(b1);
-        pq.insert(c1);
-        pq.insert(a1);
+        pq.insert(b, b1);
+        pq.insert(c, c1);
+        pq.insert(a, a1);
 
 
-        assertEquals(c1, pq.pop());
+        assertEquals(c, pq.pop());
         assertEquals(2, pq.size());
     }
 
@@ -83,12 +89,12 @@ class Priority_QueueTest {
     void insert_3() {
 
 
-        pq.insert(c1);
-        pq.insert(b1);
-        pq.insert(a1);
+        pq.insert(c, c1);
+        pq.insert(b, b1);
+        pq.insert(a, a1);
 
 
-        assertEquals(c1, pq.pop());
+        assertEquals(c, pq.pop());
         assertEquals(2, pq.size());
     }
 
@@ -98,12 +104,12 @@ class Priority_QueueTest {
     void insert_4() {
 
 
-        pq.insert(a1);
-        pq.insert(b1);
-        pq.insert(c1);
+        pq.insert(a, a1);
+        pq.insert(b, b1);
+        pq.insert(c, c1);
 
 
-        assertEquals(c1, pq.pop());
+        assertEquals(c, pq.pop());
         assertEquals(2, pq.size());
     }
 
@@ -113,12 +119,12 @@ class Priority_QueueTest {
     void insert_5() {
 
 
-        pq.insert(a1);
-        pq.insert(c1);
-        pq.insert(b1);
+        pq.insert(a, a1);
+        pq.insert(c, c1);
+        pq.insert(b, b1);
 
 
-        assertEquals(c1, pq.pop());
+        assertEquals(c, pq.pop());
         assertEquals(2, pq.size());
     }
 
@@ -127,12 +133,12 @@ class Priority_QueueTest {
     @Test
     void popTest() {
 
-        a1 = new Key(a, 20, 5);
-        b1 = new Key(b, 30, 2);
-        c1 = new Key(c, 20, 2);
+        a1 = new Tupple(20, 5);
+        b1 = new Tupple(30, 2);
+        c1 = new Tupple(20, 2);
 
-        pq.insert(b1);
-        pq.insert(c1);
+        pq.insert(b, b1);
+        pq.insert(c, c1);
         pq.pop();
 
 
@@ -142,12 +148,12 @@ class Priority_QueueTest {
     @Test
     void top_Key_base(){
 
-        pq.insert(b1);
-        pq.insert(c1);
-        pq.insert(a1);
+        pq.insert(b, b1);
+        pq.insert(c, c1);
+        pq.insert(a, a1);
 
 
-        assertEquals(c1, pq.top_Key());
+        assertTrue(c1.same_Key(pq.top_Key()));
     }
 
     /** test that pop gives null if the queue is empty when popping
@@ -155,12 +161,12 @@ class Priority_QueueTest {
     @Test
     void popTest_fails_if_empty() {
 
-        a1 = new Key(a, 20, 5);
-        b1 = new Key(b, 30, 2);
-        c1 = new Key(c, 20, 2);
+        a1 = new Tupple(20, 5);
+        b1 = new Tupple(30, 2);
+        c1 = new Tupple(20, 2);
 
-        pq.insert(b1);
-        pq.insert(c1);
+        pq.insert(b, b1);
+        pq.insert(c, c1);
         pq.pop();
         pq.pop();
         assertNull(pq.pop());
@@ -171,12 +177,12 @@ class Priority_QueueTest {
     @Test
     void size() {
 
-        a1 = new Key(a, 20, 5);
-        b1 = new Key(b, 30, 2);
-        c1 = new Key(c, 20, 2);
-        pq.insert(a1);
-        pq.insert(b1);
-        pq.insert(c1);
+        a1 = new Tupple(20, 5);
+        b1 = new Tupple(30, 2);
+        c1 = new Tupple(20, 2);
+        pq.insert(a, a1);
+        pq.insert(b, b1);
+        pq.insert(c, c1);
 
         assertEquals(3, pq.size());
     }

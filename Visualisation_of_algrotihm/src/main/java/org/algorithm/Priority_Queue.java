@@ -4,28 +4,32 @@ import java.util.*;
 
 public class Priority_Queue {
 
-    ArrayList<Key> heap;
+    ArrayList<Node> heap;
+
+    HashMap<Node,Tupple> keys;
 
     Priority_Queue(){
         heap = new ArrayList<>();
+        keys = new HashMap<>();
     }
 
     /**
      * insert Key _k into the priority queue
      * @param _k Key to be inserted
      * */
-    void insert(Key _k){
-        heap.add(_k);                 // add to end
+    void insert(Node _n, Tupple _k){
+        heap.add(_n);
+        keys.put(_n,_k);
         swim(heap.size() - 1);
     }
 
     /**
      * @return and delete the top key of queue
     * */
-    Key pop(){
+    Node pop(){
         if (is_empty()) return null;
 
-        Key min = heap.getFirst();
+        Node min = heap.getFirst();
 
         exch(0, heap.size() - 1);
         heap.removeLast();
@@ -38,31 +42,17 @@ public class Priority_Queue {
      * Gives us the TopKey in the queue, without removing it
      * @return The Key object with the highest priority
      */
-    public Key top_Key(){
-        return heap.getFirst();
+    public Tupple top_Key(){
+        return keys.get(heap.getFirst());
     }
 
     public boolean contains(Node n){
-        for (Key k: heap){
-            if (k.n == n){
-                return true;
-            }
-        }
-        return false;
+        return heap.contains(n);
     }
 
-    public void remove(Node n) throws Exception{
-        boolean found = false;
-        for (Key k: heap){
-            if (k.n == n){
-                heap.remove(k);
-                found = true;
-                break;
-            }
-        }
-        if (!found){
-            throw new Exception("Not in set");
-        }
+    public void remove(Node n) {
+        heap.remove(n);
+        keys.remove(n);
 
     }
 
@@ -121,12 +111,12 @@ public class Priority_Queue {
 
     //uisng the compareTo function of key to compare elements
     private boolean greater(int i, int j) {
-        return heap.get(i).compareTo(heap.get(j)) > 0;
+        return keys.get(heap.get(i)).compareTo(keys.get(heap.get(j))) > 0;
     }
 
     //exchange 2 elements
     private void exch(int i, int j) {
-        Key temp = heap.get(i);
+        Node temp = heap.get(i);
         heap.set(i, heap.get(j));
         heap.set(j, temp);
     }

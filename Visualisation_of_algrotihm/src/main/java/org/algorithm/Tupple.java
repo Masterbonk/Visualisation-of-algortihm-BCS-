@@ -1,18 +1,16 @@
 package org.algorithm;
 
-public class Key implements Comparable<Key> {
-    public Node n;
+public class Tupple implements Comparable<Tupple> {
     public float k1, k2;
 
 
-    Key(Node _n, float _k1, float _k2){
-        n = _n;
+    Tupple(float _k1, float _k2){
         k1 = _k1;
         k2 = _k2;
     }
 
     @Override
-    public int compareTo(Key other) {
+    public int compareTo(Tupple other) {
         if (this.k1 < other.k1) return -1;
         if (this.k1 > other.k1) return 1;
 
@@ -23,8 +21,8 @@ public class Key implements Comparable<Key> {
         return 0;
     }
 
-    public boolean same_Key(Key other){
-        return this.n == other.n && this.k1 == other.k1 && this.k2 == other.k2;
+    public boolean same_Key(Tupple other){
+        return this.k1 == other.k1 && this.k2 == other.k2;
     }
 
 

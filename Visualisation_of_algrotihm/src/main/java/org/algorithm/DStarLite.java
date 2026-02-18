@@ -1,8 +1,6 @@
 package org.algorithm;
 
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.Set;
 
 import static java.lang.Math.min;
 import static processing.core.PApplet.println;
@@ -35,7 +33,7 @@ public class DStarLite {
 
         goal.update_Rhs_Val(0);
 
-        U.insert(calculate_Key(goal));
+        U.insert(goal, calculate_Key(goal));
 
     }
 
@@ -72,18 +70,18 @@ public class DStarLite {
         }
 
         if(n.get_G_Val() != n.get_Rhs_Val()){
-            U.insert(calculate_Key(n));
+            U.insert(n, calculate_Key(n));
         }
     }
 
-    public Key calculate_Key(Node s){
+    public Tupple calculate_Key(Node s){
         float k1, k2;
 
         k1 = min(s.g,s.rhs) + heuristic(s, start) + km;
 
         k2 = min(s.g,s.rhs);
 
-        return new Key(s, k1, k2);
+        return new Tupple(k1, k2);
     }
 
 
