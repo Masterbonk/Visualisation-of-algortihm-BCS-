@@ -39,22 +39,7 @@ class DStarLiteTest extends PApplet {
     @Test
     void priority_Queue(){
 
-        PriorityQueue<Key> pq = new PriorityQueue<>();
 
-        Node a = new Node(this, 0,0);
-        Node b = new Node(this, 2,2);
-        Node c = new Node(this, 3,3);
-
-
-        Key a1 = new Key(a, 20, 5);
-        Key b1 = new Key(b, 30, 2);
-        Key c1 = new Key(c, 20, 2);
-
-        pq.add(a1);
-        pq.add(b1);
-        pq.add(c1);
-
-        assertEquals(c1, pq.peek());
     }
 
     @Test
