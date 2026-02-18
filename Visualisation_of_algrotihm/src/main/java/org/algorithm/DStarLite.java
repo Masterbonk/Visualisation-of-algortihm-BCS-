@@ -2,6 +2,8 @@ package org.algorithm;
 
 import java.util.Collection;
 
+import static processing.core.PApplet.println;
+
 public class DStarLite {
     Node start;
     Node goal;
@@ -34,9 +36,12 @@ public class DStarLite {
         return null;
     }
 
-    //Heurestic
-    public float h(Node x, Node y){
-        return -1f;
+
+    /** Calculates the heuristic between Node a & b
+     *  Heuristic = distance between the two points
+     * */
+    public float heuristic(Node a, Node b){
+        return (float) (Math.round(Math.sqrt((Math.pow(a.x - b.x,2)) + (Math.pow(a.y - b.y,2)))* 100.0) / 100.0);
     }
 
 }
