@@ -81,26 +81,75 @@ class DStarLiteTest extends PApplet {
     void update_Vertex_Locally_Consistent() {
         Node a = new Node(this, 0,0);
         Node b = new Node(this, 2,2);
+        Node start = new Node(this, 1,1);
 
         Edge ab = new Edge(this,a,b,3);
+        Edge starta = new Edge(this,a,start,4);
 
         a.update_G_Val(4);
-        a.update_Rhs_Val(4);
+        a.update_Rhs_Val(10);
 
         b.update_Rhs_Val(5);
         b.update_G_Val(5);
+
+        start.update_G_Val(0);
+        start.update_Rhs_Val(0);
 
         update_Vertex(); //a
 
         //Test that the key is not added to priority queue
         //Test the correct rhs value is calculated
-        assertEquals(8,a.get_Rhs_Val());
+        assertEquals(4,a.get_Rhs_Val());
 
     }
 
     @Test
     void update_Vertex_Calculate_Best_Rhs(){
+        Node start = new Node(this,1,1);
+        Node a = new Node(this,1,1);
+        Node b = new Node(this,1,1);
+        Node c = new Node(this,1,1);
+        Node d = new Node(this,1,1);
+        Node e = new Node(this,1,1);
+        Node g = new Node(this,1,1);
 
+        start.rhs = 0;
+        start.g = 0;
+
+        a.rhs = MAX_INT;
+        a.g = MAX_INT;
+
+        b.rhs = MAX_INT;
+        b.g = MAX_INT;
+
+        c.rhs = MAX_INT;
+        c.g = MAX_INT;
+
+        d.rhs = MAX_INT;
+        d.g = MAX_INT;
+
+        e.rhs = 3;
+        e.g = 3;
+
+        g.rhs = 2;
+        g.g = 2;
+
+        Edge startE = new Edge(this,start,e,3);
+        Edge startG = new Edge(this,start,g,2);
+        Edge startA = new Edge(this,start,a,10);
+
+        Edge ga = new Edge(this, g,a,2);
+        Edge ea = new Edge(this,e,a,5);
+
+        Edge ab = new Edge(this,a,b,3);
+        Edge ad = new Edge(this,a,d,10);
+        Edge ac = new Edge(this,a,c,1);
+
+        update_Vertex(); //a
+
+        //Test that the key is added to priority queue
+        //Test the correct rhs value is calculated
+        assertEquals(6,a.get_Rhs_Val());
     }
 
     /** This test checks the base functionality of the calculate_Key function.
