@@ -38,7 +38,7 @@ public class Priority_Queue {
      * Gives us the TopKey in the queue, without removing it
      * @return The Key object with the highest priority
      */
-    public Key TopKey(){
+    public Key top_Key(){
         return heap.getFirst();
     }
 

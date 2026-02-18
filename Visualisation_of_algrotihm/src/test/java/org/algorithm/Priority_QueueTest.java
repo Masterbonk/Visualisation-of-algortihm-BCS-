@@ -20,11 +20,17 @@ class Priority_QueueTest {
 
     PApplet sketch;
 
+    org.algorithm.Priority_Queue pq;
+
+
     /** Setup nodes & keys to use for each test
      * */
     @BeforeEach
     void setUp() {
         sketch = new PApplet();
+
+        pq = new Priority_Queue();
+
         Node a = new Node(sketch, 0,0);
         Node b = new Node(sketch, 2,2);
         Node c = new Node(sketch, 3,3);
@@ -38,6 +44,7 @@ class Priority_QueueTest {
 
     @AfterEach
     void tearDown() {
+
     }
 
     /** Test that the priorityqueue exist, and can be updated
@@ -46,7 +53,6 @@ class Priority_QueueTest {
     @Test
     void insert() {
 
-        org.algorithm.Priority_Queue pq = new Priority_Queue();
 
         pq.insert(b1);
         pq.insert(c1);
@@ -61,7 +67,6 @@ class Priority_QueueTest {
     @Test
     void insert_2() {
 
-        org.algorithm.Priority_Queue pq = new Priority_Queue();
 
         pq.insert(b1);
         pq.insert(c1);
@@ -72,12 +77,55 @@ class Priority_QueueTest {
         assertEquals(2, pq.size());
     }
 
+    /** test that pop & insert works
+     * */
+    @Test
+    void insert_3() {
+
+
+        pq.insert(c1);
+        pq.insert(b1);
+        pq.insert(a1);
+
+
+        assertEquals(c1, pq.pop());
+        assertEquals(2, pq.size());
+    }
+
+    /** test that pop & insert works
+     * */
+    @Test
+    void insert_4() {
+
+
+        pq.insert(a1);
+        pq.insert(b1);
+        pq.insert(c1);
+
+
+        assertEquals(c1, pq.pop());
+        assertEquals(2, pq.size());
+    }
+
+    /** test that pop & insert works
+     * */
+    @Test
+    void insert_5() {
+
+
+        pq.insert(a1);
+        pq.insert(c1);
+        pq.insert(b1);
+
+
+        assertEquals(c1, pq.pop());
+        assertEquals(2, pq.size());
+    }
+
     /** test that pop works
      * */
     @Test
     void popTest() {
-
-        org.algorithm.Priority_Queue pq = new Priority_Queue();
 
         a1 = new Key(a, 20, 5);
         b1 = new Key(b, 30, 2);
@@ -91,11 +139,37 @@ class Priority_QueueTest {
         assertEquals(1, pq.size());
     }
 
+    @Test
+    void top_Key_base(){
+
+        pq.insert(b1);
+        pq.insert(c1);
+        pq.insert(a1);
+
+
+        assertEquals(c1, pq.top_Key());
+    }
+
+    /** test that pop gives null if the queue is empty when popping
+     * */
+    @Test
+    void popTest_fails_if_empty() {
+
+        a1 = new Key(a, 20, 5);
+        b1 = new Key(b, 30, 2);
+        c1 = new Key(c, 20, 2);
+
+        pq.insert(b1);
+        pq.insert(c1);
+        pq.pop();
+        pq.pop();
+        assertNull(pq.pop());
+    }
+
     /** Test that size work
      * */
     @Test
     void size() {
-        org.algorithm.Priority_Queue pq = new Priority_Queue();
 
         a1 = new Key(a, 20, 5);
         b1 = new Key(b, 30, 2);
