@@ -289,9 +289,11 @@ class DStarLiteTest extends PApplet {
 
         Node b = new Node (this, 0, -5);
         result = algorithm.heuristic(algorithm.start, b);
+        expected_result = 10;
         assertEquals(expected_result, result);
 
-        b = new Node (this, -5, 0);
+        expected_result = 5;
+        b = new Node (this, -5, 5);
         result = algorithm.heuristic(algorithm.start, b);
         assertEquals(expected_result, result);
     }
