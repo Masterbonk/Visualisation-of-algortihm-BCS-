@@ -76,7 +76,7 @@ class DStarLiteTest extends PApplet {
         b.update_G_Val(2);
         b.update_Rhs_Val(2);
 
-        update_Vertex(); //a
+        algorithm.update_Vertex(a); //a
 
         //Test that the key is added to priority queue, with the correct key
         //Test the correct rhs value is calculated
@@ -108,7 +108,7 @@ class DStarLiteTest extends PApplet {
         start.update_G_Val(0);
         start.update_Rhs_Val(0);
 
-        update_Vertex(); //a
+        algorithm.update_Vertex(a);
 
         //Test that the key is not added to/in the priority queue
         //Test the correct rhs value is calculated
@@ -164,7 +164,7 @@ class DStarLiteTest extends PApplet {
         Edge ad = new Edge(this,a,d,10);
         Edge ac = new Edge(this,a,c,1);
 
-        update_Vertex(); //a
+        algorithm.update_Vertex(a); 
 
         //Test that the key is added to priority queue
         //Test the correct rhs value is calculated

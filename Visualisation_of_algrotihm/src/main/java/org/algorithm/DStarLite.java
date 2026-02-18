@@ -25,7 +25,8 @@ public class DStarLite {
 
     }
 
-    public void update_Vertex(){
+    public void update_Vertex(Node n){
+
 
     }
 
