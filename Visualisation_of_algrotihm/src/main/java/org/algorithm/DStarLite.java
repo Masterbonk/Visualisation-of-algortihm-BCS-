@@ -41,7 +41,7 @@ public class DStarLite {
      *  Heuristic = distance between the two points
      * */
     public float heuristic(Node a, Node b){
-        return (float) Math.sqrt((Math.pow(a.x - b.x,2)) + (Math.pow(a.y - b.y,2)));
+        return (float) (Math.round(Math.sqrt((Math.pow(a.x - b.x,2)) + (Math.pow(a.y - b.y,2)))* 100.0) / 100.0);
     }
 
 }
