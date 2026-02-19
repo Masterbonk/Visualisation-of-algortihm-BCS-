@@ -54,6 +54,7 @@ public class DStarLite {
                 if (min > e.weight+other_node.get_G_Val()){
                     min = e.weight+other_node.get_G_Val();
                 }
+            }
 
         }
         return min;
@@ -71,8 +72,14 @@ public class DStarLite {
                     tmp = other_node;
                 }
             }
-            n.update_Rhs_Val(min);
+
+        }
+        return tmp;
+    }
+
     public void update_Vertex(Node _n){
+        if (_n != goal){
+            _n.update_Rhs_Val(find_Min_Rhs(_n));
         }
 
         if(U.contains(_n)){
