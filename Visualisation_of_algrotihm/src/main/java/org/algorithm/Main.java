@@ -18,6 +18,7 @@ public class Main extends PApplet{
 
     public static Set<Node> set_of_nodes;
     public static HashMap<Edge,Integer> edge_update_map;
+    public static DStarLite algorithm;
 
     /**
      * Main function starts the sketch
@@ -36,11 +37,6 @@ public class Main extends PApplet{
     //zoom functionality
     public static float zoom_level = 1f;
     final float zoom_increase = 0.1f;
-
-    //The start and end node for the graph
-    public static Node start_node;
-    public static Node end_node;
-
 
     //Pan functionality
     public static int translate_x = 0;
@@ -74,6 +70,8 @@ public class Main extends PApplet{
         }
         util = new Util(this,button_height);
 
+        algorithm = new DStarLite();
+
         //fullScreen(); //Is the size of the canvas
 
         //frameRate(30); //Decides how many times per second the draw function is called
@@ -100,9 +98,6 @@ public class Main extends PApplet{
 
         Util.Make_UI(this, button_height);
         Make_Graph();
-
-
-
 
     }
 
@@ -143,6 +138,10 @@ public class Main extends PApplet{
 
         Ui.render();
         rescale();
+
+        if (!Ui.get_Button("pause").clicked){
+            algorithm.D_Main();
+        }
 
     }
 
@@ -295,8 +294,8 @@ public class Main extends PApplet{
                     if (Ui.get_Button("cut").clicked && n.mouse_Over()) {
                         clicked_on_node = true;
                         node_array.remove(n);
-                        if (start_node == n) start_node = null;
-                        if (end_node == n) end_node = null;
+                        if (algorithm.get_Start() == n) algorithm.set_Start(null);
+                        if (algorithm.get_Goal() == n) algorithm.set_Goal(null);
                         for (Edge e : n.connected) {
                             Node tmp;
                             if (e.from == n) {
@@ -332,17 +331,17 @@ public class Main extends PApplet{
 
                         break;
 
-                    } else if(Ui.get_Button("flag_a").clicked && end_node != n && n.mouse_Over()){
+                    } else if(Ui.get_Button("flag_a").clicked && algorithm.get_Goal() != n && n.mouse_Over()){
                         clicked_on_node = true;
-                        start_node = n;
-                    } else if(Ui.get_Button("flag_b").clicked && start_node != n && n.mouse_Over()){
+                        algorithm.set_Start(n);
+                    } else if(Ui.get_Button("flag_b").clicked && algorithm.get_Start() != n && n.mouse_Over()){
                         clicked_on_node = true;
-                        end_node = n;
+                        algorithm.set_Goal(n);
                     }
                 }
 
-                if (!clicked_on_node && Ui.get_Button("flag_a").clicked) start_node = null;
-                if (!clicked_on_node && Ui.get_Button("flag_b").clicked) end_node = null;
+                if (!clicked_on_node && Ui.get_Button("flag_a").clicked) algorithm.set_Start(null);
+                if (!clicked_on_node && Ui.get_Button("flag_b").clicked) algorithm.set_Goal(null);
 
 
                 //When we have line, and click outside a node

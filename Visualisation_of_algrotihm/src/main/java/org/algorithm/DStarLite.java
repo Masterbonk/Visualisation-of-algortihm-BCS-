@@ -55,7 +55,11 @@ public class DStarLite {
                 println("No valid path to start");
                 break;
             }
-            if (!has_been_paused) start = find_Min_G_Node(start);
+            if (!has_been_paused) {
+                start = find_Min_G_Node(start);
+                println("Moved start to node at x: "+start.x+" y: "+start.y);
+            }
+            
 
             if(Main.Ui.get_Button("pause").clicked){
                 has_been_paused = true;
@@ -84,6 +88,7 @@ public class DStarLite {
         while(U.top_Key().compareTo(calculate_Key(start)) < 0 || start.get_Rhs_Val() != start.get_G_Val()){
             k_old = U.top_Key();
             n = U.pop();
+            println("Popped node at x: "+n.x+" y: "+n.y);
             if(k_old.compareTo(calculate_Key(n)) < 0){
                 U.insert(n, calculate_Key(n));
             } else if (n.get_G_Val() > n.get_Rhs_Val()){
@@ -152,6 +157,7 @@ public class DStarLite {
     }
 
     public void update_Vertex(Node _n){
+        println("Updating node at x: "+_n.x+" y: "+_n.y);
         if (_n != goal){
             _n.update_Rhs_Val(find_Min_G(_n));
         }
@@ -166,6 +172,7 @@ public class DStarLite {
 
         if(_n.get_G_Val() != _n.get_Rhs_Val()){
             U.insert(_n, calculate_Key(_n));
+            println("Added node to list at x: "+_n.x+" y: "+_n.y);
         }
     }
 

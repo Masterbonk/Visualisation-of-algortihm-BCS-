@@ -124,19 +124,20 @@ class Back_Button extends Button{
 }
 
 class Pause_Button extends Button{
-    boolean paused = false;
 
     public Pause_Button(PApplet _sketch,float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch,_x_pos, _y_pos, _x_size, _y_size, _text);
+        clicked = true;
     }
 
-    void click(){super.click();
-
-        if (!paused) {
+    void click(){
+        if (!clicked) {
             text = "⏸"; //start
         } else text = "⏯"; //Pause
-        paused = !paused;
-        sketch.println("Not fully implemented Pause");
+
+        super.click();
+
+
     }
 }
 
@@ -187,7 +188,8 @@ class Flag_A_Button extends Button{
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
-    void click(){super.click();
+    void click(){
+        super.click();
     }
 }
 class Flag_B_Button extends Button{

@@ -51,7 +51,7 @@ public class Node {
 
         sketch.pop();
 
-        if (start_node == this){ //Makes flag if startnode
+        if (algorithm.get_Start() == this){ //Makes flag if startnode
             sketch.push();
             sketch.stroke(255);
             sketch.line(x,y,x,y-20);
@@ -59,7 +59,7 @@ public class Node {
             sketch.fill(255);
             sketch.rect(x,y-20,10,10);
             sketch.pop();
-        } else if (end_node == this) {
+        } else if (algorithm.get_Goal() == this) {
                 sketch.push();
                 sketch.stroke(0);
                 sketch.line(x,y,x,y-20);

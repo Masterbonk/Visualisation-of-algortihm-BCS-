@@ -16,7 +16,8 @@ public class Edge {
         sketch = _sketch;
         from = _from;
         to = _to;
-        weight = _weight;
+
+        update_Weight(_weight);
 
         from.connected.add(this);
         to.connected.add(this);
@@ -24,7 +25,10 @@ public class Edge {
     }
 
     public void update_Weight(int _i){
-        weight = _i;
+        float tmp = algorithm.heuristic(to, from);
+        if (_i < tmp){
+            weight = (int)Math.ceil(tmp);
+        } else weight = _i;
     }
 
     public void render(){
@@ -65,6 +69,7 @@ public class Edge {
         sketch.pop();
 
     }
+
 
     /**
      * This mouseOver detects if the mouse is over an edge.
