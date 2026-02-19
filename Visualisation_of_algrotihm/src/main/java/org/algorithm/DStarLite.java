@@ -45,7 +45,7 @@ public class DStarLite {
 
     }
 
-    public int find_Min_Rhs(Node _n){
+    public int find_Min_G(Node _n){
         int min = MAX_INT;
         for(Edge e: _n.connected){
             Node other_node = e.from;
@@ -60,7 +60,7 @@ public class DStarLite {
         return min;
     }
 
-    public Node find_Min_Rhs_Node(Node _n){
+    public Node find_Min_G_Node(Node _n){
         int min = MAX_INT;
         Node tmp = null;
         for(Edge e: _n.connected){
@@ -79,7 +79,7 @@ public class DStarLite {
 
     public void update_Vertex(Node _n){
         if (_n != goal){
-            _n.update_Rhs_Val(find_Min_Rhs(_n));
+            _n.update_Rhs_Val(find_Min_G(_n));
         }
 
         if(U.contains(_n)){
