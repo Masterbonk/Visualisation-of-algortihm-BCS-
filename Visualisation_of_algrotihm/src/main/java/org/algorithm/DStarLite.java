@@ -61,8 +61,10 @@ public class DStarLite {
             }
             
 
-            if(Main.Ui.get_Button("pause").clicked){
+            if(Main.Ui.get_Button("pause").clicked || Main.Ui.get_Button("forward").clicked){
                 has_been_paused = true;
+                Main.Ui.get_Button("forward").clicked = false;
+                Main.Ui.get_Button("pause").clicked = true;
                 break;
             }
 

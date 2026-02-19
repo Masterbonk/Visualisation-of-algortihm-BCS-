@@ -135,6 +135,8 @@ class Pause_Button extends Button{
             text = "⏸"; //start
         } else text = "⏯"; //Pause
 
+        algorithm.has_been_paused = !algorithm.has_been_paused;
+
         super.click();
 
 
@@ -147,7 +149,10 @@ class Forward_Button extends Button{
     }
 
     void click(){
-        sketch.println("Not implemented Forward");
+        clicked = true;
+        Ui.get_Button("pause").clicked = false;
+        algorithm.has_been_paused = false;
+
     }
 }
 
