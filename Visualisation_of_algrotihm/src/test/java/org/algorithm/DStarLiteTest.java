@@ -7,6 +7,7 @@ import processing.core.PApplet;
 
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeoutException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,8 +31,43 @@ class DStarLiteTest {
     }
 
     @Test
-    void d_Main() {
+    void d_Main_base() {
+        Node A = new Node(sketch, 3,2);
+        Node B = new Node(sketch, 1,4);
+        Node S = new Node(sketch, 1, 1);
+        Node G = new Node(sketch, 2, 5);
 
+        Edge sa = new BiEdge(sketch,S,A, 3);
+        Edge sb = new BiEdge(sketch,S,B, 3);
+        Edge bg = new BiEdge(sketch,B,G, 2);
+        Edge ag = new BiEdge(sketch,A,G, 4);
+
+        algorithm.start = S;
+        algorithm.goal = G;
+
+        algorithm.D_Main();
+
+        assertEquals(0,algorithm.km);
+        assertEquals(algorithm.goal,algorithm.start);
+    }
+
+    @Test
+    void d_Main_timeout() {
+        Node A = new Node(sketch, 3,2);
+        Node B = new Node(sketch, 1,4);
+        Node S = new Node(sketch, 1, 1);
+        Node G = new Node(sketch, 2, 5);
+
+        Edge bg = new BiEdge(sketch,B,G, 2);
+        Edge ag = new BiEdge(sketch,A,G, 4);
+
+        algorithm.start = S;
+        algorithm.goal = G;
+
+
+        assertThrows(TimeoutException.class, () -> {
+            algorithm.D_Main();
+        });
     }
 
     @Test
@@ -483,6 +519,13 @@ class DStarLiteTest {
         actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
 
+    }
+
+    void initialize_change_edge(){
+        //intialize
+        //get shortest path
+        //chnage an edge, such that a new shortes path is needed
+        //get shortest path
     }
 
     /**
