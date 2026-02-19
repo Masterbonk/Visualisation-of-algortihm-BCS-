@@ -1,6 +1,7 @@
 package org.algorithm;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 import static java.lang.Math.min;
@@ -10,12 +11,16 @@ import static processing.core.PConstants.MAX_INT;
 public class DStarLite {
     Node start;
     Node goal;
+    Node last;
     float km;
     Priority_Queue U;
+    boolean has_been_paused = false;
+    boolean first_run = true;
 
 
     DStarLite(){
         Main.set_of_nodes = new HashSet<>();
+        Main.edge_update_map = new HashMap<>();
     }
 
     public void initialize(){
@@ -39,7 +44,38 @@ public class DStarLite {
     }
 
     public void D_Main(){
+        if (first_run){
+            last = start;
+            initialize();
+            compute_Shortest_Path();
+            first_run = false;
+        }
+        while (start != goal){
+            if (start.get_G_Val() == MAX_INT) {
+                println("No valid path to start");
+                break;
+            }
+            if (!has_been_paused) start = find_Min_G_Node(start);
 
+            if(Main.Ui.get_Button("pause").clicked){
+                has_been_paused = true;
+                break;
+            }
+
+            if (!Main.edge_update_map.isEmpty()){
+                km = km + heuristic(last,start);
+                last = start;
+
+                for(Edge e: Main.edge_update_map.keySet()){
+                    e.update_Weight(Main.edge_update_map.get(e));
+                    update_Vertex(e.to);
+                    update_Vertex(e.from);
+                }
+                Main.edge_update_map = new HashMap<>();
+
+                compute_Shortest_Path();
+            }
+        }
     }
 
     public void compute_Shortest_Path(){

@@ -17,6 +17,7 @@ public class Main extends PApplet{
     public static boolean debug = false;
 
     public static Set<Node> set_of_nodes;
+    public static HashMap<Edge,Integer> edge_update_map;
 
     /**
      * Main function starts the sketch

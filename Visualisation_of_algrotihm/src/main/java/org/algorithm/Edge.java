@@ -23,6 +23,10 @@ public class Edge {
 
     }
 
+    public void update_Weight(int _i){
+        weight = _i;
+    }
+
     public void render(){
 
         sketch.push();

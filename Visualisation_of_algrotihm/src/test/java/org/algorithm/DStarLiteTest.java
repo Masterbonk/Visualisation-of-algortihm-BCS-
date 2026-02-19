@@ -9,13 +9,19 @@ import processing.core.PApplet;
 import java.util.ArrayList;
 import java.util.concurrent.TimeoutException;
 
+import static org.algorithm.Main.Ui;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
 class DStarLiteTest {
     DStarLite algorithm;
     PApplet sketch;
+
+
+    Util util;
+    int button_height = 1;
 
     @BeforeEach
     void setUp() {
@@ -23,6 +29,10 @@ class DStarLiteTest {
 
 
         algorithm = new DStarLite();
+
+        util = new Util(sketch,button_height);
+        Main.Ui = new UI(sketch);
+        Ui.add_Button("pause", (sketch.displayWidth)/9f, sketch.displayHeight-button_height, sketch.displayWidth/9f, button_height,"⏯", Pause_Button.class, true);
     }
 
     @AfterEach
@@ -48,6 +58,8 @@ class DStarLiteTest {
         algorithm.D_Main();
 
         assertEquals(0,algorithm.km);
+        println("S: x = "+algorithm.start.x+" y = "+algorithm.start.y);
+        println("G: x = "+algorithm.goal.x+" y = "+algorithm.goal.y);
         assertEquals(algorithm.goal,algorithm.start);
     }
 
@@ -64,10 +76,32 @@ class DStarLiteTest {
         algorithm.start = S;
         algorithm.goal = G;
 
+        algorithm.D_Main();
 
-        assertThrows(TimeoutException.class, () -> {
-            algorithm.D_Main();
-        });
+        assertEquals(MAX_INT, algorithm.start.get_G_Val());
+    }
+
+    @Test
+    void d_main_change_edge(){
+
+        Node A = new Node(sketch, 3,2);
+        Node B = new Node(sketch, 1,4);
+        Node S = new Node(sketch, 1, 1);
+        Node G = new Node(sketch, 2, 5);
+
+        Edge sa = new BiEdge(sketch,S,A, 3);
+        Edge sb = new BiEdge(sketch,S,B, 3);
+        Edge bg = new BiEdge(sketch,B,G, 2);
+        Edge ag = new BiEdge(sketch,A,G, 4);
+
+        algorithm.start = S;
+        algorithm.goal = G;
+
+        algorithm.D_Main();
+
+        Main.edge_update_map.put(bg,MAX_INT);
+
+        assertTrue(algorithm.get_Shortest_Path().contains(A));
     }
 
     @Test
@@ -521,12 +555,7 @@ class DStarLiteTest {
 
     }
 
-    void initialize_change_edge(){
-        //intialize
-        //get shortest path
-        //chnage an edge, such that a new shortes path is needed
-        //get shortest path
-    }
+
 
     /**
      * Checks that our queue is null before we call initialize.
