@@ -43,7 +43,30 @@ public class DStarLite {
     }
 
     public void compute_Shortest_Path(){
-
+        Tupple k_old;
+        Node n;
+        while(U.top_Key().compareTo(calculate_Key(start)) < 0 || start.get_Rhs_Val() != start.get_G_Val()){
+            k_old = U.top_Key();
+            n = U.pop();
+            if(k_old.compareTo(calculate_Key(n)) < 0){
+                U.insert(n, calculate_Key(n));
+            } else if (n.get_G_Val() > n.get_Rhs_Val()){
+                n.update_G_Val(n.get_Rhs_Val());
+                for (Edge e: n.connected){
+                    Node other_node = e.from;
+                    if (e.from == n) other_node = e.to;
+                    update_Vertex(other_node);
+                }
+            } else {
+                n.update_G_Val(MAX_INT);
+                for (Edge e: n.connected){
+                    Node other_node = e.from;
+                    if (e.from == n) other_node = e.to;
+                    update_Vertex(other_node);
+                }
+                update_Vertex(n);
+            }
+        }
     }
 
     public ArrayList<Node> get_Shortest_Path(){

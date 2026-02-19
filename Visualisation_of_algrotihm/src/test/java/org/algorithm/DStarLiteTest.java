@@ -73,7 +73,7 @@ class DStarLiteTest {
         Edge bg = new BiEdge(sketch,B,G, 2);
         Edge ag = new BiEdge(sketch,A,G, 4);
 
-        Edge ac = new BiEdge(sketch, A, C, 6);
+        Edge bc = new BiEdge(sketch, B, C, 9);
 
         algorithm.start = S;
         algorithm.goal = G;
@@ -83,7 +83,35 @@ class DStarLiteTest {
         algorithm.compute_Shortest_Path();
 
         assertEquals(MAX_INT, C.get_G_Val());
-        assertEquals(10, C.get_Rhs_Val());
+        assertEquals(11, C.get_Rhs_Val());
+
+        assertEquals(MAX_INT, A.get_G_Val());
+        assertEquals(4, A.get_Rhs_Val());
+    }
+
+    @Test
+    void compute_Shortest_Path_dead_end() {
+        Node A = new Node(sketch, 3,2);
+        Node B = new Node(sketch, 1,4);
+        Node S = new Node(sketch, 1, 1);
+        Node G = new Node(sketch, 2, 5);
+        Node D = new Node(sketch, 2,3);
+
+        Edge sa = new BiEdge(sketch,S,A, 3);
+        Edge sb = new BiEdge(sketch,S,B, 3);
+        Edge bg = new BiEdge(sketch,B,G, 2);
+        Edge ag = new BiEdge(sketch,A,G, 4);
+
+        Edge gd = new BiEdge(sketch, G, B, 2);
+
+        algorithm.start = S;
+        algorithm.goal = G;
+
+        algorithm.initialize();
+
+        algorithm.compute_Shortest_Path();
+
+        assertFalse(algorithm.get_Shortest_Path().contains(D));
     }
 
     /***
