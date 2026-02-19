@@ -15,7 +15,7 @@ public class Priority_Queue {
 
     /**
      * insert Node _n with a Key _k into the priority queue
-     * @param _n
+     * @param _n Node to be inserted
      * @param _k Key to be inserted
      * */
     void insert(Node _n, Tupple _k){
