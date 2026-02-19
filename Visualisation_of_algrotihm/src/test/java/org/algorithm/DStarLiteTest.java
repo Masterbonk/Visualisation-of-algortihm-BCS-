@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import processing.core.PApplet;
 
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static processing.core.PConstants.MAX_INT;
@@ -33,10 +35,55 @@ class DStarLiteTest {
     }
 
     @Test
-    void compute_Shortest_Path() {
+    void compute_Shortest_Path_base() {
+        Node A = new Node(sketch, 3,2);
+        Node B = new Node(sketch, 1,4);
+        Node S = new Node(sketch, 1, 1);
+        Node G = new Node(sketch, 2, 5);
 
+        Edge sa = new BiEdge(sketch,S,A, 3);
+        Edge sb = new BiEdge(sketch,S,B, 3);
+        Edge bg = new BiEdge(sketch,B,G, 2);
+        Edge ag = new BiEdge(sketch,A,G, 4);
 
+        algorithm.start = S;
+        algorithm.goal = G;
 
+        algorithm.initialize();
+
+        algorithm.compute_Shortest_Path();
+
+        ArrayList<Node> expected_result = new ArrayList<>();
+        expected_result.add(S); expected_result.add(B); expected_result.add(G);
+        
+        assertEquals(expected_result, algorithm.get_Shortest_Path());
+
+    }
+
+    @Test
+    void compute_Shortest_Path_limit_scope() {
+        Node A = new Node(sketch, 3,2);
+        Node B = new Node(sketch, 1,4);
+        Node S = new Node(sketch, 1, 1);
+        Node G = new Node(sketch, 2, 5);
+        Node C = new Node(sketch, 3,-4);
+
+        Edge sa = new BiEdge(sketch,S,A, 3);
+        Edge sb = new BiEdge(sketch,S,B, 3);
+        Edge bg = new BiEdge(sketch,B,G, 2);
+        Edge ag = new BiEdge(sketch,A,G, 4);
+
+        Edge ac = new BiEdge(sketch, A, C, 6);
+
+        algorithm.start = S;
+        algorithm.goal = G;
+
+        algorithm.initialize();
+
+        algorithm.compute_Shortest_Path();
+
+        assertEquals(MAX_INT, C.get_G_Val());
+        assertEquals(10, C.get_Rhs_Val());
     }
 
     /***

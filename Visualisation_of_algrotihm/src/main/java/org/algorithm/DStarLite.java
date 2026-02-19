@@ -1,5 +1,6 @@
 package org.algorithm;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import static java.lang.Math.min;
@@ -43,6 +44,20 @@ public class DStarLite {
 
     public void compute_Shortest_Path(){
 
+    }
+
+    public ArrayList<Node> get_Shortest_Path(){
+        ArrayList<Node> result = new ArrayList<>();
+        Node tmp = start;
+        if (start.get_G_Val() != MAX_INT) {
+            while (!result.contains(goal)) {
+                Node tmp2 = find_Min_G_Node(tmp);
+                result.add(tmp);
+                tmp = tmp2;
+            }
+            return result;
+        }
+        return null;
     }
 
     public int find_Min_G(Node _n){
