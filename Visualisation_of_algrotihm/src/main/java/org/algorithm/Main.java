@@ -423,7 +423,6 @@ public class Main extends PApplet{
      */
 
     void Make_Graph(){
-
         Node x, y;
         BiEdge e;
         x = new Node(this, 400, 200);
@@ -447,7 +446,4 @@ public class Main extends PApplet{
         node_array.add(y);
         edge_array.add(e);
     }
-
-
-
 }
