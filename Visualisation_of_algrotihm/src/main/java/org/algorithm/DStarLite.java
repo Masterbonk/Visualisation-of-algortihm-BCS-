@@ -105,10 +105,10 @@ public class DStarLite {
         }
     }
 
-    public ArrayList<Node> get_Shortest_Path(){
+    public ArrayList<Node> get_Shortest_Path(Node n){
         ArrayList<Node> result = new ArrayList<>();
-        Node tmp = start;
-        if (start.get_G_Val() != MAX_INT) {
+        Node tmp = n;
+        if (n.get_G_Val() != MAX_INT) {
             while (!result.contains(goal)) {
                 Node tmp2 = find_Min_G_Node(tmp);
                 result.add(tmp);

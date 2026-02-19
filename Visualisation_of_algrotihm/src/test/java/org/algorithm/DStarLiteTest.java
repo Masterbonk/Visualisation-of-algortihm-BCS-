@@ -58,8 +58,6 @@ class DStarLiteTest {
         algorithm.D_Main();
 
         assertEquals(0,algorithm.km);
-        println("S: x = "+algorithm.start.x+" y = "+algorithm.start.y);
-        println("G: x = "+algorithm.goal.x+" y = "+algorithm.goal.y);
         assertEquals(algorithm.goal,algorithm.start);
     }
 
@@ -97,11 +95,11 @@ class DStarLiteTest {
         algorithm.start = S;
         algorithm.goal = G;
 
-        algorithm.D_Main();
-
         Main.edge_update_map.put(bg,MAX_INT);
 
-        assertTrue(algorithm.get_Shortest_Path().contains(A));
+        algorithm.D_Main();
+
+        assertTrue(algorithm.get_Shortest_Path(S).contains(A));
     }
 
     @Test
@@ -126,7 +124,7 @@ class DStarLiteTest {
         ArrayList<Node> expected_result = new ArrayList<>();
         expected_result.add(S); expected_result.add(B); expected_result.add(G);
         
-        assertEquals(expected_result, algorithm.get_Shortest_Path());
+        assertEquals(expected_result, algorithm.get_Shortest_Path(algorithm.start));
 
     }
 
@@ -181,7 +179,7 @@ class DStarLiteTest {
 
         algorithm.compute_Shortest_Path();
 
-        assertFalse(algorithm.get_Shortest_Path().contains(D));
+        assertFalse(algorithm.get_Shortest_Path(algorithm.start).contains(D));
     }
 
     /***
