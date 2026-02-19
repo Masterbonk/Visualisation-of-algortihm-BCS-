@@ -14,7 +14,8 @@ public class Priority_Queue {
     }
 
     /**
-     * insert Key _k into the priority queue
+     * insert Node _n with a Key _k into the priority queue
+     * @param _n
      * @param _k Key to be inserted
      * */
     void insert(Node _n, Tupple _k){
@@ -45,14 +46,20 @@ public class Priority_Queue {
     public Tupple top_Key(){
         return keys.get(heap.getFirst());
     }
-
-    public boolean contains(Node n){
-        return heap.contains(n);
+    /**
+     * @return true if the given node n is in the queue
+     * @param _n the node to check if it is in the queue
+     * */
+    public boolean contains(Node _n){
+        return heap.contains(_n);
     }
-
-    public void remove(Node n) {
-        heap.remove(n);
-        keys.remove(n);
+    /**
+     * Removes the given node n from the queue
+     * @param _n the given node to be removed
+     * */
+    public void remove(Node _n) {
+        heap.remove(_n);
+        keys.remove(_n);
 
     }
 
@@ -79,46 +86,46 @@ public class Priority_Queue {
     }
 
     //sink the key down the heap
-    private void sink(int i) {
-        while (left(i) < heap.size()) {
+    private void sink(int _i) {
+        while (left(_i) < heap.size()) {
 
-            int smallest = left(i);
+            int smallest = left(_i);
 
-            if (right(i) < heap.size() && greater(smallest, right(i))) {
-                smallest = right(i);
+            if (right(_i) < heap.size() && greater(smallest, right(_i))) {
+                smallest = right(_i);
             }
 
-            if (!greater(i, smallest)) break;
+            if (!greater(_i, smallest)) break;
 
-            exch(i, smallest);
-            i = smallest;
+            exch(_i, smallest);
+            _i = smallest;
         }
     }
 
     //the get "parent" node
-    private int parent(int i) {
-        return (i - 1) / 2;
+    private int parent(int _i) {
+        return (_i - 1) / 2;
     }
     //get the "left" node
-    private int left(int i) {
-        return 2 * i + 1;
+    private int left(int _i) {
+        return 2 * _i + 1;
     }
 
     //get the "right" node
-    private int right(int i) {
-        return 2 * i + 2;
+    private int right(int _i) {
+        return 2 * _i + 2;
     }
 
     //uisng the compareTo function of key to compare elements
-    private boolean greater(int i, int j) {
-        return keys.get(heap.get(i)).compareTo(keys.get(heap.get(j))) > 0;
+    private boolean greater(int _i, int _j) {
+        return keys.get(heap.get(_i)).compareTo(keys.get(heap.get(_j))) > 0;
     }
 
     //exchange 2 elements
-    private void exch(int i, int j) {
-        Node temp = heap.get(i);
-        heap.set(i, heap.get(j));
-        heap.set(j, temp);
+    private void exch(int _i, int _j) {
+        Node temp = heap.get(_i);
+        heap.set(_i, heap.get(_j));
+        heap.set(_j, temp);
     }
 
 
