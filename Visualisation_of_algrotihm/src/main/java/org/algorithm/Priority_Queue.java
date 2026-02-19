@@ -4,9 +4,9 @@ import java.util.*;
 
 public class Priority_Queue {
 
-    ArrayList<Node> heap;
+    private ArrayList<Node> heap;
 
-    HashMap<Node,Tupple> keys;
+    private HashMap<Node,Tupple> keys;
 
     Priority_Queue(){
         heap = new ArrayList<>();
