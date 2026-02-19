@@ -17,7 +17,7 @@ public class DStarLite {
         Main.set_of_nodes = new HashSet<>();
     }
 
-    public void initialize() throws  Exception{
+    public void initialize(){
         if (start == null) throw new NullPointerException("Start not set!");
         if (goal == null) throw new NullPointerException("Goal not set!");
 
@@ -45,32 +45,46 @@ public class DStarLite {
 
     }
 
-    public void update_Vertex(Node n){
-        if (n != goal){
-            int min = MAX_INT;
-            for(Edge e: n.connected){
-                Node other_node = e.from;
-                if (e.from == n) other_node = e.to;
-                if (other_node.get_G_Val() != MAX_INT) {
-                    if (min > e.weight+other_node.get_G_Val()){
-                        min = e.weight+other_node.get_G_Val();
-                    }
+    public int find_Min_Rhs(Node _n){
+        int min = MAX_INT;
+        for(Edge e: _n.connected){
+            Node other_node = e.from;
+            if (e.from == _n) other_node = e.to;
+            if (other_node.get_G_Val() != MAX_INT) {
+                if (min > e.weight+other_node.get_G_Val()){
+                    min = e.weight+other_node.get_G_Val();
                 }
 
+        }
+        return min;
+    }
+
+    public Node find_Min_Rhs_Node(Node _n){
+        int min = MAX_INT;
+        Node tmp = null;
+        for(Edge e: _n.connected){
+            Node other_node = e.from;
+            if (e.from == _n) other_node = e.to;
+            if (other_node.get_G_Val() != MAX_INT) {
+                if (min > e.weight+other_node.get_G_Val()){
+                    min = e.weight+other_node.get_G_Val();
+                    tmp = other_node;
+                }
             }
             n.update_Rhs_Val(min);
+    public void update_Vertex(Node _n){
         }
 
-        if(U.contains(n)){
+        if(U.contains(_n)){
             try{
-                U.remove(n);
+                U.remove(_n);
             } catch (Exception e){
                 println(e.getMessage());
             }
         }
 
-        if(n.get_G_Val() != n.get_Rhs_Val()){
-            U.insert(n, calculate_Key(n));
+        if(_n.get_G_Val() != _n.get_Rhs_Val()){
+            U.insert(_n, calculate_Key(_n));
         }
     }
 

@@ -52,7 +52,7 @@ class DStarLiteTest {
         try {
             algorithm.initialize();
         } catch (Exception e) {
-            assertTrue(false);
+            fail();
         }
         Node a = new Node(sketch, 0,0);
         Node b = new Node(sketch, 2,2);
@@ -87,7 +87,7 @@ class DStarLiteTest {
         try {
             algorithm.initialize();
         } catch (Exception e) {
-            assertTrue(false);
+            fail();
         }
         Node a = new Node(sketch, 0,0);
         Node b = new Node(sketch, 2,2);

@@ -46,6 +46,7 @@ public class Priority_Queue {
     public Tupple top_Key(){
         return keys.get(heap.getFirst());
     }
+
     /**
      * @return true if the given node n is in the queue
      * @param _n the node to check if it is in the queue
@@ -116,7 +117,7 @@ public class Priority_Queue {
         return 2 * _i + 2;
     }
 
-    //uisng the compareTo function of key to compare elements
+    //using the compareTo function of key to compare elements
     private boolean greater(int _i, int _j) {
         return keys.get(heap.get(_i)).compareTo(keys.get(heap.get(_j))) > 0;
     }
