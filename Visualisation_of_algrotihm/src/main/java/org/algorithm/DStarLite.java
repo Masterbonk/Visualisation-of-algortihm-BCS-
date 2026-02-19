@@ -102,5 +102,21 @@ public class DStarLite {
         }
     }
 
+    public void set_Start(Node _n){
+        start = _n;
+    }
+
+    public void set_Goal(Node _n){
+        goal = _n;
+    }
+
+    public Node get_Start(){
+        return start;
+    }
+
+    public Node get_Goal(){
+        return goal;
+    }
+
 }
 
