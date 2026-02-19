@@ -1,3 +1,5 @@
 # Visualisation-of-algortihm-BCS-
 
-mjjj
+## To run this project, you must have processing installed. From here there are two different routes, based on your operating system
+
+
