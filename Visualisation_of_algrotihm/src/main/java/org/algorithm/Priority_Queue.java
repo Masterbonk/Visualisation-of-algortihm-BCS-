@@ -1,5 +1,6 @@
 package org.algorithm;
 import java.util.*;
+import static processing.core.PConstants.MAX_INT;
 
 
 public class Priority_Queue {
@@ -44,6 +45,7 @@ public class Priority_Queue {
      * @return The Key object with the highest priority
      */
     public Tupple top_Key(){
+        if(is_empty()) return new Tupple(MAX_INT,MAX_INT);
         return keys.get(heap.getFirst());
     }
 
