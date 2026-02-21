@@ -106,6 +106,7 @@ public class Main extends PApplet{
         Util.Make_UI(this, button_height);
         Make_Graph();
 
+
     }
 
 
@@ -222,6 +223,7 @@ public class Main extends PApplet{
         if (key == 'p'){
             //print("key pressed p");
             debug = !debug;
+
         }
 
         //handles all text input
@@ -252,7 +254,6 @@ public class Main extends PApplet{
 
             }
 
-            Ui.turn_Off_All_Other_Edge_UI(edge_array);
             display_edge_weight_ui = false;
             currentInput.clear();
         }
@@ -412,10 +413,15 @@ public class Main extends PApplet{
                 if (Ui.get_Button("weight").clicked && !clicked_on_node) {
                     for (Edge e : edge_array) {
                         if (e.mouseOver()) {
+                            currentInput.clear();
                             display_edge_weight_ui = true;
                             activeEdge = e;
-                            e.turn_On_Weight_UI(true);
                             break;
+                        } else if (!e.mouseOver()) {
+                            currentInput.clear();
+                            display_edge_weight_ui = false;
+                            activeEdge = null;
+
                         }
                     }
                 }
@@ -477,8 +483,8 @@ public class Main extends PApplet{
     void Make_Graph(){
         Node x, y;
         BiEdge e;
-        x = new Node(this, 400, 200);
-        y = new Node(this, 200, 400);
+        x = new Node(this, 400, 200, "A");
+        y = new Node(this, 200, 400, "B");
         e = new BiEdge(this, x, y, 5);
 
 
@@ -486,12 +492,12 @@ public class Main extends PApplet{
         node_array.add(y);
         edge_array.add(e);
 
-        x = new Node(this, 600, 625);
+        x = new Node(this, 600, 625, "C");
 
         e = new BiEdge(this, x, y, 15);
         edge_array.add(e);
 
-        y = new Node(this, 200, 625);
+        y = new Node(this, 200, 625,"D");
         e = new BiEdge(this, x, y, 5);
 
         node_array.add(x);

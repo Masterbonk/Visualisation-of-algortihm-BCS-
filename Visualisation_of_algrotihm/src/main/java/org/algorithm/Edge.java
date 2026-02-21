@@ -12,7 +12,6 @@ public class Edge {
     PApplet sketch;
     int weight;
     float x = 0, y = 0;
-    boolean render_weight_Ui;
 
     public Edge(PApplet _sketch, Node _from, Node _to, int _weight){
         sketch = _sketch;
@@ -74,85 +73,14 @@ public class Edge {
             sketch.pop();
         }
 
-        render_Edge_Weight_UI();
+
 
     }
 
 
     //Renders the update edge weight ui and text
-    private void render_Edge_Weight_UI() {
-
-        //make this not ugly
-
-        StringBuilder inputStr = new StringBuilder();
-        if (render_weight_Ui) {
-
-            sketch.push();
-            sketch.noStroke();
-            sketch.fill(255);
-            sketch.rectMode(CENTER);
-            String tmp = ""+1000000;
-            String boxname = "Input Weight:";
-            sketch.push();
-            sketch.textSize(16);
-            float fontSize = sketch.getGraphics().textSize;
-            sketch.pop();
-            float boxheight = (sketch.getGraphics().textSize) *1.7f;
-            sketch.rect(
-                    (sketch.displayWidth/2f),
-                    (sketch.displayHeight/2f) - (sketch.getGraphics().textSize/2) - fontSize,
-                    sketch.textWidth(tmp) *2,
-                    boxheight + (fontSize*2)
-
-            );
-            sketch.push();
-            sketch.fill(100);
-            sketch.stroke(100);
-            sketch.rect(
-                    (sketch.displayWidth/2f),
-                    (sketch.displayHeight/2f) - (sketch.getGraphics().textSize/2),
-                    sketch.textWidth(tmp) * 1.5f ,
-                    (sketch.getGraphics().textSize)
-
-            );
-            sketch.pop();
-
-            sketch.pop();
-
-            // Draw input
-            sketch.fill(0);
 
 
-            for (char c : currentInput) {
-                inputStr.append(c);
-            }
-            sketch.push();
-            sketch.textSize(16);
-            sketch.text("Input Weight:",
-                    sketch.displayWidth/2f - sketch.textWidth(tmp) - sketch.textWidth("Input Weight:")/2,
-                    sketch.displayHeight/2f - boxheight);
-            sketch.pop();
-
-
-            sketch.textAlign(LEFT);
-            sketch.text(inputStr.toString(),
-                    sketch.displayWidth/2f-sketch.textWidth(tmp)/2, sketch.displayHeight/2f);
-
-
-        }
-
-
-        sketch.println(inputStr.toString());
-
-    }
-
-    public void turn_On_Weight_UI(boolean _t){
-        render_weight_Ui = _t;
-    }
-
-    public boolean get_Weight_UI(){
-        return render_weight_Ui;
-    }
 
     public void color(){
         sketch.push();

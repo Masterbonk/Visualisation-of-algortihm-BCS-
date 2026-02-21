@@ -80,6 +80,21 @@ public class Priority_Queue {
         return heap.isEmpty();
     }
 
+    public ArrayList<Node> toList() {
+        ArrayList<Node> listOrdered = new ArrayList<>();
+
+        //for(Node n : heap){
+        //    if (n.name != null) listOrdered.add(n.name);
+        //    else listOrdered.add(n.toString());
+        //}
+        if (!heap.isEmpty()) {
+            listOrdered.add(heap.getFirst());
+        }
+
+
+        return listOrdered;
+    }
+
     //swim the key up the heap
     private void swim(int i) {
         while (i > 0 && greater(parent(i), i)) {
@@ -87,6 +102,8 @@ public class Priority_Queue {
             i = parent(i);
         }
     }
+
+
 
     //sink the key down the heap
     private void sink(int _i) {
@@ -129,6 +146,10 @@ public class Priority_Queue {
         Node temp = heap.get(_i);
         heap.set(_i, heap.get(_j));
         heap.set(_j, temp);
+    }
+
+    public ArrayList<Node> get_Heap(){
+        return heap;
     }
 
 
