@@ -4,6 +4,8 @@ import processing.core.PApplet;
 
 import java.util.*;
 
+import static org.algorithm.Main.*;
+
 public class UI {
 
     private HashMap<String, Button> button_map = new HashMap<>();;
@@ -103,6 +105,22 @@ public class UI {
             }
         }
     }
+
+    public void turn_Off_All_Other_Edge_UI(Edge _e, ArrayList<Edge> _edge_array){
+        for(Edge e: _edge_array){
+            if (_e == e) continue;
+            e.turn_On_Weight_UI(false);
+        }
+
+    }
+
+    public void turn_Off_All_Other_Edge_UI(ArrayList<Edge> _edge_array){
+        for(Edge e: _edge_array){
+            e.turn_On_Weight_UI(false);
+        }
+
+    }
+
 
 
 }
