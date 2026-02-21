@@ -224,8 +224,8 @@ public class Main extends PApplet{
             debug = !debug;
         }
 
-
-        //ensure this dosent fuck with any other keypressing
+        //handles all text input
+        //ensure this doesn't fuck with any other keypressing
         if (!display_edge_weight_ui) return;
 
         // Digits

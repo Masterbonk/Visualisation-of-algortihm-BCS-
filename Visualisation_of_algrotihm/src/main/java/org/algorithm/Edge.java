@@ -78,7 +78,9 @@ public class Edge {
 
     }
 
-    public void render_Edge_Weight_UI() {
+
+    //Renders the update edge weight ui and text
+    private void render_Edge_Weight_UI() {
 
         //make this not ugly
 
