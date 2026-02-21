@@ -367,6 +367,15 @@ public class Main extends PApplet{
                         }
                     }
                 }
+
+                if (Ui.get_Button("weight").clicked && !clicked_on_node) {
+                    for (Edge e : edge_array) {
+                        if (e.mouseOver()) {
+                            e.update_Weight(1000);
+                            break;
+                        }
+                    }
+                }
             }
 
             if (!Ui.get_Button("file").mouse_Over() && !Ui.get_Button("export").mouse_Over() && !Ui.get_Button("import").mouse_Over() && Ui.get_Button("file").clicked) { //Lukker file menuen hvis man klikker uden for den mens den er åben.
