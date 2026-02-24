@@ -71,17 +71,20 @@ public class DStarLite {
 
                 break;
             }
-
+            println("NEVER REACHED");
             if (!Main.edge_update_map.isEmpty()){
+                println("NEVER REACHED2");
                 km = km + heuristic(last,start);
                 last = start;
 
                 for(Edge e: Main.edge_update_map.keySet()){
-                    e.update_Weight(Main.edge_update_map.get(e));
+                    if (Main.edge_update_map.get(e) != -1){ //Means that the
+                        e.update_Weight(Main.edge_update_map.get(e));
+                    }
                     update_Vertex(e.to);
                     update_Vertex(e.from);
                 }
-                Main.edge_update_map = new HashMap<>();
+                Main.edge_update_map.clear();
 
                 compute_Shortest_Path();
             }
@@ -89,16 +92,16 @@ public class DStarLite {
     }
 
     public void compute_Shortest_Path(){
-        println("pq 1 " + U.get_Heap());
-        println("pq to list 1 " + U.toList());
+        //println("pq 1 " + U.get_Heap());
+        //println("pq to list 1 " + U.toList());
         Tupple k_old;
         Node n;
         while(U.top_Key().compareTo(calculate_Key(start)) < 0 || start.get_Rhs_Val() != start.get_G_Val()){
             k_old = U.top_Key();
             n = U.pop();
-            println("pq 2 " + U.get_Heap());
-            println("pq to list 2 " + U.toList());
-            println("Popped node at x: "+n.x+" y: "+n.y);
+            //println("pq 2 " + U.get_Heap());
+            //println("pq to list 2 " + U.toList());
+            //println("Popped node at x: "+n.x+" y: "+n.y);
             if(k_old.compareTo(calculate_Key(n)) < 0){
                 U.insert(n, calculate_Key(n));
             } else if (n.get_G_Val() > n.get_Rhs_Val()){
