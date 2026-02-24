@@ -371,17 +371,18 @@ public class Main extends PApplet{
                     } else if (Ui.get_Button("line").clicked && n.mouse_Over()) {
                         clicked_on_node = true;
                         //If we click on node with line button down, we need to make an edge or connect it to
-                        if (node_1 == null) {
+                        if (node_1 == null) { //If we have no node_1, then it must be the first node we clicked
                             node_1 = n;
-                        } else if (n != node_1) {
+                        } else if (n != node_1) { //We know we have clicked another node, and now we check that it's not the same node
                             boolean stop = false;
-                            for (Edge e : node_1.connected) {
-                                if (e.to == n) {
+                            for (Edge e : node_1.connected) { //We go over all edges in our node_1 and makes sure
+                                // that it's not connected to the new node we clicked
+                                if (e.to == n || e.from == n) { //If it is we stop and do not make the edge
                                     stop = true;
                                     break;
                                 }
                             }
-                            if (!stop) {
+                            if (!stop) { //If we have had no reason not to 
                                 // secon node
                                 boolean edge_already_exist = false;
                                 for (Edge e: node_1.connected) {
