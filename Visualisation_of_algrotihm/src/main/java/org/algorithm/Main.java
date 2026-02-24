@@ -366,6 +366,7 @@ public class Main extends PApplet{
                                 tmp = e.to;
                             } else tmp = e.from;
                             tmp.connected.remove(e);
+                            algorithm.remove_Node(tmp);
                             edge_array.remove(e);
                             edge_update_map.put(e,-1);
                         }
