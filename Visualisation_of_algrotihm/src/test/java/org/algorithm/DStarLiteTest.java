@@ -67,6 +67,8 @@ class DStarLiteTest {
 
         assertEquals(0,algorithm.km);
         assertEquals(algorithm.goal,algorithm.start);
+        Ui.get_Button("pause").click();
+
     }
 
     @Test
@@ -110,6 +112,9 @@ class DStarLiteTest {
         algorithm.D_Main();
 
         assertTrue(algorithm.get_Shortest_Path(S).contains(A));
+
+        Ui.get_Button("pause").click();
+
     }
 
     @Test
