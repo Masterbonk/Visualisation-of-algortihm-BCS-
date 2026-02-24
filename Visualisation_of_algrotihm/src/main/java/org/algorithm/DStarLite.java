@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import static java.lang.Math.min;
+import static org.algorithm.Util.find_Shared_Edge;
 import static org.algorithm.Util.heuristic;
 import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
@@ -62,6 +63,8 @@ public class DStarLite {
             }
 
             if (!has_been_paused && paused_once) {
+                Edge e = find_Shared_Edge(start, find_Min_G_Node(start));
+                if (e != null) e.color(0,0,150);
                 start = find_Min_G_Node(start);
                 println("Moved start to node at x: "+start.x+" y: "+start.y);
             }

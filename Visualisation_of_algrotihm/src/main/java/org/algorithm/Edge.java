@@ -13,6 +13,8 @@ public class Edge {
     PApplet sketch;
     int weight;
     float x = 0, y = 0;
+    int r = 0, g = 0, b = 0;
+
 
     public Edge(PApplet _sketch, Node _from, Node _to, int _weight){
         sketch = _sketch;
@@ -25,6 +27,8 @@ public class Edge {
         to.connected.add(this);
 
         edge_array.add(this);
+
+
 
 
     }
@@ -45,17 +49,18 @@ public class Edge {
         sketch.push();
         if (Ui.get_Button("cut").clicked){
             if(mouseOver()){
-                sketch.stroke(150,0,0);
-            }
+                r = 150;
+
+            } else {r = 0;}
         }
         if (Ui.get_Button("weight").clicked){
             if(mouseOver()){
-                sketch.stroke(0,150,0);
-            }
-            if(display_edge_weight_ui && activeEdge == this){
-                sketch.stroke(0,150,0);
-            }
+                g = 150;
+            } else if(display_edge_weight_ui && activeEdge == this){
+                g = 150;
+            }else {g = 0;}
         }
+        sketch.stroke(r,g,b);
         sketch.line(from.x,from.y, to.x, to.y);
         sketch.pop();
 
@@ -100,16 +105,10 @@ public class Edge {
 
 
 
-    public void color(){
-        sketch.push();
-        sketch.stroke(237, 194, 109);
-        sketch.line(from.x,from.y, from.x+x, from.y+y);
-        if (x>(to.x-from.x)) {
-            x += (to.x - from.x) / 60f;
-            y += (to.y - from.y) / 60f;
-        }
-        sketch.pop();
-
+    public void color(int _r, int _g, int _b){
+        r = _r;
+        g = _g;
+        b = _b;
     }
 
 

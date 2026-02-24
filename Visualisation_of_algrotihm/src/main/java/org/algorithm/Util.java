@@ -64,5 +64,16 @@ public class Util {
         Ui.add_Button("PQ_display",(_sketch.displayWidth)/9f, 0, _sketch.displayWidth/9f, _button_height,"Display Queue", Edge_Button.class, false);
     }
 
+    public static Edge find_Shared_Edge(Node _n1, Node _n2){
+
+        for (Edge e : _n1.connected){
+            if (e.to == _n2 || e.from == _n2 ){
+                return e;
+            }
+        }
+
+        return null;
+    }
+
 
 }
