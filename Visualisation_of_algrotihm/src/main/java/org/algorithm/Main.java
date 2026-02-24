@@ -385,8 +385,8 @@ public class Main extends PApplet{
                                     break;
                                 }
                             }
-                            if (!stop) { //If we have had no reason not to 
-                                // secon node
+                            if (!stop) { //If we have had no reason not to stop we make our new edge
+                                // second node
                                 boolean edge_already_exist = false;
                                 for (Edge e: node_1.connected) {
                                     if (e.from == n){
