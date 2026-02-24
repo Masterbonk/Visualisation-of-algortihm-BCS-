@@ -368,6 +368,7 @@ public class Main extends PApplet{
                             } else tmp = e.from;
                             tmp.connected.remove(e);
                             edge_array.remove(e);
+                            edge_update_map.put(e,-1);
                         }
                         println("Clicked on node at point " + n.x + ", " + n.y);
                         break;
