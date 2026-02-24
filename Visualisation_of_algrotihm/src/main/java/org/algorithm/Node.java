@@ -27,6 +27,7 @@ public class Node {
         connected = new ArrayList<>();
 
         set_of_nodes.add(this);
+        node_array.add(this);
     }
 
     public Node(PApplet _sketch, int _x, int _y, String _name){
@@ -43,6 +44,7 @@ public class Node {
         connected = new ArrayList<>();
 
         set_of_nodes.add(this);
+        node_array.add(this);
     }
 
     public int get_Rhs_Val(){

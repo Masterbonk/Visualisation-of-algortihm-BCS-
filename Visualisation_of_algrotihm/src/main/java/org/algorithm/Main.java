@@ -55,8 +55,8 @@ public class Main extends PApplet{
 
     public static UI Ui;
 
-    ArrayList<Edge> edge_array = new ArrayList<>();
-    ArrayList<Node> node_array = new ArrayList<>();
+    public static ArrayList<Edge> edge_array = new ArrayList<>();
+    public static ArrayList<Node> node_array = new ArrayList<>();
 
     /**
      * The settings are the first thing that runs, it is done before the
@@ -350,8 +350,7 @@ public class Main extends PApplet{
                         }
                     }
                     if (!over_any_nodes) {
-                        Node x = new Node(this, mouseX, mouseY);
-                        node_array.add(x);
+                        new Node(this, mouseX, mouseY);
                     }
                 }
 
@@ -388,7 +387,7 @@ public class Main extends PApplet{
                             if (!stop) { //If we have had no reason not to stop we make our new edge
                                 // second node is hit, and we can now make an edge
                                 Edge new_edge = new BiEdge(this, node_1, n, 1);
-                                edge_array.add(new_edge);
+                                edge_update_map.put(new_edge,new_edge.weight);
                                 node_1 = null;
                             }
                         }
@@ -412,16 +411,11 @@ public class Main extends PApplet{
                 //When we have line, and click outside a node
                 if (Ui.get_Button("line").clicked && !clicked_on_node) {
                     Node tmp = new Node(this, mouseX, mouseY);
-                    node_array.add(tmp);
                     if (node_1 == null) {
                         node_1 = tmp;
                     } else {
                         Edge new_edge = new BiEdge(this, node_1, tmp, 1);
-                        edge_array.add(new_edge);
-                        if (algorithm.U != null) {
-                            algorithm.update_Vertex(node_1);
-                            algorithm.update_Vertex(tmp);
-                        }
+                        edge_update_map.put(new_edge,new_edge.weight);
                         node_1 = null;
                     }
                 }
@@ -518,21 +512,12 @@ public class Main extends PApplet{
         y = new Node(this, 200, 400, "B");
         e = new BiEdge(this, x, y, 5);
 
-
-        node_array.add(x);
-        node_array.add(y);
-        edge_array.add(e);
-
         x = new Node(this, 600, 625, "C");
 
         e = new BiEdge(this, x, y, 15);
-        edge_array.add(e);
 
         y = new Node(this, 200, 625,"D");
         e = new BiEdge(this, x, y, 5);
 
-        node_array.add(x);
-        node_array.add(y);
-        edge_array.add(e);
     }
 }

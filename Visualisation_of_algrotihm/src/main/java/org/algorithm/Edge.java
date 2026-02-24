@@ -23,6 +23,9 @@ public class Edge {
         from.connected.add(this);
         to.connected.add(this);
 
+        edge_array.add(this);
+
+
     }
 
     public void update_Weight(int _i){
