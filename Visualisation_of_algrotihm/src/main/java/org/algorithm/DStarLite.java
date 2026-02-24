@@ -74,9 +74,8 @@ public class DStarLite {
 
                 break;
             }
-            println("NEVER REACHED");
+
             if (!Main.edge_update_map.isEmpty()){
-                println("NEVER REACHED2");
                 km = km + heuristic(last,start);
                 last = start;
 
@@ -92,6 +91,9 @@ public class DStarLite {
                 compute_Shortest_Path();
             }
 
+            //This makes sure that only the right parts of the code is run, when we click forward
+            //When we click forward it needs to do the check above once before it stops and breaks, this
+            //statement makes sure of it.
             if (Main.Ui.get_Button("forward").clicked || !Main.Ui.get_Button("pause").clicked) {
                 paused_once = true;
             }
