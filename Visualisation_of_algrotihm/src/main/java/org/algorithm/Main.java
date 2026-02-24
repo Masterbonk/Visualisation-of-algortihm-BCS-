@@ -17,10 +17,8 @@ public class Main extends PApplet{
     public static boolean debug = false;
 
     public static boolean display_edge_weight_ui = false;
-    public static boolean update_weight = false;
     public static Edge activeEdge = null;
     public static ArrayList<Character> currentInput = new ArrayList<>();
-    public static int savedNumber = -1;
     public static int maxValue = 9999999;
 
     public static Set<Node> set_of_nodes;
