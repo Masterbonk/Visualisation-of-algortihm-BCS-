@@ -418,7 +418,8 @@ public class Main extends PApplet{
                     } else {
                         Edge new_edge = new BiEdge(this, node_1, tmp, 1);
                         edge_array.add(new_edge);
-
+                        algorithm.update_Vertex(node_1);
+                        algorithm.update_Vertex(tmp);
                         node_1 = null;
                     }
                 }
