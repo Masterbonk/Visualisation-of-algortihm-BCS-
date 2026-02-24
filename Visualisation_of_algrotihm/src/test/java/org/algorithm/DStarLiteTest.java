@@ -7,6 +7,9 @@ import processing.core.PApplet;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.TimeoutException;
 
 import static org.algorithm.Main.Ui;
@@ -30,6 +33,8 @@ class DStarLiteTest {
 
 
         algorithm = new DStarLite();
+        Main.set_of_nodes = new HashSet<>();
+        Main.edge_update_map = new HashMap<>();
 
         util = new Util(sketch,button_height);
         Main.Ui = new UI(sketch);
@@ -39,6 +44,7 @@ class DStarLiteTest {
 
     @AfterEach
     void tearDown() {
+        Main.edge_update_map.clear();
 
     }
 

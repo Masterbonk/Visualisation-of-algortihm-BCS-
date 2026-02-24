@@ -209,8 +209,10 @@ public class DStarLite {
         float k1, k2;
 
         k1 = min(s.get_G_Val(),s.get_Rhs_Val()) + heuristic(s, start) + km;
+        if(k1 < 0) k1 = MAX_INT;
 
         k2 = min(s.get_G_Val(),s.get_Rhs_Val());
+
 
         return new Tupple(k1, k2);
     }
