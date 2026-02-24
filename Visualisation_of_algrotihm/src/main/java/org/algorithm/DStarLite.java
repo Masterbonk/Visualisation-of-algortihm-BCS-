@@ -16,7 +16,7 @@ public class DStarLite {
 
     float km;
     Priority_Queue U;
-    boolean has_been_paused = false;
+    boolean has_been_paused = true;
     boolean first_run = true;
 
 
@@ -53,7 +53,6 @@ public class DStarLite {
             first_run = false;
         }
         while (start != goal){
-
 
             if (start.get_G_Val() == MAX_INT) {
                 println("No valid path to start");
