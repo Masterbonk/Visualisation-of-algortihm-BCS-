@@ -108,6 +108,7 @@ class Button {
      */
     void click(){
         clicked = !clicked;
+
         Ui.turn_Off_All_Buttons(this);
         //sketch.println("Not implemented");
     }
