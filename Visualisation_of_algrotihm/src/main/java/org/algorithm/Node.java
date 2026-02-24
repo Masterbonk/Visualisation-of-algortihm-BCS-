@@ -17,6 +17,9 @@ public class Node {
     public Node(PApplet _sketch, int _x, int _y){
         //float tempX = mouseX/zoom_level;
         //float tempY = mouseY/zoom_level;
+        g = MAX_INT;
+        rhs = MAX_INT;
+
 
         x = Math.round((_x-translate_x)/zoom_level);
         y = Math.round((_y-translate_y)/zoom_level);
