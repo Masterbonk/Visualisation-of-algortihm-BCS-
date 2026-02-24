@@ -136,7 +136,7 @@ class Pause_Button extends Button{
             text = "⏸"; //start
         } else text = "⏯"; //Pause
 
-        algorithm.has_been_paused = !algorithm.has_been_paused;
+        DStarLite.has_been_paused = !DStarLite.has_been_paused;
 
         super.click();
 
