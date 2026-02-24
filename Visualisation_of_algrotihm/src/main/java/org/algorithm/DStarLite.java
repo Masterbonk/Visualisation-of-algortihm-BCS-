@@ -134,7 +134,6 @@ public class DStarLite {
                 update_Vertex(n);
             }
         }
-
     }
 
     public ArrayList<Node> get_Shortest_Path(Node n){

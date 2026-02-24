@@ -236,35 +236,36 @@ public class Main extends PApplet{
 
         //handles all text input
         //ensure this doesn't fuck with any other keypressing
-        if (!display_edge_weight_ui) return;
+        if (display_edge_weight_ui) {
 
-        // Digits
-        if (key >= '0' && key <= '9' && currentInput.size() < 7) {
-            currentInput.add(key);
-        }
-
-        // Backspace
-        if (key == BACKSPACE && !currentInput.isEmpty()) {
-            currentInput.removeLast();
-        }
-
-        // Enter
-        if (key == ENTER || key == RETURN) {
-            if (activeEdge != null && !currentInput.isEmpty()) {
-                StringBuilder inputStr = new StringBuilder();
-                for (char c : currentInput) inputStr.append(c);
-
-                int value = Integer.parseInt(inputStr.toString());
-
-                if (value <= maxValue) {
-                    activeEdge.update_Weight(value);
-                    edge_update_map.put(activeEdge, activeEdge.weight);
-                }
-
+            // Digits
+            if (key >= '0' && key <= '9' && currentInput.size() < 7) {
+                currentInput.add(key);
             }
 
-            display_edge_weight_ui = false;
-            currentInput.clear();
+            // Backspace
+            if (key == BACKSPACE && !currentInput.isEmpty()) {
+                currentInput.removeLast();
+            }
+
+            // Enter
+            if (key == ENTER || key == RETURN) {
+                if (activeEdge != null && !currentInput.isEmpty()) {
+                    StringBuilder inputStr = new StringBuilder();
+                    for (char c : currentInput) inputStr.append(c);
+
+                    int value = Integer.parseInt(inputStr.toString());
+
+                    if (value <= maxValue) {
+                        activeEdge.update_Weight(value);
+                        edge_update_map.put(activeEdge, activeEdge.weight);
+                    }
+
+                }
+
+                display_edge_weight_ui = false;
+                currentInput.clear();
+            }
         }
     }
     /**

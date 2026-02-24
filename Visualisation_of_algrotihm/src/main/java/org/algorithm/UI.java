@@ -21,6 +21,7 @@ public class UI {
         sketch = _sketch;
 
     }
+
     /**
      * render, calls render on all UI elements
      * */
@@ -31,6 +32,7 @@ public class UI {
         render_Edge_Weight_UI();
         display_PQ();
     }
+
     /**
      * add_Button takes a name, button and booolean describing if the button is on the top or bottom
      * @param _name the name of the  button
@@ -78,8 +80,8 @@ public class UI {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
+
     /**
      * returns the button with the given name from the map
      * @param _name name of the button we fetch
@@ -169,8 +171,6 @@ public class UI {
             sketch.textAlign(LEFT);
             sketch.text(inputStr.toString(),
                     sketch.displayWidth/2f-sketch.textWidth(tmp)/2, sketch.displayHeight/2f);
-
-
         }
         sketch.pop();
 

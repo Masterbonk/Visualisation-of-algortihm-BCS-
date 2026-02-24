@@ -28,9 +28,6 @@ public class Edge {
 
         edge_array.add(this);
 
-
-
-
     }
 
     public void update_Weight(int _i){
@@ -96,14 +93,10 @@ public class Edge {
             sketch.pop();
         }
 
-
-
     }
 
 
     //Renders the update edge weight ui and text
-
-
 
     public void color(int _r, int _g, int _b){
         r = _r;
@@ -121,7 +114,6 @@ public class Edge {
      * If so we know that there is overlap and the mouse is over that edge.
      * It should be noted that we know the mouse will be registered,
      * because it cannot intercept without hitting one of these points.
-     *
      * Got the base code from Java.awt.geom.Rectangle2D;
      * @return true if the mouse is hovering over the edge.
      */

@@ -13,6 +13,7 @@ public class Node {
     ArrayList<Edge> connected;
     PApplet sketch;
     String name;
+    int r = 204, g1 = 24, b = 24;
 
     public Node(PApplet _sketch, int _x, int _y){
         //float tempX = mouseX/zoom_level;
@@ -72,13 +73,15 @@ public class Node {
     }
 
     public void render(){
-        sketch.push();
         if (mouse_Over()) {
-            sketch.fill(24,204,24);
-        } else sketch.fill(204, 24, 24);
+            color(24,204,24);
+        } else {
+            color(204, 24, 24);
+        }
+        sketch.push();
         dim = 50;
+        sketch.fill(r,g1,b);
         sketch.circle(x,y,dim);
-
         sketch.pop();
 
         if (algorithm.get_Start() == this){ //Makes flag if startnode
@@ -104,16 +107,18 @@ public class Node {
             sketch.push();
             sketch.fill(50,10);
             sketch.stroke(0, 0, 255);
-            sketch.square(x-dim/2,y-dim/2,dim);
+            sketch.square(x-dim/2f,y-dim/2f,dim);
             sketch.pop();
         }
         if (Ui.get_Button("Node_display").clicked){
             sketch.push();
             sketch.fill(247,247,247);
             sketch.textSize(20);
-            sketch.text("g(" + display_Infinity(g) + "), rhs(" + display_Infinity(rhs) + ")",(x+dim/2)-35,(y+dim/2)+20);
+            sketch.text("g(" + display_Infinity(g) + "), rhs(" + display_Infinity(rhs) + ")",(x+dim/2f)-35,(y+dim/2f)+20);
             sketch.pop();
         }
+
+
     }
 
     public String display_Infinity(int _i){
@@ -128,7 +133,7 @@ public class Node {
         //float tempX = Math.round(sketch.mouseX/zoom_level);
         //float tempY = Math.round(sketch.mouseY/zoom_level);
 
-        float offset = dim/2;
+        float offset = dim/2f;
         if (sketch.mouseX >= (x-offset)*zoom_level+translate_x && sketch.mouseX <= (x+dim-offset)*zoom_level+translate_x &&
                 sketch.mouseY >= (y-offset)*zoom_level+translate_y && sketch.mouseY <= (y+dim-offset)*zoom_level+translate_y){
             return true;
@@ -142,4 +147,11 @@ public class Node {
         if (name != null) return name;
         return x+ " " +y;
     }
+
+    public void color(int _r, int _g, int _b){
+        r = _r;
+        g1 = _g;
+        b = _b;
+    }
+
 }
