@@ -315,6 +315,20 @@ public class Main extends PApplet{
         boolean clicked_on_node = false;
         boolean clicked_on_button = false;
 
+        if(debug){
+            for (Node t : node_array) {
+                if (t.mouse_Over()) {
+                    println("Node edges "+ t.connected);
+                }
+            }
+
+            for (Edge e : edge_array){
+                if (e.mouseOver()){
+                    print("Edge from " + e.from + " Edge to " + e.to);
+                }
+            }
+        }
+
         if(mouseButton == LEFT) {
             for (String s : Ui.get_Map().keySet()) {
                 if (Ui.get_Button(s).mouse_Over()) {
@@ -423,6 +437,10 @@ public class Main extends PApplet{
                 if (Ui.get_Button("cut").clicked && !clicked_on_node) {
                     for (Edge e : edge_array) {
                         if (e.mouseOver()) {
+                            Node to = e.to;
+                            Node from = e.from;
+                            to.connected.remove(e);
+                            from.connected.remove(e);
                             println("Edge was deleted");
                             edge_array.remove(e);
                             break;
