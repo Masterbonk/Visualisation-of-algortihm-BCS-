@@ -358,6 +358,7 @@ public class Main extends PApplet{
                     if (Ui.get_Button("cut").clicked && n.mouse_Over()) {
                         clicked_on_node = true;
                         node_array.remove(n);
+                        algorithm.remove_Node(n);
                         if (algorithm.get_Start() == n) algorithm.set_Start(null);
                         if (algorithm.get_Goal() == n) algorithm.set_Goal(null);
                         for (Edge e : n.connected) {
@@ -366,7 +367,6 @@ public class Main extends PApplet{
                                 tmp = e.to;
                             } else tmp = e.from;
                             tmp.connected.remove(e);
-                            algorithm.remove_Node(tmp);
                             edge_array.remove(e);
                             edge_update_map.put(e,-1);
                         }
