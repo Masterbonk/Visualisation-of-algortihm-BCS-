@@ -21,7 +21,7 @@ add the library to your libraries in your IDE.
 We recommend using Intellej, which is what IDE this software has been programmed in.
 
 ## how to run the program
-Run Main
+Run Main.
 A pop up will show up. This is the program for whihc the user can interact with.
 
 more details to come
