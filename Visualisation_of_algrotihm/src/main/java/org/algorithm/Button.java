@@ -108,6 +108,7 @@ class Button {
      */
     void click(){
         clicked = !clicked;
+
         Ui.turn_Off_All_Buttons(this);
         //sketch.println("Not implemented");
     }
@@ -242,6 +243,15 @@ class Edge_Button extends Button{
 
     void click(){super.click();
     }
+
+class PQueue_Button extends Button{
+        public PQueue_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text) {
+            super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
+        }
+
+    void click(){super.click();
+    }
+}
 }
 
 

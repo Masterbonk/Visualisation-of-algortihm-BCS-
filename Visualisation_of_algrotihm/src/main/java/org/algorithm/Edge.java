@@ -2,6 +2,7 @@ package org.algorithm;
 
 import processing.core.PApplet;
 
+import static java.lang.Math.log10;
 import static org.algorithm.Main.*;
 
 
@@ -39,24 +40,57 @@ public class Edge {
                 sketch.stroke(150,0,0);
             }
         }
+        if (Ui.get_Button("weight").clicked){
+            if(mouseOver()){
+                sketch.stroke(0,150,0);
+            }
+            if(display_edge_weight_ui && activeEdge == this){
+                sketch.stroke(0,150,0);
+            }
+        }
         sketch.line(from.x,from.y, to.x, to.y);
         sketch.pop();
 
+
+
         if (Ui.get_Button("Edge_display").clicked) {
+
+            //make this dynamic
+
             sketch.push();
             sketch.fill(100);
             sketch.stroke(100);
             sketch.strokeWeight(10);
-            sketch.textAlign(sketch.RIGHT, sketch.BOTTOM);
+            sketch.textAlign(sketch.CENTER);
             sketch.rectMode(sketch.CENTER);
-            sketch.rect((from.x + to.x) / 2f - (weight > 9 ? sketch.getGraphics().textSize * 0.5f : sketch.getGraphics().textSize * 0.25f),
-                    (from.y + to.y) / 2f - sketch.getGraphics().textSize * 0.5f, (weight > 9 ? sketch.getGraphics().textSize : sketch.getGraphics().textSize / 2), (sketch.getGraphics().textSize));
+            //weight > 9 ? sketch.getGraphics().textSize : sketch.getGraphics().textSize / 2
+            //from.x + to.x) / 2f - (weight > 9 ? sketch.getGraphics().textSize * 0.5f : sketch.getGraphics().textSize * 0.25f),
+            //                    (from.y + to.y) / 2f - sketch.getGraphics().textSize * 0.5f,
+            //                    ( sketch.getGraphics().textSize * digits/2),
+            //                    (sketch.getGraphics().textSize)
+            double v = (log10(weight)) + 1;
+            int digits = (int) v;
+            String tmp = ""+weight;
+            sketch.rect(
+                    ((from.x + to.x) / 2f),
+                    ((from.y + to.y) / 2f - (sketch.getGraphics().textSize/2)),
+                    sketch.textWidth(tmp),
+                    (sketch.getGraphics().textSize)
+
+            );
             sketch.fill(255);
             sketch.text("" + weight, ((from.x + to.x) / 2f), ((from.y + to.y) / 2f));
             sketch.pop();
         }
 
+
+
     }
+
+
+    //Renders the update edge weight ui and text
+
+
 
     public void color(){
         sketch.push();

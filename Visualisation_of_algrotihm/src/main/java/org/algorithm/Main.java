@@ -16,6 +16,11 @@ public class Main extends PApplet{
     public static boolean fullscreen = true;
     public static boolean debug = false;
 
+    public static boolean display_edge_weight_ui = false;
+    public static Edge activeEdge = null;
+    public static ArrayList<Character> currentInput = new ArrayList<>();
+    public static int maxValue = 9999999;
+
     public static Set<Node> set_of_nodes;
     public static HashMap<Edge,Integer> edge_update_map;
     public static DStarLite algorithm;
@@ -99,6 +104,7 @@ public class Main extends PApplet{
         Util.Make_UI(this, button_height);
         Make_Graph();
 
+
     }
 
 
@@ -138,6 +144,7 @@ public class Main extends PApplet{
 
         Ui.render();
         rescale();
+
 
         if (!Ui.get_Button("pause").clicked){
             algorithm.D_Main();
@@ -222,6 +229,39 @@ public class Main extends PApplet{
         if (key == 'p'){
             //print("key pressed p");
             debug = !debug;
+
+        }
+
+        //handles all text input
+        //ensure this doesn't fuck with any other keypressing
+        if (!display_edge_weight_ui) return;
+
+        // Digits
+        if (key >= '0' && key <= '9' && currentInput.size() < 7) {
+            currentInput.add(key);
+        }
+
+        // Backspace
+        if (key == BACKSPACE && !currentInput.isEmpty()) {
+            currentInput.removeLast();
+        }
+
+        // Enter
+        if (key == ENTER || key == RETURN) {
+            if (activeEdge != null && !currentInput.isEmpty()) {
+                StringBuilder inputStr = new StringBuilder();
+                for (char c : currentInput) inputStr.append(c);
+
+                int value = Integer.parseInt(inputStr.toString());
+
+                if (value <= maxValue) {
+                    activeEdge.update_Weight(value);
+                }
+
+            }
+
+            display_edge_weight_ui = false;
+            currentInput.clear();
         }
     }
     /**
@@ -375,6 +415,22 @@ public class Main extends PApplet{
                         }
                     }
                 }
+
+                if (Ui.get_Button("weight").clicked && !clicked_on_node) {
+                    for (Edge e : edge_array) {
+                        if (e.mouseOver()) {
+                            currentInput.clear();
+                            display_edge_weight_ui = true;
+                            activeEdge = e;
+                            break;
+                        } else if (!e.mouseOver()) {
+                            currentInput.clear();
+                            display_edge_weight_ui = false;
+                            activeEdge = null;
+
+                        }
+                    }
+                }
             }
 
             if (!Ui.get_Button("file").mouse_Over() && !Ui.get_Button("export").mouse_Over() && !Ui.get_Button("import").mouse_Over() && Ui.get_Button("file").clicked) { //Lukker file menuen hvis man klikker uden for den mens den er åben.
@@ -433,8 +489,8 @@ public class Main extends PApplet{
     void Make_Graph(){
         Node x, y;
         BiEdge e;
-        x = new Node(this, 400, 200);
-        y = new Node(this, 200, 400);
+        x = new Node(this, 400, 200, "A");
+        y = new Node(this, 200, 400, "B");
         e = new BiEdge(this, x, y, 5);
 
 
@@ -442,12 +498,12 @@ public class Main extends PApplet{
         node_array.add(y);
         edge_array.add(e);
 
-        x = new Node(this, 600, 625);
+        x = new Node(this, 600, 625, "C");
 
         e = new BiEdge(this, x, y, 15);
         edge_array.add(e);
 
-        y = new Node(this, 200, 625);
+        y = new Node(this, 200, 625,"D");
         e = new BiEdge(this, x, y, 5);
 
         node_array.add(x);

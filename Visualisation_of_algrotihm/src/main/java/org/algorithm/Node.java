@@ -12,10 +12,24 @@ public class Node {
     int dim, g, rhs;
     ArrayList<Edge> connected;
     PApplet sketch;
+    String name;
 
     public Node(PApplet _sketch, int _x, int _y){
         //float tempX = mouseX/zoom_level;
         //float tempY = mouseY/zoom_level;
+
+        x = Math.round((_x-translate_x)/zoom_level);
+        y = Math.round((_y-translate_y)/zoom_level);
+        sketch = _sketch;
+        connected = new ArrayList<>();
+
+        set_of_nodes.add(this);
+    }
+
+    public Node(PApplet _sketch, int _x, int _y, String _name){
+        //float tempX = mouseX/zoom_level;
+        //float tempY = mouseY/zoom_level;
+        name = _name;
 
         x = Math.round((_x-translate_x)/zoom_level);
         y = Math.round((_y-translate_y)/zoom_level);
@@ -99,4 +113,9 @@ public class Node {
         }
     }
 
+    @Override
+    public String toString() {
+        if (name != null) return name;
+        return x+ " " +y;
+    }
 }

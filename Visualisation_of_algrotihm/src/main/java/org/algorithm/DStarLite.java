@@ -12,6 +12,8 @@ public class DStarLite {
     Node start;
     Node goal;
     Node last;
+
+
     float km;
     Priority_Queue U;
     boolean has_been_paused = false;
@@ -51,6 +53,8 @@ public class DStarLite {
             first_run = false;
         }
         while (start != goal){
+
+
             if (start.get_G_Val() == MAX_INT) {
                 println("No valid path to start");
                 break;
@@ -65,6 +69,7 @@ public class DStarLite {
                 has_been_paused = true;
                 Main.Ui.get_Button("forward").clicked = false;
                 Main.Ui.get_Button("pause").clicked = true;
+
                 break;
             }
 
@@ -85,11 +90,15 @@ public class DStarLite {
     }
 
     public void compute_Shortest_Path(){
+        println("pq 1 " + U.get_Heap());
+        println("pq to list 1 " + U.toList());
         Tupple k_old;
         Node n;
         while(U.top_Key().compareTo(calculate_Key(start)) < 0 || start.get_Rhs_Val() != start.get_G_Val()){
             k_old = U.top_Key();
             n = U.pop();
+            println("pq 2 " + U.get_Heap());
+            println("pq to list 2 " + U.toList());
             println("Popped node at x: "+n.x+" y: "+n.y);
             if(k_old.compareTo(calculate_Key(n)) < 0){
                 U.insert(n, calculate_Key(n));
@@ -110,6 +119,7 @@ public class DStarLite {
                 update_Vertex(n);
             }
         }
+
     }
 
     public ArrayList<Node> get_Shortest_Path(Node n){
@@ -171,11 +181,16 @@ public class DStarLite {
                 println(e.getMessage());
             }
         }
+        println("pq 3 " + U.get_Heap());
+        println("pq to list 3 " + U.toList());
 
         if(_n.get_G_Val() != _n.get_Rhs_Val()){
             U.insert(_n, calculate_Key(_n));
             println("Added node to list at x: "+_n.x+" y: "+_n.y);
         }
+        println("pq 4 " + U.get_Heap());
+        println("pq to list 4 " + U.toList());
+
     }
 
     public Tupple calculate_Key(Node s){
@@ -220,6 +235,10 @@ public class DStarLite {
 
     public Node get_Goal(){
         return goal;
+    }
+
+    public Priority_Queue get_U(){
+        return U;
     }
 
 }

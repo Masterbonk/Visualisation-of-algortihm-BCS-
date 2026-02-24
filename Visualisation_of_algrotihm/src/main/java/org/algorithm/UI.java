@@ -4,6 +4,8 @@ import processing.core.PApplet;
 
 import java.util.*;
 
+import static org.algorithm.Main.*;
+
 public class UI {
 
     private HashMap<String, Button> button_map = new HashMap<>();;
@@ -26,6 +28,8 @@ public class UI {
         for(String s: button_map.keySet()){
             button_map.get(s).render();
         }
+        render_Edge_Weight_UI();
+        display_PQ();
     }
     /**
      * add_Button takes a name, button and booolean describing if the button is on the top or bottom
@@ -96,6 +100,7 @@ public class UI {
      *  The function to make sure no buttons can be clicked simultaneously
      * */
     public void turn_Off_All_Buttons(Button _button){
+        if (!bottom_ui.contains(_button.name)) return;
         for (String s : bottom_ui) {
             if (button_map.get(s) != _button) {
                 if (s.equals("pause")) continue;
@@ -104,5 +109,94 @@ public class UI {
         }
     }
 
+
+
+
+    private void render_Edge_Weight_UI() {
+
+        //make this not ugly
+        sketch.push();
+        sketch.textSize(30);
+        StringBuilder inputStr = new StringBuilder();
+        if (display_edge_weight_ui) {
+
+            sketch.push();
+            sketch.noStroke();
+            sketch.fill(255);
+            sketch.rectMode(CENTER);
+            String tmp = ""+1000000;
+            sketch.push();
+            sketch.textSize(16);
+            float fontSize = sketch.getGraphics().textSize;
+            sketch.pop();
+            float boxheight = (sketch.getGraphics().textSize) *1.7f;
+            sketch.rect(
+                    (sketch.displayWidth/2f),
+                    (sketch.displayHeight/2f) - (sketch.getGraphics().textSize/2) - fontSize,
+                    sketch.textWidth(tmp) *2,
+                    boxheight + (fontSize*2)
+
+            );
+            sketch.push();
+            sketch.fill(100);
+            sketch.stroke(100);
+            sketch.rect(
+                    (sketch.displayWidth/2f),
+                    (sketch.displayHeight/2f) - (sketch.getGraphics().textSize/2),
+                    sketch.textWidth(tmp) * 1.5f ,
+                    (sketch.getGraphics().textSize)
+
+            );
+            sketch.pop();
+
+            sketch.pop();
+
+            // Draw input
+            sketch.fill(0);
+
+
+            for (char c : currentInput) {
+                inputStr.append(c);
+            }
+            sketch.push();
+            sketch.textSize(16);
+            sketch.text("Input Weight:",
+                    sketch.displayWidth/2f - sketch.textWidth(tmp) - sketch.textWidth("Input Weight:")/2,
+                    sketch.displayHeight/2f - boxheight);
+            sketch.pop();
+
+
+            sketch.textAlign(LEFT);
+            sketch.text(inputStr.toString(),
+                    sketch.displayWidth/2f-sketch.textWidth(tmp)/2, sketch.displayHeight/2f);
+
+
+        }
+        sketch.pop();
+
+    }
+
+
+    private void display_PQ(){
+        /*
+        if(Ui.get_Button("PQ_display").clicked){
+            if (algorithm != null){
+                sketch.push();
+                for (int i = 0; i < algorithm.get_U().get_Heap().size(); i++){
+                    String tmp = algorithm.get_U().get_Heap().get(i).toString();
+
+                    sketch.text(tmp, sketch.displayWidth-400, (100 * i));
+
+                }
+                sketch.rect(sketch.displayWidth-400,0,400,750);
+
+
+                sketch.pop();
+                }
+          }
+            */
+
+
+    }
 
 }
