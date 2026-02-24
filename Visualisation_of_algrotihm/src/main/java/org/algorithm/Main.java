@@ -315,6 +315,20 @@ public class Main extends PApplet{
         boolean clicked_on_node = false;
         boolean clicked_on_button = false;
 
+        if(debug){
+            for (Node t : node_array) {
+                if (t.mouse_Over()) {
+                    println("Node edges "+ t.connected);
+                }
+            }
+
+            for (Edge e : edge_array){
+                if (e.mouseOver()){
+                    print("Edge from " + e.from + " Edge to " + e.to);
+                }
+            }
+        }
+
         if(mouseButton == LEFT) {
             for (String s : Ui.get_Map().keySet()) {
                 if (Ui.get_Button(s).mouse_Over()) {
@@ -356,7 +370,7 @@ public class Main extends PApplet{
                         break;
                     } else if (Ui.get_Button("line").clicked && n.mouse_Over()) {
                         clicked_on_node = true;
-                        //If we click on node with line buttom down we need to make an edge or connect it to
+                        //If we click on node with line button down, we need to make an edge or connect it to
                         if (node_1 == null) {
                             node_1 = n;
                         } else if (n != node_1) {
@@ -368,10 +382,24 @@ public class Main extends PApplet{
                                 }
                             }
                             if (!stop) {
-                                // second node
-                                Edge new_edge = new BiEdge(this, node_1, n, 1);
+                                // secon node
+                                boolean edge_already_exist = false;
+                                for (Edge e: node_1.connected) {
+                                    if (e.from == n){
+                                        edge_already_exist = true;
+                                    }
+                                }
+                                for (Edge e: n.connected) {
+                                    if (e.from == node_1){
+                                        edge_already_exist = true;
+                                    }
+                                }
+                                if (!edge_already_exist) {
+                                    // if the edge already exist we don't wanna edit it
+                                    Edge new_edge = new BiEdge(this, node_1, n, 1);
 
-                                edge_array.add(new_edge);
+                                    edge_array.add(new_edge);
+                                }
                                 node_1 = null;
                             }
                         }
@@ -409,6 +437,10 @@ public class Main extends PApplet{
                 if (Ui.get_Button("cut").clicked && !clicked_on_node) {
                     for (Edge e : edge_array) {
                         if (e.mouseOver()) {
+                            Node to = e.to;
+                            Node from = e.from;
+                            to.connected.remove(e);
+                            from.connected.remove(e);
                             println("Edge was deleted");
                             edge_array.remove(e);
                             break;
