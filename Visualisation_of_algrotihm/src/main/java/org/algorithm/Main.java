@@ -315,6 +315,9 @@ public class Main extends PApplet{
         boolean clicked_on_node = false;
         boolean clicked_on_button = false;
 
+
+        //debug feature prints the list of a clicked nodes connected edges
+        //or the to and from nodes of a clicked edge 
         if(debug){
             for (Node t : node_array) {
                 if (t.mouse_Over()) {
