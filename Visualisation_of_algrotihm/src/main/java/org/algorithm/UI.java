@@ -178,6 +178,7 @@ public class UI {
 
 
     private void display_PQ(){
+        /*
         if(Ui.get_Button("PQ_display").clicked){
             if (algorithm != null){
                 sketch.push();
@@ -191,8 +192,11 @@ public class UI {
 
 
                 sketch.pop();
-            }
-        }
+                }
+          }
+            */
+
+
     }
 
 }
