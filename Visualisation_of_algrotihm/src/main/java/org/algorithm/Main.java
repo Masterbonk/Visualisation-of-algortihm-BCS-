@@ -317,7 +317,7 @@ public class Main extends PApplet{
 
 
         //debug feature prints the list of a clicked nodes connected edges
-        //or the to and from nodes of a clicked edge 
+        //or the to and from nodes of a clicked edge
         if(debug){
             for (Node t : node_array) {
                 if (t.mouse_Over()) {
@@ -386,24 +386,9 @@ public class Main extends PApplet{
                                 }
                             }
                             if (!stop) { //If we have had no reason not to stop we make our new edge
-                                // second node
-                                boolean edge_already_exist = false;
-                                for (Edge e: node_1.connected) {
-                                    if (e.from == n){
-                                        edge_already_exist = true;
-                                    }
-                                }
-                                for (Edge e: n.connected) {
-                                    if (e.from == node_1){
-                                        edge_already_exist = true;
-                                    }
-                                }
-                                if (!edge_already_exist) {
-                                    // if the edge already exist we don't wanna edit it
-                                    Edge new_edge = new BiEdge(this, node_1, n, 1);
-
-                                    edge_array.add(new_edge);
-                                }
+                                // second node is hit, and we can now make an edge
+                                Edge new_edge = new BiEdge(this, node_1, n, 1);
+                                edge_array.add(new_edge);
                                 node_1 = null;
                             }
                         }
