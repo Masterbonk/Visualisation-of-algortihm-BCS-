@@ -31,6 +31,9 @@ public class Node {
         //float tempY = mouseY/zoom_level;
         name = _name;
 
+        g = MAX_INT;
+        rhs = MAX_INT;
+
         x = Math.round((_x-translate_x)/zoom_level);
         y = Math.round((_y-translate_y)/zoom_level);
         sketch = _sketch;
@@ -95,8 +98,16 @@ public class Node {
             sketch.push();
             sketch.fill(247,247,247);
             sketch.textSize(20);
-            sketch.text("g(" + g + "), rhs(" + rhs + ")",(x+dim/2)-35,(y+dim/2)+20);
+            sketch.text("g(" + display_Infinity(g) + "), rhs(" + display_Infinity(rhs) + ")",(x+dim/2)-35,(y+dim/2)+20);
             sketch.pop();
+        }
+    }
+
+    public String display_Infinity(int _i){
+        if (_i == MAX_INT){
+            return "∞";
+        } else {
+            return _i + "";
         }
     }
 
