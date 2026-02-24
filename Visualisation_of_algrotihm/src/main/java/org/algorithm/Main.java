@@ -434,6 +434,7 @@ public class Main extends PApplet{
                             to.connected.remove(e);
                             from.connected.remove(e);
                             println("Edge was deleted");
+                            edge_update_map.put(e,-1);
                             edge_array.remove(e);
                             break;
                         }

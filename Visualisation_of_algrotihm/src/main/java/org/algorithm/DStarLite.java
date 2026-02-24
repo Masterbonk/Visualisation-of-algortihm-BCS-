@@ -18,6 +18,7 @@ public class DStarLite {
     Priority_Queue U;
     boolean has_been_paused = true;
     boolean first_run = true;
+    boolean paused_once = false;
 
 
     DStarLite(){
@@ -58,14 +59,16 @@ public class DStarLite {
                 println("No valid path to start");
                 break;
             }
-            if (!has_been_paused) {
+
+            if (!has_been_paused && paused_once) {
                 start = find_Min_G_Node(start);
                 println("Moved start to node at x: "+start.x+" y: "+start.y);
             }
             
 
-            if(Main.Ui.get_Button("pause").clicked || Main.Ui.get_Button("forward").clicked){
+            if(Main.Ui.get_Button("pause").clicked || Main.Ui.get_Button("forward").clicked && paused_once){
                 has_been_paused = true;
+                paused_once = false;
                 Main.Ui.get_Button("forward").clicked = false;
                 Main.Ui.get_Button("pause").clicked = true;
 
@@ -77,28 +80,37 @@ public class DStarLite {
                 last = start;
 
                 for(Edge e: Main.edge_update_map.keySet()){
-                    e.update_Weight(Main.edge_update_map.get(e));
+                    if (Main.edge_update_map.get(e) != -1){ //Means that the
+                        e.update_Weight(Main.edge_update_map.get(e));
+                    }
                     update_Vertex(e.to);
                     update_Vertex(e.from);
                 }
-                Main.edge_update_map = new HashMap<>();
+                Main.edge_update_map.clear();
 
                 compute_Shortest_Path();
+            }
+
+            //This makes sure that only the right parts of the code is run, when we click forward
+            //When we click forward it needs to do the check above once before it stops and breaks, this
+            //statement makes sure of it.
+            if (Main.Ui.get_Button("forward").clicked || !Main.Ui.get_Button("pause").clicked) {
+                paused_once = true;
             }
         }
     }
 
     public void compute_Shortest_Path(){
-        println("pq 1 " + U.get_Heap());
-        println("pq to list 1 " + U.toList());
+        //println("pq 1 " + U.get_Heap());
+        //println("pq to list 1 " + U.toList());
         Tupple k_old;
         Node n;
         while(U.top_Key().compareTo(calculate_Key(start)) < 0 || start.get_Rhs_Val() != start.get_G_Val()){
             k_old = U.top_Key();
             n = U.pop();
-            println("pq 2 " + U.get_Heap());
-            println("pq to list 2 " + U.toList());
-            println("Popped node at x: "+n.x+" y: "+n.y);
+            //println("pq 2 " + U.get_Heap());
+            //println("pq to list 2 " + U.toList());
+            //println("Popped node at x: "+n.x+" y: "+n.y);
             if(k_old.compareTo(calculate_Key(n)) < 0){
                 U.insert(n, calculate_Key(n));
             } else if (n.get_G_Val() > n.get_Rhs_Val()){
