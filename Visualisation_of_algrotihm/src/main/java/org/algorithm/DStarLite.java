@@ -18,6 +18,7 @@ public class DStarLite {
     Priority_Queue U;
     boolean has_been_paused = true;
     boolean first_run = true;
+    boolean paused_once = false;
 
 
     DStarLite(){
@@ -58,14 +59,16 @@ public class DStarLite {
                 println("No valid path to start");
                 break;
             }
-            if (!has_been_paused) {
+
+            if (!has_been_paused && paused_once) {
                 start = find_Min_G_Node(start);
                 println("Moved start to node at x: "+start.x+" y: "+start.y);
             }
             
 
-            if(Main.Ui.get_Button("pause").clicked || Main.Ui.get_Button("forward").clicked){
+            if(Main.Ui.get_Button("pause").clicked || Main.Ui.get_Button("forward").clicked && paused_once){
                 has_been_paused = true;
+                paused_once = false;
                 Main.Ui.get_Button("forward").clicked = false;
                 Main.Ui.get_Button("pause").clicked = true;
 
@@ -87,6 +90,10 @@ public class DStarLite {
                 Main.edge_update_map.clear();
 
                 compute_Shortest_Path();
+            }
+
+            if (Main.Ui.get_Button("forward").clicked || !Main.Ui.get_Button("pause").clicked) {
+                paused_once = true;
             }
         }
     }
