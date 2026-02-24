@@ -372,34 +372,21 @@ public class Main extends PApplet{
                         clicked_on_node = true;
                         //If we click on node with line button down, we need to make an edge or connect it to
                         if (node_1 == null) {
+                            //first node we click on when making edge
                             node_1 = n;
                         } else if (n != node_1) {
                             boolean stop = false;
                             for (Edge e : node_1.connected) {
-                                if (e.to == n) {
+                                //we make sur edge don't already exist
+                                if (e.to == n || e.from == n) {
                                     stop = true;
                                     break;
                                 }
                             }
                             if (!stop) {
-                                // secon node
-                                boolean edge_already_exist = false;
-                                for (Edge e: node_1.connected) {
-                                    if (e.from == n){
-                                        edge_already_exist = true;
-                                    }
-                                }
-                                for (Edge e: n.connected) {
-                                    if (e.from == node_1){
-                                        edge_already_exist = true;
-                                    }
-                                }
-                                if (!edge_already_exist) {
-                                    // if the edge already exist we don't wanna edit it
-                                    Edge new_edge = new BiEdge(this, node_1, n, 1);
-
-                                    edge_array.add(new_edge);
-                                }
+                                // second node is hit, and we can now make an edge
+                                Edge new_edge = new BiEdge(this, node_1, n, 1);
+                                edge_array.add(new_edge);
                                 node_1 = null;
                             }
                         }
