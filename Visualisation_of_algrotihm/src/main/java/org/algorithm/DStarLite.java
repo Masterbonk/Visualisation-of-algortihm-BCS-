@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import static java.lang.Math.min;
+import static org.algorithm.Util.heuristic;
 import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
@@ -16,7 +17,7 @@ public class DStarLite {
 
     float km;
     Priority_Queue U;
-    boolean has_been_paused = true;
+    public static boolean has_been_paused = true;
     boolean first_run = true;
     boolean paused_once = false;
 
@@ -212,14 +213,6 @@ public class DStarLite {
         k2 = min(s.g,s.rhs);
 
         return new Tupple(k1, k2);
-    }
-
-
-    /** Calculates the heuristic between Node a & b
-     *  Heuristic = distance between the two points
-     * */
-    public float heuristic(Node a, Node b){
-        return (float) (Math.round(Math.sqrt((Math.pow(a.x - b.x,2)) + (Math.pow(a.y - b.y,2)))* 100.0) / 100.0);
     }
 
     public void remove_Node(Node n){

@@ -4,6 +4,7 @@ import processing.core.PApplet;
 
 import static java.lang.Math.log10;
 import static org.algorithm.Main.*;
+import static org.algorithm.Util.heuristic;
 
 
 public class Edge {
@@ -29,10 +30,14 @@ public class Edge {
     }
 
     public void update_Weight(int _i){
-        float tmp = algorithm.heuristic(to, from);
-        if (_i < tmp){
-            weight = (int)Math.ceil(tmp);
-        } else weight = _i;
+        if (_i < 0){
+            weight =  (int)Math.ceil(heuristic(to, from));
+        } else {
+            float tmp = heuristic(to, from);
+            if (_i < tmp) {
+                weight = (int) Math.ceil(tmp);
+            } else weight = _i;
+        }
     }
 
     public void render(){

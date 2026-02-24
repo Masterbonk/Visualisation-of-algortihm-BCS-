@@ -56,11 +56,19 @@ public class Node {
     }
 
     public void update_Rhs_Val(int _rhs){
-        rhs = _rhs;
+        if (_rhs < 0) {
+            rhs = MAX_INT;
+        } else {
+            rhs = _rhs;
+        }
     }
 
     public void update_G_Val(int _g) {
-        g = _g;
+        if (_g < 0) {
+            g = MAX_INT;
+        } else {
+            g = _g;
+        }
     }
 
     public void render(){

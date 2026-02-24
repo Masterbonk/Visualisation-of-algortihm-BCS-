@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeoutException;
 
 import static org.algorithm.Main.Ui;
+import static org.algorithm.Util.heuristic;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static processing.core.PApplet.println;
@@ -33,6 +34,7 @@ class DStarLiteTest {
         util = new Util(sketch,button_height);
         Main.Ui = new UI(sketch);
         Ui.add_Button("pause", (sketch.displayWidth)/9f, sketch.displayHeight-button_height, sketch.displayWidth/9f, button_height,"⏯", Pause_Button.class, true);
+        Ui.add_Button("forward", sketch.displayWidth/9f*2f, sketch.displayHeight-button_height, sketch.displayWidth/9f, button_height,"⏵", Forward_Button.class, true);
     }
 
     @AfterEach
@@ -54,7 +56,7 @@ class DStarLiteTest {
 
         algorithm.start = S;
         algorithm.goal = G;
-
+        Ui.get_Button("pause").click();
         algorithm.D_Main();
 
         assertEquals(0,algorithm.km);
@@ -96,6 +98,8 @@ class DStarLiteTest {
         algorithm.goal = G;
 
         Main.edge_update_map.put(bg,MAX_INT);
+
+        Ui.get_Button("pause").click();
 
         algorithm.D_Main();
 
@@ -394,7 +398,7 @@ class DStarLiteTest {
 
         Node a = new Node(sketch, 5, 5);
 
-        float result = algorithm.heuristic(algorithm.start,a);
+        float result = heuristic(algorithm.start,a);
 
         float expected_result = 5f;
 
@@ -414,7 +418,7 @@ class DStarLiteTest {
 
         Node a = new Node(sketch, 5, 5);
 
-        float result = algorithm.heuristic(a, algorithm.start);
+        float result = heuristic(a, algorithm.start);
 
         float expected_result = 5f;
 
@@ -436,7 +440,7 @@ class DStarLiteTest {
 
         float expected_result = 5f;
 
-        float result = algorithm.heuristic(algorithm.start, a);
+        float result = heuristic(algorithm.start, a);
 
         assertEquals(expected_result, result);
     }
@@ -453,13 +457,13 @@ class DStarLiteTest {
         algorithm.start = new Node(sketch, 0, 5);
 
         Node b = new Node (sketch, 0, -5);
-        float result = algorithm.heuristic(algorithm.start, b);
+        float result = heuristic(algorithm.start, b);
         float expected_result = 10;
         assertEquals(expected_result, result);
 
         expected_result = 5;
         b = new Node (sketch, -5, 5);
-        result = algorithm.heuristic(algorithm.start, b);
+        result = heuristic(algorithm.start, b);
         assertEquals(expected_result, result);
     }
 
@@ -477,7 +481,7 @@ class DStarLiteTest {
 
         float expected_result = 5;
         Node b = new Node (sketch, -5, 5);
-        float result = algorithm.heuristic(algorithm.start, b);
+        float result = heuristic(algorithm.start, b);
         assertEquals(expected_result, result);
     }
 
@@ -494,7 +498,7 @@ class DStarLiteTest {
 
         Node a = new Node(sketch, 5, 5);
 
-        float result = algorithm.heuristic(algorithm.start, a);
+        float result = heuristic(algorithm.start, a);
 
         float expected_result = 7.07f;
 
