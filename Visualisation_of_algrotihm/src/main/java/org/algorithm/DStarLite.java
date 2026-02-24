@@ -192,15 +192,15 @@ public class DStarLite {
                 println(e.getMessage());
             }
         }
-        println("pq 3 " + U.get_Heap());
-        println("pq to list 3 " + U.toList());
+        //println("pq 3 " + U.get_Heap());
+        //println("pq to list 3 " + U.toList());
 
         if(_n.get_G_Val() != _n.get_Rhs_Val()){
             U.insert(_n, calculate_Key(_n));
             println("Added node to list at x: "+_n.x+" y: "+_n.y);
         }
-        println("pq 4 " + U.get_Heap());
-        println("pq to list 4 " + U.toList());
+        //println("pq 4 " + U.get_Heap());
+        //println("pq to list 4 " + U.toList());
 
     }
 
