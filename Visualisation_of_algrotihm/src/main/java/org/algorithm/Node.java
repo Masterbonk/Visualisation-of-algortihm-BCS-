@@ -9,7 +9,7 @@ import static org.algorithm.Main.*;
 public class Node {
 
     int x, y;
-    int dim, g, rhs;
+    private int dim, g, rhs;
     ArrayList<Edge> connected;
     PApplet sketch;
     String name;

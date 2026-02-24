@@ -256,6 +256,7 @@ public class Main extends PApplet{
 
                 if (value <= maxValue) {
                     activeEdge.update_Weight(value);
+                    edge_update_map.put(activeEdge, activeEdge.weight);
                 }
 
             }

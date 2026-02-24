@@ -206,8 +206,8 @@ class DStarLiteTest {
 
         Edge ab = new Edge(sketch,a,b,3);
 
-        a.rhs = MAX_INT;
-        a.g = MAX_INT;
+        a.update_Rhs_Val(MAX_INT);
+        a.update_G_Val(MAX_INT);
 
         b.update_G_Val(2);
         b.update_Rhs_Val(2);
@@ -285,14 +285,14 @@ class DStarLiteTest {
         } catch (Exception exc) {
             assertTrue(false);
         }
-        start.rhs = 0;
-        start.g = 0;
+        start.update_Rhs_Val(0);
+        start.update_G_Val(0);
 
-        e.rhs = 3;
-        e.g = 3;
+        e.update_Rhs_Val(3);
+        e.update_G_Val(3);
 
-        g.rhs = 2;
-        g.g = 2;
+        g.update_Rhs_Val(2);
+        g.update_G_Val(2);
 
         Edge startE = new BiEdge(sketch,start,e,3);
         Edge startG = new BiEdge(sketch,start,g,2);
@@ -323,8 +323,8 @@ class DStarLiteTest {
         algorithm.start = new Node(sketch, 0, 5);
 
         Node a = new Node(sketch, 5, 5);
-        a.g = 100;
-        a.rhs = 100;
+        a.update_G_Val(100);
+        a.update_Rhs_Val(100);
 
         Tupple result = algorithm.calculate_Key(a);
 
@@ -344,8 +344,8 @@ class DStarLiteTest {
         algorithm.start = new Node(sketch, 0, 5);
 
         Node a = new Node(sketch, 5, 5);
-        a.g = 7;
-        a.rhs = 100;
+        a.update_G_Val(7);
+        a.update_Rhs_Val(100);
 
         Tupple result = algorithm.calculate_Key(a);
 
@@ -353,8 +353,8 @@ class DStarLiteTest {
 
         assertTrue(expected_result.same_Key(result));
 
-        a.g = 100;
-        a.rhs = 7;
+        a.update_G_Val(100);
+        a.update_Rhs_Val(7);
 
         result = algorithm.calculate_Key(a);
 
@@ -375,8 +375,8 @@ class DStarLiteTest {
         algorithm.km = 100;
 
         Node a = new Node(sketch, 5, 5);
-        a.g = 5;
-        a.rhs = 5;
+        a.update_G_Val(5);
+        a.update_Rhs_Val(5);
 
         Tupple result = algorithm.calculate_Key(a);
 
