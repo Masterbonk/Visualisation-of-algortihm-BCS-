@@ -40,8 +40,18 @@ public class Edge {
                 sketch.stroke(150,0,0);
             }
         }
+        if (Ui.get_Button("weight").clicked){
+            if(mouseOver()){
+                sketch.stroke(0,150,0);
+            }
+            if(display_edge_weight_ui && activeEdge == this){
+                sketch.stroke(0,150,0);
+            }
+        }
         sketch.line(from.x,from.y, to.x, to.y);
         sketch.pop();
+
+
 
         if (Ui.get_Button("Edge_display").clicked) {
 
