@@ -318,7 +318,13 @@ public class Main extends PApplet{
         if(debug){
             for (Node t : node_array) {
                 if (t.mouse_Over()) {
-                    println(t.connected);
+                    println("Node edges "+ t.connected);
+                }
+            }
+
+            for (Edge e : edge_array){
+                if (e.mouseOver()){
+                    print("Edge from " + e.from + " Edge to " + e.to);
                 }
             }
         }
