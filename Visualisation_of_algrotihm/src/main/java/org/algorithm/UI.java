@@ -102,6 +102,7 @@ public class UI {
      *  The function to make sure no buttons can be clicked simultaneously
      * */
     public void turn_Off_All_Buttons(Button _button){
+        display_edge_weight_ui = false;
         if (!bottom_ui.contains(_button.name)) return;
         for (String s : bottom_ui) {
             if (button_map.get(s) != _button) {
