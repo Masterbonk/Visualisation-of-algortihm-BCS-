@@ -178,23 +178,27 @@ public class UI {
 
 
     private void display_PQ(){
-        /*
+
         if(Ui.get_Button("PQ_display").clicked){
-            if (algorithm != null){
+            sketch.rect(sketch.displayWidth-400,0,400,750);
+            if (algorithm != null && algorithm.get_U() != null){
                 sketch.push();
+                sketch.fill(0,0,0);
+                sketch.textSize(100);
                 for (int i = 0; i < algorithm.get_U().get_Heap().size(); i++){
                     String tmp = algorithm.get_U().get_Heap().get(i).toString();
 
-                    sketch.text(tmp, sketch.displayWidth-400, (100 * i));
+                    sketch.text(tmp, sketch.displayWidth/2f, ((sketch.displayHeight/2f)*i));
+                    println("traversed this element " + tmp);
 
                 }
-                sketch.rect(sketch.displayWidth-400,0,400,750);
-
-
                 sketch.pop();
                 }
+
+
           }
-            */
+
+
 
 
     }

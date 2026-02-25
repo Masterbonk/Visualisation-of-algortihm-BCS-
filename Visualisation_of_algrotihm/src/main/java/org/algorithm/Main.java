@@ -164,6 +164,8 @@ public class Main extends PApplet{
 
 
         Ui.render();
+
+        text("HEJ",displayWidth/2f, (displayHeight/2f));
         rescale();
 
 
