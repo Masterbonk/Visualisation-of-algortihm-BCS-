@@ -20,6 +20,11 @@ add the library to your libraries in your IDE.
 
 We recommend using Intellej, which is what IDE this software has been programmed in.
 
+### other libraries
+  download the following library https://github.com/garciadelcastillo/-dashed-lines-for-processing-/tree/master
+  specifically go to dist, download the zip file and excstract
+  
+
 ## how to run the program
 Run Main.
 A pop up will show up. This is the program for whihc the user can interact with.
