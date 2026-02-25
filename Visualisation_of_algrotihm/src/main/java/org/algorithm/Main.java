@@ -152,6 +152,11 @@ public class Main extends PApplet{
         for(int i = 0; i < node_array.size(); i++){
             node_array.get(i).render();
         }
+
+        if(h != null){
+            h.render();
+        }
+
         pop();
         popMatrix();
 
@@ -163,9 +168,6 @@ public class Main extends PApplet{
         if (!Ui.get_Button("pause").clicked){
             algorithm.D_Main();
         }
-
-
-
 
     }
 
@@ -420,9 +422,11 @@ public class Main extends PApplet{
 
                     } else if(Ui.get_Button("flag_a").clicked && algorithm.get_Goal() != n && n.mouse_Over()){
                         clicked_on_node = true;
+                        algorithm.first_run = true;
                         algorithm.set_Start(n);
                     } else if(Ui.get_Button("flag_b").clicked && algorithm.get_Start() != n && n.mouse_Over()){
                         clicked_on_node = true;
+                        algorithm.first_run = true;
                         algorithm.set_Goal(n);
                     }
                 }
@@ -431,11 +435,13 @@ public class Main extends PApplet{
                     algorithm.set_Start(null);
                     h.set_To(null);
                     h.set_From(null);
+                    algorithm.first_run = true;
                 }
                 if (!clicked_on_node && Ui.get_Button("flag_b").clicked) {
                     algorithm.set_Goal(null);
                     h.set_To(null);
                     h.set_From(null);
+                    algorithm.first_run = true;
                 }
 
 
