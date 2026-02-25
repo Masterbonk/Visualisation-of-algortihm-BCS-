@@ -108,7 +108,7 @@ class Button {
      */
     void click(){
         clicked = !clicked;
-
+        node_1 = null;
         Ui.turn_Off_All_Buttons(this);
         //sketch.println("Not implemented");
     }
@@ -154,6 +154,7 @@ class Forward_Button extends Button{
         clicked = true;
         Ui.get_Button("pause").clicked = false;
         algorithm.has_been_paused = false;
+        node_1 = null;
 
     }
 }
@@ -187,7 +188,6 @@ class Line_Button extends Button{
 
     void click() {
         super.click();
-        node_1 = null;
     }
 }
 class Flag_A_Button extends Button{
@@ -213,7 +213,6 @@ class Weight_Button extends Button{
     }
 
     void click(){super.click();
-        sketch.println("Not implemented Weight");
     }
 }
 
