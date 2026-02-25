@@ -1,5 +1,6 @@
 package org.algorithm;
 
+import garciadelcastillo.dashedlines.DashedLines;
 import processing.core.PApplet;
 
 import static java.lang.Math.log10;
@@ -12,8 +13,7 @@ public class Edge {
     Node to;
     PApplet sketch;
     int weight;
-    float x = 0, y = 0;
-    int r = 0, g = 0, b = 0;
+    int r = 75, g = 75, b = 75;
 
 
     public Edge(PApplet _sketch, Node _from, Node _to, int _weight){
@@ -63,23 +63,22 @@ public class Edge {
 
 
 
+        render_Weight() ;
+
+    }
+
+    public void render_Weight(){
         if (Ui.get_Button("Edge_display").clicked) {
 
-            //make this dynamic
 
             sketch.push();
+            sketch.textSize(30);
             sketch.fill(100);
             sketch.stroke(100);
             sketch.strokeWeight(10);
             sketch.textAlign(sketch.CENTER);
             sketch.rectMode(sketch.CENTER);
-            //weight > 9 ? sketch.getGraphics().textSize : sketch.getGraphics().textSize / 2
-            //from.x + to.x) / 2f - (weight > 9 ? sketch.getGraphics().textSize * 0.5f : sketch.getGraphics().textSize * 0.25f),
-            //                    (from.y + to.y) / 2f - sketch.getGraphics().textSize * 0.5f,
-            //                    ( sketch.getGraphics().textSize * digits/2),
-            //                    (sketch.getGraphics().textSize)
-            double v = (log10(weight)) + 1;
-            int digits = (int) v;
+
             String tmp = ""+weight;
             sketch.rect(
                     ((from.x + to.x) / 2f),
@@ -92,7 +91,6 @@ public class Edge {
             sketch.text("" + weight, ((from.x + to.x) / 2f), ((from.y + to.y) / 2f));
             sketch.pop();
         }
-
     }
 
 
@@ -221,4 +219,41 @@ class BiEdge extends Edge{
     public void render() {
         super.render();
     }
+}
+
+class Heuristic_Edge extends Edge{
+
+    DashedLines dash;
+    public Heuristic_Edge(PApplet _sketch, Node _from, Node _to){
+        super(_sketch, _from, _to, 0);
+
+        dash = new DashedLines(sketch);
+
+    }
+
+    public void set_To(Node _n){
+        to = _n;
+    }
+    public void set_From(Node _n){
+        from = _n;
+    }
+
+
+    @Override
+    public void render() {
+        if(to != null && from != null){
+            if (Ui.get_Button("heuristic").clicked) {
+                sketch.push();
+                sketch.strokeWeight(2);
+                dash.pattern(20, 20);
+                dash.line(to.x,to.y,from.x,from.y);
+                sketch.pop();
+
+                render_Weight();
+
+            }
+        }
+
+    }
+
 }

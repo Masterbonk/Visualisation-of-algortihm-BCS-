@@ -11,8 +11,6 @@ import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
 public class DStarLite {
-    Node start;
-    Node goal;
     Node last;
 
 
@@ -26,10 +24,11 @@ public class DStarLite {
     DStarLite(){
         Main.set_of_nodes = new HashSet<>();
         Main.edge_update_map = new HashMap<>();
+
     }
 
     public void initialize(){
-        if (start == null && goal == null) {
+        if (Main.start_node == null && Main.goal_node == null) {
             println("start and/or goal are null");
             return;}
         //if (start == null) throw new NullPointerException("Start not set!");
@@ -45,31 +44,31 @@ public class DStarLite {
             n.update_Rhs_Val(MAX_INT);
         }
 
-        goal.update_Rhs_Val(0);
+        Main.goal_node.update_Rhs_Val(0);
 
-        U.insert(goal, calculate_Key(goal));
+        U.insert(Main.goal_node, calculate_Key(Main.goal_node));
 
     }
 
     public void D_Main(){
-        if (first_run && start != null && goal != null){
-            last = start;
+        if (first_run && Main.start_node != null && Main.goal_node != null){
+            last = Main.start_node;
             initialize();
             compute_Shortest_Path();
             first_run = false;
         }
-        while (start != goal){
+        while (Main.start_node != Main.goal_node){
 
-            if (start.get_G_Val() == MAX_INT) {
+            if (Main.start_node.get_G_Val() == MAX_INT) {
                 println("No valid path to start");
                 break;
             }
 
             if (!has_been_paused && paused_once) {
-                Edge e = find_Shared_Edge(start, find_Min_G_Node(start));
+                Edge e = find_Shared_Edge(Main.start_node, find_Min_G_Node(Main.start_node));
                 if (e != null) e.color(0,0,150);
-                start = find_Min_G_Node(start);
-                println("Moved start to node at x: "+start.x+" y: "+start.y);
+                Main.start_node = find_Min_G_Node(Main.start_node);
+                println("Moved start to node at x: "+Main.start_node.x+" y: "+Main.start_node.y);
             }
             
 
@@ -83,8 +82,8 @@ public class DStarLite {
             }
 
             if (!Main.edge_update_map.isEmpty()){
-                km = km + heuristic(last,start);
-                last = start;
+                km = km + heuristic(last,Main.start_node);
+                last = Main.start_node;
 
                 for(Edge e: Main.edge_update_map.keySet()){
                     if (Main.edge_update_map.get(e) != -1){ //Means that the
@@ -112,7 +111,7 @@ public class DStarLite {
         //println("pq to list 1 " + U.toList());
         Tupple k_old;
         Node n;
-        while(U.top_Key().compareTo(calculate_Key(start)) < 0 || start.get_Rhs_Val() != start.get_G_Val()){
+        while(U.top_Key().compareTo(calculate_Key(Main.start_node)) < 0 || Main.start_node.get_Rhs_Val() != Main.start_node.get_G_Val()){
             k_old = U.top_Key();
             n = U.pop();
             //println("pq 2 " + U.get_Heap());
@@ -143,7 +142,7 @@ public class DStarLite {
         ArrayList<Node> result = new ArrayList<>();
         Node tmp = n;
         if (n.get_G_Val() != MAX_INT) {
-            while (!result.contains(goal)) {
+            while (!result.contains(Main.goal_node)) {
                 Node tmp2 = find_Min_G_Node(tmp);
                 result.add(tmp);
                 tmp = tmp2;
@@ -187,7 +186,7 @@ public class DStarLite {
 
     public void update_Vertex(Node _n){
         println("Updating node at x: "+_n.x+" y: "+_n.y);
-        if (_n != goal){
+        if (_n !=Main.goal_node){
             _n.update_Rhs_Val(find_Min_G(_n));
         }
 
@@ -213,7 +212,7 @@ public class DStarLite {
     public Tupple calculate_Key(Node s){
         float k1, k2;
 
-        k1 = min(s.get_G_Val(),s.get_Rhs_Val()) + heuristic(s, start) + km;
+        k1 = min(s.get_G_Val(),s.get_Rhs_Val()) + heuristic(s, Main.start_node) + km;
         if(k1 < 0) k1 = MAX_INT;
 
         k2 = min(s.get_G_Val(),s.get_Rhs_Val());
@@ -233,19 +232,19 @@ public class DStarLite {
     }
 
     public void set_Start(Node _n){
-        start = _n;
+        Main.start_node = _n;
     }
 
     public void set_Goal(Node _n){
-        goal = _n;
+        Main.goal_node = _n;
     }
 
     public Node get_Start(){
-        return start;
+        return Main.start_node;
     }
 
     public Node get_Goal(){
-        return goal;
+        return Main.goal_node;
     }
 
     public Priority_Queue get_U(){
