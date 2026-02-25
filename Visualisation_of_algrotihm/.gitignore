@@ -39,6 +39,6 @@ build/
 .DS_Store
 
 ### Libraries ###
-.dashedlines
+.dashedlines/
 
 mode.txt
