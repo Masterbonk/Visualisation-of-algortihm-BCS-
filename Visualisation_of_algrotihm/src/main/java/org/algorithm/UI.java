@@ -180,7 +180,8 @@ public class UI {
     private void display_PQ(){
 
         if(Ui.get_Button("PQ_display").clicked){
-            sketch.rect(sketch.displayWidth-400,0,400,750);
+            sketch.rect(sketch.displayWidth-400,0,400,sketch.displayHeight-Main.button_height);
+
             if (algorithm != null && algorithm.get_U() != null){
                 sketch.push();
                 sketch.fill(0,0,0);
@@ -189,8 +190,6 @@ public class UI {
                     String tmp = algorithm.get_U().get_Heap().get(i).toString();
 
                     sketch.text(tmp, sketch.displayWidth-200, 200+100*i);
-                    println("traversed this element " + tmp);
-
                 }
                 sketch.pop();
                 }

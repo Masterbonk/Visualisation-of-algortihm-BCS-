@@ -40,7 +40,7 @@ public class Main extends PApplet{
         PApplet.runSketch(processingArgs, main);
     }
 
-    public int button_height = 50;
+    public static int button_height = 50;
     public static int dWidth, dHeight;
     public static Node node_1;
 
