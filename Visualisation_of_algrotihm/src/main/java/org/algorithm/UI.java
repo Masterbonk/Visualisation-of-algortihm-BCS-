@@ -188,19 +188,12 @@ public class UI {
                 for (int i = 0; i < algorithm.get_U().get_Heap().size(); i++){
                     String tmp = algorithm.get_U().get_Heap().get(i).toString();
 
-                    sketch.text(tmp, sketch.displayWidth/2f, ((sketch.displayHeight/2f)*i));
+                    sketch.text(tmp, sketch.displayWidth-200, 200+100*i);
                     println("traversed this element " + tmp);
 
                 }
                 sketch.pop();
                 }
-
-
           }
-
-
-
-
     }
-
 }
