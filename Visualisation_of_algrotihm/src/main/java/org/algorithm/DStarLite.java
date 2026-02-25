@@ -18,7 +18,9 @@ public class DStarLite {
     Priority_Queue U;
     public static boolean has_been_paused = true;
     boolean first_run = true;
+    boolean part_one_d_main = false;
     boolean paused_once = false;
+    boolean check_for_edge_change_done = false;
 
 
     DStarLite(){
@@ -60,45 +62,53 @@ public class DStarLite {
             initialize();
             compute_Shortest_Path();
             first_run = false;
+            println("first run " + first_run);
+            println("part 1 " + part_one_d_main);
+        }else if (part_one_d_main && !first_run){
+            println("am i real");
+            compute_Shortest_Path();
         }
-        while (Main.start_node != Main.goal_node){
 
-            if (Main.start_node.get_G_Val() == MAX_INT) {
-                println("No valid path to start");
-                println("update map has size = "+Main.edge_update_map.size());
-                check_For_Edge_Change();
-                first_run = true;
-                Main.Ui.get_Button("pause").click();
-                break;
-            }
+        if (!part_one_d_main && !first_run){
+            while (Main.start_node != Main.goal_node){
 
-            if (!has_been_paused && paused_once) {
-                Edge e = find_Shared_Edge(Main.start_node, find_Min_G_Node(Main.start_node));
-                if (e != null) e.color(0,0,150);
-                Main.start_node = find_Min_G_Node(Main.start_node);
-                println("Moved start to node at x: "+Main.start_node.x+" y: "+Main.start_node.y);
-            }
-            
+                if (Main.start_node.get_G_Val() == MAX_INT) {
+                    println("No valid path to start");
+                    println("update map has size = "+Main.edge_update_map.size());
+                    check_For_Edge_Change();
+                    first_run = true;
+                    Main.Ui.get_Button("pause").click();
+                    break;
+                }
 
-            if(Main.Ui.get_Button("pause").clicked || Main.Ui.get_Button("forward").clicked && paused_once){
-                has_been_paused = true;
-                paused_once = false;
-                Main.Ui.get_Button("forward").clicked = false;
-                Main.Ui.get_Button("pause").clicked = true;
+                if (!has_been_paused && paused_once) {
+                    Edge e = find_Shared_Edge(Main.start_node, find_Min_G_Node(Main.start_node));
+                    if (e != null) e.color(0,0,150);
+                    Main.start_node = find_Min_G_Node(Main.start_node);
+                    println("Moved start to node at x: "+Main.start_node.x+" y: "+Main.start_node.y);
+                }
 
-                break;
-            }
 
-            if (!Main.edge_update_map.isEmpty()){
-                check_For_Edge_Change();
+                if(Main.Ui.get_Button("pause").clicked || Main.Ui.get_Button("forward").clicked && paused_once){
+                    has_been_paused = true;
+                    paused_once = false;
+                    Main.Ui.get_Button("forward").clicked = false;
+                    Main.Ui.get_Button("pause").clicked = true;
 
-            }
+                    break;
+                }
 
-            //This makes sure that only the right parts of the code is run, when we click forward
-            //When we click forward it needs to do the check above once before it stops and breaks, this
-            //statement makes sure of it.
-            if (Main.Ui.get_Button("forward").clicked || !Main.Ui.get_Button("pause").clicked) {
-                paused_once = true;
+                if (!Main.edge_update_map.isEmpty()){
+                    check_For_Edge_Change();
+
+                }
+
+                //This makes sure that only the right parts of the code is run, when we click forward
+                //When we click forward it needs to do the check above once before it stops and breaks, this
+                //statement makes sure of it.
+                if (Main.Ui.get_Button("forward").clicked || !Main.Ui.get_Button("pause").clicked) {
+                    paused_once = true;
+                }
             }
         }
     }
@@ -127,6 +137,18 @@ public class DStarLite {
         Tupple k_old;
         Node n;
         while(U.top_Key().compareTo(calculate_Key(Main.start_node)) < 0 || Main.start_node.get_Rhs_Val() != Main.start_node.get_G_Val()){
+
+            if(!Main.Ui.get_Button("pause").clicked || !Main.Ui.get_Button("forward").clicked && paused_once ){
+                println("how did i get here");
+                has_been_paused = true;
+                paused_once = false;
+                part_one_d_main = true;
+                Main.Ui.get_Button("forward").clicked = false;
+                Main.Ui.get_Button("pause").clicked = true;
+
+                break;
+            }
+
             k_old = U.top_Key();
             n = U.pop();
             //println("pq 2 " + U.get_Heap());
@@ -140,6 +162,7 @@ public class DStarLite {
                     Node other_node = e.from;
                     if (e.from == n) other_node = e.to;
                     update_Vertex(other_node);
+
                 }
             } else {
                 n.update_G_Val(MAX_INT);
@@ -151,6 +174,7 @@ public class DStarLite {
                 update_Vertex(n);
             }
         }
+
     }
 
     public ArrayList<Node> get_Shortest_Path(Node n){
