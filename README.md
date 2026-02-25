@@ -22,7 +22,9 @@ We recommend using Intellej, which is what IDE this software has been programmed
 
 ### other libraries
   download the following library https://github.com/garciadelcastillo/-dashed-lines-for-processing-/tree/master
-  specifically go to dist, download the zip file and excstract
+  specifically go to dist, download the zip file and excstract.
+  Now you can add the following file to your libraries, just how you added processing:
+  dashedlines/libraries/dashedlines.jar
   
 
 ## how to run the program
