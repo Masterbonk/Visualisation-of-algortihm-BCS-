@@ -45,6 +45,8 @@ class DStarLiteTest {
     @AfterEach
     void tearDown() {
         Main.edge_update_map.clear();
+        Main.start_node = null;
+        Main.goal_node = null;
 
     }
 
