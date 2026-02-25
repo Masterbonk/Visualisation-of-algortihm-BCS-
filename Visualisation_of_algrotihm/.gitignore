@@ -38,5 +38,7 @@ build/
 ### Mac OS ###
 .DS_Store
 
+### Libraries ###
+.dashedlines
 
 mode.txt
