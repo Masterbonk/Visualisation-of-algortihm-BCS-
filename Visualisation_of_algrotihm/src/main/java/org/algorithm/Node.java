@@ -13,7 +13,7 @@ public class Node {
     ArrayList<Edge> connected;
     PApplet sketch;
     String name;
-    int r = 204, g1 = 24, b = 24;
+    int r = 232, g1 = 25, b = 25;
 
     public Node(PApplet _sketch, int _x, int _y){
         //float tempX = mouseX/zoom_level;
@@ -73,10 +73,12 @@ public class Node {
     }
 
     public void render(){
-        if (mouse_Over()) {
+        if (mouse_Over() && debug || mouse_Over() && Ui.get_Button("line").clicked || node_1 == this ) {
             color(24,204,24);
+        } else if (mouse_Over() && Ui.get_Button("cut").clicked) {
+            color(160, 4, 4);
         } else {
-            color(204, 24, 24);
+            color(232,25,25);
         }
         sketch.push();
         dim = 50;
