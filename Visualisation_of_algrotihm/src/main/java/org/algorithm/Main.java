@@ -404,6 +404,7 @@ public class Main extends PApplet{
                     } else if(Ui.get_Button("flag_a").clicked && algorithm.get_Goal() != n && n.mouse_Over()){
                         clicked_on_node = true;
                         algorithm.set_Start(n);
+                        if (algorithm.U != null) algorithm.update_Vertex(n);
                     } else if(Ui.get_Button("flag_b").clicked && algorithm.get_Start() != n && n.mouse_Over()){
                         clicked_on_node = true;
                         algorithm.set_Goal(n);

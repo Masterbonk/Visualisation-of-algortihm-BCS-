@@ -29,8 +29,11 @@ public class DStarLite {
     }
 
     public void initialize(){
-        if (start == null) throw new NullPointerException("Start not set!");
-        if (goal == null) throw new NullPointerException("Goal not set!");
+        if (start == null && goal == null) {
+            println("start and/or goal are null");
+            return;}
+        //if (start == null) throw new NullPointerException("Start not set!");
+        //if (goal == null) throw new NullPointerException("Goal not set!");
 
 
         U = new Priority_Queue();
@@ -49,7 +52,7 @@ public class DStarLite {
     }
 
     public void D_Main(){
-        if (first_run){
+        if (first_run && start != null && goal != null){
             last = start;
             initialize();
             compute_Shortest_Path();
