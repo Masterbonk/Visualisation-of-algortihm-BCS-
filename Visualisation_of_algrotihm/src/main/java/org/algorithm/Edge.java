@@ -45,17 +45,17 @@ public class Edge {
 
         sketch.push();
         if (Ui.get_Button("cut").clicked){
-            if(mouseOver()){
-                r = 150;
+            if(mouseOver() || to.mouse_Over() || from.mouse_Over()){
+                color(150,-1,-1);
 
-            } else {r = 0;}
+            } else {color(75,-1,-1);}
         }
         if (Ui.get_Button("weight").clicked){
             if(mouseOver()){
-                g = 150;
+                color(-1,150,-1);
             } else if(display_edge_weight_ui && activeEdge == this){
-                g = 150;
-            }else {g = 0;}
+                color(-1,150,-1);
+            }else {color(-1,75,-1);}
         }
         sketch.stroke(r,g,b);
         sketch.line(from.x,from.y, to.x, to.y);
@@ -97,9 +97,15 @@ public class Edge {
     //Renders the update edge weight ui and text
 
     public void color(int _r, int _g, int _b){
-        r = _r;
-        g = _g;
-        b = _b;
+        if(_r > -1 ){
+            r = _r;
+        }
+        if(_g > -1 ){
+            g = _g;
+        }
+        if(_b > -1 ){
+            b = _b;
+        }
     }
 
 
