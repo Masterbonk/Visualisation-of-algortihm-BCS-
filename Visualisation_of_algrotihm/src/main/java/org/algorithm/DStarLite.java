@@ -31,6 +31,10 @@ public class DStarLite {
         if (Main.start_node == null && Main.goal_node == null) {
             println("start and/or goal are null");
             return;}
+
+        for (Edge e:Main.edge_array) {
+            e.color(75,75,75);
+        }
         //if (start == null) throw new NullPointerException("Start not set!");
         //if (goal == null) throw new NullPointerException("Goal not set!");
 

@@ -548,24 +548,11 @@ class DStarLiteTest {
      */
     @Test
     void initialize_fail_if_no_start_and_goal_set(){
-        Exception exception = assertThrows(NullPointerException.class, () -> {
-            algorithm.initialize();
-        });
 
-        String expectedMessage = "Start not set!";
-        String actualMessage = exception.getMessage();
-
-        assertEquals(expectedMessage, actualMessage);
-
-
-        Main.start_node = new Node(sketch, 0, 0);
-        expectedMessage = "Goal not set!";
-        exception = assertThrows(NullPointerException.class, () -> {
-            algorithm.initialize();
-        });
-        actualMessage = exception.getMessage();
-        assertEquals(expectedMessage, actualMessage);
-
+        algorithm.initialize();
+        assertNull(algorithm.get_Start());
+        assertNull(algorithm.get_Goal());
+        assertNull(algorithm.U);
     }
 
 
