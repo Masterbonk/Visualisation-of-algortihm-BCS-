@@ -65,6 +65,10 @@ public class DStarLite {
 
             if (Main.start_node.get_G_Val() == MAX_INT) {
                 println("No valid path to start");
+                println("update map has size = "+Main.edge_update_map.size());
+                check_For_Edge_Change();
+                first_run = true;
+                Main.Ui.get_Button("pause").click();
                 break;
             }
 
@@ -86,19 +90,8 @@ public class DStarLite {
             }
 
             if (!Main.edge_update_map.isEmpty()){
-                km = km + heuristic(last,Main.start_node);
-                last = Main.start_node;
+                check_For_Edge_Change();
 
-                for(Edge e: Main.edge_update_map.keySet()){
-                    if (Main.edge_update_map.get(e) != -1){ //Means that the
-                        e.update_Weight(Main.edge_update_map.get(e));
-                    }
-                    update_Vertex(e.to);
-                    update_Vertex(e.from);
-                }
-                Main.edge_update_map.clear();
-
-                compute_Shortest_Path();
             }
 
             //This makes sure that only the right parts of the code is run, when we click forward
@@ -107,6 +100,24 @@ public class DStarLite {
             if (Main.Ui.get_Button("forward").clicked || !Main.Ui.get_Button("pause").clicked) {
                 paused_once = true;
             }
+        }
+    }
+
+    private void check_For_Edge_Change(){
+        if (!Main.edge_update_map.isEmpty()) {
+            km = km + heuristic(last, Main.start_node);
+            last = Main.start_node;
+
+            for (Edge e : Main.edge_update_map.keySet()) {
+                if (Main.edge_update_map.get(e) != -1) { //Means that the
+                    e.update_Weight(Main.edge_update_map.get(e));
+                }
+                update_Vertex(e.to);
+                update_Vertex(e.from);
+            }
+            Main.edge_update_map.clear();
+
+            compute_Shortest_Path();
         }
     }
 

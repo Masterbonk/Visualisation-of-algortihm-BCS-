@@ -25,8 +25,9 @@ public class Edge {
 
         from.connected.add(this);
         to.connected.add(this);
-
         edge_array.add(this);
+        edge_update_map.put(this,weight);
+
 
     }
 
@@ -238,7 +239,7 @@ class Heuristic_Edge extends Edge{
         from.connected.remove(this);
         to.connected.remove(this);
         edge_array.remove(this);
-
+        edge_update_map.remove(this);
     }
 
     public void set_To(Node _n){

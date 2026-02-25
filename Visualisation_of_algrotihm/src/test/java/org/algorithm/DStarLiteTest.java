@@ -64,6 +64,8 @@ class DStarLiteTest {
 
         Main.start_node = S;
         Main.goal_node = G;
+
+        algorithm.D_Main();
         Ui.get_Button("pause").click();
         algorithm.D_Main();
 

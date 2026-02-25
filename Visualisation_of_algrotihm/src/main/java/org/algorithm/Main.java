@@ -410,7 +410,7 @@ public class Main extends PApplet{
                             if (!stop) { //If we have had no reason not to stop we make our new edge
                                 // second node is hit, and we can now make an edge
                                 Edge new_edge = new BiEdge(this, node_1, n, 1);
-                                edge_update_map.put(new_edge,new_edge.weight);
+                                //edge_update_map.put(new_edge,new_edge.weight);
                                 node_1 = null;
                             }
                         }
@@ -433,14 +433,18 @@ public class Main extends PApplet{
 
                 if (!clicked_on_node && Ui.get_Button("flag_a").clicked) {
                     algorithm.set_Start(null);
-                    h.set_To(null);
-                    h.set_From(null);
+                    if(h != null){
+                        h.set_To(null);
+                        h.set_From(null);
+                    }
                     algorithm.first_run = true;
                 }
                 if (!clicked_on_node && Ui.get_Button("flag_b").clicked) {
                     algorithm.set_Goal(null);
-                    h.set_To(null);
-                    h.set_From(null);
+                    if(h != null){
+                        h.set_To(null);
+                        h.set_From(null);
+                    }
                     algorithm.first_run = true;
                 }
 
@@ -452,7 +456,7 @@ public class Main extends PApplet{
                         node_1 = tmp;
                     } else {
                         Edge new_edge = new BiEdge(this, node_1, tmp, 1);
-                        edge_update_map.put(new_edge,new_edge.weight);
+                        //edge_update_map.put(new_edge,new_edge.weight);
                         node_1 = null;
                     }
                 }
