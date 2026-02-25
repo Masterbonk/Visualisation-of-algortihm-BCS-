@@ -115,13 +115,25 @@ class Button {
 
 }
 
-class Back_Button extends Button{
-    public Back_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
+class Reset_Button extends Button{
+    public Reset_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch,_x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
     void click(){
-        sketch.println("Not implemented Back");
+        super.click();
+        algorithm.first_run = true;
+        algorithm.set_Start(initial_start_node);
+        algorithm.set_Goal(initial_goal_node);
+
+        for (Edge e:Main.edge_array) {
+            e.color(75,75,75);
+        }
+        if (!Ui.get_Button("pause").clicked){
+            Ui.get_Button("pause").click();
+        }
+        clicked = false;
+
     }
 }
 

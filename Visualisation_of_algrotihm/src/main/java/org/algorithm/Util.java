@@ -27,7 +27,7 @@ public class Util {
     public static void Make_UI(PApplet _sketch, int _button_height){
 
         //bottom ui
-        Ui.add_Button("back", 0, _sketch.displayHeight-_button_height, _sketch.displayWidth/9f, _button_height,"⏴", Back_Button.class, true);
+        Ui.add_Button("reset", 0, _sketch.displayHeight-_button_height, _sketch.displayWidth/9f, _button_height,"↺", Reset_Button.class, true);
 
         Ui.add_Button("pause", (_sketch.displayWidth)/9f, _sketch.displayHeight-_button_height, _sketch.displayWidth/9f, _button_height,"⏯", Pause_Button.class, true);
 

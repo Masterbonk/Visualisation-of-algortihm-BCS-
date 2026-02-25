@@ -27,6 +27,8 @@ public class Main extends PApplet{
     public static DStarLite algorithm;
     public static Node start_node;
     public static Node goal_node;
+    public static Node initial_start_node;
+    public static Node initial_goal_node;
 
     /**
      * Main function starts the sketch
@@ -424,10 +426,12 @@ public class Main extends PApplet{
                         clicked_on_node = true;
                         algorithm.first_run = true;
                         algorithm.set_Start(n);
+                        initial_start_node = n;
                     } else if(Ui.get_Button("flag_b").clicked && algorithm.get_Start() != n && n.mouse_Over()){
                         clicked_on_node = true;
                         algorithm.first_run = true;
                         algorithm.set_Goal(n);
+                        initial_goal_node = n;
                     }
                 }
 
