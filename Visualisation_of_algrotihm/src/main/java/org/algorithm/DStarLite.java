@@ -165,13 +165,21 @@ public class DStarLite {
             }
 
             //The pause mechanic, that stops the while loop from running more than a single step
-            if(Main.Ui.get_Button("pause").clicked || !Main.Ui.get_Button("forward").clicked && paused_once ){
+            if(Main.Ui.get_Button("forward").clicked ){
                 //println("Pausing inside compute shortest path");
                 has_been_paused = true;
                 paused_once = false;
                 part_one_d_main = true;
                 Main.Ui.get_Button("forward").clicked = false;
-                //Main.Ui.get_Button("pause").clicked = true;
+                Main.Ui.get_Button("pause").clicked = true;
+                done = false;
+                break;
+            } else if(Main.Ui.get_Button("pause").clicked){
+                //println("Pausing inside compute shortest path");
+                has_been_paused = true;
+                paused_once = false;
+                part_one_d_main = true;
+                Main.Ui.get_Button("forward").clicked = false;
                 done = false;
                 break;
             }
