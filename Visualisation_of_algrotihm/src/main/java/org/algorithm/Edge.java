@@ -229,6 +229,10 @@ class Heuristic_Edge extends Edge{
 
         dash = new DashedLines(sketch);
 
+        from.connected.remove(this);
+        to.connected.remove(this);
+        edge_array.remove(this);
+
     }
 
     public void set_To(Node _n){
