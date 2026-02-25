@@ -2,6 +2,7 @@ package org.algorithm;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.*;
+import garciadelcastillo.dashedlines.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +25,8 @@ public class Main extends PApplet{
     public static Set<Node> set_of_nodes;
     public static HashMap<Edge,Integer> edge_update_map;
     public static DStarLite algorithm;
+    public static Node start_node;
+    public static Node goal_node;
 
     /**
      * Main function starts the sketch
@@ -57,6 +60,10 @@ public class Main extends PApplet{
 
     public static ArrayList<Edge> edge_array = new ArrayList<>();
     public static ArrayList<Node> node_array = new ArrayList<>();
+
+    Heuristic_Edge h;
+
+
 
     /**
      * The settings are the first thing that runs, it is done before the
@@ -107,6 +114,9 @@ public class Main extends PApplet{
         Make_Graph();
 
 
+
+        // Set the dash-gap pattern in pixels
+
     }
 
 
@@ -119,10 +129,12 @@ public class Main extends PApplet{
     public void draw(){
         background(204); //Draws over everything on screen clearing it for the next frame
 
+        //zoom functionality
         zoom();
-
         pushMatrix();
         translate(translate_x,translate_y);
+
+
         //line formatting
         push();
         strokeWeight(10);
@@ -151,6 +163,9 @@ public class Main extends PApplet{
         if (!Ui.get_Button("pause").clicked){
             algorithm.D_Main();
         }
+
+
+
 
     }
 
@@ -401,18 +416,27 @@ public class Main extends PApplet{
 
                         break;
 
+                        //algorithm starts:
+
                     } else if(Ui.get_Button("flag_a").clicked && algorithm.get_Goal() != n && n.mouse_Over()){
                         clicked_on_node = true;
                         algorithm.set_Start(n);
-                        if (algorithm.U != null) algorithm.update_Vertex(n);
                     } else if(Ui.get_Button("flag_b").clicked && algorithm.get_Start() != n && n.mouse_Over()){
                         clicked_on_node = true;
                         algorithm.set_Goal(n);
                     }
                 }
 
-                if (!clicked_on_node && Ui.get_Button("flag_a").clicked) algorithm.set_Start(null);
-                if (!clicked_on_node && Ui.get_Button("flag_b").clicked) algorithm.set_Goal(null);
+                if (!clicked_on_node && Ui.get_Button("flag_a").clicked) {
+                    algorithm.set_Start(null);
+                    h.set_To(null);
+                    h.set_From(null);
+                }
+                if (!clicked_on_node && Ui.get_Button("flag_b").clicked) {
+                    algorithm.set_Goal(null);
+                    h.set_To(null);
+                    h.set_From(null);
+                }
 
 
                 //When we have line, and click outside a node
@@ -459,11 +483,21 @@ public class Main extends PApplet{
                 }
             }
 
+            if(Ui.get_Button("heuristic").clicked && algorithm.get_Start() != null && algorithm.get_Goal() != null){
+                if (h == null) {
+                    h = new Heuristic_Edge(this, start_node, goal_node);
+                } else {
+                    h.set_To(start_node);
+                    h.set_From(goal_node);
+                    h.update_Weight(0);
+                }
+            }
+
             if (!Ui.get_Button("file").mouse_Over() && !Ui.get_Button("export").mouse_Over() && !Ui.get_Button("import").mouse_Over() && Ui.get_Button("file").clicked) { //Lukker file menuen hvis man klikker uden for den mens den er åben.
                 Ui.get_Button("file").clicked = false;
             }
         } else if (mouseButton == RIGHT){
-
+            // right click functionality to be implemented
         }
     }
 
@@ -525,6 +559,9 @@ public class Main extends PApplet{
 
         y = new Node(this, 200, 625,"D");
         e = new BiEdge(this, x, y, 5);
+
+
+
 
     }
 }

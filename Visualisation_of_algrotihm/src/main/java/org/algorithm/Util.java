@@ -55,13 +55,15 @@ public class Util {
         //CORRECT X & Y COORDINATES DO NOT CHNAGE
         Ui.add_Button("Node_display", _sketch.displayWidth / 9f,0, _sketch.displayWidth/10f, _button_height,"Display N", Node_Botton.class, false);
 
-        Ui.add_Button("Edge_display",_sketch.displayWidth/9f*2f/9f*3f, 0, _sketch.width/9f, _button_height,"Display E", Edge_Button.class, false);
+        Ui.add_Button("Edge_display",_sketch.displayWidth/9f*2f, 0, _sketch.width/9f, _button_height,"Display E", Edge_Button.class, false);
+
+        Ui.add_Button("heuristic",_sketch.displayWidth/9f*3f, 0, _sketch.width/9f, _button_height,"Display H", Heuristic_Button.class, false);
+
+        Ui.add_Button("PQ_display",(_sketch.displayWidth)/9f*4f, 0, _sketch.displayWidth/9f, _button_height,"Display Q", Edge_Button.class, false);
 
         //debugging slash testing
-        System.out.println("display: " + _sketch.displayWidth + ", " + _sketch.displayHeight);
-        System.out.println("normal: " + _sketch.width + ", " + _sketch.height);
-
-        Ui.add_Button("PQ_display",(_sketch.displayWidth)/9f, 0, _sketch.displayWidth/9f, _button_height,"Display Queue", Edge_Button.class, false);
+        //System.out.println("display: " + _sketch.displayWidth + ", " + _sketch.displayHeight);
+        //System.out.println("normal: " + _sketch.width + ", " + _sketch.height);
     }
 
     public static Edge find_Shared_Edge(Node _n1, Node _n2){
