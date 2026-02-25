@@ -62,15 +62,16 @@ public class DStarLite {
             initialize();
             compute_Shortest_Path();
             first_run = false;
-            println("Running first run part 1");
+            //println("Running first run part 1");
         }else if (part_one_d_main && !first_run){
-            // This if statement activates if we stopped ourselves 
-            println("Running first run part 2");
+            // This if statement activates if we stopped ourselves inside the first compute
+            // shortest path function call above
+            //println("Running first run part 2");
             compute_Shortest_Path();
         }
 
         if (!part_one_d_main && !first_run){
-            println("Running while loop");
+            //println("Running while loop");
             while (Main.start_node != Main.goal_node){
 
                 if (Main.start_node.get_G_Val() == MAX_INT) {
