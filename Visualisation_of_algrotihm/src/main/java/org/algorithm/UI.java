@@ -102,6 +102,7 @@ public class UI {
      *  The function to make sure no buttons can be clicked simultaneously
      * */
     public void turn_Off_All_Buttons(Button _button){
+        display_edge_weight_ui = false;
         if (!bottom_ui.contains(_button.name)) return;
         for (String s : bottom_ui) {
             if (button_map.get(s) != _button) {
@@ -189,24 +190,23 @@ public class UI {
             sketch.pop();
 
             if (algorithm != null && algorithm.get_U() != null){
-                sketch.push();
-                sketch.fill(0,0,0);
-                sketch.textSize(20);
-
                 if (!algorithm.get_U().is_empty()) {
                     algorithm.get_U().get_Heap().getFirst().change_In_PQ(true);
                 }
 
-
+                sketch.push();
+                sketch.fill(0,0,0);
+                sketch.textSize(20);
+                sketch.text("N   k1  , k2" , sketch.displayWidth-325, 200-sketch.getGraphics().textSize);
                 for (int i = 0; i < algorithm.get_U().get_Heap().size(); i++){
                     //getting the elements in the queue
                     String tmp_node = algorithm.get_U().get_Heap().get(i).toString();
                     String tmp_tupple = algorithm.get_U().get_Keys().get(algorithm.get_U().get_Heap().get(i)).toString();
-                    Util.make_digit_fit_range(tmp_tupple, 10);
 
                     //for each key in the pq, following is printed
-                    sketch.text("Key: " + tmp_node + tmp_tupple, sketch.displayWidth-325, 200+40*i);
 
+
+                    sketch.text(tmp_node + " " + tmp_tupple, sketch.displayWidth-325, 200+40*i);
                 }
                 sketch.pop();
                 }
