@@ -181,15 +181,20 @@ public class UI {
 
         if(Ui.get_Button("PQ_display").clicked){
             sketch.rect(sketch.displayWidth-400,0,400,sketch.displayHeight-Main.button_height);
+            sketch.push();
+            sketch.fill(0,0,0);
+            sketch.textSize(40);
+            sketch.text("Priority Queue",sketch.displayWidth-350,100);
+            sketch.pop();
 
             if (algorithm != null && algorithm.get_U() != null){
                 sketch.push();
                 sketch.fill(0,0,0);
-                sketch.textSize(100);
+                sketch.textSize(30);
                 for (int i = 0; i < algorithm.get_U().get_Heap().size(); i++){
                     String tmp = algorithm.get_U().get_Heap().get(i).toString();
 
-                    sketch.text(tmp, sketch.displayWidth-200, 200+100*i);
+                    sketch.text("Key: " + tmp, sketch.displayWidth-325, 200+40*i);
                 }
                 sketch.pop();
                 }
