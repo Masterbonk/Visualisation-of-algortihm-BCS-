@@ -28,7 +28,7 @@ public class Tupple implements Comparable<Tupple> {
 
     @Override
     public String toString() {
-        return "[" + Math.round(k1) + ", " + Math.round(k2) + "]";
+        return "[" + Util.make_digit_fit_range(Math.round(k1), 10) + ", " + Util.make_digit_fit_range(Math.round(k2),10) + "]";
     }
 
 
