@@ -200,7 +200,7 @@ public class UI {
                 if (!algorithm.get_U().is_empty()) { //Makes the main node yellow
                     algorithm.get_U().get_Heap().getFirst().change_In_PQ(true);
                 }
-                for (int i = 0; i < algorithm.get_U().get_Heap().size(); i++){
+                for (int i = 0; i < Math.min(algorithm.get_U().get_Heap().size(), 11); i++){
                     //getting the elements in the queue
                     String tmp_node = algorithm.get_U().get_Heap().get(i).toString();
                     String tmp_tupple = algorithm.get_U().get_Keys().get(algorithm.get_U().get_Heap().get(i)).toString();
