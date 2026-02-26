@@ -184,7 +184,7 @@ public class UI {
             sketch.push();
             sketch.fill(0,0,0);
             sketch.textSize(40);
-            sketch.text("Priority_Queue",sketch.displayWidth-350,100);
+            sketch.text("Priority Queue",sketch.displayWidth-350,100);
             sketch.pop();
 
             if (algorithm != null && algorithm.get_U() != null){
