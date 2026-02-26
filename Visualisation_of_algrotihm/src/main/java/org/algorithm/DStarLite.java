@@ -85,7 +85,7 @@ public class DStarLite {
 
                 if (!has_been_paused && paused_once) {
                     Edge e = find_Shared_Edge(Main.start_node, find_Min_G_Node(Main.start_node));
-                    if (e != null) e.color(0,0,150);
+                    if (e != null) e.color(-1,-1,150);
                     Main.start_node = find_Min_G_Node(Main.start_node);
                     println("Moved start to node at x: "+Main.start_node.x+" y: "+Main.start_node.y);
                 }
