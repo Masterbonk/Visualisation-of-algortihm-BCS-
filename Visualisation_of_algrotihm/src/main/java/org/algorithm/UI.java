@@ -193,13 +193,16 @@ public class UI {
                 sketch.push();
                 sketch.fill(0,0,0);
                 sketch.textSize(20);
+                sketch.text("N   k1  , k2" , sketch.displayWidth-325, 200-sketch.getGraphics().textSize);
                 for (int i = 0; i < algorithm.get_U().get_Heap().size(); i++){
                     //getting the elements in the queue
                     String tmp_node = algorithm.get_U().get_Heap().get(i).toString();
                     String tmp_tupple = algorithm.get_U().get_Keys().get(algorithm.get_U().get_Heap().get(i)).toString();
 
                     //for each key in the pq, following is printed
-                    sketch.text("Key: " + tmp_node + tmp_tupple, sketch.displayWidth-325, 200+40*i);
+
+
+                    sketch.text(tmp_node + " " + tmp_tupple, sketch.displayWidth-325, 200+40*i);
                 }
                 sketch.pop();
                 }
