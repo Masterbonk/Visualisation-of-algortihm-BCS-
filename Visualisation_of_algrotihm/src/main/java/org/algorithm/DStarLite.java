@@ -20,7 +20,6 @@ public class DStarLite {
     boolean first_run = true;
     boolean part_one_d_main = false;
     boolean paused_once = false;
-    boolean check_for_edge_change_done = false;
 
 
     DStarLite(){
@@ -29,6 +28,16 @@ public class DStarLite {
 
     }
 
+    /**
+     * Initialize is run to reset the values of the nodes, reset the color of the edges and create a new priority queue.
+     * First it checks whether we have a start and goal node.
+     * Then it resets the colors on all edges.
+     * Then it gives the U variable a new priority queue
+     * Then it set's km to 0
+     * Then it gives all nodes a infinite g and rhs value
+     * Then it updates the RHS value of the goal node to 0
+     * Then it add the goal node to the priority queue.
+     */
     public void initialize(){
         if (Main.start_node == null && Main.goal_node == null) {
             println("start and/or goal are null");
@@ -56,6 +65,17 @@ public class DStarLite {
 
     }
 
+    /**
+     * D_Main is what calls all other functions in the right order.
+     * It starts by performing a start section, where it set's up the graph and
+     * performs the first compute shortest path call. Once it has completed that,
+     * it will begin to move the start closer to the goal. Then it will check for
+     * changes in any edge in the graph. If it finds any, they are implemented,
+     * and the right nodes are updated. Those nodes are added to the priority queue,
+     * and then a new shortest path is calculated. It the moves the start one closer again.
+     *
+     * It has been given the ability to pause right before it checks for changes.
+     */
     public void D_Main(){
         if (first_run && Main.start_node != null && Main.goal_node != null){
             last = Main.start_node;
@@ -112,6 +132,13 @@ public class DStarLite {
         }
     }
 
+    /**
+     * This code snipbit is used to check whether new changes has
+     * been made to edges in the graph, inside D_main.
+     * It will check for changes, update the relevant nodes,
+     * then call compute_Shortest_Path().
+     *
+     */
     private void check_For_Edge_Change(){
         if (!Main.edge_update_map.isEmpty()) {
             km = km + heuristic(last, Main.start_node);
@@ -130,6 +157,11 @@ public class DStarLite {
         }
     }
 
+    /**Finds the shortest path in the current graph, while only calculating
+     * enough of the graph to be sure it has found the shortest path from goal to start.
+     *
+     * It has been given the ability to stop.
+     */
     public void compute_Shortest_Path(){
         //println("pq 1 " + U.get_Heap());
         //println("pq to list 1 " + U.toList());

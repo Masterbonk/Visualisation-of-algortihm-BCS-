@@ -198,7 +198,6 @@ public class UI {
                     //getting the elements in the queue
                     String tmp_node = algorithm.get_U().get_Heap().get(i).toString();
                     String tmp_tupple = algorithm.get_U().get_Keys().get(algorithm.get_U().get_Heap().get(i)).toString();
-                    Util.make_digit_fit_range(tmp_tupple, 10);
 
                     //for each key in the pq, following is printed
 
