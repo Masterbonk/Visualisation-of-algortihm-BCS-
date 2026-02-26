@@ -33,15 +33,6 @@ public class Main extends PApplet{
     public static PFont font;
     public static PFont mono;
 
-    /**
-     * Main function starts the sketch
-     * @param args
-     */
-    public static void main(String[] args){
-        String[] processingArgs = {"Main"};
-        Main main = new Main();
-        PApplet.runSketch(processingArgs, main);
-    }
 
     public static int button_height = 50;
     public static int dWidth, dHeight;
@@ -69,6 +60,17 @@ public class Main extends PApplet{
     Heuristic_Edge h;
     int count = 0;
     int letter = 65;
+
+
+    /**
+     * Main function starts the sketch
+     * @param args
+     */
+    public static void main(String[] args){
+        String[] processingArgs = {"Main"};
+        Main main = new Main();
+        PApplet.runSketch(processingArgs, main);
+    }
 
 
     /**
@@ -154,15 +156,18 @@ public class Main extends PApplet{
         pop();
 
 
+
+        if(h != null){
+            h.render();
+        }
+
         push();
         scale(zoom_level);
         for(int i = 0; i < node_array.size(); i++){
             node_array.get(i).render();
         }
 
-        if(h != null){
-            h.render();
-        }
+
 
         pop();
         popMatrix();
@@ -536,8 +541,13 @@ public class Main extends PApplet{
                 if (h == null) {
                     h = new Heuristic_Edge(this, start_node, goal_node);
                 } else {
-                    h.set_To(start_node);
-                    h.set_From(goal_node);
+                    //heuristic is one behind except when it isn't , it moves first then is synced, else it always de-synced
+                    if(algorithm.find_Min_G_Node(start_node) != null) {
+                        h.set_To(algorithm.find_Min_G_Node(start_node));
+                    }else {
+                        h.set_To(start_node);
+                    }
+                    h.set_From(algorithm.get_Goal());
                     h.update_Weight(0);
                 }
             }
