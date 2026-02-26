@@ -99,7 +99,7 @@ public class UI {
     }
 
     /**
-     *  The function to make sure no buttons can be clicked simultaneously
+     *  Turns of all other buttons than the one passed through (except pause)
      * */
     public void turn_Off_All_Buttons(Button _button){
         display_edge_weight_ui = false;
@@ -114,25 +114,28 @@ public class UI {
 
 
 
-
+    /**
+     * Renders the Edge Weight UI input display
+     * */
     private void render_Edge_Weight_UI() {
 
-        //make this not ugly
         sketch.push();
         sketch.textSize(30);
         StringBuilder inputStr = new StringBuilder();
-        if (display_edge_weight_ui) {
+        if (display_edge_weight_ui) { // if the display is active we render it
 
             sketch.push();
             sketch.noStroke();
             sketch.fill(255);
             sketch.rectMode(CENTER);
-            String tmp = ""+1000000;
+            String tmp = ""+9999999;
             sketch.push();
             sketch.textSize(16);
             float fontSize = sketch.getGraphics().textSize;
             sketch.pop();
             float boxheight = (sketch.getGraphics().textSize) *1.7f;
+            //this is the outer box for the ui
+            //the rect dimensions are based of the text size
             sketch.rect(
                     (sketch.displayWidth/2f),
                     (sketch.displayHeight/2f) - (sketch.getGraphics().textSize/2) - fontSize,
@@ -143,6 +146,7 @@ public class UI {
             sketch.push();
             sketch.fill(100);
             sketch.stroke(100);
+            //this is the "text" field" of the ui
             sketch.rect(
                     (sketch.displayWidth/2f),
                     (sketch.displayHeight/2f) - (sketch.getGraphics().textSize/2),
@@ -157,7 +161,7 @@ public class UI {
             // Draw input
             sketch.fill(0);
 
-
+            //this renders the text input
             for (char c : currentInput) {
                 inputStr.append(c);
             }
@@ -215,5 +219,6 @@ public class UI {
             sketch.pop();
         }
     }
+
 }
 
