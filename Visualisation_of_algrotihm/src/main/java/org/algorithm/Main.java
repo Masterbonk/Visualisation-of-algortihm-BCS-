@@ -287,6 +287,8 @@ public class Main extends PApplet{
                 display_edge_weight_ui = false;
                 currentInput.clear();
             }
+        } else {
+            activeEdge = null;
         }
     }
     /**
@@ -493,6 +495,8 @@ public class Main extends PApplet{
                 }
 
                 if (Ui.get_Button("cut").clicked && !clicked_on_node) {
+                    display_edge_weight_ui = false;
+
                     for (Edge e : edge_array) {
                         if (e.mouseOver()) {
                             Node to = e.to;

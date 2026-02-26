@@ -57,7 +57,7 @@ public class Edge {
             } else if(display_edge_weight_ui && activeEdge == this){
                 color(-1,150,-1);
             }else {color(-1,75,-1);}
-        }
+        } else {color(75,75,75);}
         sketch.stroke(r,g,b);
         sketch.line(from.x,from.y, to.x, to.y);
         sketch.pop();

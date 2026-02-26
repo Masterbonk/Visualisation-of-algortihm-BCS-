@@ -31,7 +31,11 @@ We recommend using Intellej, which is what IDE this software has been programmed
 
 ## how to run the program
 Run Main.
+
 A pop up will show up. This is the program for whihc the user can interact with.
+
+- Pressing p will enable the debug feature.
+- Pressing f11 will make the program full screen.
 
 ## Git Ignore
 In github desktop, you can right click an added file/folder, and add it to git ignore
