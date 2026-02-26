@@ -14,6 +14,7 @@ public class Node {
     PApplet sketch;
     String name;
     int r = 232, g1 = 25, b = 25;
+    boolean in_PQ;
 
     public Node(PApplet _sketch, int _x, int _y){
         //float tempX = mouseX/zoom_level;
@@ -77,6 +78,8 @@ public class Node {
             color(24,204,24);
         } else if (mouse_Over() && Ui.get_Button("cut").clicked) {
             color(160, 4, 4);
+        } else if(in_PQ){
+            color(238,218,18);
         } else {
             color(232,25,25);
         }
@@ -164,6 +167,18 @@ public class Node {
         r = _r;
         g1 = _g;
         b = _b;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void change_In_PQ(boolean _valid){
+        if(_valid){
+            in_PQ = true;
+        } else {
+            in_PQ = false;
+        }
     }
 
 }

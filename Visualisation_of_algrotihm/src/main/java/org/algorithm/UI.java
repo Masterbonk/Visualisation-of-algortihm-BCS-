@@ -192,6 +192,12 @@ public class UI {
                 sketch.push();
                 sketch.fill(0,0,0);
                 sketch.textSize(20);
+
+                if (!algorithm.get_U().is_empty()) {
+                    algorithm.get_U().get_Heap().getFirst().change_In_PQ(true);
+                }
+
+
                 for (int i = 0; i < algorithm.get_U().get_Heap().size(); i++){
                     //getting the elements in the queue
                     String tmp_node = algorithm.get_U().get_Heap().get(i).toString();
@@ -200,6 +206,7 @@ public class UI {
 
                     //for each key in the pq, following is printed
                     sketch.text("Key: " + tmp_node + tmp_tupple, sketch.displayWidth-325, 200+40*i);
+
                 }
                 sketch.pop();
                 }

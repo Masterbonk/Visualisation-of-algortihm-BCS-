@@ -141,6 +141,7 @@ public class DStarLite {
 
             k_old = U.top_Key();
             n = U.pop();
+            n.change_In_PQ(true);
             //println("pq 2 " + U.get_Heap());
             //println("pq to list 2 " + U.toList());
             //println("Popped node at x: "+n.x+" y: "+n.y);
@@ -163,6 +164,7 @@ public class DStarLite {
                 }
                 update_Vertex(n);
             }
+            n.change_In_PQ(false);
 
             //The pause mechanic, that stops the while loop from running more than a single step
             if(Main.Ui.get_Button("forward").clicked ){
