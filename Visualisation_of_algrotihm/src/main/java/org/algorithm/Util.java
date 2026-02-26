@@ -85,6 +85,25 @@ public class Util {
         return result.toString();
     }
 
+    /**
+     * Util function that will add spaces to the front of a digit,
+     * if the _range is bigger than the amount of digits in _digit.
+     * It will not remove digits if the range is smaller.
+     * @param _digit The number we want to make int a new string
+     * @param _range The amount of characters our resulting string will have,
+     *               any amount above the characters in the _digit will become spaces in front.
+     * @return The string version of the _digit, with spaces in front depending on the _range.
+     */
+    public static String make_digit_fit_range(String _digit, int _range){
+        int difference = _range-_digit.length();
+        StringBuffer result = new StringBuffer();
+        for (int i = 0; i < difference; i++) {
+            result.append(" ");
+        }
+        result.append(_digit);
+        return result.toString();
+    }
+
     public static Edge find_Shared_Edge(Node _n1, Node _n2){
 
         for (Edge e : _n1.connected){
