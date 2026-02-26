@@ -125,13 +125,17 @@ class Reset_Button extends Button{
         algorithm.first_run = true;
         algorithm.set_Start(initial_start_node);
         algorithm.set_Goal(initial_goal_node);
+        algorithm.initialize();
 
         for (Edge e:Main.edge_array) {
             e.color(75,75,75);
         }
         for (Node n : set_of_nodes){
             n.color(232,25,25);
+            n.change_In_PQ(false);
         }
+        algorithm.get_U().get_Heap().clear();
+        algorithm.get_U().get_Keys().clear();
         if (!Ui.get_Button("pause").clicked){
             Ui.get_Button("pause").click();
         }

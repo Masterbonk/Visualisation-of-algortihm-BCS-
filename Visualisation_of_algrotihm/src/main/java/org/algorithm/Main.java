@@ -591,22 +591,42 @@ public class Main extends PApplet{
      * Makes the base graph objects. All are added to the node and edge arrays so they are rendered.
      */
 
+
+
     void Make_Graph(){
-        Node x, y;
-        BiEdge e;
-        x = new Node(this, 400, 200, "A");
-        y = new Node(this, 200, 400, "B");
-        e = new BiEdge(this, x, y, 5);
+        Node old = null;
+        Node _new;
 
-        x = new Node(this, 600, 625, "C");
+        for (int i = 0; i < 8; i++){
+            for (int j = 0; j < 7; j++){
 
-        e = new BiEdge(this, x, y, 15);
+                String name;
+                if (count == 0) {name = Character.toString ((char) letter);}
+                else {name = Character.toString ((char) letter) + count;}
 
-        y = new Node(this, 200, 625,"D");
-        e = new BiEdge(this, x, y, 5);
+                _new = new Node(this,i*100+100,100*j+100+button_height, name);
+
+                if(old != null){
+                    new BiEdge(this,old,_new,1);
+                }
+                if (node_array.size()>8){
+                    new BiEdge(this,node_array.get(node_array.indexOf(_new)-7),_new,1);
+                }
 
 
 
+                old = _new;
+
+                if(letter == 90){letter = 64;count++;}
+                letter++;
+
+
+
+            }
+            old = null;
+        }
+
+        new BiEdge(this, node_array.getFirst(),node_array.get(7),1);
 
     }
 }
