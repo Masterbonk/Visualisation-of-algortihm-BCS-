@@ -30,6 +30,9 @@ public class Main extends PApplet{
     public static Node initial_start_node;
     public static Node initial_goal_node;
 
+    public static PFont font;
+    public static PFont mono;
+
     /**
      * Main function starts the sketch
      * @param args
@@ -98,7 +101,7 @@ public class Main extends PApplet{
      */
     public void setup(){
         //frameRate(30); //Decides how many times per second the draw function is called
-        PFont font;
+
         // The font must be located in the sketch's
         // "data" directory to load successfully
 
@@ -108,6 +111,7 @@ public class Main extends PApplet{
         surface.setLocation(0,0);
 
         font = createFont("Arial-Black-48", 128);
+        mono = createFont("SpaceMono-Regular", 128);
         textFont(font);
         Ui = new UI(this);
 

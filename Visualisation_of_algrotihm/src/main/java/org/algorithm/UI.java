@@ -189,15 +189,17 @@ public class UI {
             sketch.text("Priority Queue",sketch.displayWidth-350,100);
             sketch.pop();
 
+
+            sketch.push();
+            sketch.textFont(mono);
+            sketch.fill(0,0,0);
+            sketch.textSize(20);
+            sketch.text(Util.make_digit_fit_range("N", 5)+Util.make_digit_fit_range("k1", 13)+","+Util.make_digit_fit_range("k2", 13) , sketch.displayWidth-290/*325*/, 200-sketch.getGraphics().textSize);
+
             if (algorithm != null && algorithm.get_U() != null){
-                if (!algorithm.get_U().is_empty()) {
+                if (!algorithm.get_U().is_empty()) { //Makes the main node yellow
                     algorithm.get_U().get_Heap().getFirst().change_In_PQ(true);
                 }
-
-                sketch.push();
-                sketch.fill(0,0,0);
-                sketch.textSize(20);
-                sketch.text("N   k1  , k2" , sketch.displayWidth-325, 200-sketch.getGraphics().textSize);
                 for (int i = 0; i < algorithm.get_U().get_Heap().size(); i++){
                     //getting the elements in the queue
                     String tmp_node = algorithm.get_U().get_Heap().get(i).toString();
@@ -208,8 +210,10 @@ public class UI {
 
                     sketch.text(tmp_node + " " + tmp_tupple, sketch.displayWidth-325, 200+40*i);
                 }
-                sketch.pop();
-                }
-          }
+
+           }
+            sketch.pop();
+        }
     }
 }
+
