@@ -67,12 +67,13 @@ public class DStarLite {
 
     /**
      * D_Main is what calls all other functions in the right order.
-     * It starts by performing a start section, where it set's up the graph and
-     * performs the first compute shortest path call. Once it has completed that,
-     * it will begin to move the start closer to the goal. Then it will check for
-     * changes in any edge in the graph. If it finds any, they are implemented,
-     * and the right nodes are updated. Those nodes are added to the priority queue,
-     * and then a new shortest path is calculated. It the moves the start one closer again.
+     * It starts by performing a start section, where it sets up the graph and
+     * performs the first compute_shortest_path() call. Once it has completed that,
+     * it will begin to move the start_node closer to the goal_node.
+     * During this process, it will check for changes in any edge in the graph.
+     * If it finds any, they are implemented, and the right nodes are updated.
+     * Those nodes are added to the priority queue, and a new shortest path is calculated.
+     * It then moves the start_node closer, just like before, in the updated graph.
      *
      * It has been given the ability to pause right before it checks for changes.
      */
@@ -224,6 +225,12 @@ public class DStarLite {
 
     }
 
+    /**
+     * A special function not part of the original paper on D* Lite.
+     * returns the shortest path that computeShortestPath() function finds.
+     * @param n Node n is the start node, that we try to get to goal with
+     * @return A list of nodes that are traveled over towards the goal
+     */
     public ArrayList<Node> get_Shortest_Path(Node n){
         ArrayList<Node> result = new ArrayList<>();
         Node tmp = n;
@@ -238,6 +245,11 @@ public class DStarLite {
         return null;
     }
 
+    /**
+     * Finds the smallest g value amongst all the nodes.
+     * @param _n The node that is part of the graph that we wish to find the smallest g value of
+     * @return The int value of the smallest g
+     */
     public int find_Min_G(Node _n){
         int min = MAX_INT;
         for(Edge e: _n.connected){
@@ -253,6 +265,11 @@ public class DStarLite {
         return min;
     }
 
+    /**
+     * Finds the node with the smallest G value
+     * @param _n The node that the graph is part of
+     * @return The node with the smallest G value.
+     */
     public Node find_Min_G_Node(Node _n){
         int min = MAX_INT;
         Node tmp = null;
@@ -270,6 +287,11 @@ public class DStarLite {
         return tmp;
     }
 
+    /**
+     * From the original D*Lite algorithm. Updates the Node's RHS value,
+     * and adds it to the PQ list if it's no longer locally consistent
+     * @param _n The node to update.
+     */
     public void update_Vertex(Node _n){
         println("Updating node at x: "+_n.x+" y: "+_n.y);
         if (_n !=Main.goal_node){
@@ -295,6 +317,13 @@ public class DStarLite {
 
     }
 
+    /**
+     * Original function from the paper.
+     * Calculate key gives us a tupple with the values of [min(g, rhs)+km+h(this, start_node), min(g, rhs)]
+     * @param s The node we calculate
+     * @return [min(g, rhs)+km+h(this, start_node), min(g, rhs)]
+     */
+
     public Tupple calculate_Key(Node s){
         float k1, k2;
 
@@ -307,6 +336,10 @@ public class DStarLite {
         return new Tupple(k1, k2);
     }
 
+    /**
+     * This removes the Node from the PQ and the set of nodes
+     * @param n The node to remove
+     */
     public void remove_Node(Node n){
         Main.set_of_nodes.remove(n);
 
@@ -317,22 +350,42 @@ public class DStarLite {
         }
     }
 
+    /**
+     * Sets the start node.
+     * @param _n The node that becomes start
+     */
     public void set_Start(Node _n){
         Main.start_node = _n;
     }
 
+    /**
+     * Sets the goal node.
+     * @param _n The node that becomes goal
+     */
     public void set_Goal(Node _n){
         Main.goal_node = _n;
     }
 
+    /**
+     * Gets the start node
+     * @return The start node
+     */
     public Node get_Start(){
         return Main.start_node;
     }
 
+    /**
+     * Gets the goal node
+     * @return The goal node
+     */
     public Node get_Goal(){
         return Main.goal_node;
     }
 
+    /**
+     * Gets the priority queue
+     * @return The priority queue
+     */
     public Priority_Queue get_U(){
         return U;
     }
