@@ -26,6 +26,12 @@ public class Tupple implements Comparable<Tupple> {
     }
 
 
+    @Override
+    public String toString() {
+        return "[" + Math.round(k1) + ", " + Math.round(k2) + "]";
+    }
+
+
 }
 
 

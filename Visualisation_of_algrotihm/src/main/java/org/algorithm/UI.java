@@ -176,7 +176,8 @@ public class UI {
 
     }
 
-
+    /** displays the priority queue, if the algorithm exist
+     * */
     private void display_PQ(){
 
         if(Ui.get_Button("PQ_display").clicked){
@@ -190,11 +191,15 @@ public class UI {
             if (algorithm != null && algorithm.get_U() != null){
                 sketch.push();
                 sketch.fill(0,0,0);
-                sketch.textSize(30);
+                sketch.textSize(20);
                 for (int i = 0; i < algorithm.get_U().get_Heap().size(); i++){
-                    String tmp = algorithm.get_U().get_Heap().get(i).toString();
+                    //getting the elements in the queue
+                    String tmp_node = algorithm.get_U().get_Heap().get(i).toString();
+                    String tmp_tupple = algorithm.get_U().get_Keys().get(algorithm.get_U().get_Heap().get(i)).toString();
+                    Util.make_digit_fit_range(tmp_tupple, 10);
 
-                    sketch.text("Key: " + tmp, sketch.displayWidth-325, 200+40*i);
+                    //for each key in the pq, following is printed
+                    sketch.text("Key: " + tmp_node + tmp_tupple, sketch.displayWidth-325, 200+40*i);
                 }
                 sketch.pop();
                 }

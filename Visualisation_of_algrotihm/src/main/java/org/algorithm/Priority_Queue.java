@@ -152,5 +152,7 @@ public class Priority_Queue {
         return heap;
     }
 
+    public HashMap<Node,Tupple> get_Keys(){return keys;}
+
 
 }
