@@ -129,6 +129,9 @@ class Reset_Button extends Button{
         for (Edge e:Main.edge_array) {
             e.color(75,75,75);
         }
+        for (Node n : set_of_nodes){
+            n.color(232,25,25);
+        }
         if (!Ui.get_Button("pause").clicked){
             Ui.get_Button("pause").click();
         }

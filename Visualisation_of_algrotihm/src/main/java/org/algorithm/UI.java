@@ -189,16 +189,13 @@ public class UI {
             sketch.text("Priority Queue",sketch.displayWidth-350,100);
             sketch.pop();
 
-            /*sketch.push();
-            sketch.line(sketch.displayWidth-310, 200-sketch.getGraphics().textSize, sketch.displayWidth-310, sketch.displayHeight-button_height);
-            sketch.pop();
+            if (algorithm != null && algorithm.get_U() != null){
+                if (!algorithm.get_U().is_empty()) {
+                    algorithm.get_U().get_Heap().getFirst().change_In_PQ(true);
+                }
 
-             */
-
-            sketch.push();
-            sketch.fill(0,0,0);
-
-            sketch.textFont(mono);
+                sketch.push();
+                sketch.textFont(mono);
             sketch.textSize(20);
             sketch.text(Util.make_digit_fit_range("N", 5)+Util.make_digit_fit_range("k1", 13)+","+Util.make_digit_fit_range("k2", 13) , sketch.displayWidth-290/*325*/, 200-sketch.getGraphics().textSize);
 
@@ -206,17 +203,16 @@ public class UI {
 
                 for (int i = 0; i < algorithm.get_U().get_Heap().size(); i++){
                     //getting the elements in the queue
-                    String tmp_node = Util.make_digit_fit_range(algorithm.get_U().get_Heap().get(i).toString(), 5);
+                    String tmp_node = algorithm.get_U().get_Heap().get(i).toString();
                     String tmp_tupple = algorithm.get_U().get_Keys().get(algorithm.get_U().get_Heap().get(i)).toString();
 
                     //for each key in the pq, following is printed
 
 
-                    sketch.text(tmp_node + " " + tmp_tupple, sketch.displayWidth-290/*325*/, 200+40*i);
+                    sketch.text(tmp_node + " " + tmp_tupple, sketch.displayWidth-325, 200+40*i);
                 }
-
-            }
-            sketch.pop();
+                sketch.pop();
+                }
           }
     }
 }
