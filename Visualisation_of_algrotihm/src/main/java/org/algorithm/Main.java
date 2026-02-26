@@ -64,7 +64,8 @@ public class Main extends PApplet{
     public static ArrayList<Node> node_array = new ArrayList<>();
 
     Heuristic_Edge h;
-
+    int count = 0;
+    int letter = 65;
 
 
     /**
@@ -374,7 +375,20 @@ public class Main extends PApplet{
                         }
                     }
                     if (!over_any_nodes) {
-                        new Node(this, mouseX, mouseY);
+                        String name; //temp name string
+                        if (count == 0) { //if the count is 0 we don't append the number to the name
+                            name = Character.toString ((char) letter);
+                        } else {//else we append the number to the name
+                            name = Character.toString ((char) letter) + count;
+                        }
+                        new Node(this, mouseX, mouseY, name);
+                        if(letter == 90){ //if we are at the end of the alphabet via ascii, then go back to A (64 isnt A, its just so it dosent skip)
+                            letter = 64;
+                            count++;//also increment our number label
+                        }
+                        letter++;//increment our ascii letter
+
+
                     }
                 }
 
@@ -456,7 +470,19 @@ public class Main extends PApplet{
 
                 //When we have line, and click outside a node
                 if (Ui.get_Button("line").clicked && !clicked_on_node) {
-                    Node tmp = new Node(this, mouseX, mouseY);
+                    String name;
+                    if (count == 0) {
+                        name = Character.toString ((char) letter);
+                    } else {
+                        name = Character.toString ((char) letter) + count;
+                    }
+                    Node tmp = new Node(this, mouseX, mouseY, name);
+                    if(letter == 90){
+                        letter = 64;
+                        count++;
+                    }
+                    letter++;
+
                     if (node_1 == null) {
                         node_1 = tmp;
                     } else {

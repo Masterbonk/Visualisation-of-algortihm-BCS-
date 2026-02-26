@@ -116,7 +116,17 @@ public class Node {
             sketch.push();
             sketch.fill(247,247,247);
             sketch.textSize(20);
-            sketch.text("g(" + display_Infinity(g) + "), rhs(" + display_Infinity(rhs) + ")",(x+dim/2f)-35,(y+dim/2f)+20);
+            sketch.textAlign(LEFT,TOP);
+            String tmp = "g(" + display_Infinity(g) + "), rhs(" + display_Infinity(rhs) + ")";
+            sketch.text(tmp,x-sketch.textWidth(tmp)/2,(y+dim/2f)+sketch.getGraphics().textSize);
+            sketch.pop();
+        }
+        if (Ui.get_Button("Name_display").clicked){
+            sketch.push();
+            sketch.fill(247,247,247);
+            sketch.textSize(20);
+            sketch.textAlign(LEFT,CENTER);
+            sketch.text(name,x-sketch.textWidth(name)/2,y);
             sketch.pop();
         }
 

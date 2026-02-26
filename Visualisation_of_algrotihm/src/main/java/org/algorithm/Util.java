@@ -53,13 +53,15 @@ public class Util {
         Ui.add_Button("import", 0, _button_height*2+_button_height/10f, _sketch.displayWidth/10f, _button_height-_button_height/10f,"Import", Import_Button.class, false);
 
         //CORRECT X & Y COORDINATES DO NOT CHNAGE
-        Ui.add_Button("Node_display", _sketch.displayWidth / 9f,0, _sketch.displayWidth/10f, _button_height,"Display N", Node_Botton.class, false);
+        Ui.add_Button("Name_display", _sketch.displayWidth / 9f,0, _sketch.displayWidth/10f, _button_height,"Name", Name_Button.class, false);
 
-        Ui.add_Button("Edge_display",_sketch.displayWidth/9f*2f, 0, _sketch.width/9f, _button_height,"Display E", Edge_Button.class, false);
+        Ui.add_Button("Node_display", _sketch.displayWidth / 9f*2f,0, _sketch.displayWidth/10f, _button_height,"Display N", Node_Button.class, false);
 
-        Ui.add_Button("heuristic",_sketch.displayWidth/9f*3f, 0, _sketch.width/9f, _button_height,"Display H", Heuristic_Button.class, false);
+        Ui.add_Button("Edge_display",_sketch.displayWidth/9f*3f, 0, _sketch.width/9f, _button_height,"Display E", Edge_Button.class, false);
 
-        Ui.add_Button("PQ_display",(_sketch.displayWidth)/9f*4f, 0, _sketch.displayWidth/9f, _button_height,"Display Q", Edge_Button.class, false);
+        Ui.add_Button("heuristic",_sketch.displayWidth/9f*4f, 0, _sketch.width/9f, _button_height,"Display H", Heuristic_Button.class, false);
+
+        Ui.add_Button("PQ_display",(_sketch.displayWidth)/9f*5f, 0, _sketch.displayWidth/9f, _button_height,"Display Q", Edge_Button.class, false);
 
         //debugging slash testing
         //System.out.println("display: " + _sketch.displayWidth + ", " + _sketch.displayHeight);
