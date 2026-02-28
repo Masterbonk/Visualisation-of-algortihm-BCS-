@@ -38,6 +38,7 @@ public class Main extends PApplet{
         String[] processingArgs = {"Main"};
         Main main = new Main();
         PApplet.runSketch(processingArgs, main);
+
     }
 
     public int button_height = 50;
@@ -56,6 +57,7 @@ public class Main extends PApplet{
 
 
     Util util;
+    Color_Scheme cs;
 
 
     public static UI Ui;
@@ -83,6 +85,7 @@ public class Main extends PApplet{
 
         }
         util = new Util(this,button_height);
+        cs = new Color_Scheme(this);
 
         algorithm = new DStarLite();
 
@@ -129,7 +132,9 @@ public class Main extends PApplet{
      */
 
     public void draw(){
-        background(204); //Draws over everything on screen clearing it for the next frame
+        cs.changeColors(false);
+        background(Color_Scheme.bg);
+        //background(204); //Draws over everything on screen clearing it for the next frame
 
         //zoom functionality
         zoom();
