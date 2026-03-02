@@ -132,7 +132,7 @@ public class Main extends PApplet{
      */
 
     public void draw(){
-        cs.changeColors(false);
+        cs.changeColors(true);
         background(Color_Scheme.bg);
         //background(204); //Draws over everything on screen clearing it for the next frame
 

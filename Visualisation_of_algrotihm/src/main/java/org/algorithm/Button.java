@@ -32,13 +32,13 @@ class Button {
      */
 
     void render(){
-        sketch.fill(162f,162f,162f);
+        sketch.fill(Color_Scheme.border_button);
         sketch.rect(x_pos,y_pos, x_size, y_size);
 
         int changeVal = 5;
         if (debug) {
             sketch.push();
-            sketch.fill(255, 255, 255); //Text color
+            sketch.fill(Color_Scheme.debug_text_button); //Text color
             sketch.textSize((x_size - changeVal) / 5f);
             sketch.textAlign(sketch.CENTER);
             sketch.text(str(clicked), (x_pos + changeVal) + (x_size - changeVal * 2) / 2f, (y_pos - 10));
@@ -46,12 +46,12 @@ class Button {
         }
 
 
-
+        //hover
         if (mouse_Over()){
             sketch.push();
-            sketch.fill(0f);
+            sketch.fill(Color_Scheme.bg_button_hover);
             sketch.rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
-            sketch.fill(255f); //Text color
+            sketch.fill(Color_Scheme.text_button_hover); //Text color
             sketch.textSize((x_size-changeVal)/5f);
             sketch.textAlign(sketch.CENTER);
             sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
@@ -60,9 +60,9 @@ class Button {
         } else if (clicked){
 
             sketch.push();
-            sketch.fill(127,178,96);
+            sketch.fill(Color_Scheme.bg_button_clicked);
             sketch.rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
-            sketch.fill(255f); //Text color
+            sketch.fill(Color_Scheme.text_button_clicked); //Text color
             sketch.textSize((x_size-changeVal)/5f);
             sketch.textAlign(sketch.CENTER);
             sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
@@ -70,9 +70,9 @@ class Button {
 
         } else {
                 sketch.push();
-                sketch.fill(80f);
+                sketch.fill(Color_Scheme.bg_button);
                 sketch.rect(x_pos,y_pos, x_size, y_size);
-                sketch.fill(255f);
+                sketch.fill(Color_Scheme.text_button);
                 sketch.textSize(x_size/5f);
                 sketch.textAlign(sketch.CENTER);
                 sketch.text(text, (x_pos)+(x_size)/2f, (y_pos)+(y_size)/2f+10);
