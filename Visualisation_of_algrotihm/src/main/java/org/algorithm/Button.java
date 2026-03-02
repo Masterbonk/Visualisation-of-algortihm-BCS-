@@ -294,25 +294,25 @@ class File_Type_Buttons extends Button{
 
     void render(){
         if (Ui.get_Button("file").clicked){
-            sketch.fill(162f);
+            sketch.fill(Color_Scheme.border_button);
             sketch.rect(x_pos,y_pos, x_size, y_size);
 
             int changeVal = 5;
 
             if (mouse_Over()){
                 sketch.push();
-                sketch.fill(0f);
+                sketch.fill(Color_Scheme.bg_button_hover);
                 sketch.rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
-                sketch.fill(255f); //Text color
+                sketch.fill(Color_Scheme.text_button_hover); //Text color
                 sketch.textSize((x_size-changeVal)/5f);
                 sketch.textAlign(sketch.CENTER);
                 sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
                 sketch.pop();
             } else {
                 sketch.push();
-                sketch.fill(80f);
+                sketch.fill(Color_Scheme.bg_button);
                 sketch.rect(x_pos,y_pos, x_size, y_size);
-                sketch.fill(255f);
+                sketch.fill(Color_Scheme.text_button);
                 sketch.textSize(x_size/5f);
                 sketch.textAlign(sketch.CENTER);
                 sketch.text(text, (x_pos)+(x_size)/2f, (y_pos)+(y_size)/2f+10);
