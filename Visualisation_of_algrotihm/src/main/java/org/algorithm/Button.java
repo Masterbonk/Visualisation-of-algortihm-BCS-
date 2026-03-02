@@ -274,6 +274,13 @@ class Heuristic_Button extends Button{
     }
 }
 
+class Color_Scheme_Button extends Button{
+    public Color_Scheme_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
+        super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
+    }
+    void click(){super.click();
+    }
+}
 
 /**
  * Unique type knap til knapper under file, som skal gemmes væk når man ikke har klikket på file.

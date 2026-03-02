@@ -30,6 +30,8 @@ public class Main extends PApplet{
     public static Node initial_start_node;
     public static Node initial_goal_node;
 
+    private boolean pink_mode;
+
     /**
      * Main function starts the sketch
      * @param args
@@ -86,6 +88,7 @@ public class Main extends PApplet{
         }
         util = new Util(this,button_height);
         cs = new Color_Scheme(this);
+        pink_mode = false;
 
         algorithm = new DStarLite();
 
@@ -132,7 +135,7 @@ public class Main extends PApplet{
      */
 
     public void draw(){
-        cs.changeColors(true);
+        cs.changeColors(pink_mode);
         background(Color_Scheme.bg);
         //background(204); //Draws over everything on screen clearing it for the next frame
 
@@ -514,6 +517,12 @@ public class Main extends PApplet{
                     h.set_From(goal_node);
                     h.update_Weight(0);
                 }
+            }
+
+            if(Ui.get_Button("color_scheme").clicked){
+                pink_mode = true;
+            } else{
+                pink_mode = false;
             }
 
             if (!Ui.get_Button("file").mouse_Over() && !Ui.get_Button("export").mouse_Over() && !Ui.get_Button("import").mouse_Over() && Ui.get_Button("file").clicked) { //Lukker file menuen hvis man klikker uden for den mens den er åben.

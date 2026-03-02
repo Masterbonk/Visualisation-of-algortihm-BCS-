@@ -60,6 +60,8 @@ public class Util {
         Ui.add_Button("heuristic",_sketch.displayWidth/9f*3f, 0, _sketch.width/9f, _button_height,"Display H", Heuristic_Button.class, false);
 
         Ui.add_Button("PQ_display",(_sketch.displayWidth)/9f*4f, 0, _sketch.displayWidth/9f, _button_height,"Display Q", Edge_Button.class, false);
+        Ui.add_Button("color_scheme",(_sketch.displayWidth)/9f*4f, 0, _sketch.displayWidth/9f, _button_height,"Pink", Color_Scheme_Button.class, false);
+
 
         //debugging slash testing
         //System.out.println("display: " + _sketch.displayWidth + ", " + _sketch.displayHeight);
