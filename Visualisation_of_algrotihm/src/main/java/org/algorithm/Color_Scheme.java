@@ -18,6 +18,7 @@ public class Color_Scheme {
     public static int node;
     public static  int cut_node;
     public static  int hover_node;
+    public static int in_PQ_node;
     Color_Scheme(PApplet _sketch){
         sketch = _sketch;
     }
@@ -48,12 +49,14 @@ public class Color_Scheme {
             node = sketch.color(252,10,135);
             cut_node = sketch.color(119,1,62);
             hover_node = sketch.color(207,99,249);
+            in_PQ_node = sketch.color(252,183,200);
 
         } else{
             //default
             node = sketch.color(232,25,25);
             cut_node = sketch.color(160, 4, 4);
             hover_node = sketch.color(24,204,24);
+            in_PQ_node = sketch.color(238,218,18);
 
         }
 

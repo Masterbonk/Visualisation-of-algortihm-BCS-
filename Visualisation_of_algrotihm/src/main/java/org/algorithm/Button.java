@@ -131,7 +131,7 @@ class Reset_Button extends Button{
             e.color(75,75,75);
         }
         for (Node n : set_of_nodes){
-            n.color(232,25,25);
+            n.color(Color_Scheme.node);
             n.change_In_PQ(false);
         }
         algorithm.get_U().get_Heap().clear();

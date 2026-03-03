@@ -79,9 +79,10 @@ public class Node {
         } else if (mouse_Over() && Ui.get_Button("cut").clicked) {
             color(Color_Scheme.cut_node);
         }  else if (in_PQ){
-            color(sketch.color(238,218,18));
-        }
+            color(Color_Scheme.in_PQ_node);
+        } else {
             color(Color_Scheme.node);
+        }
         sketch.push();
         dim = 50;
         sketch.fill(node_color);
