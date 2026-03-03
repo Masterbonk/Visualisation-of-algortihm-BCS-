@@ -196,12 +196,12 @@ public class Util {
 
     public static int convertX(String _x){
         float tmp = Float.parseFloat(_x);
-        return (int) ((tmp /*- 12.57*/)*100);
+        return (int) ((tmp - 12.57)*100);
     }
 
     public static int convertY(String _y){
         float tmp = Float.parseFloat(_y);
-        return (int) ((tmp /*- 55.63*/)*100);
+        return (int) ((tmp - 55.63)*100);
     }
 }
 
