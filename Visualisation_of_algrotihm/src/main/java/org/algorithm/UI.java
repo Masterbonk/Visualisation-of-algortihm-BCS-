@@ -201,9 +201,9 @@ public class UI {
             sketch.text(Util.make_digit_fit_range("N", 5)+Util.make_digit_fit_range("k1", 13)+","+Util.make_digit_fit_range("k2", 13) , sketch.displayWidth-290/*325*/, 200-sketch.getGraphics().textSize);
 
             if (algorithm != null && algorithm.get_U() != null){
-                if (!algorithm.get_U().is_empty()) { //Makes the main node yellow
+                if (!algorithm.get_U().is_empty() && algorithm.part_one_d_main) { //Makes the main node yellow
                     algorithm.get_U().get_Heap().getFirst().change_In_PQ(true);
-                }
+                } else if(!algorithm.get_U().is_empty()) { algorithm.get_U().get_Heap().getFirst().change_In_PQ(false);}
                 for (int i = 0; i < Math.min(algorithm.get_U().get_Heap().size(), 11); i++){
                     //getting the elements in the queue
                     String tmp_node = algorithm.get_U().get_Heap().get(i).toString();

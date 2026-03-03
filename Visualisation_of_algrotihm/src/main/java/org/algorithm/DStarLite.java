@@ -105,6 +105,7 @@ public class DStarLite {
                 }
 
                 if (!has_been_paused && paused_once) {
+                    U.get_Heap().getFirst().change_In_PQ(false);
                     Edge e = find_Shared_Edge(Main.start_node, find_Min_G_Node(Main.start_node));
                     if (e != null) e.color(-1,-1,150);
                     Main.start_node = find_Min_G_Node(Main.start_node);
@@ -130,6 +131,7 @@ public class DStarLite {
                     paused_once = true;
                 }
             }
+
         }
     }
 
@@ -174,7 +176,6 @@ public class DStarLite {
 
             k_old = U.top_Key();
             n = U.pop();
-            n.change_In_PQ(true);
             //println("pq 2 " + U.get_Heap());
             //println("pq to list 2 " + U.toList());
             //println("Popped node at x: "+n.x+" y: "+n.y);
@@ -218,6 +219,7 @@ public class DStarLite {
                 done = false;
                 break;
             }
+
         }
         if (done){
             part_one_d_main = false;
