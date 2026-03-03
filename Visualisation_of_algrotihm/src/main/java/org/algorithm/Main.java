@@ -32,6 +32,7 @@ public class Main extends PApplet{
 
     public static PFont font;
     public static PFont mono;
+    private boolean pink_mode;
 
 
     public static int button_height = 50;
@@ -50,6 +51,7 @@ public class Main extends PApplet{
 
 
     Util util;
+    Color_Scheme cs;
 
 
     public static UI Ui;
@@ -89,6 +91,8 @@ public class Main extends PApplet{
 
         }
         util = new Util(this,button_height);
+        cs = new Color_Scheme(this);
+        pink_mode = false;
 
         algorithm = new DStarLite();
 
@@ -136,7 +140,9 @@ public class Main extends PApplet{
      */
 
     public void draw(){
-        background(204); //Draws over everything on screen clearing it for the next frame
+        cs.changeColors(pink_mode);
+        background(Color_Scheme.bg);
+        //background(204); //Draws over everything on screen clearing it for the next frame
 
         //zoom functionality
         zoom();
@@ -543,6 +549,12 @@ public class Main extends PApplet{
                 }
             }
 
+            if(Ui.get_Button("color_scheme").clicked){
+                pink_mode = true;
+            } else{
+                pink_mode = false;
+            }
+
             if (!Ui.get_Button("file").mouse_Over() && !Ui.get_Button("export").mouse_Over() && !Ui.get_Button("import").mouse_Over() && Ui.get_Button("file").clicked) { //Lukker file menuen hvis man klikker uden for den mens den er åben.
                 Ui.get_Button("file").clicked = false;
             }
@@ -595,8 +607,6 @@ public class Main extends PApplet{
     /**
      * Makes the base graph objects. All are added to the node and edge arrays so they are rendered.
      */
-
-
 
     void Make_Graph(){
         Node old = null;
