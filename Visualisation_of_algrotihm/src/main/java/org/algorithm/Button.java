@@ -348,7 +348,7 @@ class Import_Button extends File_Type_Buttons{
         try {
             sketch.println("Beginning parsing");
 
-            Util.parseOSM(sketch, new FileInputStream("src/main/data/TestOSMFile.osm"));
+            Util.parseOSM(sketch, "src/main/data/TestOSMFile.osm");
 
             sketch.println("Completed parsing");
 

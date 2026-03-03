@@ -5,6 +5,7 @@ import processing.core.PApplet;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -87,8 +88,8 @@ public class Util {
         return null;
     }
 
-    public static void parseOSM(PApplet _sketch,InputStream inputStream) throws Exception  {
-        var input = XMLInputFactory.newInstance().createXMLStreamReader(new BufferedInputStream(inputStream));
+    public static void parseOSM(PApplet _sketch,String inp) throws Exception  {
+        var input = XMLInputFactory.newInstance().createXMLStreamReader(new BufferedInputStream(new FileInputStream(inp)));
 
         ArrayList<Util_Way> way_list = new ArrayList<>();
         ArrayList<String> nodes_in_current_way = new ArrayList<>();
@@ -123,25 +124,28 @@ public class Util {
 
         println("Made it out of first loop");
 
-        input = XMLInputFactory.newInstance().createXMLStreamReader(new BufferedInputStream(inputStream));
+        input.close();
+        //input = XMLInputFactory.newInstance().createXMLStreamReader(new BufferedInputStream(inputStream));
+        input = XMLInputFactory.newInstance().createXMLStreamReader(new BufferedInputStream(new FileInputStream(inp)));
         println("Made it out of first loop 2");
 
+        Node tmp = null;
         while (input.hasNext()) { //Run number 2
-            println("While loop begins");
             var tagKind = input.next();
             if (tagKind == XMLStreamConstants.START_ELEMENT) {
-                println("1");
+                //println("1");
                 var name = input.getLocalName();
-                switch (name) {
-                    case "node" -> {
-                        if (all_nodes_in_use.contains(input.getAttributeValue(null, "ref"))){
-                            println("2");
-                            new Node(_sketch, convertX(input.getAttributeValue(null, "lon")),convertY(input.getAttributeValue(null, "lat")));
-                        }
+
+                if (name.equals("node")) {
+                    if (all_nodes_in_use.contains(input.getAttributeValue(null, "id"))){
+                        println("MADE A NODE");
+                        tmp = new Node(_sketch, convertX(input.getAttributeValue(null, "lon")),convertY(input.getAttributeValue(null, "lat")));
                     }
                 }
+
             }
         }
+        new BiEdge(_sketch,tmp,Main.node_array.getFirst(),0);
         println("Made it out of second loop");
 
 
@@ -150,12 +154,12 @@ public class Util {
 
     public static int convertX(String _x){
         float tmp = Float.parseFloat(_x);
-        return (int) ((tmp - 12.57)*100);
+        return (int) ((tmp /*- 12.57*/)*100);
     }
 
     public static int convertY(String _y){
         float tmp = Float.parseFloat(_y);
-        return (int) ((tmp - 55.63)*100);
+        return (int) ((tmp /*- 55.63*/)*100);
     }
 }
 
