@@ -53,19 +53,59 @@ public class Util {
         Ui.add_Button("import", 0, _button_height*2+_button_height/10f, _sketch.displayWidth/10f, _button_height-_button_height/10f,"Import", Import_Button.class, false);
 
         //CORRECT X & Y COORDINATES DO NOT CHNAGE
-        Ui.add_Button("Node_display", _sketch.displayWidth / 9f,0, _sketch.displayWidth/10f, _button_height,"Display N", Node_Botton.class, false);
+        Ui.add_Button("Name_display", _sketch.displayWidth / 9f,0, _sketch.displayWidth/10f, _button_height,"Name", Name_Button.class, false);
 
-        Ui.add_Button("Edge_display",_sketch.displayWidth/9f*2f, 0, _sketch.width/9f, _button_height,"Display E", Edge_Button.class, false);
+        Ui.add_Button("Node_display", _sketch.displayWidth / 9f*2f,0, _sketch.displayWidth/10f, _button_height,"Display N", Node_Button.class, false);
 
-        Ui.add_Button("heuristic",_sketch.displayWidth/9f*3f, 0, _sketch.width/9f, _button_height,"Display H", Heuristic_Button.class, false);
+        Ui.add_Button("Edge_display",_sketch.displayWidth/9f*3f, 0, _sketch.width/9f, _button_height,"Display E", Edge_Button.class, false);
 
-        Ui.add_Button("PQ_display",(_sketch.displayWidth)/9f*4f, 0, _sketch.displayWidth/9f, _button_height,"Display Q", Edge_Button.class, false);
+        Ui.add_Button("heuristic",_sketch.displayWidth/9f*4f, 0, _sketch.width/9f, _button_height,"Display H", Heuristic_Button.class, false);
+
+        Ui.add_Button("PQ_display",(_sketch.displayWidth)/9f*5f, 0, _sketch.displayWidth/9f, _button_height,"Display Q", Edge_Button.class, false);
+
         Ui.add_Button("color_scheme",(_sketch.displayWidth)/9f*4f, 0, _sketch.displayWidth/9f, _button_height,"Pink", Color_Scheme_Button.class, false);
-
 
         //debugging slash testing
         //System.out.println("display: " + _sketch.displayWidth + ", " + _sketch.displayHeight);
         //System.out.println("normal: " + _sketch.width + ", " + _sketch.height);
+    }
+
+    /**
+     * Util function that will add spaces to the front of a digit,
+     * if the _range is bigger than the amount of digits in _digit.
+     * It will not remove digits if the range is smaller.
+     * @param _digit The number we want to make int oa string
+     * @param _range The amount of characters our resulting string will have,
+     *               any amount above the characters in the _digit will become spaces in front.
+     * @return The string version of the _digit, with spaces in front depending on the _range.
+     */
+    public static String make_digit_fit_range(int _digit, int _range){
+        int difference = _range-(""+_digit).length();
+        StringBuffer result = new StringBuffer();
+        for (int i = 0; i < difference; i++) {
+                    result.append(" ");
+        }
+        result.append(""+_digit);
+        return result.toString();
+    }
+
+    /**
+     * Util function that will add spaces to the front of a digit,
+     * if the _range is bigger than the amount of digits in _digit.
+     * It will not remove digits if the range is smaller.
+     * @param _digit The number we want to make int a new string
+     * @param _range The amount of characters our resulting string will have,
+     *               any amount above the characters in the _digit will become spaces in front.
+     * @return The string version of the _digit, with spaces in front depending on the _range.
+     */
+    public static String make_digit_fit_range(String _digit, int _range){
+        int difference = _range-_digit.length();
+        StringBuffer result = new StringBuffer();
+        for (int i = 0; i < difference; i++) {
+            result.append(" ");
+        }
+        result.append(_digit);
+        return result.toString();
     }
 
     public static Edge find_Shared_Edge(Node _n1, Node _n2){

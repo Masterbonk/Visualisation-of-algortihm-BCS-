@@ -14,6 +14,7 @@ public class Node {
     PApplet sketch;
     String name;
     int node_color;
+    boolean in_PQ;
 
     public Node(PApplet _sketch, int _x, int _y){
         //float tempX = mouseX/zoom_level;
@@ -77,7 +78,9 @@ public class Node {
             color(Color_Scheme.hover_node);
         } else if (mouse_Over() && Ui.get_Button("cut").clicked) {
             color(Color_Scheme.cut_node);
-        }  else
+        }  else if (in_PQ){
+            color(sketch.color(238,218,18));
+        }
             color(Color_Scheme.node);
         sketch.push();
         dim = 50;
@@ -115,7 +118,17 @@ public class Node {
             sketch.push();
             sketch.fill(247,247,247);
             sketch.textSize(20);
-            sketch.text("g(" + display_Infinity(g) + "), rhs(" + display_Infinity(rhs) + ")",(x+dim/2f)-35,(y+dim/2f)+20);
+            sketch.textAlign(LEFT,TOP);
+            String tmp = "g(" + display_Infinity(g) + "), rhs(" + display_Infinity(rhs) + ")";
+            sketch.text(tmp,x-sketch.textWidth(tmp)/2,(y+dim/2f)+sketch.getGraphics().textSize);
+            sketch.pop();
+        }
+        if (Ui.get_Button("Name_display").clicked){
+            sketch.push();
+            sketch.fill(247,247,247);
+            sketch.textSize(20);
+            sketch.textAlign(LEFT,CENTER);
+            sketch.text(name,x-sketch.textWidth(name)/2,y);
             sketch.pop();
         }
 
@@ -151,6 +164,18 @@ public class Node {
 
     public void color(int _color){
         node_color = _color;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void change_In_PQ(boolean _valid){
+        if(_valid){
+            in_PQ = true;
+        } else {
+            in_PQ = false;
+        }
     }
 
 }

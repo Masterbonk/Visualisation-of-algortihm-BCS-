@@ -99,7 +99,7 @@ public class UI {
     }
 
     /**
-     *  The function to make sure no buttons can be clicked simultaneously
+     *  Turns of all other buttons than the one passed through (except pause)
      * */
     public void turn_Off_All_Buttons(Button _button){
         display_edge_weight_ui = false;
@@ -114,25 +114,28 @@ public class UI {
 
 
 
-
+    /**
+     * Renders the Edge Weight UI input display
+     * */
     private void render_Edge_Weight_UI() {
 
-        //make this not ugly
         sketch.push();
         sketch.textSize(30);
         StringBuilder inputStr = new StringBuilder();
-        if (display_edge_weight_ui) {
+        if (display_edge_weight_ui) { // if the display is active we render it
 
             sketch.push();
             sketch.noStroke();
             sketch.fill(255);
             sketch.rectMode(CENTER);
-            String tmp = ""+1000000;
+            String tmp = ""+9999999;
             sketch.push();
             sketch.textSize(16);
             float fontSize = sketch.getGraphics().textSize;
             sketch.pop();
             float boxheight = (sketch.getGraphics().textSize) *1.7f;
+            //this is the outer box for the ui
+            //the rect dimensions are based of the text size
             sketch.rect(
                     (sketch.displayWidth/2f),
                     (sketch.displayHeight/2f) - (sketch.getGraphics().textSize/2) - fontSize,
@@ -143,6 +146,7 @@ public class UI {
             sketch.push();
             sketch.fill(100);
             sketch.stroke(100);
+            //this is the "text" field" of the ui
             sketch.rect(
                     (sketch.displayWidth/2f),
                     (sketch.displayHeight/2f) - (sketch.getGraphics().textSize/2),
@@ -157,7 +161,7 @@ public class UI {
             // Draw input
             sketch.fill(0);
 
-
+            //this renders the text input
             for (char c : currentInput) {
                 inputStr.append(c);
             }
@@ -177,27 +181,44 @@ public class UI {
 
     }
 
-
+    /** displays the priority queue, if the algorithm exist
+     * */
     private void display_PQ(){
-        /*
+
         if(Ui.get_Button("PQ_display").clicked){
-            if (algorithm != null){
-                sketch.push();
-                for (int i = 0; i < algorithm.get_U().get_Heap().size(); i++){
-                    String tmp = algorithm.get_U().get_Heap().get(i).toString();
+            sketch.rect(sketch.displayWidth-400,0,400,sketch.displayHeight-Main.button_height);
+            sketch.push();
+            sketch.fill(0,0,0);
+            sketch.textSize(40);
+            sketch.text("Priority Queue",sketch.displayWidth-350,100);
+            sketch.pop();
 
-                    sketch.text(tmp, sketch.displayWidth-400, (100 * i));
 
+            sketch.push();
+            sketch.textFont(mono);
+            sketch.fill(0,0,0);
+            sketch.textSize(20);
+            sketch.text(Util.make_digit_fit_range("N", 5)+Util.make_digit_fit_range("k1", 13)+","+Util.make_digit_fit_range("k2", 13) , sketch.displayWidth-290/*325*/, 200-sketch.getGraphics().textSize);
+
+            if (algorithm != null && algorithm.get_U() != null){
+                if (!algorithm.get_U().is_empty()) { //Makes the main node yellow
+                    algorithm.get_U().get_Heap().getFirst().change_In_PQ(true);
                 }
-                sketch.rect(sketch.displayWidth-400,0,400,750);
+                for (int i = 0; i < Math.min(algorithm.get_U().get_Heap().size(), 11); i++){
+                    //getting the elements in the queue
+                    String tmp_node = algorithm.get_U().get_Heap().get(i).toString();
+                    String tmp_tupple = algorithm.get_U().get_Keys().get(algorithm.get_U().get_Heap().get(i)).toString();
+
+                    //for each key in the pq, following is printed
 
 
-                sketch.pop();
+                    sketch.text(tmp_node + " " + tmp_tupple, sketch.displayWidth-325, 200+40*i);
                 }
-          }
-            */
 
-
+           }
+            sketch.pop();
+        }
     }
 
 }
+
