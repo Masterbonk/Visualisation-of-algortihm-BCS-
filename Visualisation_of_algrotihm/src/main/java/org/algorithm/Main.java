@@ -4,6 +4,7 @@ import processing.core.PFont;
 import processing.core.*;
 import garciadelcastillo.dashedlines.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -29,7 +30,7 @@ public class Main extends PApplet{
     public static Node goal_node;
     public static Node initial_start_node;
     public static Node initial_goal_node;
-
+    
     public static PFont font;
     public static PFont mono;
     private boolean pink_mode;
@@ -127,7 +128,6 @@ public class Main extends PApplet{
         Make_Graph();
 
 
-
         // Set the dash-gap pattern in pixels
 
     }
@@ -188,6 +188,14 @@ public class Main extends PApplet{
             algorithm.D_Main();
         }
 
+    }
+
+    public void file_Selected(File selection) throws Exception {
+        if (selection == null) {
+            println("Window was closed or the user hit cancel.");
+        } else {
+            Util.parseOSM(this, selection.getAbsolutePath());
+        }
     }
 
     public void rescale(){
@@ -558,6 +566,8 @@ public class Main extends PApplet{
             if (!Ui.get_Button("file").mouse_Over() && !Ui.get_Button("export").mouse_Over() && !Ui.get_Button("import").mouse_Over() && Ui.get_Button("file").clicked) { //Lukker file menuen hvis man klikker uden for den mens den er åben.
                 Ui.get_Button("file").clicked = false;
             }
+
+
         } else if (mouseButton == RIGHT){
             // right click functionality to be implemented
         }

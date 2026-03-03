@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 
 import static org.algorithm.Main.*;
+import static processing.core.PApplet.*;
 import static processing.core.PApplet.str;
 
 
@@ -368,10 +369,13 @@ class Import_Button extends File_Type_Buttons{
     void click(){
         super.click();
 
+        sketch.selectInput("Select a file to process:", "file_Selected");
+
+
         try {
             sketch.println("Beginning parsing");
 
-            Util.parseOSM(sketch, "src/main/data/TestOSMFile.osm");
+            //Util.parseOSM(sketch, input);
 
             sketch.println("Completed parsing");
 
