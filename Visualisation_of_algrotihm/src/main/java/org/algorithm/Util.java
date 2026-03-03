@@ -119,6 +119,17 @@ public class Util {
         return result.toString();
     }
 
+    public static void delete_Graph(){
+        Main.edge_array = new ArrayList<>();
+        Main.node_array = new ArrayList<>();
+        Main.goal_node = null;
+        Main.start_node = null;
+        Main.node_1 = null;
+        Main.initial_goal_node = null;
+        Main.initial_start_node = null;
+
+    }
+
     public static Edge find_Shared_Edge(Node _n1, Node _n2){
 
         for (Edge e : _n1.connected){
