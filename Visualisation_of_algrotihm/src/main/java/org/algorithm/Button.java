@@ -2,6 +2,9 @@ package org.algorithm;
 
 import processing.core.PApplet;
 
+import java.io.File;
+import java.io.FileInputStream;
+
 import static org.algorithm.Main.*;
 import static processing.core.PApplet.str;
 
@@ -339,7 +342,21 @@ class Import_Button extends File_Type_Buttons{
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
-    void click(){super.click();
+    void click(){
+        super.click();
+
+        try {
+            sketch.println("Beginning parsing");
+
+            Util.parseOSM(sketch, new FileInputStream("src/main/data/TestOSMFile.osm"));
+
+            sketch.println("Completed parsing");
+
+        } catch(Exception e){
+            sketch.println("Failed ;(");
+            sketch.println(e.getMessage());
+        }
+
         sketch.println("Not implemented Import");
     }
 }

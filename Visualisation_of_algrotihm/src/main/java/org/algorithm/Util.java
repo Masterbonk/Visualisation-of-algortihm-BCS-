@@ -2,7 +2,17 @@ package org.algorithm;
 
 import processing.core.PApplet;
 
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamConstants;
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Objects;
+
 import static org.algorithm.Main.Ui;
+import static processing.core.PApplet.print;
+import static processing.core.PApplet.println;
 
 
 public class Util {
@@ -77,5 +87,83 @@ public class Util {
         return null;
     }
 
+    public static void parseOSM(PApplet _sketch,InputStream inputStream) throws Exception  {
+        var input = XMLInputFactory.newInstance().createXMLStreamReader(new BufferedInputStream(inputStream));
 
+        ArrayList<Util_Way> way_list = new ArrayList<>();
+        ArrayList<String> nodes_in_current_way = new ArrayList<>();
+        HashSet<String> all_nodes_in_use = new HashSet<>();
+
+        boolean stop_first_loop = false;
+        boolean way_has_begun = false;
+        while (input.hasNext() && !stop_first_loop) { //Run number 1
+            var tagKind = input.next();
+            if (tagKind == XMLStreamConstants.START_ELEMENT) {
+                var name = input.getLocalName();
+                switch (name) {
+                    case "way" -> {
+                        nodes_in_current_way.clear();
+                        way_has_begun = true;
+                    }
+                    case "tag" -> {
+                        if (way_has_begun && Objects.equals(input.getAttributeValue(null, "k"), "highway")){
+                            all_nodes_in_use.addAll(nodes_in_current_way);
+                            way_list.add(new Util_Way(nodes_in_current_way));
+                        }
+                    }
+                    case "nd" -> {
+                        nodes_in_current_way.add(input.getAttributeValue(null, "ref")); //The key)
+                    }
+                    case "relation" -> {
+                        stop_first_loop = true;
+                    }
+                }
+            }
+        }
+
+        println("Made it out of first loop");
+
+        input = XMLInputFactory.newInstance().createXMLStreamReader(new BufferedInputStream(inputStream));
+        println("Made it out of first loop 2");
+
+        while (input.hasNext()) { //Run number 2
+            println("While loop begins");
+            var tagKind = input.next();
+            if (tagKind == XMLStreamConstants.START_ELEMENT) {
+                println("1");
+                var name = input.getLocalName();
+                switch (name) {
+                    case "node" -> {
+                        if (all_nodes_in_use.contains(input.getAttributeValue(null, "ref"))){
+                            println("2");
+                            new Node(_sketch, convertX(input.getAttributeValue(null, "lon")),convertY(input.getAttributeValue(null, "lat")));
+                        }
+                    }
+                }
+            }
+        }
+        println("Made it out of second loop");
+
+
+        //When all nodes have been added, we will connect them with edges
+    }
+
+    public static int convertX(String _x){
+        float tmp = Float.parseFloat(_x);
+        return (int) ((tmp - 12.57)*100);
+    }
+
+    public static int convertY(String _y){
+        float tmp = Float.parseFloat(_y);
+        return (int) ((tmp - 55.63)*100);
+    }
+}
+
+class Util_Way{
+    ArrayList<String> node_list;
+
+    Util_Way(ArrayList<String> _node_list){
+        node_list = _node_list;
+        println(node_list.toString());
+    }
 }
