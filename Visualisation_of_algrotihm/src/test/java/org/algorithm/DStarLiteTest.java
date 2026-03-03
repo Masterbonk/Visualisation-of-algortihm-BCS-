@@ -111,8 +111,10 @@ class DStarLiteTest {
 
         Main.edge_update_map.put(bg,MAX_INT);
 
-        Ui.get_Button("pause").click();
 
+
+        algorithm.D_Main();
+        Ui.get_Button("pause").click();
         algorithm.D_Main();
 
         assertTrue(algorithm.get_Shortest_Path(S).contains(A));
@@ -137,12 +139,13 @@ class DStarLiteTest {
         Main.goal_node = G;
 
         algorithm.initialize();
+        Ui.get_Button("pause").click();
 
         algorithm.compute_Shortest_Path();
 
         ArrayList<Node> expected_result = new ArrayList<>();
         expected_result.add(S); expected_result.add(B); expected_result.add(G);
-        
+
         assertEquals(expected_result, algorithm.get_Shortest_Path(Main.start_node));
 
     }
@@ -166,6 +169,7 @@ class DStarLiteTest {
         Main.goal_node = G;
 
         algorithm.initialize();
+        Ui.get_Button("pause").click();
 
         algorithm.compute_Shortest_Path();
 
@@ -195,7 +199,7 @@ class DStarLiteTest {
         Main.goal_node = G;
 
         algorithm.initialize();
-
+        Ui.get_Button("pause").click();
         algorithm.compute_Shortest_Path();
 
         assertFalse(algorithm.get_Shortest_Path(Main.start_node).contains(D));

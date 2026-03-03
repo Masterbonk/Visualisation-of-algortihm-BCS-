@@ -57,7 +57,7 @@ public class Edge {
             } else if(display_edge_weight_ui && activeEdge == this){
                 color(-1,150,-1);
             }else {color(-1,75,-1);}
-        } else {color(75,75,75);}
+        } else{color(-1,75,-1);}
         sketch.stroke(r,g,b);
         sketch.line(from.x,from.y, to.x, to.y);
         sketch.pop();
@@ -253,6 +253,9 @@ class Heuristic_Edge extends Edge{
     @Override
     public void render() {
         if(to != null && from != null){
+            update_Weight(0);
+            set_To(start_node);
+            set_From(goal_node);
             if (Ui.get_Button("heuristic").clicked) {
                 sketch.push();
                 sketch.strokeWeight(2);

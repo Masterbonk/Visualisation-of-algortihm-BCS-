@@ -13,7 +13,8 @@ public class Node {
     ArrayList<Edge> connected;
     PApplet sketch;
     String name;
-    int r = 232, g1 = 25, b = 25;
+    int node_color;
+    boolean in_PQ;
 
     public Node(PApplet _sketch, int _x, int _y){
         //float tempX = mouseX/zoom_level;
@@ -74,15 +75,17 @@ public class Node {
 
     public void render(){
         if (mouse_Over() && debug || mouse_Over() && Ui.get_Button("line").clicked || node_1 == this ) {
-            color(24,204,24);
+            color(Color_Scheme.hover_node);
         } else if (mouse_Over() && Ui.get_Button("cut").clicked) {
-            color(160, 4, 4);
+            color(Color_Scheme.cut_node);
+        }  else if (in_PQ){
+            color(Color_Scheme.in_PQ_node);
         } else {
-            color(232,25,25);
+            color(Color_Scheme.node);
         }
         sketch.push();
         dim = 50;
-        sketch.fill(r,g1,b);
+        sketch.fill(node_color);
         sketch.circle(x,y,dim);
         sketch.pop();
 
@@ -116,7 +119,17 @@ public class Node {
             sketch.push();
             sketch.fill(247,247,247);
             sketch.textSize(20);
-            sketch.text("g(" + display_Infinity(g) + "), rhs(" + display_Infinity(rhs) + ")",(x+dim/2f)-35,(y+dim/2f)+20);
+            sketch.textAlign(LEFT,TOP);
+            String tmp = "g(" + display_Infinity(g) + "), rhs(" + display_Infinity(rhs) + ")";
+            sketch.text(tmp,x-sketch.textWidth(tmp)/2,(y+dim/2f)+sketch.getGraphics().textSize);
+            sketch.pop();
+        }
+        if (Ui.get_Button("Name_display").clicked){
+            sketch.push();
+            sketch.fill(247,247,247);
+            sketch.textSize(20);
+            sketch.textAlign(LEFT,CENTER);
+            sketch.text(name,x-sketch.textWidth(name)/2,y);
             sketch.pop();
         }
 
@@ -150,10 +163,20 @@ public class Node {
         return x+ " " +y;
     }
 
-    public void color(int _r, int _g, int _b){
-        r = _r;
-        g1 = _g;
-        b = _b;
+    public void color(int _color){
+        node_color = _color;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void change_In_PQ(boolean _valid){
+        if(_valid){
+            in_PQ = true;
+        } else {
+            in_PQ = false;
+        }
     }
 
 }

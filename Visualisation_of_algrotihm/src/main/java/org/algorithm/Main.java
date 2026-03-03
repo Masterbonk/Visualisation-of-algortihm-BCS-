@@ -30,17 +30,12 @@ public class Main extends PApplet{
     public static Node initial_start_node;
     public static Node initial_goal_node;
 
-    /**
-     * Main function starts the sketch
-     * @param args
-     */
-    public static void main(String[] args){
-        String[] processingArgs = {"Main"};
-        Main main = new Main();
-        PApplet.runSketch(processingArgs, main);
-    }
+    public static PFont font;
+    public static PFont mono;
+    private boolean pink_mode;
 
-    public int button_height = 50;
+
+    public static int button_height = 50;
     public static int dWidth, dHeight;
     public static Node node_1;
 
@@ -56,6 +51,7 @@ public class Main extends PApplet{
 
 
     Util util;
+    Color_Scheme cs;
 
 
     public static UI Ui;
@@ -64,7 +60,19 @@ public class Main extends PApplet{
     public static ArrayList<Node> node_array = new ArrayList<>();
 
     Heuristic_Edge h;
+    int count = 0;
+    int letter = 65;
 
+
+    /**
+     * Main function starts the sketch
+     * @param args
+     */
+    public static void main(String[] args){
+        String[] processingArgs = {"Main"};
+        Main main = new Main();
+        PApplet.runSketch(processingArgs, main);
+    }
 
 
     /**
@@ -83,6 +91,8 @@ public class Main extends PApplet{
 
         }
         util = new Util(this,button_height);
+        cs = new Color_Scheme(this);
+        pink_mode = false;
 
         algorithm = new DStarLite();
 
@@ -97,7 +107,7 @@ public class Main extends PApplet{
      */
     public void setup(){
         //frameRate(30); //Decides how many times per second the draw function is called
-        PFont font;
+
         // The font must be located in the sketch's
         // "data" directory to load successfully
 
@@ -107,6 +117,7 @@ public class Main extends PApplet{
         surface.setLocation(0,0);
 
         font = createFont("Arial-Black-48", 128);
+        mono = createFont("SpaceMono-Regular", 128);
         textFont(font);
         Ui = new UI(this);
 
@@ -129,7 +140,9 @@ public class Main extends PApplet{
      */
 
     public void draw(){
-        background(204); //Draws over everything on screen clearing it for the next frame
+        cs.changeColors(pink_mode);
+        background(Color_Scheme.bg);
+        //background(204); //Draws over everything on screen clearing it for the next frame
 
         //zoom functionality
         zoom();
@@ -149,21 +162,25 @@ public class Main extends PApplet{
         pop();
 
 
+
+        if(h != null){
+            h.render();
+        }
+
         push();
         scale(zoom_level);
         for(int i = 0; i < node_array.size(); i++){
             node_array.get(i).render();
         }
 
-        if(h != null){
-            h.render();
-        }
+
 
         pop();
         popMatrix();
 
 
         Ui.render();
+
         rescale();
 
 
@@ -375,7 +392,20 @@ public class Main extends PApplet{
                         }
                     }
                     if (!over_any_nodes) {
-                        new Node(this, mouseX, mouseY);
+                        String name; //temp name string
+                        if (count == 0) { //if the count is 0 we don't append the number to the name
+                            name = Character.toString ((char) letter);
+                        } else {//else we append the number to the name
+                            name = Character.toString ((char) letter) + count;
+                        }
+                        new Node(this, mouseX, mouseY, name);
+                        if(letter == 90){ //if we are at the end of the alphabet via ascii, then go back to A (64 isnt A, its just so it dosent skip)
+                            letter = 64;
+                            count++;//also increment our number label
+                        }
+                        letter++;//increment our ascii letter
+
+
                     }
                 }
 
@@ -457,7 +487,19 @@ public class Main extends PApplet{
 
                 //When we have line, and click outside a node
                 if (Ui.get_Button("line").clicked && !clicked_on_node) {
-                    Node tmp = new Node(this, mouseX, mouseY);
+                    String name;
+                    if (count == 0) {
+                        name = Character.toString ((char) letter);
+                    } else {
+                        name = Character.toString ((char) letter) + count;
+                    }
+                    Node tmp = new Node(this, mouseX, mouseY, name);
+                    if(letter == 90){
+                        letter = 64;
+                        count++;
+                    }
+                    letter++;
+
                     if (node_1 == null) {
                         node_1 = tmp;
                     } else {
@@ -504,11 +546,13 @@ public class Main extends PApplet{
             if(Ui.get_Button("heuristic").clicked && algorithm.get_Start() != null && algorithm.get_Goal() != null){
                 if (h == null) {
                     h = new Heuristic_Edge(this, start_node, goal_node);
-                } else {
-                    h.set_To(start_node);
-                    h.set_From(goal_node);
-                    h.update_Weight(0);
                 }
+            }
+
+            if(Ui.get_Button("color_scheme").clicked){
+                pink_mode = true;
+            } else{
+                pink_mode = false;
             }
 
             if (!Ui.get_Button("file").mouse_Over() && !Ui.get_Button("export").mouse_Over() && !Ui.get_Button("import").mouse_Over() && Ui.get_Button("file").clicked) { //Lukker file menuen hvis man klikker uden for den mens den er åben.
@@ -565,21 +609,39 @@ public class Main extends PApplet{
      */
 
     void Make_Graph(){
-        Node x, y;
-        BiEdge e;
-        x = new Node(this, 400, 200, "A");
-        y = new Node(this, 200, 400, "B");
-        e = new BiEdge(this, x, y, 5);
+        Node old = null;
+        Node _new;
 
-        x = new Node(this, 600, 625, "C");
+        for (int i = 0; i < 8; i++){
+            for (int j = 0; j < 7; j++){
 
-        e = new BiEdge(this, x, y, 15);
+                String name;
+                if (count == 0) {name = Character.toString ((char) letter);}
+                else {name = Character.toString ((char) letter) + count;}
 
-        y = new Node(this, 200, 625,"D");
-        e = new BiEdge(this, x, y, 5);
+                _new = new Node(this,i*100+100,100*j+100+button_height, name);
+
+                if(old != null){
+                    new BiEdge(this,old,_new,1);
+                }
+                if (node_array.size()>8){
+                    new BiEdge(this,node_array.get(node_array.indexOf(_new)-7),_new,1);
+                }
 
 
 
+                old = _new;
+
+                if(letter == 90){letter = 64;count++;}
+                letter++;
+
+
+
+            }
+            old = null;
+        }
+
+        new BiEdge(this, node_array.getFirst(),node_array.get(7),1);
 
     }
 }

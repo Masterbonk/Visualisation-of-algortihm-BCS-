@@ -35,13 +35,13 @@ class Button {
      */
 
     void render(){
-        sketch.fill(162f,162f,162f);
+        sketch.fill(Color_Scheme.border_button);
         sketch.rect(x_pos,y_pos, x_size, y_size);
 
         int changeVal = 5;
         if (debug) {
             sketch.push();
-            sketch.fill(255, 255, 255); //Text color
+            sketch.fill(Color_Scheme.debug_text_button); //Text color
             sketch.textSize((x_size - changeVal) / 5f);
             sketch.textAlign(sketch.CENTER);
             sketch.text(str(clicked), (x_pos + changeVal) + (x_size - changeVal * 2) / 2f, (y_pos - 10));
@@ -49,12 +49,12 @@ class Button {
         }
 
 
-
+        //hover
         if (mouse_Over()){
             sketch.push();
-            sketch.fill(0f);
+            sketch.fill(Color_Scheme.bg_button_hover);
             sketch.rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
-            sketch.fill(255f); //Text color
+            sketch.fill(Color_Scheme.text_button_hover); //Text color
             sketch.textSize((x_size-changeVal)/5f);
             sketch.textAlign(sketch.CENTER);
             sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
@@ -63,9 +63,9 @@ class Button {
         } else if (clicked){
 
             sketch.push();
-            sketch.fill(127,178,96);
+            sketch.fill(Color_Scheme.bg_button_clicked);
             sketch.rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
-            sketch.fill(255f); //Text color
+            sketch.fill(Color_Scheme.text_button_clicked); //Text color
             sketch.textSize((x_size-changeVal)/5f);
             sketch.textAlign(sketch.CENTER);
             sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
@@ -73,9 +73,9 @@ class Button {
 
         } else {
                 sketch.push();
-                sketch.fill(80f);
+                sketch.fill(Color_Scheme.bg_button);
                 sketch.rect(x_pos,y_pos, x_size, y_size);
-                sketch.fill(255f);
+                sketch.fill(Color_Scheme.text_button);
                 sketch.textSize(x_size/5f);
                 sketch.textAlign(sketch.CENTER);
                 sketch.text(text, (x_pos)+(x_size)/2f, (y_pos)+(y_size)/2f+10);
@@ -128,10 +128,17 @@ class Reset_Button extends Button{
         algorithm.first_run = true;
         algorithm.set_Start(initial_start_node);
         algorithm.set_Goal(initial_goal_node);
+        algorithm.initialize();
 
         for (Edge e:Main.edge_array) {
             e.color(75,75,75);
         }
+        for (Node n : set_of_nodes){
+            n.color(Color_Scheme.node);
+            n.change_In_PQ(false);
+        }
+        algorithm.get_U().get_Heap().clear();
+        algorithm.get_U().get_Keys().clear();
         if (!Ui.get_Button("pause").clicked){
             Ui.get_Button("pause").click();
         }
@@ -242,8 +249,17 @@ class File_Button extends Button{
     }
 }
 
-class Node_Botton extends Button{
-    public Node_Botton(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
+class Node_Button extends Button{
+    public Node_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
+        super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
+
+    }
+    void click(){super.click();
+    }
+}
+
+class Name_Button extends Button{
+    public Name_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
 
     }
@@ -277,6 +293,13 @@ class Heuristic_Button extends Button{
     }
 }
 
+class Color_Scheme_Button extends Button{
+    public Color_Scheme_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
+        super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
+    }
+    void click(){super.click();
+    }
+}
 
 /**
  * Unique type knap til knapper under file, som skal gemmes væk når man ikke har klikket på file.
@@ -290,25 +313,25 @@ class File_Type_Buttons extends Button{
 
     void render(){
         if (Ui.get_Button("file").clicked){
-            sketch.fill(162f);
+            sketch.fill(Color_Scheme.border_button);
             sketch.rect(x_pos,y_pos, x_size, y_size);
 
             int changeVal = 5;
 
             if (mouse_Over()){
                 sketch.push();
-                sketch.fill(0f);
+                sketch.fill(Color_Scheme.bg_button_hover);
                 sketch.rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
-                sketch.fill(255f); //Text color
+                sketch.fill(Color_Scheme.text_button_hover); //Text color
                 sketch.textSize((x_size-changeVal)/5f);
                 sketch.textAlign(sketch.CENTER);
                 sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
                 sketch.pop();
             } else {
                 sketch.push();
-                sketch.fill(80f);
+                sketch.fill(Color_Scheme.bg_button);
                 sketch.rect(x_pos,y_pos, x_size, y_size);
-                sketch.fill(255f);
+                sketch.fill(Color_Scheme.text_button);
                 sketch.textSize(x_size/5f);
                 sketch.textAlign(sketch.CENTER);
                 sketch.text(text, (x_pos)+(x_size)/2f, (y_pos)+(y_size)/2f+10);
