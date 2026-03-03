@@ -379,6 +379,8 @@ class Import_Button extends File_Type_Buttons{
     void click(){
         super.click();
 
+        delete_Graph();
+
         try {
             sketch.println("Beginning parsing");
 
