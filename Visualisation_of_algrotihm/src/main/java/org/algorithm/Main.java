@@ -540,15 +540,6 @@ public class Main extends PApplet{
             if(Ui.get_Button("heuristic").clicked && algorithm.get_Start() != null && algorithm.get_Goal() != null){
                 if (h == null) {
                     h = new Heuristic_Edge(this, start_node, goal_node);
-                } else {
-                    //heuristic is one behind except when it isn't , it moves first then is synced, else it always de-synced
-                    if(algorithm.find_Min_G_Node(start_node) != null) {
-                        h.set_To(algorithm.find_Min_G_Node(start_node));
-                    }else {
-                        h.set_To(start_node);
-                    }
-                    h.set_From(algorithm.get_Goal());
-                    h.update_Weight(0);
                 }
             }
 
