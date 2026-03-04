@@ -7,7 +7,7 @@ import java.io.FileInputStream;
 
 import static org.algorithm.Main.*;
 import static org.algorithm.Util.delete_Graph;
-import static processing.core.PApplet.str;
+import static processing.core.PApplet.*;
 
 
 class Button {
@@ -379,17 +379,8 @@ class Import_Button extends File_Type_Buttons{
         super.click();
 
         delete_Graph();
-
-        try {
-            sketch.println("Beginning parsing");
-
-            Util.parseOSMIntersection(sketch, "src/main/data/TestOSMFile.osm");
-
-            sketch.println("Completed parsing");
-
-        } catch(Exception e){
-            sketch.println("Failed ;(");
-            sketch.println(e.getMessage());
-        }
+        Main.zoom_level = 1f;
+        //calls the function file_Selected in main
+        sketch.selectInput("Select a file to process:", "file_Selected");
     }
 }
