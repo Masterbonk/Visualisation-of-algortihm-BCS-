@@ -234,7 +234,8 @@ public class Util {
 
     public static int convertY(String _y, double _bounds){
         float tmp = Float.parseFloat(_y);
-        return (int) ((tmp - _bounds)*1000000);
+        double flipY = 0- ((tmp - _bounds)*1000000);
+        return (int) flipY;
     }
 }
 
