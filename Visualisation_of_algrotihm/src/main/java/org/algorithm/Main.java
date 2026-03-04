@@ -358,6 +358,8 @@ public class Main extends PApplet{
         boolean clicked_on_button = false;
 
 
+
+
         //debug feature prints the list of a clicked nodes connected edges
         //or the to and from nodes of a clicked edge
         if(debug){
@@ -381,6 +383,8 @@ public class Main extends PApplet{
                     Ui.get_Button(s).click();
                 }
             }
+
+
 
 
             if (!clicked_on_button) {
@@ -509,6 +513,7 @@ public class Main extends PApplet{
                     }
                 }
 
+
                 if (Ui.get_Button("cut").clicked && !clicked_on_node) {
                     display_edge_weight_ui = false;
 
@@ -560,6 +565,18 @@ public class Main extends PApplet{
             }
         } else if (mouseButton == RIGHT){
             // right click functionality to be implemented
+            println("right click");
+            if (Ui.get_Button("line").clicked) {
+                println("deselect node");
+                node_1 = null;
+            }
+
+            if (Ui.get_Button("weight").clicked) {
+                println("deselect weight");
+                activeEdge = null;
+                currentInput =  new ArrayList<Character>();
+                display_edge_weight_ui = false;
+            }
         }
     }
 
