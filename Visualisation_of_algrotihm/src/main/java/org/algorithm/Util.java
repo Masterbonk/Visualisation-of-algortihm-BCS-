@@ -20,6 +20,9 @@ import static processing.core.PApplet.println;
 public class Util {
     PApplet sketch;
     int button_height;
+
+    public static HashMap<String, Node> name_to_node;
+
     Util(PApplet _sketch, int _button_height){
         sketch = _sketch;
         button_height = _button_height;
@@ -156,6 +159,8 @@ public class Util {
         ArrayList<String> nodes_in_current_way = new ArrayList<>();
         HashSet<String> all_nodes_in_use = new HashSet<>();
 
+        name_to_node = new HashMap<>();
+
         boolean stop_first_loop = false;
         boolean way_has_begun = false;
         while (input.hasNext() && !stop_first_loop) { //Run number 1
@@ -164,7 +169,7 @@ public class Util {
                 var name = input.getLocalName();
                 switch (name) {
                     case "way" -> {
-                        nodes_in_current_way.clear();
+                        nodes_in_current_way = new ArrayList<>();
                         way_has_begun = true;
                     }
                     case "tag" -> {
@@ -182,13 +187,10 @@ public class Util {
                 }
             }
         }
-
-        println("Made it out of first loop");
-
+        
         input.close();
         //input = XMLInputFactory.newInstance().createXMLStreamReader(new BufferedInputStream(inputStream));
         input = XMLInputFactory.newInstance().createXMLStreamReader(new BufferedInputStream(new FileInputStream(inp)));
-        println("Made it out of first loop 2");
 
         Node tmp = null;
         while (input.hasNext()) { //Run number 2
@@ -199,18 +201,22 @@ public class Util {
 
                 if (name.equals("node")) {
                     if (all_nodes_in_use.contains(input.getAttributeValue(null, "id"))){
-                        println("MADE A NODE");
+                        //println("MADE A NODE");
                         tmp = new Node(_sketch, convertX(input.getAttributeValue(null, "lon")),convertY(input.getAttributeValue(null, "lat")));
+                        name_to_node.put(input.getAttributeValue(null, "id"), tmp);
                     }
                 }
-
             }
         }
-        new BiEdge(_sketch,tmp,Main.node_array.getFirst(),0);
-        println("Made it out of second loop");
-
+        //new BiEdge(_sketch,tmp,Main.node_array.getFirst(),0);
+        //println("Made it out of second loop");
 
         //When all nodes have been added, we will connect them with edges
+        for (Util_Way w: way_list){
+            w.connect(_sketch);
+        }
+
+        name_to_node.clear();
     }
 
     public static int convertX(String _x){
@@ -230,5 +236,16 @@ class Util_Way{
     Util_Way(ArrayList<String> _node_list){
         node_list = _node_list;
         println(node_list.toString());
+    }
+
+    public void connect(PApplet _sketch){
+        for (int i = 0; i< node_list.size()-1; i++){
+            if (Util.name_to_node.get(node_list.get(i)) != null && Util.name_to_node.get(node_list.get(i + 1)) != null) {
+                new BiEdge(_sketch, Util.name_to_node.get(node_list.get(i)), Util.name_to_node.get(node_list.get(i + 1)));
+            } else {
+                //println("New connect call \n size: "+node_list.size()+"\n i: "+i);
+                println("One of them was null");
+            }
+        }
     }
 }
