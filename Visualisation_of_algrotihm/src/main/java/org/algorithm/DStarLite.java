@@ -5,8 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import static java.lang.Math.min;
-import static org.algorithm.Util.find_Shared_Edge;
-import static org.algorithm.Util.heuristic;
+import static org.algorithm.Util.*;
 import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
@@ -348,44 +347,7 @@ public class DStarLite {
         return U;
     }
 
-    /**
-     * @return the connected node with the lowest g value
-     * */
-    public Node find_Min_G_Node(Node _n){
-        int min = MAX_INT;
-        Node tmp = null;
-        for(Edge e: _n.connected){
-            Node other_node = e.from;
-            if (e.from == _n) other_node = e.to;
-            if (other_node.get_G_Val() != MAX_INT) {
-                if (min > e.weight+other_node.get_G_Val()){
-                    min = e.weight+other_node.get_G_Val();
-                    tmp = other_node;
-                }
-            }
 
-        }
-        return tmp;
-    }
-
-    /**
-     * Finds the smallest g value amongst all the nodes.
-     * @param _n The node that is part of the graph that we wish to find the smallest g value of
-     * @return The int value of the smallest g
-     */
-    public int find_Min_G(Node _n){
-        int min = MAX_INT;
-        for(Edge e: _n.connected){
-            Node other_node = e.from;
-            if (e.from == _n) other_node = e.to;
-            if (other_node.get_G_Val() != MAX_INT) {
-                if (min > e.weight+other_node.get_G_Val()){
-                    min = e.weight+other_node.get_G_Val();
-                }
-            }
-        }
-        return min;
-    }
 
 }
 
