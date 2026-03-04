@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import static org.algorithm.Util.heuristic;
+import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
 public class LPA_Star {
@@ -16,6 +17,8 @@ public class LPA_Star {
     LPA_Star(){
         Main.set_of_nodes = new HashSet<>();
         Main.edge_update_map = new HashMap<>();
+        start_node = null;
+        goal_node = null;
     }
 
     public void LPA_Main(){
@@ -29,6 +32,10 @@ public class LPA_Star {
     }
     
     public void initialize(){
+       if (start_node == null && goal_node == null) {
+            println("start and/or goal are null");
+            return;
+       }
        U = new Priority_Queue();
 
        for(Node n: Main.set_of_nodes){
@@ -49,7 +56,7 @@ public class LPA_Star {
 
     public void compute_Shortest_Path(){
 
-        while(U.top_Key().compareTo(calculate_Key(Main.goal_node)) < 0 || Main.goal_node.get_Rhs_Val() != Main.goal_node.get_G_Val()){
+        while(U.top_Key().compareTo(calculate_Key(goal_node)) < 0 || goal_node.get_Rhs_Val() != goal_node.get_G_Val()){
 
             Node n = U.pop();
 

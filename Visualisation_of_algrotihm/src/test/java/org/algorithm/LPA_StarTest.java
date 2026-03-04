@@ -33,9 +33,13 @@ class LPA_StarTest {
     void setUp() {
 
         sketch = new PApplet();
-        algorithm = new LPA_Star();
         Main.set_of_nodes = new HashSet<>();
         Main.edge_update_map = new HashMap<>();
+
+
+
+        algorithm = new LPA_Star();
+
         util = new Util(sketch,button_height);
         Main.Ui = new UI(sketch);
 
@@ -253,6 +257,8 @@ class LPA_StarTest {
         a.update_Rhs_Val(2);
         a.update_G_Val(2);
 
+        algorithm.initialize();
+
         algorithm.update_Vertex(a);
 
         assertFalse(algorithm.get_U().contains(d));
@@ -272,6 +278,8 @@ class LPA_StarTest {
         Edge ad = new Edge(sketch,a,d,1);
 
         algorithm.start_node = a;
+
+        algorithm.initialize();
 
         algorithm.update_Vertex(a);
 
