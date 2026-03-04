@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import static org.algorithm.Util.find_Min_G_Node;
-import static org.algorithm.Util.heuristic;
+import static org.algorithm.Util.*;
 import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
@@ -104,7 +103,7 @@ public class LPA_Star {
 
     public void update_Vertex(Node _n){
         if (_n != start_node){
-            _n.update_Rhs_Val(find_Min_G_Node(_n).get_G_Val());
+            _n.update_Rhs_Val(find_Min_G(_n));
         }
         if (U.contains(_n)){
             U.remove(_n);

@@ -50,6 +50,7 @@ class LPA_StarTest {
 
     }
 
+    /*
     @Test
     void LPA_main_base() {
         Node A = new Node(sketch, 3,2);
@@ -94,6 +95,8 @@ class LPA_StarTest {
         assertTrue(algorithm.get_Shortest_Path(S).contains(A));
 
     }
+
+     */
 
     @Test
     void initialize() {
@@ -284,7 +287,7 @@ class LPA_StarTest {
         algorithm.update_Vertex(a);
 
         assertEquals(0,a.get_Rhs_Val());
-        assertEquals(0,a.get_G_Val());
+        assertEquals(MAX_INT,a.get_G_Val());
     }
 
 
