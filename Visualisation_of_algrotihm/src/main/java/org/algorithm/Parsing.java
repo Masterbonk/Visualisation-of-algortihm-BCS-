@@ -6,10 +6,8 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Objects;
+import java.lang.reflect.Array;
+import java.util.*;
 
 import static org.algorithm.Util.generate_Name;
 import static processing.core.PApplet.println;
@@ -274,6 +272,12 @@ public class Parsing {
         //When all nodes have been added, we will connect them with edges
         for (Util_Way w: way_list){
             w.connect(_sketch);
+        }
+
+        //When we have made the initial nodes and edges, we will completly remove the intersections
+        ArrayList<Node> array = (ArrayList<Node>) Main.node_array.clone();
+        for (int i = 0; i < array.size(); i++){
+            array.get(i).strait_Edge_Connecting_Node();
         }
 
         name_to_node = new HashMap<>();

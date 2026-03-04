@@ -394,6 +394,7 @@ public class Main extends PApplet{
             for (Node t : node_array) {
                 if (t.mouse_Over()) {
                     println("Node edges "+ t.connected);
+                    println("Size of connected = "+t.connected.size());
                 }
             }
 
