@@ -307,14 +307,26 @@ public class Util {
             w.connect(_sketch);
         }
 
+        //Clears the name to node map, so we don't save a lot of objects we might not need.
         name_to_node = new HashMap<>();
     }
 
+    /**
+     * This parseOSM works much like the other one, but is made to specifically eliminate all nodes that
+     * are not nodes at the end of a line OR are nodes that make intersections. Much of the code is the
+     * same, so if a part is not described the describtion can be read in parseOSM.
+     * @param _sketch The sketch file so it can do stuff like create new edges or nodes.
+     * @param inp The string file path to the file.
+     * @throws Exception Nessecary to use the file reader as the file might be missing or smt.
+     */
     public static void parseOSMIntersection(PApplet _sketch,String inp) throws Exception  {
         var input = XMLInputFactory.newInstance().createXMLStreamReader(new BufferedInputStream(new FileInputStream(inp)));
 
         ArrayList<Util_Way> way_list = new ArrayList<>();
         ArrayList<String> nodes_in_current_way = new ArrayList<>();
+
+        //All_nodes_in_use has been made into a hashmap to keep track of which ways have a specific node
+        // in their list.
         HashMap<String, ArrayList<Util_Way>> all_nodes_in_use = new HashMap<>();
 
         name_to_node = new HashMap<>();
@@ -335,13 +347,17 @@ public class Util {
                         minlatY = Float.parseFloat(input.getAttributeValue(null, "minlat"));
                     }
                     case "way" -> {
-                        nodes_in_current_way = new ArrayList<String>();
+                        nodes_in_current_way = new ArrayList<>();
                         way_has_begun = true;
                     }
                     case "tag" -> {
                         if (way_has_begun && Objects.equals(input.getAttributeValue(null, "k"), "highway")){
+
+                            //We create the way for the object in a local variable to use it later in here.
                             Util_Way new_way = new Util_Way(nodes_in_current_way);
                             for (String s: nodes_in_current_way){
+
+                                //Adds the way to the hashmap connected to the id of the node.
                                 if (nodes_in_current_way.contains(s)){
                                     ArrayList<Util_Way> tmp = new ArrayList<>();
                                     all_nodes_in_use.putIfAbsent(s, tmp);
@@ -352,6 +368,8 @@ public class Util {
                                     all_nodes_in_use.putIfAbsent(s, tmp);
                                 }
                             }
+
+                            //Adds the way to the list of ways.
                             way_list.add(new_way);
                         }
                     }
@@ -366,42 +384,50 @@ public class Util {
         }
 
         input.close();
-        //input = XMLInputFactory.newInstance().createXMLStreamReader(new BufferedInputStream(inputStream));
+
         input = XMLInputFactory.newInstance().createXMLStreamReader(new BufferedInputStream(new FileInputStream(inp)));
 
         Node tmp = null;
-        while (input.hasNext()) { //Run number 2
+        boolean stop_second_loop = false;
+
+        while (input.hasNext() && !stop_second_loop) { //Run number 2
             var tagKind = input.next();
             if (tagKind == XMLStreamConstants.START_ELEMENT) {
-                //println("1");
+
                 var name = input.getLocalName();
 
                 if (name.equals("node")) {
                     if (all_nodes_in_use.containsKey(input.getAttributeValue(null, "id"))){
                         if (all_nodes_in_use.get(input.getAttributeValue(null, "id")).size() > 1){
+                            //Checks if there are more than 1 way that has the node in it's list.
                             tmp = new Node(_sketch, convertX(input.getAttributeValue(null, "lon"), minlonX),convertY(input.getAttributeValue(null, "lat"), minlatY));
                             name_to_node.put(input.getAttributeValue(null, "id"), tmp);
                         } else {
+                            //removes the node from the list, where if it returns true the way is too
+                            // small and should be completly removed from the way_list.
                             if(all_nodes_in_use.get(input.getAttributeValue(null, "id")).getFirst().remove(input.getAttributeValue(null, "id"))){
                                 way_list.remove(all_nodes_in_use.get(input.getAttributeValue(null, "id")).getFirst());
                             } else if (all_nodes_in_use.get(input.getAttributeValue(null, "id")).getFirst().node_Should_Exist(input.getAttributeValue(null, "id"))){
+                                // If we don't have to remove the way (it has more nodes than removed),
+                                // then we check whether we need the node to exist, ie. it's the first or
+                                // last node. If so we quickly make it here to avoid errors later.
                                 tmp = new Node(_sketch, convertX(input.getAttributeValue(null, "lon"), minlonX),convertY(input.getAttributeValue(null, "lat"), minlatY));
                                 name_to_node.put(input.getAttributeValue(null, "id"), tmp);
                             }
                         }
                     }
+                } else if (name.equals("way")) {
+                    stop_second_loop = true;
                 }
             }
         }
-        //new BiEdge(_sketch,tmp,Main.node_array.getFirst(),0);
-        //println("Made it out of second loop");
 
         //When all nodes have been added, we will connect them with edges
         for (Util_Way w: way_list){
             w.connect(_sketch);
         }
 
-        name_to_node.clear();
+        name_to_node = new HashMap<>();
     }
 
     public static int convertX(String _x, double _bounds){
