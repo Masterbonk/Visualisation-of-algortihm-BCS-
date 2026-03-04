@@ -131,13 +131,13 @@ public class Util {
         Main.start_node = null;
         Main.node_1 = null;
         Main.initial_goal_node = null;
-        count = 0;
-        letter = 64;
         Main.initial_start_node = null;
         if (Main.algorithm.get_U() != null){
             Main.algorithm.get_U().clear_Heap();
             Main.algorithm.get_U().clear_Keys();
         }
+        count = 0;
+        letter = 64;
 
 
     }
@@ -153,6 +153,9 @@ public class Util {
         return null;
     }
 
+    /**
+     * @return a string composed of a letter based of an ascii code and a number depending on how many of that letter nodes there are
+     * */
     public static String generate_Name(){
         if(letter == 90){ //if we are at the end of the alphabet via ascii, then go back to A (64 isn't A, its just so it doesn't skip)
             letter = 64;
