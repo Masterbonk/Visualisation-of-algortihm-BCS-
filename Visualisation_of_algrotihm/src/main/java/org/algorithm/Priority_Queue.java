@@ -152,7 +152,14 @@ public class Priority_Queue {
         return heap;
     }
 
+    public void clear_Heap(){
+        heap = new ArrayList<>();
+    }
+
     public HashMap<Node,Tupple> get_Keys(){return keys;}
+    public void clear_Keys(){
+        keys = new HashMap<Node,Tupple>();
+    }
 
 
 }

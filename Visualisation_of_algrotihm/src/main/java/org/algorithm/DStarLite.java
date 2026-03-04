@@ -154,7 +154,7 @@ public class DStarLite {
                 update_Vertex(e.to);
                 update_Vertex(e.from);
             }
-            Main.edge_update_map.clear();
+            Main.edge_update_map = new HashMap<Edge, Integer>();
 
             compute_Shortest_Path();
         }
@@ -344,11 +344,8 @@ public class DStarLite {
      */
     public void remove_Node(Node n){
         Main.set_of_nodes.remove(n);
-
-        try {
+        if(U != null){
             U.remove(n);
-        } catch (Exception e){
-            println(e.getMessage());
         }
     }
 

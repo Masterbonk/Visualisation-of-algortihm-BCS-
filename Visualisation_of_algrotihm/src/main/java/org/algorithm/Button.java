@@ -2,8 +2,12 @@ package org.algorithm;
 
 import processing.core.PApplet;
 
+import java.io.File;
+import java.io.FileInputStream;
+
 import static org.algorithm.Main.*;
-import static processing.core.PApplet.str;
+import static org.algorithm.Util.delete_Graph;
+import static processing.core.PApplet.*;
 
 
 class Button {
@@ -134,8 +138,8 @@ class Reset_Button extends Button{
             n.color(Color_Scheme.node);
             n.change_In_PQ(false);
         }
-        algorithm.get_U().get_Heap().clear();
-        algorithm.get_U().get_Keys().clear();
+        algorithm.get_U().clear_Heap();
+        algorithm.get_U().clear_Keys();
         if (!Ui.get_Button("pause").clicked){
             Ui.get_Button("pause").click();
         }
@@ -290,6 +294,15 @@ class Heuristic_Button extends Button{
     }
 }
 
+class Clear_Button extends Button{
+    public Clear_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
+        super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
+    }
+    void click(){
+        delete_Graph();
+    }
+}
+
 class Color_Scheme_Button extends Button{
     public Color_Scheme_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
@@ -362,7 +375,12 @@ class Import_Button extends File_Type_Buttons{
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
     }
 
-    void click(){super.click();
-        sketch.println("Not implemented Import");
+    void click(){
+        super.click();
+
+        delete_Graph();
+        Main.zoom_level = 1f;
+        //calls the function file_Selected in main
+        sketch.selectInput("Select a file to process:", "file_Selected");
     }
 }
