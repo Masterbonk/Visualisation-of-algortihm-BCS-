@@ -192,13 +192,6 @@ public class Main extends PApplet{
 
     }
 
-    public void file_Selected(File selection) throws Exception {
-        if (selection == null) {
-            println("Window was closed or the user hit cancel.");
-        } else {
-            Util.parseOSM(this, selection.getAbsolutePath());
-        }
-    }
 
     public void rescale(){
 
