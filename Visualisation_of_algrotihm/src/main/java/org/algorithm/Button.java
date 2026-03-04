@@ -379,6 +379,7 @@ class Import_Button extends File_Type_Buttons{
         super.click();
 
         delete_Graph();
+        Main.zoom_level = 1f;
 
         sketch.selectInput("Select a file to process:", "file_Selected");
 
