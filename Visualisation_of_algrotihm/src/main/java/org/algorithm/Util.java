@@ -6,13 +6,12 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
 
-import static org.algorithm.Main.Ui;
+import static org.algorithm.Main.*;
 import static processing.core.PApplet.print;
 import static processing.core.PApplet.println;
 
@@ -132,6 +131,8 @@ public class Util {
         Main.start_node = null;
         Main.node_1 = null;
         Main.initial_goal_node = null;
+        count = 0;
+        letter = 64;
         Main.initial_start_node = null;
         if (Main.algorithm.get_U() != null){
             Main.algorithm.get_U().clear_Heap();
@@ -150,6 +151,21 @@ public class Util {
         }
 
         return null;
+    }
+
+    public static String generate_Name(){
+        if(letter == 90){ //if we are at the end of the alphabet via ascii, then go back to A (64 isn't A, its just so it doesn't skip)
+            letter = 64;
+            count++;//also increment our number label
+        }
+        letter++;//increment our ascii letter
+        if (count == 0) { //if the count is 0 we don't append the number to the name
+            return Character.toString ((char) letter);
+        } else {//else we append the number to the name
+            return Character.toString ((char) letter) + count;
+        }
+
+
     }
 
     public static void parseOSM(PApplet _sketch,String inp) throws Exception  {
@@ -210,7 +226,7 @@ public class Util {
                 if (name.equals("node")) {
                     if (all_nodes_in_use.contains(input.getAttributeValue(null, "id"))){
                         //println("MADE A NODE");
-                        tmp = new Node(_sketch, convertX(input.getAttributeValue(null, "lon"), minlonX),convertY(input.getAttributeValue(null, "lat"), minlatY));
+                        tmp = new Node(_sketch, convertX(input.getAttributeValue(null, "lon"), minlonX),convertY(input.getAttributeValue(null, "lat"), minlatY),generate_Name());
                         name_to_node.put(input.getAttributeValue(null, "id"), tmp);
                     }
                 }
