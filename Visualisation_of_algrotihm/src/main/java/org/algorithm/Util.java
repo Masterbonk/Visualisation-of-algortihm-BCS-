@@ -164,7 +164,7 @@ public class Util {
                 var name = input.getLocalName();
                 switch (name) {
                     case "way" -> {
-                        nodes_in_current_way.clear();
+                        nodes_in_current_way = new ArrayList<String>();
                         way_has_begun = true;
                     }
                     case "tag" -> {

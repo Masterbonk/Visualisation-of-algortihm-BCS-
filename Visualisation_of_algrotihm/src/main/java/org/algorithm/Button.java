@@ -138,8 +138,8 @@ class Reset_Button extends Button{
             n.color(Color_Scheme.node);
             n.change_In_PQ(false);
         }
-        algorithm.get_U().get_Heap().clear();
-        algorithm.get_U().get_Keys().clear();
+        algorithm.get_U().clear_Heap();
+        algorithm.get_U().clear_Keys();
         if (!Ui.get_Button("pause").clicked){
             Ui.get_Button("pause").click();
         }

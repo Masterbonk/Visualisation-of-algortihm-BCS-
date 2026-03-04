@@ -300,7 +300,7 @@ public class Main extends PApplet{
                 }
 
                 display_edge_weight_ui = false;
-                currentInput.clear();
+                currentInput = new ArrayList<Character>();
             }
         } else {
             activeEdge = null;
@@ -529,12 +529,12 @@ public class Main extends PApplet{
                 if (Ui.get_Button("weight").clicked && !clicked_on_node) {
                     for (Edge e : edge_array) {
                         if (e.mouseOver()) {
-                            currentInput.clear();
+                            currentInput = new ArrayList<Character>();
                             display_edge_weight_ui = true;
                             activeEdge = e;
                             break;
                         } else if (!e.mouseOver()) {
-                            currentInput.clear();
+                            currentInput =  new ArrayList<Character>();
                             display_edge_weight_ui = false;
                             activeEdge = null;
 
