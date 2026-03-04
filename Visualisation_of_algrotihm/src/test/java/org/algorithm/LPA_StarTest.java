@@ -134,7 +134,8 @@ class LPA_StarTest {
 
     @Test
     void calculate_Key_base() {
-        algorithm.start_node = new Node(sketch, 0, 5);
+        algorithm.start_node = new Node(sketch, 5, 5);
+        algorithm.goal_node = new Node(sketch,0,5);
 
         Node a = new Node(sketch, 5, 5);
         a.update_G_Val(100);
@@ -150,7 +151,8 @@ class LPA_StarTest {
     @Test
     void calculate_Key_pick_lowest_rhs_g() {
 
-        algorithm.start_node = new Node(sketch, 0, 5);
+        algorithm.start_node = new Node(sketch, 10, 5);
+        algorithm.goal_node = new Node(sketch, 0, 5);
 
         Node a = new Node(sketch, 5, 5);
         a.update_G_Val(7);
