@@ -400,7 +400,7 @@ public class Util {
                     if (all_nodes_in_use.containsKey(input.getAttributeValue(null, "id"))){
                         if (all_nodes_in_use.get(input.getAttributeValue(null, "id")).size() > 1){
                             //Checks if there are more than 1 way that has the node in it's list.
-                            tmp = new Node(_sketch, convertX(input.getAttributeValue(null, "lon"), minlonX),convertY(input.getAttributeValue(null, "lat"), minlatY));
+                            tmp = new Node(_sketch, convertX(input.getAttributeValue(null, "lon"), minlonX),convertY(input.getAttributeValue(null, "lat"), minlatY), generate_Name());
                             name_to_node.put(input.getAttributeValue(null, "id"), tmp);
                         } else {
                             //removes the node from the list, where if it returns true the way is too
@@ -411,7 +411,7 @@ public class Util {
                                 // If we don't have to remove the way (it has more nodes than removed),
                                 // then we check whether we need the node to exist, ie. it's the first or
                                 // last node. If so we quickly make it here to avoid errors later.
-                                tmp = new Node(_sketch, convertX(input.getAttributeValue(null, "lon"), minlonX),convertY(input.getAttributeValue(null, "lat"), minlatY));
+                                tmp = new Node(_sketch, convertX(input.getAttributeValue(null, "lon"), minlonX),convertY(input.getAttributeValue(null, "lat"), minlatY), generate_Name());
                                 name_to_node.put(input.getAttributeValue(null, "id"), tmp);
                             }
                         }
