@@ -8,6 +8,7 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
 
@@ -130,8 +131,8 @@ public class Util {
         Main.initial_goal_node = null;
         Main.initial_start_node = null;
         if (Main.algorithm.get_U() != null){
-            Main.algorithm.get_U().get_Heap().clear();
-            Main.algorithm.get_U().get_Keys().clear();
+            Main.algorithm.get_U().clear_Heap();
+            Main.algorithm.get_U().clear_Keys();
         }
 
 
