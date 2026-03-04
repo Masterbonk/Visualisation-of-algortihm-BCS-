@@ -90,7 +90,7 @@ public class LPA_Star {
         if (n.get_G_Val() != MAX_INT) {
             ArrayList<Node> result = new ArrayList<>();
             while (!result.contains(Main.goal_node)) {
-                Node tmp2 = Util.find_Min_G_Node(tmp);
+                Node tmp2 = find_Min_G_Node(tmp);
                 result.add(tmp);
                 tmp = tmp2;
             }
@@ -103,7 +103,7 @@ public class LPA_Star {
 
     public void update_Vertex(Node _n){
         if (_n != start_node){
-            _n.update_Rhs_Val(Util.find_Min_G_Node(_n).get_G_Val());
+            _n.update_Rhs_Val(find_Min_G_Node(_n).get_G_Val());
         }
         if (U.contains(_n)){
             U.remove(_n);
@@ -137,5 +137,24 @@ public class LPA_Star {
             }
             Main.edge_update_map = new HashMap<>();
         }
+    }
+    /**
+     * @return the connected node with the lowest g value
+     * */
+    public Node find_Min_G_Node(Node _n){
+        int min = MAX_INT;
+        Node tmp = null;
+        for(Edge e: _n.connected){
+            Node other_node = e.from;
+            if (e.from == _n) other_node = e.to;
+            if (other_node.get_G_Val() != MAX_INT) {
+                if (min > e.weight+other_node.get_G_Val()){
+                    min = e.weight+other_node.get_G_Val();
+                    tmp = other_node;
+                }
+            }
+
+        }
+        return tmp;
     }
 }

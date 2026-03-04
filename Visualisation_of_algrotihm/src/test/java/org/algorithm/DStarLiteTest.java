@@ -44,7 +44,7 @@ class DStarLiteTest {
 
     @AfterEach
     void tearDown() {
-        Main.edge_update_map = new HashMap<Edge,Integer>();
+        Main.edge_update_map = new HashMap<>();
         Main.start_node = null;
         Main.goal_node = null;
 
