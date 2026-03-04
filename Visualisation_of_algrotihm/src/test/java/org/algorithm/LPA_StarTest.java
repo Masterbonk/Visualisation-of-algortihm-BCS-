@@ -225,9 +225,9 @@ class LPA_StarTest {
         Node c = new Node(sketch,0,10);
         Node d = new Node(sketch,2,2);
 
-        Edge ab = new Edge(sketch,a,b,1);
-        Edge ac = new Edge(sketch,a,c,1);
-        Edge ad = new Edge(sketch,a,d,1);
+        Edge ab = new BiEdge(sketch,a,b,1);
+        Edge ac = new BiEdge(sketch,a,c,1);
+        Edge ad = new BiEdge(sketch,a,d,1);
 
         algorithm.initialize();
         algorithm.update_Vertex(a);
@@ -246,9 +246,9 @@ class LPA_StarTest {
         Node c = new Node(sketch,0,10);
         Node d = new Node(sketch,2,2);
 
-        Edge ab = new Edge(sketch,a,b,1);
-        Edge ac = new Edge(sketch,a,c,1);
-        Edge ad = new Edge(sketch,a,d,1);
+        Edge ab = new BiEdge(sketch,a,b,1);
+        Edge ac = new BiEdge(sketch,a,c,1);
+        Edge ad = new BiEdge(sketch,a,d,1);
 
         a.update_Rhs_Val(2);
         a.update_G_Val(2);
@@ -267,9 +267,9 @@ class LPA_StarTest {
         Node c = new Node(sketch,0,10);
         Node d = new Node(sketch,2,2);
 
-        Edge ab = new Edge(sketch,a,b,1);
-        Edge ac = new Edge(sketch,a,c,1);
-        Edge ad = new Edge(sketch,a,d,1);
+        Edge ab = new BiEdge(sketch,a,b,1);
+        Edge ac = new BiEdge(sketch,a,c,1);
+        Edge ad = new BiEdge(sketch,a,d,1);
 
         algorithm.start_node = a;
 
