@@ -383,7 +383,7 @@ class Import_Button extends File_Type_Buttons{
         try {
             sketch.println("Beginning parsing");
 
-            Util.parseOSM(sketch, "src/main/data/TestOSMFile.osm");
+            Util.parseOSMIntersection(sketch, "src/main/data/TestOSMFile.osm");
 
             sketch.println("Completed parsing");
 
@@ -391,7 +391,5 @@ class Import_Button extends File_Type_Buttons{
             sketch.println("Failed ;(");
             sketch.println(e.getMessage());
         }
-
-        sketch.println("Not implemented Import");
     }
 }
