@@ -4,9 +4,12 @@ import processing.core.PFont;
 import processing.core.*;
 import garciadelcastillo.dashedlines.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
+
+import static org.algorithm.Util.generate_Name;
 
 //used this code to implement zoom feature https://forum.processing.org/one/topic/zooming-in-and-zooming-out.html
 
@@ -29,7 +32,7 @@ public class Main extends PApplet{
     public static Node goal_node;
     public static Node initial_start_node;
     public static Node initial_goal_node;
-
+    
     public static PFont font;
     public static PFont mono;
     private boolean pink_mode;
@@ -60,8 +63,8 @@ public class Main extends PApplet{
     public static ArrayList<Node> node_array = new ArrayList<>();
 
     Heuristic_Edge h;
-    int count = 0;
-    int letter = 65;
+    public static int count = 0;
+    public static int letter = 64;
 
 
     /**
@@ -127,7 +130,6 @@ public class Main extends PApplet{
         Make_Graph();
 
 
-
         // Set the dash-gap pattern in pixels
 
     }
@@ -190,6 +192,7 @@ public class Main extends PApplet{
 
     }
 
+
     public void rescale(){
 
         if (dWidth != width || dHeight != height){
@@ -224,6 +227,21 @@ public class Main extends PApplet{
 
     }
 
+    /**
+     * runs pareseOSM on the selected file
+     * */
+    public void file_Selected(File selection) throws Exception {
+        if (selection == null) {
+            println("Window was closed or the user hit cancel.");
+        } else {
+            if (debug) {
+                Util.parseOSM(this, selection.getAbsolutePath());
+            } else {
+                Util.parseOSMIntersection(this, selection.getAbsolutePath());
+            }
+        }
+    }
+
     /** This function ensures that the zoom level updates
      * and that there is min & max zoom
      * */
@@ -231,7 +249,7 @@ public class Main extends PApplet{
         if(keyPressed) {
             if (key == '+' && zoom_level < 3) {
                 zoom_level += zoom_increase;
-            } else if (key == '-' && zoom_level > 0) {
+            } else if (key == '-' && zoom_level > 0.1) {
                 zoom_level -= zoom_increase;
             }
         }
@@ -245,7 +263,7 @@ public class Main extends PApplet{
         if(zoom_level < 3 && wheel_number < 0) {
                 zoom_level += zoom_increase;
         }
-        if(zoom_level > 0 && wheel_number > 0) {
+        if(zoom_level > 0.1 && wheel_number > 0) {
             zoom_level -= zoom_increase;
         }
     }
@@ -300,7 +318,7 @@ public class Main extends PApplet{
                 }
 
                 display_edge_weight_ui = false;
-                currentInput.clear();
+                currentInput = new ArrayList<Character>();
             }
         } else {
             activeEdge = null;
@@ -396,18 +414,8 @@ public class Main extends PApplet{
                         }
                     }
                     if (!over_any_nodes) {
-                        String name; //temp name string
-                        if (count == 0) { //if the count is 0 we don't append the number to the name
-                            name = Character.toString ((char) letter);
-                        } else {//else we append the number to the name
-                            name = Character.toString ((char) letter) + count;
-                        }
-                        new Node(this, mouseX, mouseY, name);
-                        if(letter == 90){ //if we are at the end of the alphabet via ascii, then go back to A (64 isnt A, its just so it dosent skip)
-                            letter = 64;
-                            count++;//also increment our number label
-                        }
-                        letter++;//increment our ascii letter
+
+                        new Node(this, mouseX, mouseY, generate_Name());
 
 
                     }
@@ -491,18 +499,9 @@ public class Main extends PApplet{
 
                 //When we have line, and click outside a node
                 if (Ui.get_Button("line").clicked && !clicked_on_node) {
-                    String name;
-                    if (count == 0) {
-                        name = Character.toString ((char) letter);
-                    } else {
-                        name = Character.toString ((char) letter) + count;
-                    }
-                    Node tmp = new Node(this, mouseX, mouseY, name);
-                    if(letter == 90){
-                        letter = 64;
-                        count++;
-                    }
-                    letter++;
+
+                    Node tmp = new Node(this, mouseX, mouseY, generate_Name());
+
 
                     if (node_1 == null) {
                         node_1 = tmp;
@@ -534,12 +533,12 @@ public class Main extends PApplet{
                 if (Ui.get_Button("weight").clicked && !clicked_on_node) {
                     for (Edge e : edge_array) {
                         if (e.mouseOver()) {
-                            currentInput.clear();
+                            currentInput = new ArrayList<Character>();
                             display_edge_weight_ui = true;
                             activeEdge = e;
                             break;
                         } else if (!e.mouseOver()) {
-                            currentInput.clear();
+                            currentInput =  new ArrayList<Character>();
                             display_edge_weight_ui = false;
                             activeEdge = null;
 
@@ -563,6 +562,8 @@ public class Main extends PApplet{
             if (!Ui.get_Button("file").mouse_Over() && !Ui.get_Button("export").mouse_Over() && !Ui.get_Button("import").mouse_Over() && Ui.get_Button("file").clicked) { //Lukker file menuen hvis man klikker uden for den mens den er åben.
                 Ui.get_Button("file").clicked = false;
             }
+
+
         } else if (mouseButton == RIGHT){
             // right deselects any selected object
             if (Ui.get_Button("line").clicked) {
@@ -630,10 +631,8 @@ public class Main extends PApplet{
             for (int j = 0; j < 7; j++){
 
                 String name;
-                if (count == 0) {name = Character.toString ((char) letter);}
-                else {name = Character.toString ((char) letter) + count;}
 
-                _new = new Node(this,i*100+100,100*j+100+button_height, name);
+                _new = new Node(this,i*100+100,100*j+100+button_height, generate_Name());
 
                 if(old != null){
                     new BiEdge(this,old,_new,1);
@@ -642,14 +641,7 @@ public class Main extends PApplet{
                     new BiEdge(this,node_array.get(node_array.indexOf(_new)-7),_new,1);
                 }
 
-
-
                 old = _new;
-
-                if(letter == 90){letter = 64;count++;}
-                letter++;
-
-
 
             }
             old = null;

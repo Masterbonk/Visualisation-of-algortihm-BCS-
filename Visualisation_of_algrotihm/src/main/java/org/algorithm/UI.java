@@ -99,7 +99,7 @@ public class UI {
     }
 
     /**
-     *  Turns of all other buttons than the one passed through (except pause)
+     *  Turns of all other buttons on the bottom ui other than the one passed through (except pause)
      * */
     public void turn_Off_All_Buttons(Button _button){
         display_edge_weight_ui = false;
