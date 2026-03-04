@@ -192,7 +192,7 @@ public class Node {
             other_2.connected.remove(connected.getLast());
 
 
-            new BiEdge(sketch, other_1, other_2);
+            new BiEdge(sketch, other_1, other_2, connected.getFirst().weight + connected.getLast().weight);
 
             edge_array.remove(connected.getFirst());
             edge_array.remove(connected.getLast());
