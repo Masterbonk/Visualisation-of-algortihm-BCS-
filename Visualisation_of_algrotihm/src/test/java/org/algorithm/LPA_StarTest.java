@@ -261,6 +261,7 @@ class LPA_StarTest {
         Edge ab = new Edge(sketch,a,b,3);
         Edge starta = new Edge(sketch,a,start,4);
 
+        algorithm.initialize();
         a.update_G_Val(4);
         a.update_Rhs_Val(10);
 
@@ -270,7 +271,7 @@ class LPA_StarTest {
         start.update_G_Val(0);
         start.update_Rhs_Val(0);
 
-        algorithm.initialize();
+
 
         algorithm.update_Vertex(a);
 
