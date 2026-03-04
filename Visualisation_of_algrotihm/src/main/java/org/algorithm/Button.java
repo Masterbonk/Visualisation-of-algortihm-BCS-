@@ -383,9 +383,6 @@ class Import_Button extends File_Type_Buttons{
         //calls the function file_Selected in main
         sketch.selectInput("Select a file to process:", "file_Selected");
 
-
-        sketch.selectInput("Select a file to process:", "file_Selected");
-
     }
 
     /**
