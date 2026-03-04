@@ -7,7 +7,7 @@ import java.io.FileInputStream;
 
 import static org.algorithm.Main.*;
 import static org.algorithm.Util.delete_Graph;
-import static processing.core.PApplet.str;
+import static processing.core.PApplet.*;
 
 
 class Button {
@@ -380,10 +380,15 @@ class Import_Button extends File_Type_Buttons{
 
         delete_Graph();
 
+        sketch.selectInput("Select a file to process:", "file_Selected");
+
+
+
+
         try {
             sketch.println("Beginning parsing");
 
-            Util.parseOSM(sketch, "src/main/data/TestOSMFile.osm");
+            //Util.parseOSM(sketch, input);
 
             sketch.println("Completed parsing");
 
