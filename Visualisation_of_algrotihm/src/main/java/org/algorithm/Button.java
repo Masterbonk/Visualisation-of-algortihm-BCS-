@@ -385,14 +385,5 @@ class Import_Button extends File_Type_Buttons{
 
     }
 
-    /**
-     * runs pareseOSM on the selected file
-     * */
-    public void file_Selected(File selection) throws Exception {
-        if (selection == null) {
-            println("Window was closed or the user hit cancel.");
-        } else {
-            Util.parseOSM(sketch, selection.getAbsolutePath());
-        }
-    }
+
 }

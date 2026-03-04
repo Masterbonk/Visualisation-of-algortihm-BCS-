@@ -227,6 +227,17 @@ public class Main extends PApplet{
 
     }
 
+    /**
+     * runs pareseOSM on the selected file
+     * */
+    public void file_Selected(File selection) throws Exception {
+        if (selection == null) {
+            println("Window was closed or the user hit cancel.");
+        } else {
+            Util.parseOSM(this, selection.getAbsolutePath());
+        }
+    }
+
     /** This function ensures that the zoom level updates
      * and that there is min & max zoom
      * */
