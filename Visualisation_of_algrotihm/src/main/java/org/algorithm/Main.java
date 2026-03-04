@@ -270,6 +270,16 @@ public class Main extends PApplet{
 
         }
 
+        if (keyCode == UP){
+            translate_y -= 10;
+        } else if (keyCode == DOWN){
+            translate_y += 10;
+        } else if (keyCode == LEFT){
+            translate_x -= 10;
+        } else if (keyCode == RIGHT){
+            translate_x += 10;
+        }
+
         //handles all text input
         //ensure this doesn't fuck with any other keypressing
         if (display_edge_weight_ui) {
