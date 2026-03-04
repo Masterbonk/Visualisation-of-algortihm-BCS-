@@ -564,15 +564,12 @@ public class Main extends PApplet{
                 Ui.get_Button("file").clicked = false;
             }
         } else if (mouseButton == RIGHT){
-            // right click functionality to be implemented
-            println("right click");
+            // right deselects any selected object
             if (Ui.get_Button("line").clicked) {
-                println("deselect node");
                 node_1 = null;
             }
 
             if (Ui.get_Button("weight").clicked) {
-                println("deselect weight");
                 activeEdge = null;
                 currentInput =  new ArrayList<Character>();
                 display_edge_weight_ui = false;
