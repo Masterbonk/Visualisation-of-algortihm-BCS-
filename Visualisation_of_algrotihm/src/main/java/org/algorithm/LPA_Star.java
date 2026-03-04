@@ -49,7 +49,7 @@ public class LPA_Star {
     }
 
     public Tupple calculate_Key(Node _n){
-        float k = Math.min(_n.get_G_Val(), _n.get_Rhs_Val()) + heuristic(_n,start_node);
+        float k = Math.min(_n.get_G_Val(), _n.get_Rhs_Val()) + heuristic(_n,goal_node);
         int v = Math.min(_n.get_G_Val(), _n.get_Rhs_Val());
         return new Tupple(k,v);
     }
