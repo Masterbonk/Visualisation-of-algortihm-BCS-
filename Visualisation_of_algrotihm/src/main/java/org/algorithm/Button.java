@@ -379,24 +379,19 @@ class Import_Button extends File_Type_Buttons{
         super.click();
 
         delete_Graph();
-
+        //calls the function file_Selected in main
         sketch.selectInput("Select a file to process:", "file_Selected");
 
+    }
 
-
-
-        try {
-            sketch.println("Beginning parsing");
-
-            //Util.parseOSM(sketch, input);
-
-            sketch.println("Completed parsing");
-
-        } catch(Exception e){
-            sketch.println("Failed ;(");
-            sketch.println(e.getMessage());
+    /**
+     * runs pareseOSM on the selected file
+     * */
+    public void file_Selected(File selection) throws Exception {
+        if (selection == null) {
+            println("Window was closed or the user hit cancel.");
+        } else {
+            Util.parseOSM(sketch, selection.getAbsolutePath());
         }
-
-        sketch.println("Not implemented Import");
     }
 }
