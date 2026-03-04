@@ -352,6 +352,11 @@ public class Util {
     }
 }
 
+/**
+ * Util_Way is ways described in OSM files. This class is made to support the parseOSM functions and keeps
+ * some specific info related to the ways. It specifically keeps a list of nodes in our node_list, using a string
+ * ArrayList, where each string corresponds to a node ID in the OSM file.
+ */
 class Util_Way{
     ArrayList<String> node_list;
 
@@ -360,6 +365,12 @@ class Util_Way{
         println(node_list.toString());
     }
 
+    /**
+     * Connect is a function that creates BiEdges between all the nodes in the node_list. They are made in order they are in the list, so first element will connect to second element and so on.
+     *
+     * If it prints "One of them was null" it means that either node does not exist.
+     * @param _sketch The sketch for the program, necessary to use certain processing functions.
+     */
     public void connect(PApplet _sketch){
         for (int i = 0; i< node_list.size()-1; i++){
             if (Util.name_to_node.get(node_list.get(i)) != null && Util.name_to_node.get(node_list.get(i + 1)) != null) {
@@ -389,6 +400,11 @@ class Util_Way{
         }
     }
 
+    /**
+     * A special function that checks whether a node is at the end or the start of this ways list.
+     * @param _node_ref The node id/ref in a string that we wish to check.
+     * @return true if it's at the start or end of the list, false otherwise.
+     */
     public boolean node_Should_Exist(String _node_ref){
         if (node_list.get(0).equals(_node_ref) || node_list.get(node_list.size()-1).equals(_node_ref)){
             return true;
