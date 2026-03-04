@@ -78,7 +78,9 @@ public class Util {
 
         Ui.add_Button("PQ_display",(_sketch.displayWidth)/9f*5f, 0, _sketch.displayWidth/9f, _button_height,"Display Q", Edge_Button.class, false);
 
-        Ui.add_Button("color_scheme",(_sketch.displayWidth)/9f*4f, 0, _sketch.displayWidth/9f, _button_height,"Pink", Color_Scheme_Button.class, false);
+        Ui.add_Button("clear",(_sketch.displayWidth)/9f*6f, 0, _sketch.displayWidth/9f, _button_height,"Clear", Clear_Button.class, false);
+
+        Ui.add_Button("color_scheme",(_sketch.displayWidth)/9f*7f, 0, _sketch.displayWidth/9f, _button_height,"Pink", Color_Scheme_Button.class, false);
 
         //debugging slash testing
         //System.out.println("display: " + _sketch.displayWidth + ", " + _sketch.displayHeight);
@@ -121,6 +123,22 @@ public class Util {
         }
         result.append(_digit);
         return result.toString();
+    }
+
+    public static void delete_Graph(){
+        Main.edge_array = new ArrayList<>();
+        Main.node_array = new ArrayList<>();
+        Main.goal_node = null;
+        Main.start_node = null;
+        Main.node_1 = null;
+        Main.initial_goal_node = null;
+        Main.initial_start_node = null;
+        if (Main.algorithm.get_U() != null){
+            Main.algorithm.get_U().get_Heap().clear();
+            Main.algorithm.get_U().get_Keys().clear();
+        }
+
+
     }
 
     public static Edge find_Shared_Edge(Node _n1, Node _n2){

@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 
 import static org.algorithm.Main.*;
+import static org.algorithm.Util.delete_Graph;
 import static processing.core.PApplet.str;
 
 
@@ -293,6 +294,15 @@ class Heuristic_Button extends Button{
     }
 }
 
+class Clear_Button extends Button{
+    public Clear_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
+        super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
+    }
+    void click(){
+        delete_Graph();
+    }
+}
+
 class Color_Scheme_Button extends Button{
     public Color_Scheme_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
@@ -367,6 +377,8 @@ class Import_Button extends File_Type_Buttons{
 
     void click(){
         super.click();
+
+        delete_Graph();
 
         try {
             sketch.println("Beginning parsing");
