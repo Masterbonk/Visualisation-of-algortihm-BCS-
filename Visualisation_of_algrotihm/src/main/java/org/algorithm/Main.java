@@ -241,7 +241,7 @@ public class Main extends PApplet{
         if(keyPressed) {
             if (key == '+' && zoom_level < 3) {
                 zoom_level += zoom_increase;
-            } else if (key == '-' && zoom_level > 0) {
+            } else if (key == '-' && zoom_level > 0.1) {
                 zoom_level -= zoom_increase;
             }
         }
@@ -255,7 +255,7 @@ public class Main extends PApplet{
         if(zoom_level < 3 && wheel_number < 0) {
                 zoom_level += zoom_increase;
         }
-        if(zoom_level > 0 && wheel_number > 0) {
+        if(zoom_level > 0.1 && wheel_number > 0) {
             zoom_level -= zoom_increase;
         }
     }
