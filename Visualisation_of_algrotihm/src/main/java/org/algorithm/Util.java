@@ -177,7 +177,7 @@ public class Util {
                         minlatY = Float.parseFloat(input.getAttributeValue(null, "minlat"));
                     }
                     case "way" -> {
-                        nodes_in_current_way = new ArrayList<>();
+                        nodes_in_current_way = new ArrayList<String>();
                         way_has_begun = true;
                     }
                     case "tag" -> {
@@ -195,7 +195,7 @@ public class Util {
                 }
             }
         }
-        
+
         input.close();
         //input = XMLInputFactory.newInstance().createXMLStreamReader(new BufferedInputStream(inputStream));
         input = XMLInputFactory.newInstance().createXMLStreamReader(new BufferedInputStream(new FileInputStream(inp)));

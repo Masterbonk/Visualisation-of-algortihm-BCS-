@@ -154,7 +154,7 @@ public class DStarLite {
                 update_Vertex(e.to);
                 update_Vertex(e.from);
             }
-            Main.edge_update_map.clear();
+            Main.edge_update_map = new HashMap<Edge, Integer>();
 
             compute_Shortest_Path();
         }
