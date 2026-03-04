@@ -223,24 +223,28 @@ class LPA_StarTest {
     // test that closest vertex is updated
     @Test
     void update_Vertex() {
-        algorithm.start_node = new Node(sketch,20,20);
-        algorithm.goal_node = new Node(sketch,25,25);
+        algorithm.start_node = new Node(sketch,0,0);
+        algorithm.goal_node = new Node(sketch,0,0);
 
+        Node a = new Node(sketch, 0,0);
+        Node b = new Node(sketch, 2,2);
 
-        Node a = new Node(sketch,0,0);
-        Node b = new Node(sketch,5,5);
-        Node c = new Node(sketch,0,10);
-        Node d = new Node(sketch,2,2);
-
-        Edge ab = new BiEdge(sketch,a,b,1);
-        Edge ac = new BiEdge(sketch,a,c,1);
-        Edge ad = new BiEdge(sketch,a,d,1);
+        Edge ab = new Edge(sketch,a,b,3);
 
         algorithm.initialize();
-        algorithm.update_Vertex(a);
 
-        assertEquals(2,a.get_Rhs_Val());
-        assertTrue(algorithm.get_U().contains(d));
+        a.update_Rhs_Val(MAX_INT);
+        a.update_G_Val(MAX_INT);
+
+        b.update_G_Val(2);
+        b.update_Rhs_Val(2);
+
+        algorithm.update_Vertex(a); //a
+
+        //Test that the key is added to priority queue, with the correct key
+        assertTrue(algorithm.U.contains(a));
+        //Test the correct rhs value is calculated
+        assertEquals(5,a.get_Rhs_Val());
 
     }
 
@@ -253,12 +257,15 @@ class LPA_StarTest {
         Node c = new Node(sketch,0,10);
         Node d = new Node(sketch,2,2);
 
-        Edge ab = new BiEdge(sketch,a,b,1);
-        Edge ac = new BiEdge(sketch,a,c,1);
+        Edge ab = new BiEdge(sketch,a,b,10);
+        Edge ac = new BiEdge(sketch,a,c,10);
         Edge ad = new BiEdge(sketch,a,d,1);
 
         a.update_Rhs_Val(2);
         a.update_G_Val(2);
+
+        algorithm.start_node = new Node(sketch,20,20);
+        algorithm.goal_node = new Node(sketch,25,25);
 
         algorithm.initialize();
 
@@ -281,6 +288,7 @@ class LPA_StarTest {
         Edge ad = new BiEdge(sketch,a,d,1);
 
         algorithm.start_node = a;
+        algorithm.goal_node = new Node(sketch,25,25);
 
         algorithm.initialize();
 
