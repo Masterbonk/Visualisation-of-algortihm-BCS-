@@ -234,7 +234,11 @@ public class Main extends PApplet{
         if (selection == null) {
             println("Window was closed or the user hit cancel.");
         } else {
-            Util.parseOSM(this, selection.getAbsolutePath());
+            if (debug) {
+                Util.parseOSM(this, selection.getAbsolutePath());
+            } else {
+                Util.parseOSMIntersection(this, selection.getAbsolutePath());
+            }
         }
     }
 
