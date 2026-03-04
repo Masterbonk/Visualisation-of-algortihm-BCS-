@@ -151,7 +151,7 @@ public class Util {
                 var name = input.getLocalName();
                 switch (name) {
                     case "way" -> {
-                        nodes_in_current_way.clear();
+                        nodes_in_current_way = new ArrayList<>();
                         way_has_begun = true;
                     }
                     case "tag" -> {
@@ -227,18 +227,12 @@ class Util_Way{
     }
 
     public void connect(PApplet _sketch, HashSet<String> _all_nodes_in_use){
-
         for (int i = 0; i< node_list.size()-1; i++){
-            //println("Trying one");
-            if(_all_nodes_in_use.contains(node_list.get(i))) {
-                if (Util.name_to_node.get(node_list.get(i)) != null && Util.name_to_node.get(node_list.get(i + 1)) == null) {
-                    new BiEdge(_sketch, Util.name_to_node.get(node_list.get(i)), Util.name_to_node.get(node_list.get(i + 1)));
-                } else {
-                    //println("New connect call \n size: "+node_list.size()+"\n i: "+i);
-                    println("One of them was null");
-                }
+            if (Util.name_to_node.get(node_list.get(i)) != null && Util.name_to_node.get(node_list.get(i + 1)) != null) {
+                new BiEdge(_sketch, Util.name_to_node.get(node_list.get(i)), Util.name_to_node.get(node_list.get(i + 1)));
             } else {
-                println("Not made the correct way");
+                //println("New connect call \n size: "+node_list.size()+"\n i: "+i);
+                println("One of them was null");
             }
         }
     }
