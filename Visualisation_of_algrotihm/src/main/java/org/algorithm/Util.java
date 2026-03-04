@@ -129,6 +129,11 @@ public class Util {
         Main.node_1 = null;
         Main.initial_goal_node = null;
         Main.initial_start_node = null;
+        if (Main.algorithm.get_U() != null){
+            Main.algorithm.get_U().get_Heap().clear();
+            Main.algorithm.get_U().get_Keys().clear();
+        }
+
 
     }
 
