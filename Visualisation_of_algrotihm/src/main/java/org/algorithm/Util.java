@@ -161,6 +161,10 @@ public class Util {
 
         name_to_node = new HashMap<>();
 
+        double minlonX = 0;
+        double minlatY = 0;
+
+
         boolean stop_first_loop = false;
         boolean way_has_begun = false;
         while (input.hasNext() && !stop_first_loop) { //Run number 1
@@ -168,6 +172,10 @@ public class Util {
             if (tagKind == XMLStreamConstants.START_ELEMENT) {
                 var name = input.getLocalName();
                 switch (name) {
+                    case "bounds" -> {
+                        minlonX = Float.parseFloat(input.getAttributeValue(null, "minlon"));
+                        minlatY = Float.parseFloat(input.getAttributeValue(null, "minlat"));
+                    }
                     case "way" -> {
                         nodes_in_current_way = new ArrayList<>();
                         way_has_begun = true;
@@ -202,7 +210,7 @@ public class Util {
                 if (name.equals("node")) {
                     if (all_nodes_in_use.contains(input.getAttributeValue(null, "id"))){
                         //println("MADE A NODE");
-                        tmp = new Node(_sketch, convertX(input.getAttributeValue(null, "lon")),convertY(input.getAttributeValue(null, "lat")));
+                        tmp = new Node(_sketch, convertX(input.getAttributeValue(null, "lon"), minlonX),convertY(input.getAttributeValue(null, "lat"), minlatY));
                         name_to_node.put(input.getAttributeValue(null, "id"), tmp);
                     }
                 }
@@ -219,14 +227,14 @@ public class Util {
         name_to_node.clear();
     }
 
-    public static int convertX(String _x){
+    public static int convertX(String _x, double _bounds){
         float tmp = Float.parseFloat(_x);
-        return (int) ((tmp - 12.588658)*1000000);
+        return (int) ((tmp - _bounds)*1000000);
     }
 
-    public static int convertY(String _y){
+    public static int convertY(String _y, double _bounds){
         float tmp = Float.parseFloat(_y);
-        return (int) ((tmp - 55.658591)*1000000);
+        return (int) ((tmp - _bounds)*1000000);
     }
 }
 
