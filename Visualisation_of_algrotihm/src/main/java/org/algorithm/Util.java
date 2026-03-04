@@ -154,6 +154,28 @@ public class Util {
     }
 
     /**
+     * @return the connected node with the lowest g value
+     * */
+    public static Node find_Min_G_Node(Node _n){
+        int min = MAX_INT;
+        Node tmp = null;
+        for(Edge e: _n.connected){
+            Node other_node = e.from;
+            if (e.from == _n) other_node = e.to;
+            if (other_node.get_G_Val() != MAX_INT) {
+                if (min > e.weight+other_node.get_G_Val()){
+                    min = e.weight+other_node.get_G_Val();
+                    tmp = other_node;
+                }
+            }
+
+        }
+        return tmp;
+    }
+
+
+
+    /**
      * @return a string composed of a letter based of an ascii code and a number depending on how many of that letter nodes there are
      * */
     public static String generate_Name(){

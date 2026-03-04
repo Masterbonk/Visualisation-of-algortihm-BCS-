@@ -106,9 +106,9 @@ public class DStarLite {
 
                 if (!has_been_paused && paused_once) {
                     U.get_Heap().getFirst().change_In_PQ(false);
-                    Edge e = find_Shared_Edge(Main.start_node, find_Min_G_Node(Main.start_node));
+                    Edge e = find_Shared_Edge(Main.start_node, Util.find_Min_G_Node(Main.start_node));
                     if (e != null) e.color(-1,-1,150);
-                    Main.start_node = find_Min_G_Node(Main.start_node);
+                    Main.start_node = Util.find_Min_G_Node(Main.start_node);
                     println("Moved start to node at x: "+Main.start_node.x+" y: "+Main.start_node.y);
                 }
 
@@ -238,7 +238,7 @@ public class DStarLite {
         Node tmp = n;
         if (n.get_G_Val() != MAX_INT) {
             while (!result.contains(Main.goal_node)) {
-                Node tmp2 = find_Min_G_Node(tmp);
+                Node tmp2 = Util.find_Min_G_Node(tmp);
                 result.add(tmp);
                 tmp = tmp2;
             }
@@ -247,47 +247,6 @@ public class DStarLite {
         return null;
     }
 
-    /**
-     * Finds the smallest g value amongst all the nodes.
-     * @param _n The node that is part of the graph that we wish to find the smallest g value of
-     * @return The int value of the smallest g
-     */
-    public int find_Min_G(Node _n){
-        int min = MAX_INT;
-        for(Edge e: _n.connected){
-            Node other_node = e.from;
-            if (e.from == _n) other_node = e.to;
-            if (other_node.get_G_Val() != MAX_INT) {
-                if (min > e.weight+other_node.get_G_Val()){
-                    min = e.weight+other_node.get_G_Val();
-                }
-            }
-
-        }
-        return min;
-    }
-
-    /**
-     * Finds the node with the smallest G value
-     * @param _n The node that the graph is part of
-     * @return The node with the smallest G value.
-     */
-    public Node find_Min_G_Node(Node _n){
-        int min = MAX_INT;
-        Node tmp = null;
-        for(Edge e: _n.connected){
-            Node other_node = e.from;
-            if (e.from == _n) other_node = e.to;
-            if (other_node.get_G_Val() != MAX_INT) {
-                if (min > e.weight+other_node.get_G_Val()){
-                    min = e.weight+other_node.get_G_Val();
-                    tmp = other_node;
-                }
-            }
-
-        }
-        return tmp;
-    }
 
     /**
      * From the original D*Lite algorithm. Updates the Node's RHS value,
@@ -297,7 +256,7 @@ public class DStarLite {
     public void update_Vertex(Node _n){
         println("Updating node at x: "+_n.x+" y: "+_n.y);
         if (_n !=Main.goal_node){
-            _n.update_Rhs_Val(find_Min_G(_n));
+            _n.update_Rhs_Val(Util.find_Min_G_Node(_n).get_G_Val());
         }
 
         if(U.contains(_n)){
