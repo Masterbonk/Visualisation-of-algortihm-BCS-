@@ -169,13 +169,10 @@ public class Util {
                 }
             }
         }
-
-        println("Made it out of first loop");
-
+        
         input.close();
         //input = XMLInputFactory.newInstance().createXMLStreamReader(new BufferedInputStream(inputStream));
         input = XMLInputFactory.newInstance().createXMLStreamReader(new BufferedInputStream(new FileInputStream(inp)));
-        println("Made it out of first loop 2");
 
         Node tmp = null;
         while (input.hasNext()) { //Run number 2
@@ -186,7 +183,7 @@ public class Util {
 
                 if (name.equals("node")) {
                     if (all_nodes_in_use.contains(input.getAttributeValue(null, "id"))){
-                        println("MADE A NODE");
+                        //println("MADE A NODE");
                         tmp = new Node(_sketch, convertX(input.getAttributeValue(null, "lon")),convertY(input.getAttributeValue(null, "lat")));
                         name_to_node.put(input.getAttributeValue(null, "id"), tmp);
                     }
@@ -194,15 +191,12 @@ public class Util {
             }
         }
         //new BiEdge(_sketch,tmp,Main.node_array.getFirst(),0);
-        println("Made it out of second loop");
+        //println("Made it out of second loop");
 
         //When all nodes have been added, we will connect them with edges
         for (Util_Way w: way_list){
-            w.connect(_sketch, all_nodes_in_use);
-            println("Way has: "+w.node_list.toString());
+            w.connect(_sketch);
         }
-        println("Name to Node: "+name_to_node.toString());
-
 
         name_to_node.clear();
     }
@@ -226,7 +220,7 @@ class Util_Way{
         println(node_list.toString());
     }
 
-    public void connect(PApplet _sketch, HashSet<String> _all_nodes_in_use){
+    public void connect(PApplet _sketch){
         for (int i = 0; i< node_list.size()-1; i++){
             if (Util.name_to_node.get(node_list.get(i)) != null && Util.name_to_node.get(node_list.get(i + 1)) != null) {
                 new BiEdge(_sketch, Util.name_to_node.get(node_list.get(i)), Util.name_to_node.get(node_list.get(i + 1)));
