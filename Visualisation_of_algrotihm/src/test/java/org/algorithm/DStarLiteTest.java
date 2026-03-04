@@ -273,10 +273,11 @@ class DStarLiteTest {
 
         algorithm.update_Vertex(a);
 
-        //Test that the key is not added to/in the priority queue
-        assertFalse(algorithm.U.contains(a));
         //Test the correct rhs value is calculated
         assertEquals(4,a.get_Rhs_Val());
+        //Test that the key is not added to/in the priority queue
+        assertFalse(algorithm.U.contains(a));
+
 
     }
 
