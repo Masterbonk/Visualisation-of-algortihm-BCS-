@@ -24,7 +24,7 @@ public class LPA_Star {
     public void LPA_Main(){
       initialize();
       //AHHH shit i'm temporaraly running
-      // NAH BITCH YOU RUNNIN FOREVA
+      //NAH BITCH YOU RUNNIN FOREVA
       while (true){
           compute_Shortest_Path();
           check_For_Edge_Change();
@@ -62,26 +62,29 @@ public class LPA_Star {
     public void compute_Shortest_Path(){
 
         while(U.top_Key().compareTo(calculate_Key(goal_node)) < 0 || goal_node.get_Rhs_Val() != goal_node.get_G_Val()){
-
+            println("csp running");
             Node n = U.pop();
 
             if (n.get_G_Val() > n.get_Rhs_Val()){
+                println("g greater than rhs");
 
                 n.update_G_Val(n.get_Rhs_Val());
 
                 for (Edge e: n.connected){
                     Node other_node = e.from;
                     if (e.from == n) other_node = e.to;
+                    println("update vertex on" + other_node.toString());
                     update_Vertex(other_node);
                 }
 
             } else {
-
+                println("g less than rhs");
                 n.update_G_Val(MAX_INT);
 
                 for (Edge e: n.connected){
                     Node other_node = e.from;
                     if (e.from == n) other_node = e.to;
+                    println("update vertex on" + other_node.toString());
                     update_Vertex(other_node);
                 }
 
@@ -89,12 +92,12 @@ public class LPA_Star {
             }
         }
     }
-
+    //traverse from goal to start
     public ArrayList<Node> get_Shortest_Path(Node n){
         Node tmp = n;
         if (n.get_G_Val() != MAX_INT) {
             ArrayList<Node> result = new ArrayList<>();
-            while (!result.contains(Main.goal_node)) {
+            while (!result.contains(start_node)) {
                 Node tmp2 = find_Min_G_Node(tmp);
                 result.add(tmp);
                 tmp = tmp2;
@@ -108,22 +111,16 @@ public class LPA_Star {
 
     public void update_Vertex(Node _n){
         if (_n != start_node){
-
-            int new_rhs = find_Min_G(_n);
-
-            if (new_rhs != _n.get_Rhs_Val()) {
-                _n.update_Rhs_Val(new_rhs);
-            }
-            //_n.update_Rhs_Val(find_Min_G(_n));
+            println("updated node " + _n.toString() + " rhs val to " + find_Min_G(_n));
+            _n.update_Rhs_Val(find_Min_G(_n));
         }
         if (U.contains(_n)){
+            println("removed node " + _n.toString() + "from pq");
             U.remove(_n);
         }
         if(_n.get_G_Val() != _n.get_Rhs_Val()){
-            if (!U.contains(_n)) {   
-                U.insert(_n,calculate_Key(_n));
-            }
-           //U.insert(_n,calculate_Key(_n));
+            println("added node " + _n.toString() + "from pq");
+            U.insert(_n,calculate_Key(_n));
         }
 
     }

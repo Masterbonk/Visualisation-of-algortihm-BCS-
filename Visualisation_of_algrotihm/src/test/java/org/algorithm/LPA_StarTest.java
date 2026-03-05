@@ -192,9 +192,9 @@ class LPA_StarTest {
         algorithm.compute_Shortest_Path();
 
         ArrayList<Node> expected_result = new ArrayList<>();
-        expected_result.add(S); expected_result.add(B); expected_result.add(G);
+        expected_result.add(G); expected_result.add(B); expected_result.add(S);
 
-        assertEquals(expected_result, algorithm.get_Shortest_Path(algorithm.start_node));
+        assertEquals(expected_result, algorithm.get_Shortest_Path(algorithm.goal_node));
 
     }
 
@@ -219,7 +219,7 @@ class LPA_StarTest {
         algorithm.initialize();
         algorithm.compute_Shortest_Path();
 
-        assertFalse(algorithm.get_Shortest_Path(algorithm.start_node).contains(D));
+        assertFalse(algorithm.get_Shortest_Path(algorithm.goal_node).contains(D));
     }
 
     // test that closest vertex is updated
