@@ -188,7 +188,8 @@ public class Util {
                 }
             }
         }
-        return min;
+
+        return min < -1 ? MAX_INT : min;
     }
 
 
