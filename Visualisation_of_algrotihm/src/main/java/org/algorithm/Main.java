@@ -147,15 +147,18 @@ public class Main extends PApplet{
         //background(204); //Draws over everything on screen clearing it for the next frame
 
         //zoom functionality
-        zoom();
         pushMatrix();
-        translate(translate_x,translate_y);
+        translate(translate_x+width/2,translate_y+height/2);
+//        translate(translate_x,translate_y);
+        zoom();
 
 
         //line formatting
         push();
         strokeWeight(10);
         textSize(30);
+
+
         scale(zoom_level);
         for(int i = 0; i < edge_array.size(); i++){
             edge_array.get(i).render();
@@ -249,10 +252,34 @@ public class Main extends PApplet{
         if(keyPressed) {
             if (key == '+' && zoom_level < 3) {
                 zoom_level += zoom_increase;
+                move_Towards_Mouse(true);
             } else if (key == '-' && zoom_level > 0.1) {
                 zoom_level -= zoom_increase;
+                move_Towards_Mouse(false);
             }
         }
+    }
+
+    private void move_Towards_Mouse(boolean zooming_in){
+        if (zooming_in) {
+            translate_x += displayWidth / 4;
+            translate_y += displayHeight / 4;
+        } else {
+            translate_x -= displayWidth / 4;
+            translate_y -= displayHeight / 4;
+        }
+
+        /*
+        int change = 50;
+        if (translate_x>0) {
+            translate_x-= (int) (change*(3-zoom_level));
+        } else translate_x+=(int) (change*(3-zoom_level));
+
+        if (translate_y>0) {
+            translate_y-=(int) (change*(3-zoom_level));
+        } else translate_y+=(int) (change*(3-zoom_level));
+
+         */
     }
 
     /** Zoom functionality works when scrolling the mouse wheel (on an actual mouse)
