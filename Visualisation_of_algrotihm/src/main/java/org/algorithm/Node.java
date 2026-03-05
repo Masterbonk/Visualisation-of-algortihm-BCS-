@@ -179,4 +179,41 @@ public class Node {
         }
     }
 
+    public void strait_Edge_Connecting_Node(){
+        if (connected.size() == 2) {
+            node_array.remove(this);
+            set_of_nodes.remove(this);
+            if (algorithm.U != null) algorithm.U.remove(this);
+
+            Node other_1 = help_Get_Opposite(connected.getFirst());
+            Node other_2 = help_Get_Opposite(connected.getLast());
+
+            other_1.connected.remove(connected.getFirst());
+            other_2.connected.remove(connected.getLast());
+
+
+            new BiEdge(sketch, other_1, other_2, connected.getFirst().weight + connected.getLast().weight);
+
+            edge_array.remove(connected.getFirst());
+            edge_array.remove(connected.getLast());
+
+            println("Straigthened the node edges");
+
+        } else if(connected.isEmpty()) {
+            node_array.remove(this);
+            set_of_nodes.remove(this);
+            if (algorithm.U != null) algorithm.U.remove(this);
+            println("Lone node removed");
+
+        }else {
+            println("Only works if it has specifically 2 edges connected to it.");
+        }
+    }
+
+    private Node help_Get_Opposite(Edge _e){
+        if (_e.to == this) {
+            return _e.from;
+        } else return _e.to;
+    }
+
 }

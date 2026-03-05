@@ -235,9 +235,9 @@ public class Main extends PApplet{
             println("Window was closed or the user hit cancel.");
         } else {
             if (debug) {
-                Util.parseOSM(this, selection.getAbsolutePath());
+                Parsing.parseOSM(this, selection.getAbsolutePath(), false);
             } else {
-                Util.parseOSMIntersection(this, selection.getAbsolutePath());
+                Parsing.parseOSM(this, selection.getAbsolutePath(), true);
             }
         }
     }
@@ -286,6 +286,16 @@ public class Main extends PApplet{
             //print("key pressed p");
             debug = !debug;
 
+        }
+
+        if (keyCode == UP){
+            translate_y -= 10;
+        } else if (keyCode == DOWN){
+            translate_y += 10;
+        } else if (keyCode == LEFT){
+            translate_x -= 10;
+        } else if (keyCode == RIGHT){
+            translate_x += 10;
         }
 
         //handles all text input
@@ -384,6 +394,7 @@ public class Main extends PApplet{
             for (Node t : node_array) {
                 if (t.mouse_Over()) {
                     println("Node edges "+ t.connected);
+                    println("Size of connected = "+t.connected.size());
                 }
             }
 
