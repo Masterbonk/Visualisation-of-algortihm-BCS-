@@ -14,6 +14,7 @@ import java.util.concurrent.TimeoutException;
 
 import static org.algorithm.Main.Ui;
 
+import static org.algorithm.Util.find_Min_G;
 import static org.algorithm.Util.heuristic;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -72,14 +73,14 @@ class LPA_StarTest {
         assertEquals(5,algorithm.goal_node.get_G_Val());
 
     }
-
+*/
     @Test
     void LPA_main_change_edge(){
 
-        Node A = new Node(sketch, 3,2);
-        Node B = new Node(sketch, 1,4);
-        Node S = new Node(sketch, 1, 1);
-        Node G = new Node(sketch, 2, 5);
+        Node A = new Node(sketch, 3,2,"A");
+        Node B = new Node(sketch, 1,4, "B");
+        Node S = new Node(sketch, 1, 1, "S");
+        Node G = new Node(sketch, 2, 5, "G");
 
         Edge sa = new BiEdge(sketch,S,A, 3);
         Edge sb = new BiEdge(sketch,S,B, 3);
@@ -89,14 +90,15 @@ class LPA_StarTest {
         algorithm.start_node = S;
         algorithm.goal_node = G;
 
-        Main.edge_update_map.put(bg,MAX_INT);
+        Main.edge_update_map.put(bg, MAX_INT);
 
         algorithm.LPA_Main();
-        assertTrue(algorithm.get_Shortest_Path(S).contains(A));
+
+        assertTrue(algorithm.get_Shortest_Path(G).contains(A));
 
     }
 
-     */
+
 
     @Test
     void initialize() {

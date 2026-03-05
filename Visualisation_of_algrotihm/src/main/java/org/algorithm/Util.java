@@ -162,7 +162,7 @@ public class Util {
             Node other_node = e.from;
             if (e.from == _n) other_node = e.to;
             if (other_node.get_G_Val() != MAX_INT) {
-                if (min > e.weight+other_node.get_G_Val()){
+                if (min > e.weight+other_node.get_G_Val() && e.weight+other_node.get_G_Val() > -1){
                     min = e.weight+other_node.get_G_Val();
                     tmp = other_node;
                 }
@@ -180,10 +180,12 @@ public class Util {
     public static int find_Min_G(Node _n){
         int min = MAX_INT;
         for(Edge e: _n.connected){
+
             Node other_node = e.from;
             if (e.from == _n) other_node = e.to;
+
             if (other_node.get_G_Val() != MAX_INT) {
-                if (min > e.weight+other_node.get_G_Val()){
+                if (min > e.weight+other_node.get_G_Val() && e.weight+other_node.get_G_Val() > -1){
                     min = e.weight+other_node.get_G_Val();
                 }
             }
