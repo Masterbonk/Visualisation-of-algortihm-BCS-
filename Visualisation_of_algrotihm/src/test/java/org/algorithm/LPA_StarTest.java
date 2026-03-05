@@ -51,7 +51,7 @@ class LPA_StarTest {
 
     }
 
-    /*
+
     @Test
     void LPA_main_base() {
         Node A = new Node(sketch, 3,2);
@@ -73,7 +73,7 @@ class LPA_StarTest {
         assertEquals(5,algorithm.goal_node.get_G_Val());
 
     }
-*/
+
     @Test
     void LPA_main_change_edge(){
 
