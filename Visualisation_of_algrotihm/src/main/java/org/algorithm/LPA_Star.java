@@ -36,6 +36,7 @@ public class LPA_Star {
             println("start and/or goal are null");
             return;
        }
+
        U = new Priority_Queue();
 
        for(Node n: Main.set_of_nodes){
@@ -49,8 +50,12 @@ public class LPA_Star {
     }
 
     public Tupple calculate_Key(Node _n){
+
         float k = Math.min(_n.get_G_Val(), _n.get_Rhs_Val()) + heuristic(_n,goal_node);
+        if(k < 0) k = MAX_INT;
+
         int v = Math.min(_n.get_G_Val(), _n.get_Rhs_Val());
+
         return new Tupple(k,v);
     }
 
@@ -103,13 +108,22 @@ public class LPA_Star {
 
     public void update_Vertex(Node _n){
         if (_n != start_node){
-            _n.update_Rhs_Val(find_Min_G(_n));
+
+            int new_rhs = find_Min_G(_n);
+
+            if (new_rhs != _n.get_Rhs_Val()) {
+                _n.update_Rhs_Val(new_rhs);
+            }
+            //_n.update_Rhs_Val(find_Min_G(_n));
         }
         if (U.contains(_n)){
             U.remove(_n);
         }
         if(_n.get_G_Val() != _n.get_Rhs_Val()){
-            U.insert(_n,calculate_Key(_n));
+            if (!U.contains(_n)) {   
+                U.insert(_n,calculate_Key(_n));
+            }
+           //U.insert(_n,calculate_Key(_n));
         }
 
     }
