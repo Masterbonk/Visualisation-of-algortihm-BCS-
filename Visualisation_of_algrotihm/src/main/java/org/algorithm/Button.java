@@ -162,7 +162,7 @@ class Pause_Button extends Button{
             text = "⏸"; //start
         } else text = "⏯"; //Pause
 
-        DStarLite.has_been_paused = !DStarLite.has_been_paused;
+        //DStarLite.has_been_paused = !DStarLite.has_been_paused;
 
         super.click();
 
@@ -178,7 +178,7 @@ class Forward_Button extends Button{
     void click(){
         clicked = true;
         Ui.get_Button("pause").clicked = false;
-        algorithm.has_been_paused = false;
+        //algorithm.has_been_paused = false;
         node_1 = null;
 
     }

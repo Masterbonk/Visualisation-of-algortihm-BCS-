@@ -27,7 +27,8 @@ public class Main extends PApplet{
 
     public static Set<Node> set_of_nodes;
     public static HashMap<Edge,Integer> edge_update_map;
-    public static DStarLite algorithm;
+    //public static DStarLite algorithm;
+    public static Visual_LPA algorithm;
     public static Node start_node;
     public static Node goal_node;
     public static Node initial_start_node;
@@ -97,7 +98,8 @@ public class Main extends PApplet{
         cs = new Color_Scheme(this);
         pink_mode = false;
 
-        algorithm = new DStarLite();
+        //algorithm = new DStarLite();
+        algorithm = new Visual_LPA();
 
         //fullScreen(); //Is the size of the canvas
 
@@ -165,9 +167,7 @@ public class Main extends PApplet{
 
 
 
-        if(h != null){
-            h.render();
-        }
+
 
         push();
         scale(zoom_level);
@@ -180,15 +180,22 @@ public class Main extends PApplet{
         pop();
         popMatrix();
 
-
+        if(h != null){
+            h.render();
+        }
+        
         Ui.render();
 
         rescale();
 
 
+
         if (!Ui.get_Button("pause").clicked){
-            algorithm.D_Main();
+            //algorithm.D_Main();
+            algorithm.LPA_Main();
         }
+
+
 
     }
 
@@ -482,11 +489,13 @@ public class Main extends PApplet{
                         algorithm.first_run = true;
                         algorithm.set_Start(n);
                         initial_start_node = n;
+                        start_node = n;
                     } else if(Ui.get_Button("flag_b").clicked && algorithm.get_Start() != n && n.mouse_Over()){
                         clicked_on_node = true;
                         algorithm.first_run = true;
                         algorithm.set_Goal(n);
                         initial_goal_node = n;
+                        goal_node = n; 
                     }
                 }
 

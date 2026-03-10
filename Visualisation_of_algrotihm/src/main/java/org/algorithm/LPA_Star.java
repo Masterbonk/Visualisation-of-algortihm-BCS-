@@ -91,8 +91,8 @@ public class LPA_Star {
     //traverse from goal to start
 
     /**
-     * Finds the shortest path from the goal node to the start node
-     * @param n the start node
+     * Finds the shortest path from the goal node to the goal node
+     * @param n the goal node
      * @return ArrayList
      */
     public ArrayList<Node> get_Shortest_Path(Node n){
@@ -136,7 +136,7 @@ public class LPA_Star {
         return U;
     }
 
-    private void check_For_Edge_Change(){
+    void check_For_Edge_Change(){
         if (!Main.edge_update_map.isEmpty()) {
             for (Edge e : Main.edge_update_map.keySet()) {
                 if (Main.edge_update_map.get(e) != -1) {
@@ -146,6 +146,17 @@ public class LPA_Star {
                 update_Vertex(e.from);
             }
             Main.edge_update_map = new HashMap<>();
+        }
+    }
+
+    /**
+     * This removes the Node from the PQ and the set of nodes
+     * @param n The node to remove
+     */
+    public void remove_Node(Node n){
+        Main.set_of_nodes.remove(n);
+        if(U != null){
+            U.remove(n);
         }
     }
 }
