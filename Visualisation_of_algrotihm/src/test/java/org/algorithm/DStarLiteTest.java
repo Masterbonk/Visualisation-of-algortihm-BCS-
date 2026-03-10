@@ -65,9 +65,9 @@ class DStarLiteTest {
         Main.start_node = S;
         Main.goal_node = G;
 
-        algorithm.D_Main();
+        algorithm.Main();
         Ui.get_Button("pause").click();
-        algorithm.D_Main();
+        algorithm.Main();
 
         assertEquals(0,algorithm.km);
         assertEquals(Main.goal_node,Main.start_node);
@@ -88,7 +88,7 @@ class DStarLiteTest {
         Main.start_node = S;
         Main.goal_node = G;
 
-        algorithm.D_Main();
+        algorithm.Main();
 
         assertEquals(MAX_INT, Main.start_node.get_G_Val());
     }
@@ -113,9 +113,9 @@ class DStarLiteTest {
 
 
 
-        algorithm.D_Main();
+        algorithm.Main();
         Ui.get_Button("pause").click();
-        algorithm.D_Main();
+        algorithm.Main();
 
         assertTrue(algorithm.get_Shortest_Path(S).contains(A));
 

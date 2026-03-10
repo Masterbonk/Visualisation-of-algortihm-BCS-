@@ -162,7 +162,7 @@ class Pause_Button extends Button{
             text = "⏸"; //start
         } else text = "⏯"; //Pause
 
-        //DStarLite.has_been_paused = !DStarLite.has_been_paused;
+        Algorithm.has_been_paused = !Algorithm.has_been_paused;
 
         super.click();
 
@@ -178,7 +178,7 @@ class Forward_Button extends Button{
     void click(){
         clicked = true;
         Ui.get_Button("pause").clicked = false;
-        //algorithm.has_been_paused = false;
+        Algorithm.has_been_paused = false;
         node_1 = null;
 
     }
@@ -302,6 +302,28 @@ class Clear_Button extends Button{
     }
     void click(){
         delete_Graph();
+    }
+}
+
+class Algo_Mode_Button extends Button{
+    public Algo_Mode_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
+        super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
+        clicked = true;
+    }
+    void click(){
+        super.click();
+        if (!clicked) {
+            text = "LPA*";
+            algorithm = new Visual_LPA();
+            algorithm.set_Start(start_node);
+            algorithm.set_Goal(goal_node);
+        } else {
+            text = "D* Lite"; //Pause
+            algorithm = new DStarLite();
+            //Ui.get_Button("reset").click();
+            //algorithm.set_Start(start_node);
+            //algorithm.set_Goal(goal_node);
+        }
     }
 }
 

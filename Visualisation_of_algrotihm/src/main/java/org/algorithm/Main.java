@@ -27,8 +27,11 @@ public class Main extends PApplet{
 
     public static Set<Node> set_of_nodes;
     public static HashMap<Edge,Integer> edge_update_map;
+
     //public static DStarLite algorithm;
-    public static Visual_LPA algorithm;
+    //public static Visual_LPA algorithm;
+    public static Algorithm algorithm;
+
     public static Node start_node;
     public static Node goal_node;
     public static Node initial_start_node;
@@ -98,8 +101,9 @@ public class Main extends PApplet{
         cs = new Color_Scheme(this);
         pink_mode = false;
 
-        //algorithm = new DStarLite();
-        algorithm = new Visual_LPA();
+        //program always starts as D* lite
+        algorithm = new DStarLite();
+        //algorithm = new Visual_LPA();
 
         //fullScreen(); //Is the size of the canvas
 
@@ -159,8 +163,8 @@ public class Main extends PApplet{
         strokeWeight(10);
         textSize(30);
         scale(zoom_level);
-        for(int i = 0; i < edge_array.size(); i++){
-            edge_array.get(i).render();
+        for (Edge edge : edge_array) {
+            edge.render();
             //edge_array.get(i).color(); //for animating
         }
         pop();
@@ -171,8 +175,8 @@ public class Main extends PApplet{
 
         push();
         scale(zoom_level);
-        for(int i = 0; i < node_array.size(); i++){
-            node_array.get(i).render();
+        for (Node node : node_array) {
+            node.render();
         }
 
 
@@ -183,7 +187,7 @@ public class Main extends PApplet{
         if(h != null){
             h.render();
         }
-        
+
         Ui.render();
 
         rescale();
@@ -192,7 +196,7 @@ public class Main extends PApplet{
 
         if (!Ui.get_Button("pause").clicked){
             //algorithm.D_Main();
-            algorithm.LPA_Main();
+            algorithm.Main();
         }
 
 
@@ -495,7 +499,7 @@ public class Main extends PApplet{
                         algorithm.first_run = true;
                         algorithm.set_Goal(n);
                         initial_goal_node = n;
-                        goal_node = n; 
+                        goal_node = n;
                     }
                 }
 

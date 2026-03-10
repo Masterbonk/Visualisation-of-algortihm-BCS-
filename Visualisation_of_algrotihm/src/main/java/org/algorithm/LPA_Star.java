@@ -8,11 +8,7 @@ import static org.algorithm.Util.*;
 import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
-public class LPA_Star {
-
-    Priority_Queue U;
-    Node start_node;
-    Node goal_node;
+public class LPA_Star extends Algorithm{
 
     LPA_Star(){
         Main.set_of_nodes = new HashSet<>();
@@ -21,7 +17,7 @@ public class LPA_Star {
         goal_node = null;
     }
 
-    public void LPA_Main(){
+    public void Main(){
       initialize();
       //AHHH shit i'm temporaraly running
       //NAH BITCH YOU RUNNIN FOREVA

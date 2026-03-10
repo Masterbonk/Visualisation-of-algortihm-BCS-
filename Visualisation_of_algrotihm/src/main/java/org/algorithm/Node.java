@@ -183,7 +183,7 @@ public class Node {
         if (connected.size() == 2) {
             node_array.remove(this);
             set_of_nodes.remove(this);
-            if (algorithm.U != null) algorithm.U.remove(this);
+            if (algorithm.get_U() != null) algorithm.get_U().remove(this);
 
             Node other_1 = help_Get_Opposite(connected.getFirst());
             Node other_2 = help_Get_Opposite(connected.getLast());
@@ -202,7 +202,7 @@ public class Node {
         } else if(connected.isEmpty()) {
             node_array.remove(this);
             set_of_nodes.remove(this);
-            if (algorithm.U != null) algorithm.U.remove(this);
+            if (algorithm.get_U() != null) algorithm.get_U().remove(this);
             println("Lone node removed");
 
         }else {

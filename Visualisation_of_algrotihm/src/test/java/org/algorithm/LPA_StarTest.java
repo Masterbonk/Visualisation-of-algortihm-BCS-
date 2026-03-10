@@ -67,7 +67,7 @@ class LPA_StarTest {
         algorithm.start_node = S;
         algorithm.goal_node = G;
 
-        algorithm.LPA_Main();
+        algorithm.Main();
         assertNotEquals(MAX_INT,algorithm.goal_node.get_G_Val());
         assertNotEquals(MAX_INT,algorithm.goal_node.get_Rhs_Val());
         assertEquals(5,algorithm.goal_node.get_G_Val());
@@ -92,7 +92,7 @@ class LPA_StarTest {
 
         Main.edge_update_map.put(bg, MAX_INT);
 
-        algorithm.LPA_Main();
+        algorithm.Main();
 
         assertTrue(algorithm.get_Shortest_Path(G).contains(A));
 

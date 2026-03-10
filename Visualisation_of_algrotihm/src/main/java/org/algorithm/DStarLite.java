@@ -9,21 +9,24 @@ import static org.algorithm.Util.*;
 import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
-public class DStarLite {
+public class DStarLite extends Algorithm {
+
+
     Node last;
-
-
     float km;
-    Priority_Queue U;
-    public static boolean has_been_paused = true;
-    boolean first_run = true;
-    boolean part_one_d_main = false;
-    boolean paused_once = false;
+
+
+
 
 
     DStarLite(){
         Main.set_of_nodes = new HashSet<>();
         Main.edge_update_map = new HashMap<>();
+
+        first_run = true;
+        has_been_paused = true;
+        part_one_d_main = false;
+        paused_once = false;
 
     }
 
@@ -76,7 +79,7 @@ public class DStarLite {
      *
      * It has been given the ability to pause right before it checks for changes.
      */
-    public void D_Main(){
+    public void Main(){
         if (first_run && Main.start_node != null && Main.goal_node != null){
             last = Main.start_node;
             initialize();
@@ -104,6 +107,7 @@ public class DStarLite {
                 }
 
                 if (!has_been_paused && paused_once) {
+                    println(U.get_Heap().size());
                     U.get_Heap().getFirst().change_In_PQ(false);
                     Edge e = find_Shared_Edge(Main.start_node, find_Min_G_Node(Main.start_node));
                     if (e != null) e.color(-1,-1,150);
@@ -141,7 +145,7 @@ public class DStarLite {
      * then call compute_Shortest_Path().
      *
      */
-    private void check_For_Edge_Change(){
+    public void check_For_Edge_Change(){
         if (!Main.edge_update_map.isEmpty()) {
             km = km + heuristic(last, Main.start_node);
             last = Main.start_node;

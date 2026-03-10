@@ -3,7 +3,6 @@ package org.algorithm;
 import java.util.ArrayList;
 
 public class Visual_LPA extends LPA_Star{
-    public boolean first_run = true;
     public boolean part_one_d_main = true; // delete sometime soon
 
     Visual_LPA(){
@@ -16,7 +15,7 @@ public class Visual_LPA extends LPA_Star{
 
     }
 
-    public void LPA_Main(){
+    public void Main(){
         if (first_run && this.start_node != null && this.goal_node != null) {
 
             initialize();
