@@ -41,8 +41,6 @@ public abstract class Algorithm {
     public void Main() {
     }
 
-
-
     /**
      * Sets the goal node.
      * @param _n The node that becomes goal

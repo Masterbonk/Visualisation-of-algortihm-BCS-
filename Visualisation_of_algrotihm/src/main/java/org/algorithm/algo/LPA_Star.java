@@ -37,7 +37,6 @@ public class LPA_Star extends Algorithm{
             println("start and/or goal are null");
             return;
        }
-        println("initialize run");
        U = new Priority_Queue();
 
        for(Node n: Main.set_of_nodes){
@@ -61,7 +60,6 @@ public class LPA_Star extends Algorithm{
     }
 
     public void compute_Shortest_Path(){
-        println("csp run");
 
         while(U.top_Key().compareTo(calculate_Key(goal_node)) < 0 || goal_node.get_Rhs_Val() != goal_node.get_G_Val() || !U.is_empty()){
             Node n = U.pop();
