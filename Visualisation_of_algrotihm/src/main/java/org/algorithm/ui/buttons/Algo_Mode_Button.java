@@ -14,7 +14,6 @@ public class Algo_Mode_Button extends Button {
         clicked = true;
     }
 
-    @Override
     public boolean mouse_Over() {
 
         if (super.mouse_Over()) {
