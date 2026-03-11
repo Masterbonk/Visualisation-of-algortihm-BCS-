@@ -1,9 +1,9 @@
 package org.algorithm;
 
-import garciadelcastillo.dashedlines.DashedLines;
+//import garciadelcastillo.dashedlines.DashedLines;
+
 import processing.core.PApplet;
 
-import static java.lang.Math.log10;
 import static org.algorithm.Main.*;
 import static org.algorithm.Util.heuristic;
 
