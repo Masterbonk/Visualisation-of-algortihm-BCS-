@@ -1,10 +1,12 @@
-package org.algorithm;
+package org.algorithm.algo;
+
+import org.algorithm.Util;
 
 public class Tupple implements Comparable<Tupple> {
     public float k1, k2;
 
 
-    Tupple(float _k1, float _k2){
+    public Tupple(float _k1, float _k2){
         k1 = _k1;
         k2 = _k2;
     }

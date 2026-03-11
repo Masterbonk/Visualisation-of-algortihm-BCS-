@@ -1,4 +1,8 @@
-package org.algorithm;
+package org.algorithm.algo;
+
+import org.algorithm.Main;
+import org.algorithm.graph.edges.Edge;
+import org.algorithm.graph.Node;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,20 +12,16 @@ import static org.algorithm.Util.*;
 import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
-public class LPA_Star {
+public class LPA_Star extends Algorithm{
 
-    Priority_Queue U;
-    Node start_node;
-    Node goal_node;
 
-    LPA_Star(){
-        Main.set_of_nodes = new HashSet<>();
-        Main.edge_update_map = new HashMap<>();
-        start_node = null;
-        goal_node = null;
+
+    public LPA_Star(){
+        super();
+
     }
 
-    public void LPA_Main(){
+    public void Main(){
       initialize();
       //AHHH shit i'm temporaraly running
       //NAH BITCH YOU RUNNIN FOREVA
@@ -33,11 +33,10 @@ public class LPA_Star {
     }
     
     public void initialize(){
-       if (start_node == null && goal_node == null) {
+       if (start_node == null || goal_node == null) {
             println("start and/or goal are null");
             return;
        }
-
        U = new Priority_Queue();
 
        for(Node n: Main.set_of_nodes){
@@ -69,18 +68,18 @@ public class LPA_Star {
 
                 n.update_G_Val(n.get_Rhs_Val());
 
-                for (Edge e: n.connected){
-                    Node other_node = e.from;
-                    if (e.from == n) other_node = e.to;
+                for (Edge e: n.get_Connected()){
+                    Node other_node = e.get_From();
+                    if (e.get_From() == n) other_node = e.get_To();
                     update_Vertex(other_node);
                 }
 
             } else {
                 n.update_G_Val(MAX_INT);
 
-                for (Edge e: n.connected){
-                    Node other_node = e.from;
-                    if (e.from == n) other_node = e.to;
+                for (Edge e: n.get_Connected()){
+                    Node other_node = e.get_From();
+                    if (e.get_From() == n) other_node = e.get_To();
                     update_Vertex(other_node);
                 }
 
@@ -91,8 +90,8 @@ public class LPA_Star {
     //traverse from goal to start
 
     /**
-     * Finds the shortest path from the goal node to the start node
-     * @param n the start node
+     * Finds the shortest path from the goal node to the goal node
+     * @param n the goal node
      * @return ArrayList
      */
     public ArrayList<Node> get_Shortest_Path(Node n){
@@ -124,28 +123,22 @@ public class LPA_Star {
 
     }
 
-    public Node get_Start(){
-        return start_node;
-    }
-
-    public Node get_Goal(){
-        return goal_node;
-    }
-
     public Priority_Queue get_U(){
         return U;
     }
 
-    private void check_For_Edge_Change(){
+    void check_For_Edge_Change(){
         if (!Main.edge_update_map.isEmpty()) {
             for (Edge e : Main.edge_update_map.keySet()) {
                 if (Main.edge_update_map.get(e) != -1) {
                     e.update_Weight(Main.edge_update_map.get(e));
                 }
-                update_Vertex(e.to);
-                update_Vertex(e.from);
+                update_Vertex(e.get_To());
+                update_Vertex(e.get_From());
             }
             Main.edge_update_map = new HashMap<>();
         }
     }
+
+
 }

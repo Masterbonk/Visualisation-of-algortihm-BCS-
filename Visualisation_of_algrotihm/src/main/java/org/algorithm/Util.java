@@ -1,15 +1,11 @@
 package org.algorithm;
 
+import org.algorithm.graph.edges.Edge;
+import org.algorithm.graph.Node;
+import org.algorithm.ui.buttons.*;
 import processing.core.PApplet;
 
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamConstants;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Objects;
 
 import static org.algorithm.Main.*;
 import static processing.core.PApplet.print;
@@ -30,7 +26,7 @@ public class Util {
      *  Heuristic = distance between the two points
      * */
     public static float heuristic(Node a, Node b){
-        return (float) (Math.round(Math.sqrt((Math.pow(a.x - b.x,2)) + (Math.pow(a.y - b.y,2)))* 100.0) / 100.0);
+        return (float) (Math.round(Math.sqrt((Math.pow(a.get_X() - b.get_X(),2)) + (Math.pow(a.get_Y() - b.get_Y(),2)))* 100.0) / 100.0);
     }
 
 
@@ -74,11 +70,13 @@ public class Util {
 
         Ui.add_Button("heuristic",_sketch.displayWidth/9f*4f, 0, _sketch.width/9f, _button_height,"Display H", Heuristic_Button.class, false);
 
-        Ui.add_Button("PQ_display",(_sketch.displayWidth)/9f*5f, 0, _sketch.displayWidth/9f, _button_height,"Display Q", Edge_Button.class, false);
+        Ui.add_Button("PQ_display",(_sketch.displayWidth)/9f*5f, 0, _sketch.displayWidth/9f, _button_height,"Display Q", PQueue_Button.class, false);
 
         Ui.add_Button("clear",(_sketch.displayWidth)/9f*6f, 0, _sketch.displayWidth/9f, _button_height,"Clear", Clear_Button.class, false);
 
-        Ui.add_Button("color_scheme",(_sketch.displayWidth)/9f*7f, 0, _sketch.displayWidth/9f, _button_height,"Pink", Color_Scheme_Button.class, false);
+        Ui.add_Button("algo_mode",(_sketch.displayWidth)/9f*7f, 0, _sketch.displayWidth/9f, _button_height,"D* Lite", Algo_Mode_Button.class, false);
+
+        Ui.add_Button("color_scheme",(_sketch.displayWidth)/9f*8f, 0, _sketch.displayWidth/9f, _button_height,"Pink", Color_Scheme_Button.class, false);
 
         //debugging slash testing
         //System.out.println("display: " + _sketch.displayWidth + ", " + _sketch.displayHeight);
@@ -126,8 +124,8 @@ public class Util {
     public static void delete_Graph(){
         Main.edge_array = new ArrayList<>();
         Main.node_array = new ArrayList<>();
-        Main.goal_node = null;
-        Main.start_node = null;
+        algorithm.set_Goal(null);
+        algorithm.set_Start(null);
         Main.node_1 = null;
         Main.initial_goal_node = null;
         Main.initial_start_node = null;
@@ -143,8 +141,8 @@ public class Util {
 
     public static Edge find_Shared_Edge(Node _n1, Node _n2){
 
-        for (Edge e : _n1.connected){
-            if (e.to == _n2 || e.from == _n2 ){
+        for (Edge e : _n1.get_Connected()){
+            if (e.get_To() == _n2 || e.get_From() == _n2 ){
                 return e;
             }
         }
@@ -158,12 +156,12 @@ public class Util {
     public static Node find_Min_G_Node(Node _n){
         int min = MAX_INT;
         Node tmp = null;
-        for(Edge e: _n.connected){
-            Node other_node = e.from;
-            if (e.from == _n) other_node = e.to;
+        for(Edge e: _n.get_Connected()){
+            Node other_node = e.get_From();
+            if (e.get_From() == _n) other_node = e.get_To();
             if (other_node.get_G_Val() != MAX_INT) {
-                if (min > e.weight+other_node.get_G_Val() && e.weight+other_node.get_G_Val() > -1){
-                    min = e.weight+other_node.get_G_Val();
+                if (min > e.get_Weight()+other_node.get_G_Val() && e.get_Weight()+other_node.get_G_Val() > -1){
+                    min = e.get_Weight()+other_node.get_G_Val();
                     tmp = other_node;
                 }
             }
@@ -179,14 +177,14 @@ public class Util {
      */
     public static int find_Min_G(Node _n){
         int min = MAX_INT;
-        for(Edge e: _n.connected){
+        for(Edge e: _n.get_Connected()){
 
-            Node other_node = e.from;
-            if (e.from == _n) other_node = e.to;
+            Node other_node = e.get_From();
+            if (e.get_From() == _n) other_node = e.get_To();
 
             if (other_node.get_G_Val() != MAX_INT) {
-                if (min > e.weight+other_node.get_G_Val() && e.weight+other_node.get_G_Val() > -1){
-                    min = e.weight+other_node.get_G_Val();
+                if (min > e.get_Weight()+other_node.get_G_Val() && e.get_Weight()+other_node.get_G_Val() > -1){
+                    min = e.get_Weight()+other_node.get_G_Val();
                 }
             }
         }

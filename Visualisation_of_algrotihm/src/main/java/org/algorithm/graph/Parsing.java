@@ -1,12 +1,13 @@
-package org.algorithm;
+package org.algorithm.graph;
 
+import org.algorithm.Main;
+import org.algorithm.graph.edges.BiEdge;
 import processing.core.PApplet;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
-import java.lang.reflect.Array;
 import java.util.*;
 
 import static org.algorithm.Util.generate_Name;
