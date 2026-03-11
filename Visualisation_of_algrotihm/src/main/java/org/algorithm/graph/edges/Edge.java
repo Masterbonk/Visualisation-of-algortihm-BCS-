@@ -1,18 +1,17 @@
-package org.algorithm;
+package org.algorithm.graph.edges;
 
-import garciadelcastillo.dashedlines.DashedLines;
+import org.algorithm.graph.Node;
 import processing.core.PApplet;
 
-import static java.lang.Math.log10;
 import static org.algorithm.Main.*;
 import static org.algorithm.Util.heuristic;
 
 
 public class Edge {
-    Node from;
-    Node to;
+    protected Node from;
+    protected Node to;
     PApplet sketch;
-    int weight;
+    private int weight;
     int r = 75, g = 75, b = 75;
 
 
@@ -23,8 +22,8 @@ public class Edge {
 
         update_Weight(_weight);
 
-        from.connected.add(this);
-        to.connected.add(this);
+        from.get_Connected().add(this);
+        to.get_Connected().add(this);
         edge_array.add(this);
         edge_update_map.put(this,weight);
 
@@ -41,6 +40,14 @@ public class Edge {
             } else weight = _i;
         }
     }
+
+    public int get_Weight(){
+        return weight;
+    }
+
+    public Node get_To(){return to;}
+
+    public Node get_From(){return from;}
 
     public void render(){
 
@@ -59,7 +66,7 @@ public class Edge {
             }else {color(-1,75,-1);}
         } else{color(-1,75,-1);}
         sketch.stroke(r,g,b);
-        sketch.line(from.x,from.y, to.x, to.y);
+        sketch.line(from.get_X(),from.get_Y(), to.get_X(), to.get_Y());
         sketch.pop();
 
 
@@ -82,14 +89,14 @@ public class Edge {
 
             String tmp = ""+weight;
             sketch.rect(
-                    ((from.x + to.x) / 2f),
-                    ((from.y + to.y) / 2f - (sketch.getGraphics().textSize/2)),
+                    ((from.get_X() + to.get_X()) / 2f),
+                    ((from.get_Y() + to.get_Y()) / 2f - (sketch.getGraphics().textSize/2)),
                     sketch.textWidth(tmp),
                     (sketch.getGraphics().textSize)
 
             );
             sketch.fill(255);
-            sketch.text("" + weight, ((from.x + to.x) / 2f), ((from.y + to.y) / 2f));
+            sketch.text("" + weight, ((from.get_X() + to.get_X()) / 2f), ((from.get_Y() + to.get_Y()) / 2f));
             sketch.pop();
         }
     }
@@ -127,7 +134,7 @@ public class Edge {
         int box_size = 10; int box_x = sketch.mouseX-box_size/2; int box_y = sketch.mouseY-box_size/2;
 
         //The start and end points of the edge
-        double x1_tmp = from.x*zoom_level+translate_x; double y1_tmp = from.y*zoom_level+translate_y; double x2_tmp = to.x*zoom_level+translate_x; double y2_tmp = to.y*zoom_level+translate_y;
+        double x1_tmp = from.get_X()*zoom_level+translate_x; double y1_tmp = from.get_Y()*zoom_level+translate_y; double x2_tmp = to.get_X()*zoom_level+translate_x; double y2_tmp = to.get_Y()*zoom_level+translate_y;
 
         //The 2 outcodes that we save. Each one is a binary value that tells us if the point was over,
         // under, to the left or right of the box
@@ -216,62 +223,3 @@ public class Edge {
     }
 }
 
-class BiEdge extends Edge{
-
-    public BiEdge(PApplet _sketch, Node _from, Node _to, int _weight){
-        super(_sketch, _from, _to, _weight);
-    }
-
-    public BiEdge(PApplet _sketch, Node _from, Node _to){
-        super(_sketch, _from, _to, 0);
-    }
-
-    @Override
-    public void render() {
-        super.render();
-    }
-}
-
-class Heuristic_Edge extends Edge{
-
-    DashedLines dash;
-    public Heuristic_Edge(PApplet _sketch, Node _from, Node _to){
-        super(_sketch, _from, _to, 0);
-
-        dash = new DashedLines(sketch);
-
-        from.connected.remove(this);
-        to.connected.remove(this);
-        edge_array.remove(this);
-        edge_update_map.remove(this);
-    }
-
-    public void set_To(Node _n){
-        to = _n;
-    }
-    public void set_From(Node _n){
-        from = _n;
-    }
-
-
-    @Override
-    public void render() {
-        if(to != null && from != null){
-            update_Weight(0);
-            set_To(start_node);
-            set_From(goal_node);
-            if (Ui.get_Button("heuristic").clicked) {
-                sketch.push();
-                sketch.strokeWeight(2);
-                dash.pattern(20, 20);
-                dash.line(to.x,to.y,from.x,from.y);
-                sketch.pop();
-
-                render_Weight();
-
-            }
-        }
-
-    }
-
-}

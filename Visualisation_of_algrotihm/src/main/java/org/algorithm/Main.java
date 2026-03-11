@@ -1,8 +1,14 @@
 package org.algorithm;
+import org.algorithm.algo.Algorithm;
+import org.algorithm.algo.DStarLite;
+import org.algorithm.graph.*;
+import org.algorithm.graph.edges.BiEdge;
+import org.algorithm.graph.edges.Edge;
+import org.algorithm.graph.edges.Heuristic_Edge;
+import org.algorithm.ui.Color_Scheme;
+import org.algorithm.ui.UI;
 import processing.core.PApplet;
 import processing.core.PFont;
-import processing.core.*;
-import garciadelcastillo.dashedlines.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -333,7 +339,7 @@ public class Main extends PApplet{
 
                     if (value <= maxValue) {
                         activeEdge.update_Weight(value);
-                        edge_update_map.put(activeEdge, activeEdge.weight);
+                        edge_update_map.put(activeEdge, activeEdge.get_Weight());
                     }
 
                 }
@@ -404,14 +410,14 @@ public class Main extends PApplet{
         if(debug){
             for (Node t : node_array) {
                 if (t.mouse_Over()) {
-                    println("Node edges "+ t.connected);
-                    println("Size of connected = "+t.connected.size());
+                    println("Node edges "+ t.get_Connected());
+                    println("Size of connected = "+t.get_Connected().size());
                 }
             }
 
             for (Edge e : edge_array){
                 if (e.mouseOver()){
-                    print("Edge from " + e.from + " Edge to " + e.to);
+                    print("Edge from " + e.get_From() + " Edge to " + e.get_To());
                 }
             }
         }
@@ -450,16 +456,16 @@ public class Main extends PApplet{
                         algorithm.remove_Node(n);
                         if (algorithm.get_Start() == n) algorithm.set_Start(null);
                         if (algorithm.get_Goal() == n) algorithm.set_Goal(null);
-                        for (Edge e : n.connected) {
+                        for (Edge e : n.get_Connected()) {
                             Node tmp;
-                            if (e.from == n) {
-                                tmp = e.to;
-                            } else tmp = e.from;
-                            tmp.connected.remove(e);
+                            if (e.get_From() == n) {
+                                tmp = e.get_To();
+                            } else tmp = e.get_From();
+                            tmp.get_Connected().remove(e);
                             edge_array.remove(e);
                             edge_update_map.put(e,-1);
                         }
-                        println("Clicked on node at point " + n.x + ", " + n.y);
+                        println("Clicked on node at point " + n.get_X() + ", " + n.get_Y());
                         break;
                     } else if (Ui.get_Button("line").clicked && n.mouse_Over()) {
                         clicked_on_node = true;
@@ -468,9 +474,9 @@ public class Main extends PApplet{
                             node_1 = n;
                         } else if (n != node_1) { //We know we have clicked another node, and now we check that it's not the same node
                             boolean stop = false;
-                            for (Edge e : node_1.connected) { //We go over all edges in our node_1 and makes sure
+                            for (Edge e : node_1.get_Connected()) { //We go over all edges in our node_1 and makes sure
                                 // that it's not connected to the new node we clicked
-                                if (e.to == n || e.from == n) { //If it is we stop and do not make the edge
+                                if (e.get_To() == n || e.get_From() == n) { //If it is we stop and do not make the edge
                                     stop = true;
                                     break;
                                 }
@@ -505,6 +511,7 @@ public class Main extends PApplet{
 
                 if (!clicked_on_node && Ui.get_Button("flag_a").clicked) {
                     algorithm.set_Start(null);
+                    initial_start_node = null;
                     if(h != null){
                         h.set_To(null);
                         h.set_From(null);
@@ -513,6 +520,7 @@ public class Main extends PApplet{
                 }
                 if (!clicked_on_node && Ui.get_Button("flag_b").clicked) {
                     algorithm.set_Goal(null);
+                    initial_goal_node = null;
                     if(h != null){
                         h.set_To(null);
                         h.set_From(null);
@@ -542,10 +550,10 @@ public class Main extends PApplet{
 
                     for (Edge e : edge_array) {
                         if (e.mouseOver()) {
-                            Node to = e.to;
-                            Node from = e.from;
-                            to.connected.remove(e);
-                            from.connected.remove(e);
+                            Node to = e.get_To();
+                            Node from = e.get_From();
+                            to.get_Connected().remove(e);
+                            from.get_Connected().remove(e);
                             println("Edge was deleted");
                             edge_update_map.put(e,-1);
                             edge_array.remove(e);

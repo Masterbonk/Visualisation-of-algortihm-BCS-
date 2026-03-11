@@ -1,4 +1,4 @@
-package org.algorithm;
+package org.algorithm.ui;
 
 import processing.core.PApplet;
 
@@ -19,7 +19,7 @@ public class Color_Scheme {
     public static  int cut_node;
     public static  int hover_node;
     public static int in_PQ_node;
-    Color_Scheme(PApplet _sketch){
+    public Color_Scheme(PApplet _sketch){
         sketch = _sketch;
     }
     //bla

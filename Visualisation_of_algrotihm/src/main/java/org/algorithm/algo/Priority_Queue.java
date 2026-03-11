@@ -1,4 +1,6 @@
-package org.algorithm;
+package org.algorithm.algo;
+import org.algorithm.graph.Node;
+
 import java.util.*;
 import static processing.core.PConstants.MAX_INT;
 
@@ -7,9 +9,9 @@ public class Priority_Queue {
 
     private ArrayList<Node> heap;
 
-    private HashMap<Node,Tupple> keys;
+    private HashMap<Node, Tupple> keys;
 
-    Priority_Queue(){
+    public Priority_Queue(){
         heap = new ArrayList<>();
         keys = new HashMap<>();
     }
@@ -19,7 +21,7 @@ public class Priority_Queue {
      * @param _n Node to be inserted
      * @param _k Key to be inserted
      * */
-    void insert(Node _n, Tupple _k){
+    public void insert(Node _n, Tupple _k){
         heap.add(_n);
         keys.put(_n,_k);
         swim(heap.size() - 1);
@@ -28,7 +30,7 @@ public class Priority_Queue {
     /**
      * @return and delete the top key of queue
     * */
-    Node pop(){
+    public Node pop(){
         if (is_empty()) return null;
 
         Node min = heap.getFirst();
@@ -69,14 +71,14 @@ public class Priority_Queue {
     /**
      * @return the size of the queue
      * */
-    int size(){
+    public int size(){
         return heap.size();
     }
 
     /**
      * @return true if the queue is empty
      * */
-    boolean is_empty(){
+    public boolean is_empty(){
         return heap.isEmpty();
     }
 
@@ -151,6 +153,7 @@ public class Priority_Queue {
     public ArrayList<Node> get_Heap(){
         return heap;
     }
+
 
     public void clear_Heap(){
         heap = new ArrayList<>();

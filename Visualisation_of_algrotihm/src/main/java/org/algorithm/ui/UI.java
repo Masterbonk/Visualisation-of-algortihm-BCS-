@@ -1,5 +1,8 @@
-package org.algorithm;
+package org.algorithm.ui;
 
+import org.algorithm.Main;
+import org.algorithm.Util;
+import org.algorithm.ui.buttons.Button;
 import processing.core.PApplet;
 
 import java.util.*;
@@ -9,15 +12,15 @@ import static org.algorithm.Main.*;
 public class UI {
 
     private HashMap<String, Button> button_map = new HashMap<>();;
-    ArrayList<String> bottom_ui = new ArrayList<>();
-    ArrayList<String> top_ui = new ArrayList<>();
+    public ArrayList<String> bottom_ui = new ArrayList<>();
+    public ArrayList<String> top_ui = new ArrayList<>();
     PApplet sketch;
 
     /**
      * UI class is used to make all UI elements in the program.
      * @param _sketch The _sketch is the sketch from main
      */
-    UI(PApplet _sketch){
+    public UI(PApplet _sketch){
         sketch = _sketch;
 
     }
@@ -186,7 +189,7 @@ public class UI {
     private void display_PQ(){
 
         if(Ui.get_Button("PQ_display").clicked){
-            sketch.rect(sketch.displayWidth-400,0,400,sketch.displayHeight-Main.button_height);
+            sketch.rect(sketch.displayWidth-400,0,400,sketch.displayHeight- Main.button_height);
             sketch.push();
             sketch.fill(0,0,0);
             sketch.textSize(40);

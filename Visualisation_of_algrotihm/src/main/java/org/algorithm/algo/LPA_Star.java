@@ -1,4 +1,8 @@
-package org.algorithm;
+package org.algorithm.algo;
+
+import org.algorithm.Main;
+import org.algorithm.graph.edges.Edge;
+import org.algorithm.graph.Node;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +14,9 @@ import static processing.core.PConstants.MAX_INT;
 
 public class LPA_Star extends Algorithm{
 
-    LPA_Star(){
+
+
+    public LPA_Star(){
         Main.set_of_nodes = new HashSet<>();
         Main.edge_update_map = new HashMap<>();
         start_node = null;
@@ -29,7 +35,7 @@ public class LPA_Star extends Algorithm{
     }
     
     public void initialize(){
-       if (start_node == null && goal_node == null) {
+       if (start_node == null || goal_node == null) {
             println("start and/or goal are null");
             return;
        }
@@ -65,18 +71,18 @@ public class LPA_Star extends Algorithm{
 
                 n.update_G_Val(n.get_Rhs_Val());
 
-                for (Edge e: n.connected){
-                    Node other_node = e.from;
-                    if (e.from == n) other_node = e.to;
+                for (Edge e: n.get_Connected()){
+                    Node other_node = e.get_From();
+                    if (e.get_From() == n) other_node = e.get_To();
                     update_Vertex(other_node);
                 }
 
             } else {
                 n.update_G_Val(MAX_INT);
 
-                for (Edge e: n.connected){
-                    Node other_node = e.from;
-                    if (e.from == n) other_node = e.to;
+                for (Edge e: n.get_Connected()){
+                    Node other_node = e.get_From();
+                    if (e.get_From() == n) other_node = e.get_To();
                     update_Vertex(other_node);
                 }
 
@@ -138,8 +144,8 @@ public class LPA_Star extends Algorithm{
                 if (Main.edge_update_map.get(e) != -1) {
                     e.update_Weight(Main.edge_update_map.get(e));
                 }
-                update_Vertex(e.to);
-                update_Vertex(e.from);
+                update_Vertex(e.get_To());
+                update_Vertex(e.get_From());
             }
             Main.edge_update_map = new HashMap<>();
         }

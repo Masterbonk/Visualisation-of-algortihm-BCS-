@@ -1,5 +1,11 @@
 package org.algorithm;
 
+import org.algorithm.algo.LPA_Star;
+import org.algorithm.algo.Tupple;
+import org.algorithm.graph.edges.BiEdge;
+import org.algorithm.graph.edges.Edge;
+import org.algorithm.graph.Node;
+import org.algorithm.ui.UI;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,13 +15,7 @@ import processing.core.PApplet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.TimeoutException;
 
-import static org.algorithm.Main.Ui;
-
-import static org.algorithm.Util.find_Min_G;
-import static org.algorithm.Util.heuristic;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static processing.core.PApplet.println;

@@ -1,11 +1,16 @@
-package org.algorithm;
+package org.algorithm.algo;
+
+import org.algorithm.Main;
+import org.algorithm.Util;
+import org.algorithm.graph.edges.Edge;
+import org.algorithm.graph.Node;
 
 import java.util.ArrayList;
 
 public class Visual_LPA extends LPA_Star{
     public boolean part_one_d_main = true; // delete sometime soon
 
-    Visual_LPA(){
+    public Visual_LPA(){
         super();
     }
 
@@ -16,13 +21,12 @@ public class Visual_LPA extends LPA_Star{
     }
 
     public void Main(){
-        if (first_run && this.start_node != null && this.goal_node != null) {
+        if (first_run && start_node != null && goal_node != null) {
 
             initialize();
             first_run = false;
 
         }
-
 
 
         //while (!Main.Ui.get_Button("pause").clicked) {
@@ -38,7 +42,7 @@ public class Visual_LPA extends LPA_Star{
 
             compute_Shortest_Path();
 
-            ArrayList<Node> traveres_edges = super.get_Shortest_Path(this.goal_node);
+            ArrayList<Node> traveres_edges = super.get_Shortest_Path(goal_node);
             if(traveres_edges == null){
                 return;
             }
@@ -58,22 +62,19 @@ public class Visual_LPA extends LPA_Star{
     }
 
     public void set_Goal(Node _n){
-        this.goal_node = _n;
+        goal_node = _n;
     }
 
     public void set_Start(Node _n){
-        this.start_node = _n;
+        start_node = _n;
     }
 
     public void compute_Shortest_Path(){
         super.compute_Shortest_Path();
-
-
     }
 
     public ArrayList<Node> get_Shortest_Path(Node n){
         return super.get_Shortest_Path(n);
     }
-
 
     }

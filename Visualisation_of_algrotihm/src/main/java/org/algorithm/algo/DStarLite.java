@@ -1,4 +1,8 @@
-package org.algorithm;
+package org.algorithm.algo;
+
+import org.algorithm.Main;
+import org.algorithm.graph.edges.Edge;
+import org.algorithm.graph.Node;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +23,7 @@ public class DStarLite extends Algorithm {
 
 
 
-    DStarLite(){
+    public DStarLite(){
         Main.set_of_nodes = new HashSet<>();
         Main.edge_update_map = new HashMap<>();
 
@@ -41,7 +45,7 @@ public class DStarLite extends Algorithm {
      * Then it add the goal node to the priority queue.
      */
     public void initialize(){
-        if (Main.start_node == null && Main.goal_node == null) {
+        if (Main.start_node == null || Main.goal_node == null) {
             println("start and/or goal are null");
             return;}
 
@@ -112,7 +116,7 @@ public class DStarLite extends Algorithm {
                     Edge e = find_Shared_Edge(Main.start_node, find_Min_G_Node(Main.start_node));
                     if (e != null) e.color(-1,-1,150);
                     Main.start_node = find_Min_G_Node(Main.start_node);
-                    println("Moved start to node at x: "+Main.start_node.x+" y: "+Main.start_node.y);
+                    println("Moved start to node at x: "+Main.start_node.get_X()+" y: "+Main.start_node.get_Y());
                 }
 
 
@@ -154,8 +158,8 @@ public class DStarLite extends Algorithm {
                 if (Main.edge_update_map.get(e) != -1) { //Means that the
                     e.update_Weight(Main.edge_update_map.get(e));
                 }
-                update_Vertex(e.to);
-                update_Vertex(e.from);
+                update_Vertex(e.get_To());
+                update_Vertex(e.get_From());
             }
             Main.edge_update_map = new HashMap<Edge, Integer>();
 
@@ -186,17 +190,17 @@ public class DStarLite extends Algorithm {
                 U.insert(n, calculate_Key(n));
             } else if (n.get_G_Val() > n.get_Rhs_Val()){
                 n.update_G_Val(n.get_Rhs_Val());
-                for (Edge e: n.connected){
-                    Node other_node = e.from;
-                    if (e.from == n) other_node = e.to;
+                for (Edge e: n.get_Connected()){
+                    Node other_node = e.get_From();
+                    if (e.get_From() == n) other_node = e.get_To();
                     update_Vertex(other_node);
 
                 }
             } else {
                 n.update_G_Val(MAX_INT);
-                for (Edge e: n.connected){
-                    Node other_node = e.from;
-                    if (e.from == n) other_node = e.to;
+                for (Edge e: n.get_Connected()){
+                    Node other_node = e.get_From();
+                    if (e.get_From() == n) other_node = e.get_To();
                     update_Vertex(other_node);
                 }
                 update_Vertex(n);
@@ -257,7 +261,7 @@ public class DStarLite extends Algorithm {
      * @param _n The node to update.
      */
     public void update_Vertex(Node _n){
-        println("Updating node at x: "+_n.x+" y: "+_n.y);
+        println("Updating node at x: "+_n.get_X()+" y: "+_n.get_Y());
         if (_n !=Main.goal_node){
             _n.update_Rhs_Val(find_Min_G(_n));
         }
@@ -274,7 +278,7 @@ public class DStarLite extends Algorithm {
 
         if(_n.get_G_Val() != _n.get_Rhs_Val()){
             U.insert(_n, calculate_Key(_n));
-            println("Added node to list at x: "+_n.x+" y: "+_n.y);
+            println("Added node to list at x: "+_n.get_X()+" y: "+_n.get_Y());
         }
         //println("pq 4 " + U.get_Heap());
         //println("pq to list 4 " + U.toList());
@@ -349,6 +353,14 @@ public class DStarLite extends Algorithm {
      */
     public Priority_Queue get_U(){
         return U;
+    }
+
+    public float get_Km(){
+        return km;
+    }
+
+    public void set_Km(float _km){
+        km = _km;
     }
 
 

@@ -1,5 +1,8 @@
 package org.algorithm;
 
+import org.algorithm.algo.Priority_Queue;
+import org.algorithm.algo.Tupple;
+import org.algorithm.graph.Node;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +25,7 @@ class Priority_QueueTest {
 
     PApplet sketch;
 
-    org.algorithm.Priority_Queue pq;
+    Priority_Queue pq;
 
 
     /** Setup nodes & keys to use for each test
@@ -203,7 +206,7 @@ class Priority_QueueTest {
      * */
     @Test
     void is_empty() {
-        org.algorithm.Priority_Queue pq = new Priority_Queue();
+        Priority_Queue pq = new Priority_Queue();
         assertEquals(true, pq.is_empty());
     }
 }

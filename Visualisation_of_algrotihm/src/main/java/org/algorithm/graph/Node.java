@@ -1,5 +1,7 @@
-package org.algorithm;
+package org.algorithm.graph;
 
+import org.algorithm.graph.edges.*;
+import org.algorithm.ui.Color_Scheme;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
@@ -8,11 +10,12 @@ import static org.algorithm.Main.*;
 
 public class Node {
 
-    int x, y;
+    private final int x;
+    private final int y;
     private int dim, g, rhs;
-    ArrayList<Edge> connected;
+    private ArrayList<Edge> connected;
     PApplet sketch;
-    String name;
+    private String name;
     int node_color;
     boolean in_PQ;
 
@@ -144,7 +147,7 @@ public class Node {
         }
     }
 
-    boolean mouse_Over(){
+    public boolean mouse_Over(){
         //float tempX = Math.round(sketch.mouseX/zoom_level);
         //float tempY = Math.round(sketch.mouseY/zoom_level);
 
@@ -192,7 +195,7 @@ public class Node {
             other_2.connected.remove(connected.getLast());
 
 
-            new BiEdge(sketch, other_1, other_2, connected.getFirst().weight + connected.getLast().weight);
+            new BiEdge(sketch, other_1, other_2, connected.getFirst().get_Weight() + connected.getLast().get_Weight());
 
             edge_array.remove(connected.getFirst());
             edge_array.remove(connected.getLast());
@@ -211,9 +214,23 @@ public class Node {
     }
 
     private Node help_Get_Opposite(Edge _e){
-        if (_e.to == this) {
-            return _e.from;
-        } else return _e.to;
+        if (_e.get_To() == this) {
+            return _e.get_From();
+        } else return _e.get_To();
     }
+
+    public int get_X(){
+        return x;
+    }
+
+    public int get_Y(){
+        return y;
+    }
+
+    public ArrayList<Edge> get_Connected(){
+        return connected;
+    }
+
+    public String get_Name(){return name;}
 
 }

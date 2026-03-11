@@ -1,5 +1,13 @@
 package org.algorithm;
 
+import org.algorithm.algo.DStarLite;
+import org.algorithm.algo.Tupple;
+import org.algorithm.graph.edges.BiEdge;
+import org.algorithm.graph.edges.Edge;
+import org.algorithm.graph.Node;
+import org.algorithm.ui.buttons.Forward_Button;
+import org.algorithm.ui.buttons.Pause_Button;
+import org.algorithm.ui.UI;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,8 +17,6 @@ import processing.core.PApplet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.TimeoutException;
 
 import static org.algorithm.Main.Ui;
 import static org.algorithm.Util.heuristic;
@@ -69,7 +75,7 @@ class DStarLiteTest {
         Ui.get_Button("pause").click();
         algorithm.Main();
 
-        assertEquals(0,algorithm.km);
+        assertEquals(0,algorithm.get_Km());
         assertEquals(Main.goal_node,Main.start_node);
         Ui.get_Button("pause").click();
 
@@ -392,7 +398,7 @@ class DStarLiteTest {
 
         Main.start_node = new Node(sketch, 0, 5);
 
-        algorithm.km = 100;
+        algorithm.set_Km(100);
 
         Node a = new Node(sketch, 5, 5);
         a.update_G_Val(5);
@@ -542,7 +548,7 @@ class DStarLiteTest {
         } catch (Exception e){
             assertTrue(false);
         }
-        assertEquals(0,algorithm.km);
+        assertEquals(0,algorithm.get_Km());
         assertEquals(MAX_INT,Main.start_node.get_G_Val());
         assertEquals(MAX_INT,Main.start_node.get_Rhs_Val());
         assertEquals(MAX_INT,Main.goal_node.get_G_Val());

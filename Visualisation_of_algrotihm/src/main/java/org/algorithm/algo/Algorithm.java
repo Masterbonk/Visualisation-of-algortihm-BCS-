@@ -1,9 +1,11 @@
-package org.algorithm;
+package org.algorithm.algo;
+
+import org.algorithm.graph.Node;
 
 import java.util.ArrayList;
 
 public abstract class Algorithm {
-    protected Priority_Queue U;
+    public Priority_Queue U;
     protected Node start_node;
     protected Node goal_node;
 
@@ -60,7 +62,6 @@ public abstract class Algorithm {
 
     public void initialize(){
     }
-
 
 }
 
