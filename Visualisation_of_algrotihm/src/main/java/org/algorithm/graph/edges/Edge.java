@@ -13,6 +13,7 @@ public class Edge {
     PApplet sketch;
     private int weight;
     int r = 75, g = 75, b = 75;
+    private int id;
 
 
     public Edge(PApplet _sketch, Node _from, Node _to, int _weight){
@@ -25,6 +26,7 @@ public class Edge {
         from.get_Connected().add(this);
         to.get_Connected().add(this);
         edge_array.add(this);
+        id = edge_array.size();
         edge_update_map.put(this,weight);
 
 
@@ -43,6 +45,10 @@ public class Edge {
 
     public int get_Weight(){
         return weight;
+    }
+
+    public int get_Id(){
+        return id;
     }
 
     public Node get_To(){return to;}

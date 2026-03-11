@@ -15,3 +15,4 @@ Visualisation_of_algrotihm/src/main/data/TestOSMFile.osm
 *.osm
 
 .idea/workspace.xml
+Visualisation_of_algrotihm/graph.xml

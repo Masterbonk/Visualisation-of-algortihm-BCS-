@@ -19,6 +19,8 @@ public class Node {
     int node_color;
     boolean in_PQ;
 
+    private int id;
+
     public Node(PApplet _sketch, int _x, int _y){
         //float tempX = mouseX/zoom_level;
         //float tempY = mouseY/zoom_level;
@@ -33,6 +35,9 @@ public class Node {
 
         set_of_nodes.add(this);
         node_array.add(this);
+
+        id = node_array.size();
+
     }
 
     public Node(PApplet _sketch, int _x, int _y, String _name){
@@ -50,6 +55,8 @@ public class Node {
 
         set_of_nodes.add(this);
         node_array.add(this);
+
+        id = node_array.size();
     }
 
     public int get_Rhs_Val(){
@@ -232,5 +239,9 @@ public class Node {
     }
 
     public String get_Name(){return name;}
+
+    public int get_Id(){
+        return id;
+    }
 
 }

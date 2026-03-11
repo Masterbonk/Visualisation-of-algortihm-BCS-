@@ -10,6 +10,7 @@ import org.algorithm.ui.UI;
 import processing.core.PApplet;
 import processing.core.PFont;
 
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,6 +66,8 @@ public class Main extends PApplet{
 
     Util util;
     Color_Scheme cs;
+    public static Export_Handler file;
+
 
 
     public static UI Ui;
@@ -75,6 +78,7 @@ public class Main extends PApplet{
     Heuristic_Edge h;
     public static int count = 0;
     public static int letter = 64;
+
 
 
     /**
@@ -114,6 +118,8 @@ public class Main extends PApplet{
         //fullScreen(); //Is the size of the canvas
 
         //frameRate(30); //Decides how many times per second the draw function is called
+
+        file = new Export_Handler();
     }
 
     /**
@@ -302,7 +308,6 @@ public class Main extends PApplet{
         if (key == 'p'){
             //print("key pressed p");
             debug = !debug;
-
         }
 
         if (keyCode == UP){
