@@ -51,8 +51,8 @@ class DStarLiteTest {
     @AfterEach
     void tearDown() {
         Main.edge_update_map = new HashMap<>();
-        Main.start_node = null;
-        Main.goal_node = null;
+        algorithm.set_Start(null);
+        algorithm.set_Goal(null);
 
     }
 
@@ -68,15 +68,15 @@ class DStarLiteTest {
         Edge bg = new BiEdge(sketch,B,G, 2);
         Edge ag = new BiEdge(sketch,A,G, 4);
 
-        Main.start_node = S;
-        Main.goal_node = G;
+        algorithm.set_Start(S);
+        algorithm.set_Goal(G);
 
         algorithm.Main();
         Ui.get_Button("pause").click();
         algorithm.Main();
 
         assertEquals(0,algorithm.get_Km());
-        assertEquals(Main.goal_node,Main.start_node);
+        assertEquals(algorithm.get_Goal(),algorithm.get_Start());
         Ui.get_Button("pause").click();
 
     }
@@ -91,12 +91,12 @@ class DStarLiteTest {
         Edge bg = new BiEdge(sketch,B,G, 2);
         Edge ag = new BiEdge(sketch,A,G, 4);
 
-        Main.start_node = S;
-        Main.goal_node = G;
+        algorithm.set_Start(S);
+        algorithm.set_Goal(G);
 
         algorithm.Main();
 
-        assertEquals(MAX_INT, Main.start_node.get_G_Val());
+        assertEquals(MAX_INT, algorithm.get_Start().get_G_Val());
     }
 
     @Test
@@ -112,8 +112,8 @@ class DStarLiteTest {
         Edge bg = new BiEdge(sketch,B,G, 2);
         Edge ag = new BiEdge(sketch,A,G, 4);
 
-        Main.start_node = S;
-        Main.goal_node = G;
+        algorithm.set_Start(S);
+        algorithm.set_Goal(G);
 
         Main.edge_update_map.put(bg,MAX_INT);
 
@@ -141,8 +141,8 @@ class DStarLiteTest {
         Edge bg = new BiEdge(sketch,B,G, 2);
         Edge ag = new BiEdge(sketch,A,G, 4);
 
-        Main.start_node = S;
-        Main.goal_node = G;
+        algorithm.set_Start(S);
+        algorithm.set_Goal(G);
 
         algorithm.initialize();
         Ui.get_Button("pause").click();
@@ -152,7 +152,7 @@ class DStarLiteTest {
         ArrayList<Node> expected_result = new ArrayList<>();
         expected_result.add(S); expected_result.add(B); expected_result.add(G);
 
-        assertEquals(expected_result, algorithm.get_Shortest_Path(Main.start_node));
+        assertEquals(expected_result, algorithm.get_Shortest_Path(algorithm.get_Start()));
 
     }
 
@@ -171,8 +171,8 @@ class DStarLiteTest {
 
         Edge bc = new BiEdge(sketch, B, C, 9);
 
-        Main.start_node = S;
-        Main.goal_node = G;
+        algorithm.set_Start(S);
+        algorithm.set_Goal(G);
 
         algorithm.initialize();
         Ui.get_Button("pause").click();
@@ -201,14 +201,14 @@ class DStarLiteTest {
 
         Edge gd = new BiEdge(sketch, G, B, 2);
 
-        Main.start_node = S;
-        Main.goal_node = G;
+        algorithm.set_Start(S);
+        algorithm.set_Goal(G);
 
         algorithm.initialize();
         Ui.get_Button("pause").click();
         algorithm.compute_Shortest_Path();
 
-        assertFalse(algorithm.get_Shortest_Path(Main.start_node).contains(D));
+        assertFalse(algorithm.get_Shortest_Path(algorithm.get_Start()).contains(D));
     }
 
     /***
@@ -219,8 +219,8 @@ class DStarLiteTest {
      */
     @Test
     void update_Vertex() {
-        Main.start_node = new Node(sketch,0,0);
-        Main.goal_node = new Node(sketch,0,0);
+        algorithm.set_Start(new Node(sketch,0,0));
+        algorithm.set_Goal(new Node(sketch,0,0));
         try {
             algorithm.initialize();
         } catch (Exception e) {
@@ -254,8 +254,8 @@ class DStarLiteTest {
      */
     @Test
     void update_Vertex_Locally_Consistent() {
-        Main.start_node = new Node(sketch,0,0);
-        Main.goal_node = new Node(sketch,0,0);
+        algorithm.set_Start(new Node(sketch,0,0));
+        algorithm.set_Goal(new Node(sketch,0,0));
         try {
             algorithm.initialize();
         } catch (Exception e) {
@@ -295,8 +295,8 @@ class DStarLiteTest {
      */
     @Test
     void update_Vertex_Calculate_Best_Rhs(){
-        Main.start_node = new Node(sketch,0,0);
-        Main.goal_node = new Node(sketch,0,0);
+        algorithm.set_Start(new Node(sketch,0,0));
+        algorithm.set_Goal(new Node(sketch,0,0));
 
         Node start = new Node(sketch,1,1);
         Node a = new Node(sketch,1,1);
@@ -346,7 +346,7 @@ class DStarLiteTest {
     @Test
     void calculate_Key_base() {
 
-        Main.start_node = new Node(sketch, 0, 5);
+        algorithm.set_Start(new Node(sketch, 0, 5));
 
         Node a = new Node(sketch, 5, 5);
         a.update_G_Val(100);
@@ -367,7 +367,7 @@ class DStarLiteTest {
     @Test
     void calculate_Key_pick_lowest_rhs_g() {
 
-        Main.start_node = new Node(sketch, 0, 5);
+        algorithm.set_Start(new Node(sketch, 0, 5));
 
         Node a = new Node(sketch, 5, 5);
         a.update_G_Val(7);
@@ -396,7 +396,7 @@ class DStarLiteTest {
     @Test
     void calculate_Key_uses_km() {
 
-        Main.start_node = new Node(sketch, 0, 5);
+        algorithm.set_Start(new Node(sketch, 0, 5));
 
         algorithm.set_Km(100);
 
@@ -420,11 +420,11 @@ class DStarLiteTest {
      */
     @Test
     void heuristic_base(){
-        Main.start_node = new Node(sketch, 0, 5);
+        algorithm.set_Start(new Node(sketch, 0, 5));
 
         Node a = new Node(sketch, 5, 5);
 
-        float result = heuristic(Main.start_node,a);
+        float result = heuristic(algorithm.get_Start(),a);
 
         float expected_result = 5f;
 
@@ -440,11 +440,11 @@ class DStarLiteTest {
      */
     @Test
     void heuristic_always_positive(){
-        Main.start_node = new Node(sketch, 0, 5);
+        algorithm.set_Start(new Node(sketch, 0, 5));
 
         Node a = new Node(sketch, 5, 5);
 
-        float result = heuristic(a, Main.start_node);
+        float result = heuristic(a, algorithm.get_Start());
 
         float expected_result = 5f;
 
@@ -460,13 +460,13 @@ class DStarLiteTest {
      */
     @Test
     void heuristic_always_positive2(){
-        Main.start_node = new Node(sketch, 0, 5);
+        algorithm.set_Start(new Node(sketch, 0, 5));
 
         Node a = new Node(sketch, 5, 5);
 
         float expected_result = 5f;
 
-        float result = heuristic(Main.start_node, a);
+        float result = heuristic(algorithm.get_Start(), a);
 
         assertEquals(expected_result, result);
     }
@@ -480,16 +480,16 @@ class DStarLiteTest {
      */
     @Test
     void heuristic_always_positive3(){
-        Main.start_node = new Node(sketch, 0, 5);
+        algorithm.set_Start(new Node(sketch, 0, 5));
 
         Node b = new Node (sketch, 0, -5);
-        float result = heuristic(Main.start_node, b);
+        float result = heuristic(algorithm.get_Start(), b);
         float expected_result = 10;
         assertEquals(expected_result, result);
 
         expected_result = 5;
         b = new Node (sketch, -5, 5);
-        result = heuristic(Main.start_node, b);
+        result = heuristic(algorithm.get_Start(), b);
         assertEquals(expected_result, result);
     }
 
@@ -503,11 +503,11 @@ class DStarLiteTest {
 
     @Test
     void heuristic_always_positive4(){
-        Main.start_node = new Node(sketch, 0, 5);
+        algorithm.set_Start(new Node(sketch, 0, 5));
 
         float expected_result = 5;
         Node b = new Node (sketch, -5, 5);
-        float result = heuristic(Main.start_node, b);
+        float result = heuristic(algorithm.get_Start(), b);
         assertEquals(expected_result, result);
     }
 
@@ -520,11 +520,11 @@ class DStarLiteTest {
 
     @Test
     void heuristic_hypotenuse_cal(){
-        Main.start_node = new Node(sketch, 0, 0);
+        algorithm.set_Start(new Node(sketch, 0, 0));
 
         Node a = new Node(sketch, 5, 5);
 
-        float result = heuristic(Main.start_node, a);
+        float result = heuristic(algorithm.get_Start(), a);
 
         float expected_result = 7.07f;
 
@@ -540,8 +540,8 @@ class DStarLiteTest {
      */
     @Test
     void initialize_base(){
-        Main.start_node = new Node(sketch, 0, 0);
-        Main.goal_node = new Node(sketch, 1, 1);
+        algorithm.set_Start(new Node(sketch, 0, 0));
+        algorithm.set_Goal(new Node(sketch, 1, 1));
 
         try {
             algorithm.initialize();
@@ -549,10 +549,10 @@ class DStarLiteTest {
             assertTrue(false);
         }
         assertEquals(0,algorithm.get_Km());
-        assertEquals(MAX_INT,Main.start_node.get_G_Val());
-        assertEquals(MAX_INT,Main.start_node.get_Rhs_Val());
-        assertEquals(MAX_INT,Main.goal_node.get_G_Val());
-        assertEquals(0,Main.goal_node.get_Rhs_Val());
+        assertEquals(MAX_INT,algorithm.get_Start().get_G_Val());
+        assertEquals(MAX_INT,algorithm.get_Start().get_Rhs_Val());
+        assertEquals(MAX_INT,algorithm.get_Goal().get_G_Val());
+        assertEquals(0,algorithm.get_Goal().get_Rhs_Val());
         assertEquals(1, algorithm.U.size());
     }
 

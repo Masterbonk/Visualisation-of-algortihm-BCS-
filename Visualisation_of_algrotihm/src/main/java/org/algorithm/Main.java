@@ -38,8 +38,8 @@ public class Main extends PApplet{
     //public static Visual_LPA algorithm;
     public static Algorithm algorithm;
 
-    public static Node start_node;
-    public static Node goal_node;
+    //public static Node start_node;
+    //public static Node goal_node;
     public static Node initial_start_node;
     public static Node initial_goal_node;
     
@@ -499,13 +499,12 @@ public class Main extends PApplet{
                         algorithm.first_run = true;
                         algorithm.set_Start(n);
                         initial_start_node = n;
-                        start_node = n;
+
                     } else if(Ui.get_Button("flag_b").clicked && algorithm.get_Start() != n && n.mouse_Over()){
                         clicked_on_node = true;
                         algorithm.first_run = true;
                         algorithm.set_Goal(n);
                         initial_goal_node = n;
-                        goal_node = n;
                     }
                 }
 
@@ -517,6 +516,7 @@ public class Main extends PApplet{
                         h.set_From(null);
                     }
                     algorithm.first_run = true;
+                    if(!Ui.get_Button("pause").clicked) Ui.get_Button("pause").click();
                 }
                 if (!clicked_on_node && Ui.get_Button("flag_b").clicked) {
                     algorithm.set_Goal(null);
@@ -525,6 +525,7 @@ public class Main extends PApplet{
                         h.set_To(null);
                         h.set_From(null);
                     }
+                    if(!Ui.get_Button("pause").clicked) Ui.get_Button("pause").click();
                     algorithm.first_run = true;
                 }
 
@@ -581,7 +582,7 @@ public class Main extends PApplet{
 
             if(Ui.get_Button("heuristic").clicked && algorithm.get_Start() != null && algorithm.get_Goal() != null){
                 if (h == null) {
-                    h = new Heuristic_Edge(this, start_node, goal_node);
+                    h = new Heuristic_Edge(this, algorithm.get_Start(), algorithm.get_Goal());
                 }
             }
 

@@ -124,8 +124,8 @@ public class Util {
     public static void delete_Graph(){
         Main.edge_array = new ArrayList<>();
         Main.node_array = new ArrayList<>();
-        Main.goal_node = null;
-        Main.start_node = null;
+        algorithm.set_Goal(null);
+        algorithm.set_Start(null);
         Main.node_1 = null;
         Main.initial_goal_node = null;
         Main.initial_start_node = null;

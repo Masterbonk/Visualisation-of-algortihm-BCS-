@@ -37,8 +37,6 @@ class LPA_StarTest {
         Main.set_of_nodes = new HashSet<>();
         Main.edge_update_map = new HashMap<>();
 
-
-
         algorithm = new LPA_Star();
 
         util = new Util(sketch,button_height);
@@ -64,13 +62,13 @@ class LPA_StarTest {
         Edge bg = new BiEdge(sketch,B,G, 2);
         Edge ag = new BiEdge(sketch,A,G, 4);
 
-        algorithm.start_node = S;
-        algorithm.goal_node = G;
+        algorithm.set_Start(S);
+        algorithm.set_Goal(G);
 
         algorithm.Main();
-        assertNotEquals(MAX_INT,algorithm.goal_node.get_G_Val());
-        assertNotEquals(MAX_INT,algorithm.goal_node.get_Rhs_Val());
-        assertEquals(5,algorithm.goal_node.get_G_Val());
+        assertNotEquals(MAX_INT,algorithm.get_Start().get_G_Val());
+        assertNotEquals(MAX_INT,algorithm.get_Goal().get_Rhs_Val());
+        assertEquals(5,algorithm.get_Goal().get_G_Val());
 
     }
 
@@ -87,8 +85,8 @@ class LPA_StarTest {
         Edge bg = new BiEdge(sketch,B,G, 2);
         Edge ag = new BiEdge(sketch,A,G, 4);
 
-        algorithm.start_node = S;
-        algorithm.goal_node = G;
+        algorithm.set_Start(S);
+        algorithm.set_Goal(G);
 
         Main.edge_update_map.put(bg, MAX_INT);
 
@@ -103,8 +101,8 @@ class LPA_StarTest {
     @Test
     void initialize() {
 
-        algorithm.start_node = new Node(sketch, 0, 0);
-        algorithm.goal_node = new Node(sketch, 1, 1);
+        algorithm.set_Start(new Node(sketch, 0, 0));
+        algorithm.set_Goal(new Node(sketch, 1, 1));
 
         try {
             algorithm.initialize();
@@ -112,10 +110,10 @@ class LPA_StarTest {
             fail();
         }
 
-        assertEquals(MAX_INT,algorithm.start_node.get_G_Val());
-        assertEquals(0,algorithm.start_node.get_Rhs_Val());
-        assertEquals(MAX_INT,algorithm.goal_node.get_G_Val());
-        assertEquals(MAX_INT,algorithm.goal_node.get_Rhs_Val());
+        assertEquals(MAX_INT,algorithm.get_Start().get_G_Val());
+        assertEquals(0,algorithm.get_Start().get_Rhs_Val());
+        assertEquals(MAX_INT,algorithm.get_Goal().get_G_Val());
+        assertEquals(MAX_INT,algorithm.get_Goal().get_Rhs_Val());
         assertEquals(1, algorithm.U.size());
 
     }
@@ -136,8 +134,8 @@ class LPA_StarTest {
 
     @Test
     void calculate_Key_base() {
-        algorithm.start_node = new Node(sketch, 5, 5);
-        algorithm.goal_node = new Node(sketch,0,5);
+        algorithm.set_Start(new Node(sketch, 5, 5));
+        algorithm.set_Goal(new Node(sketch,0,5));
 
         Node a = new Node(sketch, 5, 5);
         a.update_G_Val(100);
@@ -153,8 +151,8 @@ class LPA_StarTest {
     @Test
     void calculate_Key_pick_lowest_rhs_g() {
 
-        algorithm.start_node = new Node(sketch, 10, 5);
-        algorithm.goal_node = new Node(sketch, 0, 5);
+        algorithm.set_Start(new Node(sketch, 10, 5));
+        algorithm.set_Goal(new Node(sketch,0,5));
 
         Node a = new Node(sketch, 5, 5);
         a.update_G_Val(7);
@@ -186,8 +184,9 @@ class LPA_StarTest {
         Edge bg = new BiEdge(sketch,B,G, 2);
         Edge ag = new BiEdge(sketch,A,G, 4);
 
-        algorithm.start_node = S;
-        algorithm.goal_node = G;
+
+        algorithm.set_Start(S);
+        algorithm.set_Goal(G);
 
         algorithm.initialize();
 
@@ -196,7 +195,7 @@ class LPA_StarTest {
         ArrayList<Node> expected_result = new ArrayList<>();
         expected_result.add(G); expected_result.add(B); expected_result.add(S);
 
-        assertEquals(expected_result, algorithm.get_Shortest_Path(algorithm.goal_node));
+        assertEquals(expected_result, algorithm.get_Shortest_Path(algorithm.get_Goal()));
 
     }
 
@@ -215,20 +214,22 @@ class LPA_StarTest {
 
         Edge gd = new BiEdge(sketch, G, B, 2);
 
-        algorithm.start_node = S;
-        algorithm.goal_node = G;
+        algorithm.set_Start(S);
+        algorithm.set_Goal(G);
 
         algorithm.initialize();
         algorithm.compute_Shortest_Path();
 
-        assertFalse(algorithm.get_Shortest_Path(algorithm.goal_node).contains(D));
+        assertFalse(algorithm.get_Shortest_Path(algorithm.get_Goal()).contains(D));
     }
 
     // test that closest vertex is updated
     @Test
     void update_Vertex() {
-        algorithm.start_node = new Node(sketch,0,0);
-        algorithm.goal_node = new Node(sketch,0,0);
+
+        algorithm.set_Start(new Node(sketch,0,0));
+        algorithm.set_Goal(new Node(sketch,0,0));
+
 
         Node a = new Node(sketch, 0,0);
         Node b = new Node(sketch, 2,2);
@@ -255,8 +256,10 @@ class LPA_StarTest {
     //test that vertex is not updated
     @Test
     void not_Update_Vertex(){
-        algorithm.start_node = new Node(sketch,0,0);
-        algorithm.goal_node = new Node(sketch,0,0);
+
+        algorithm.set_Start(new Node(sketch,0,0));
+        algorithm.set_Goal(new Node(sketch,0,0));
+
 
         Node a = new Node(sketch, 0,0);
         Node b = new Node(sketch, 2,2);
@@ -299,8 +302,9 @@ class LPA_StarTest {
         Edge ac = new BiEdge(sketch,a,c,1);
         Edge ad = new BiEdge(sketch,a,d,1);
 
-        algorithm.start_node = a;
-        algorithm.goal_node = new Node(sketch,25,25);
+        algorithm.set_Start(a);
+        algorithm.set_Goal(new Node(sketch,25,25));
+
 
         algorithm.initialize();
 

@@ -24,13 +24,8 @@ public class DStarLite extends Algorithm {
 
 
     public DStarLite(){
-        Main.set_of_nodes = new HashSet<>();
-        Main.edge_update_map = new HashMap<>();
 
-        first_run = true;
-        has_been_paused = true;
-        part_one_d_main = false;
-        paused_once = false;
+        super();
 
     }
 
@@ -45,9 +40,10 @@ public class DStarLite extends Algorithm {
      * Then it add the goal node to the priority queue.
      */
     public void initialize(){
-        if (Main.start_node == null || Main.goal_node == null) {
+        if (start_node == null || goal_node == null) {
             println("start and/or goal are null");
-            return;}
+            return;
+        }
 
         for (Edge e:Main.edge_array) {
             e.color(75,75,75);
@@ -65,9 +61,9 @@ public class DStarLite extends Algorithm {
             n.update_Rhs_Val(MAX_INT);
         }
 
-        Main.goal_node.update_Rhs_Val(0);
+        goal_node.update_Rhs_Val(0);
 
-        U.insert(Main.goal_node, calculate_Key(Main.goal_node));
+        U.insert(goal_node, calculate_Key(goal_node));
 
     }
 
@@ -84,8 +80,8 @@ public class DStarLite extends Algorithm {
      * It has been given the ability to pause right before it checks for changes.
      */
     public void Main(){
-        if (first_run && Main.start_node != null && Main.goal_node != null){
-            last = Main.start_node;
+        if (first_run && start_node != null && goal_node != null){
+            last = start_node;
             initialize();
             compute_Shortest_Path();
             first_run = false;
@@ -99,9 +95,9 @@ public class DStarLite extends Algorithm {
 
         if (!part_one_d_main && !first_run){
             //println("Running while loop");
-            while (Main.start_node != Main.goal_node){
+            while (start_node != goal_node){
 
-                if (Main.start_node.get_G_Val() == MAX_INT) {
+                if (start_node.get_G_Val() == MAX_INT) {
                     println("No valid path to start");
                     println("update map has size = "+Main.edge_update_map.size());
                     check_For_Edge_Change();
@@ -111,12 +107,12 @@ public class DStarLite extends Algorithm {
                 }
 
                 if (!has_been_paused && paused_once) {
-                    println(U.get_Heap().size());
-                    U.get_Heap().getFirst().change_In_PQ(false);
-                    Edge e = find_Shared_Edge(Main.start_node, find_Min_G_Node(Main.start_node));
+
+                    if (!U.get_Heap().isEmpty()) U.get_Heap().getFirst().change_In_PQ(false);
+                    Edge e = find_Shared_Edge(start_node, find_Min_G_Node(start_node));
                     if (e != null) e.color(-1,-1,150);
-                    Main.start_node = find_Min_G_Node(Main.start_node);
-                    println("Moved start to node at x: "+Main.start_node.get_X()+" y: "+Main.start_node.get_Y());
+                    start_node = find_Min_G_Node(start_node);
+                    println("Moved start to node at x: "+start_node.get_X()+" y: "+start_node.get_Y());
                 }
 
 
@@ -151,8 +147,8 @@ public class DStarLite extends Algorithm {
      */
     public void check_For_Edge_Change(){
         if (!Main.edge_update_map.isEmpty()) {
-            km = km + heuristic(last, Main.start_node);
-            last = Main.start_node;
+            km = km + heuristic(last, start_node);
+            last = start_node;
 
             for (Edge e : Main.edge_update_map.keySet()) {
                 if (Main.edge_update_map.get(e) != -1) { //Means that the
@@ -179,7 +175,7 @@ public class DStarLite extends Algorithm {
         Node n;
 
         boolean done = true;
-        while(U.top_Key().compareTo(calculate_Key(Main.start_node)) < 0 || Main.start_node.get_Rhs_Val() != Main.start_node.get_G_Val()){
+        while(U.top_Key().compareTo(calculate_Key(start_node)) < 0 || start_node.get_Rhs_Val() != start_node.get_G_Val()){
 
             k_old = U.top_Key();
             n = U.pop();
@@ -244,7 +240,7 @@ public class DStarLite extends Algorithm {
         ArrayList<Node> result = new ArrayList<>();
         Node tmp = n;
         if (n.get_G_Val() != MAX_INT) {
-            while (!result.contains(Main.goal_node)) {
+            while (!result.contains(goal_node)) {
                 Node tmp2 = find_Min_G_Node(tmp);
                 result.add(tmp);
                 tmp = tmp2;
@@ -262,7 +258,7 @@ public class DStarLite extends Algorithm {
      */
     public void update_Vertex(Node _n){
         println("Updating node at x: "+_n.get_X()+" y: "+_n.get_Y());
-        if (_n !=Main.goal_node){
+        if (_n !=goal_node){
             _n.update_Rhs_Val(find_Min_G(_n));
         }
 
@@ -295,7 +291,7 @@ public class DStarLite extends Algorithm {
     public Tupple calculate_Key(Node s){
         float k1, k2;
 
-        k1 = min(s.get_G_Val(),s.get_Rhs_Val()) + heuristic(s, Main.start_node) + km;
+        k1 = min(s.get_G_Val(),s.get_Rhs_Val()) + heuristic(s, start_node) + km;
         if(k1 < 0) k1 = MAX_INT;
 
         k2 = min(s.get_G_Val(),s.get_Rhs_Val());
@@ -304,56 +300,8 @@ public class DStarLite extends Algorithm {
         return new Tupple(k1, k2);
     }
 
-    /**
-     * This removes the Node from the PQ and the set of nodes
-     * @param n The node to remove
-     */
-    public void remove_Node(Node n){
-        Main.set_of_nodes.remove(n);
-        if(U != null){
-            U.remove(n);
-        }
-    }
 
-    /**
-     * Sets the start node.
-     * @param _n The node that becomes start
-     */
-    public void set_Start(Node _n){
-        Main.start_node = _n;
-    }
 
-    /**
-     * Sets the goal node.
-     * @param _n The node that becomes goal
-     */
-    public void set_Goal(Node _n){
-        Main.goal_node = _n;
-    }
-
-    /**
-     * Gets the start node
-     * @return The start node
-     */
-    public Node get_Start(){
-        return Main.start_node;
-    }
-
-    /**
-     * Gets the goal node
-     * @return The goal node
-     */
-    public Node get_Goal(){
-        return Main.goal_node;
-    }
-
-    /**
-     * Gets the priority queue
-     * @return The priority queue
-     */
-    public Priority_Queue get_U(){
-        return U;
-    }
 
     public float get_Km(){
         return km;

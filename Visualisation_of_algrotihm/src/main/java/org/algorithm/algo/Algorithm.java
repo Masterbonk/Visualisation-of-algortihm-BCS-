@@ -1,48 +1,101 @@
 package org.algorithm.algo;
 
+import org.algorithm.Main;
 import org.algorithm.graph.Node;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+
+import static processing.core.PApplet.println;
+import static processing.core.PConstants.MAX_INT;
 
 public abstract class Algorithm {
     public Priority_Queue U;
     protected Node start_node;
     protected Node goal_node;
 
-    public boolean first_run = true;
+    public boolean first_run;
 
     //d* specific find a better way
-    public boolean part_one_d_main = false;
-    public static boolean has_been_paused = true;
-    boolean paused_once = false;
+    public boolean part_one_d_main;
+    public static boolean has_been_paused;
+    boolean paused_once;
+
+    public Algorithm(){
+
+        Main.set_of_nodes = new HashSet<>();
+        Main.edge_update_map = new HashMap<>();
+
+        start_node = null;
+        goal_node = null;
 
 
+        first_run = true;
+        has_been_paused = true;
+
+        part_one_d_main = false;
+        paused_once = false;
+    }
 
     public void Main() {
     }
 
-    public Node get_Start() {
-        return null;
-    }
 
-    public Node get_Goal() {
-        return null;
-    }
 
-    public void set_Start(Node _n) {
-    }
-
+    /**
+     * Sets the goal node.
+     * @param _n The node that becomes goal
+     */
     public void set_Goal(Node _n) {
+        goal_node = _n;
     }
 
-    public Priority_Queue get_U() {
-        return null;
+
+    /**
+     * Sets the start node.
+     * @param _n The node that becomes start
+     */
+    public void set_Start(Node _n){
+        start_node = _n;
     }
 
+
+    /**
+     * Gets the start node
+     * @return The start node
+     */
+    public Node get_Start(){
+        return start_node;
+    }
+
+    /**
+     * Gets the goal node
+     * @return The goal node
+     */
+    public Node get_Goal(){
+        return goal_node;
+    }
+
+    /**
+     * Gets the priority queue
+     * @return The priority queue
+     */
+    public Priority_Queue get_U(){
+        return U;
+    }
     void check_For_Edge_Change() {
     }
 
+    /**
+     * This removes the Node from the PQ and the set of nodes
+     * @param n The node to remove
+     */
     public void remove_Node(Node n){
+        Main.set_of_nodes.remove(n);
+        if(U != null){
+            U.remove(n);
+        }
     }
 
     public void update_Vertex(Node _n){
@@ -61,6 +114,17 @@ public abstract class Algorithm {
     }
 
     public void initialize(){
+    }
+
+    public void reset(){
+
+        for(Node n: Main.set_of_nodes){
+            println("reseting node " + n.toString());
+            n.update_G_Val(MAX_INT);
+            n.update_Rhs_Val(MAX_INT);
+        }
+
+
     }
 
 }

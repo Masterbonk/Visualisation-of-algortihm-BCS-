@@ -7,7 +7,7 @@ import org.algorithm.graph.Node;
 
 import java.util.ArrayList;
 
-public class Visual_LPA extends LPA_Star{
+public class  Visual_LPA extends LPA_Star{
     public boolean part_one_d_main = true; // delete sometime soon
 
     public Visual_LPA(){
@@ -21,8 +21,10 @@ public class Visual_LPA extends LPA_Star{
     }
 
     public void Main(){
-        if (first_run && start_node != null && goal_node != null) {
-
+        if (first_run && start_node != null || goal_node != null) {
+            for (Edge e:Main.edge_array) {
+                e.color(75,75,75);
+            }
             initialize();
             first_run = false;
 
@@ -34,9 +36,7 @@ public class Visual_LPA extends LPA_Star{
             while (!Main.edge_update_map.isEmpty()) {
                 super.check_For_Edge_Change();
 
-                for (Edge e:Main.edge_array) {
-                    e.color(75,75,75);
-                }
+
 
             }
 

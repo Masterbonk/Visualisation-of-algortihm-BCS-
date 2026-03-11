@@ -16,7 +16,7 @@ public class Reset_Button extends Button {
     public void click(){
         super.click();
         algorithm.first_run = true;
-        if(algorithm.get_Start() != null && algorithm.get_Goal() != null || start_node != null && goal_node != null) {
+        if(algorithm.get_Start() != null && algorithm.get_Goal() != null) {
             algorithm.set_Start(initial_start_node);
             algorithm.set_Goal(initial_goal_node);
             algorithm.initialize();

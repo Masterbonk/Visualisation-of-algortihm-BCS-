@@ -17,10 +17,8 @@ public class LPA_Star extends Algorithm{
 
 
     public LPA_Star(){
-        Main.set_of_nodes = new HashSet<>();
-        Main.edge_update_map = new HashMap<>();
-        start_node = null;
-        goal_node = null;
+        super();
+
     }
 
     public void Main(){
@@ -39,7 +37,7 @@ public class LPA_Star extends Algorithm{
             println("start and/or goal are null");
             return;
        }
-
+        println("initialize run");
        U = new Priority_Queue();
 
        for(Node n: Main.set_of_nodes){
@@ -63,6 +61,7 @@ public class LPA_Star extends Algorithm{
     }
 
     public void compute_Shortest_Path(){
+        println("csp run");
 
         while(U.top_Key().compareTo(calculate_Key(goal_node)) < 0 || goal_node.get_Rhs_Val() != goal_node.get_G_Val() || !U.is_empty()){
             Node n = U.pop();
@@ -126,14 +125,6 @@ public class LPA_Star extends Algorithm{
 
     }
 
-    public Node get_Start(){
-        return start_node;
-    }
-
-    public Node get_Goal(){
-        return goal_node;
-    }
-
     public Priority_Queue get_U(){
         return U;
     }
@@ -151,14 +142,5 @@ public class LPA_Star extends Algorithm{
         }
     }
 
-    /**
-     * This removes the Node from the PQ and the set of nodes
-     * @param n The node to remove
-     */
-    public void remove_Node(Node n){
-        Main.set_of_nodes.remove(n);
-        if(U != null){
-            U.remove(n);
-        }
-    }
+
 }

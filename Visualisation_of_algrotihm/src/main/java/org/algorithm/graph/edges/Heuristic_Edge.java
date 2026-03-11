@@ -32,8 +32,8 @@ public class Heuristic_Edge extends Edge{
     public void render() {
         if(to != null && from != null){
             update_Weight(0);
-            set_To(start_node);
-            set_From(goal_node);
+            set_To(algorithm.get_Start());
+            set_From(algorithm.get_Goal());
             if (Ui.get_Button("heuristic").clicked) {
                 sketch.push();
                 sketch.strokeWeight(2);

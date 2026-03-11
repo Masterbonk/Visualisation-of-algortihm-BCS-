@@ -1,5 +1,6 @@
 package org.algorithm.ui.buttons;
 
+import org.algorithm.Main;
 import org.algorithm.algo.DStarLite;
 import org.algorithm.algo.Visual_LPA;
 import processing.core.PApplet;
@@ -14,11 +15,15 @@ public class Algo_Mode_Button extends Button {
 
     public void click(){
         super.click();
+
+
+        Ui.get_Button("reset").click();
+
+
         if (!clicked) {
             text = "LPA*";
             algorithm = new Visual_LPA();
-            algorithm.set_Start(start_node);
-            algorithm.set_Goal(goal_node);
+
         } else {
             text = "D* Lite"; //Pause
             algorithm = new DStarLite();
@@ -26,5 +31,9 @@ public class Algo_Mode_Button extends Button {
             //algorithm.set_Start(start_node);
             //algorithm.set_Goal(goal_node);
         }
+
+
+        set_of_nodes.addAll(node_array);
+
     }
 }
