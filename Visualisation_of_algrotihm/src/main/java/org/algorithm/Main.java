@@ -79,6 +79,8 @@ public class Main extends PApplet{
     public static int count = 0;
     public static int letter = 64;
 
+    public static boolean importing = false;
+
 
 
     /**
@@ -175,9 +177,11 @@ public class Main extends PApplet{
         strokeWeight(10);
         textSize(30);
         scale(zoom_level);
-        for (Edge edge : edge_array) {
-            edge.render();
-            //edge_array.get(i).color(); //for animating
+        if(!importing){
+            for (Edge edge : edge_array) {
+                edge.render();
+                //edge_array.get(i).color(); //for animating
+            }
         }
         pop();
 
@@ -187,8 +191,12 @@ public class Main extends PApplet{
 
         push();
         scale(zoom_level);
+
+        if(!importing) {
+
         for (Node node : node_array) {
             node.render();
+        }
         }
 
 
@@ -258,9 +266,14 @@ public class Main extends PApplet{
             println("Window was closed or the user hit cancel.");
         } else {
             if (debug) {
+
                 Parsing.parseOSM(this, selection.getAbsolutePath(), false);
             } else {
-                Parsing.parseOSM(this, selection.getAbsolutePath(), true);
+                if(selection.getAbsolutePath().endsWith(".osm")) {
+                    Parsing.parseOSM(this, selection.getAbsolutePath(), true);
+                }else if(selection.getAbsolutePath().endsWith(".xml")) {
+                Parsing.parseXML(this,selection.getAbsolutePath());
+                } else {println("unsuported file type");}
             }
         }
     }

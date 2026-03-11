@@ -2,6 +2,7 @@ package org.algorithm.graph;
 
 import org.algorithm.Main;
 import org.algorithm.graph.edges.BiEdge;
+import org.algorithm.graph.edges.Edge;
 import processing.core.PApplet;
 
 import javax.xml.stream.XMLInputFactory;
@@ -166,6 +167,72 @@ public class Parsing {
         }
         //Clears the name to node map, so we don't save a lot of objects we might not need.
         name_to_node = new HashMap<>();
+        Main.importing = false;
+    }
+
+
+    public static void parseXML(PApplet _sketch, String inp) throws Exception  {
+
+        println("parse XML runs");
+        var input = XMLInputFactory.newInstance().createXMLStreamReader(new BufferedInputStream(new FileInputStream(inp)));
+
+        ArrayList<Edge> edges = new ArrayList<>();
+
+        Map<Integer, Node> nodes = new HashMap<>();
+
+        String currentElement = null;
+
+        int ref = 0, x = 0, y = 0;
+        int from = 0, to = 0;
+
+        while (input.hasNext()) {
+            int event = input.next();
+
+            switch (event) {
+
+                case XMLStreamConstants.START_ELEMENT:
+                    currentElement = input.getLocalName();
+                    break;
+
+                case XMLStreamConstants.CHARACTERS:
+                    String text = input.getText().trim();
+                    if (text.isEmpty()) break;
+
+                    switch (currentElement) {
+                        case "ref":
+                            ref = Integer.parseInt(text);
+                            break;
+                        case "x":
+                            x = Integer.parseInt(text);
+                            break;
+                        case "y":
+                            y = Integer.parseInt(text);
+                            break;
+                        case "From":
+                            from = Integer.parseInt(text);
+                            break;
+                        case "To":
+                            to = Integer.parseInt(text);
+                            break;
+                    }
+                    break;
+
+                case XMLStreamConstants.END_ELEMENT:
+                    String end = input.getLocalName();
+
+                    if (end.equals("Node")) {
+                        Node node = new Node(_sketch, x, y);
+                        nodes.put(ref, node);
+                    }
+
+                    if (end.equals("Edge")) {
+                        Node from_node = nodes.get(from);
+                        Node to_node = nodes.get(to);
+                        edges.add(new Edge(_sketch,from_node, to_node,0));
+                    }
+                    break;
+            }
+        }
     }
 
     public static int convertX(String _x, double _bounds){
@@ -244,4 +311,5 @@ class Util_Way {
             return true;
         } else return false;
     }
+
 }
