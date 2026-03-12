@@ -1,5 +1,6 @@
 package org.algorithm;
 
+import org.algorithm.graph.edges.BiEdge;
 import org.algorithm.graph.edges.Edge;
 import org.algorithm.graph.Node;
 import org.algorithm.ui.buttons.*;
@@ -208,5 +209,37 @@ public class Util {
         } else {//else we append the number to the name
             return Character.toString ((char) letter) + count;
         }
+    }
+
+    /**
+     * Makes the base graph objects. All are added to the node and edge arrays so they are rendered.
+     */
+
+    public static void Make_Graph(PApplet _sketch, int _x, int _y){
+        Node old = null;
+        Node _new;
+
+        for (int i = 0; i < _x; i++){
+            for (int j = 0; j < _y; j++){
+
+                String name;
+
+                _new = new Node(_sketch,i*100+100,100*j+100, generate_Name());
+
+                if(old != null){
+                    new BiEdge(_sketch,old,_new,1);
+                }
+                if (node_array.size()>8){
+                    new BiEdge(_sketch,node_array.get(node_array.indexOf(_new)-7),_new,1);
+                }
+
+                old = _new;
+
+            }
+            old = null;
+        }
+
+        new BiEdge(_sketch, node_array.getFirst(),node_array.get(7),1);
+
     }
 }

@@ -147,7 +147,7 @@ public class Main extends PApplet{
         button_height = displayHeight*10/144;
 
         Util.Make_UI(this, button_height);
-        Make_Graph();
+        Util.Make_Graph(this,8,7);
 
 
         // Set the dash-gap pattern in pixels
@@ -666,35 +666,5 @@ public class Main extends PApplet{
 
 
 
-    /**
-     * Makes the base graph objects. All are added to the node and edge arrays so they are rendered.
-     */
 
-    void Make_Graph(){
-        Node old = null;
-        Node _new;
-
-        for (int i = 0; i < 8; i++){
-            for (int j = 0; j < 7; j++){
-
-                String name;
-
-                _new = new Node(this,i*100+100,100*j+100+button_height, generate_Name());
-
-                if(old != null){
-                    new BiEdge(this,old,_new,1);
-                }
-                if (node_array.size()>8){
-                    new BiEdge(this,node_array.get(node_array.indexOf(_new)-7),_new,1);
-                }
-
-                old = _new;
-
-            }
-            old = null;
-        }
-
-        new BiEdge(this, node_array.getFirst(),node_array.get(7),1);
-
-    }
 }
