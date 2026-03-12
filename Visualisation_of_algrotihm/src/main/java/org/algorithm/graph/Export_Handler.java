@@ -43,10 +43,13 @@ public class Export_Handler extends PApplet {
         }
 
         for (Edge e: Main.edge_array){
-            output.append("\n\t<Edge>").append("\n\t\t<ref>").append(e.get_Id()).append("</ref>").append("\n\t\t<To>").append(e.get_To().get_Id()).append("</To>").append("\n\t\t<From>").append(e.get_From().get_Id()).append("</From>\n\t</Edge>");
+            output.append("\n\t<Edge>").
+                    append("\n\t\t<ref>").append(e.get_Id()).append("</ref>").
+                    append("\n\t\t<To>").append(e.get_To().get_Id()).append("</To>").
+                    append("\n\t\t<From>").append(e.get_From().get_Id()).append("</From>").
+                    append("\n\t\t<Weight>").append(e.get_Weight()).append("</Weight>\n\t</Edge>");
 
         }
-
 
         output.append("\n</Graph>");
         return output.toString();

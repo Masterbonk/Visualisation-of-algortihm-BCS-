@@ -186,17 +186,13 @@ public class Main extends PApplet{
         pop();
 
 
-
-
-
         push();
         scale(zoom_level);
 
         if(!importing) {
-
-        for (Node node : node_array) {
-            node.render();
-        }
+            for (Node node : node_array) {
+                node.render();
+            }
         }
 
 
@@ -273,7 +269,7 @@ public class Main extends PApplet{
                     Parsing.parseOSM(this, selection.getAbsolutePath(), true);
                 }else if(selection.getAbsolutePath().endsWith(".xml")) {
                 Parsing.parseXML(this,selection.getAbsolutePath());
-                } else {println("unsuported file type");}
+                } else {println("unsupported file type");}
             }
         }
     }

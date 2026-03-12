@@ -173,7 +173,6 @@ public class Parsing {
 
     public static void parseXML(PApplet _sketch, String inp) throws Exception  {
 
-        println("parse XML runs");
         var input = XMLInputFactory.newInstance().createXMLStreamReader(new BufferedInputStream(new FileInputStream(inp)));
 
         ArrayList<Edge> edges = new ArrayList<>();
@@ -183,7 +182,7 @@ public class Parsing {
         String currentElement = null;
 
         int ref = 0, x = 0, y = 0;
-        int from = 0, to = 0;
+        int from = 0, to = 0, weight = 0;
 
         while (input.hasNext()) {
             int event = input.next();
@@ -214,6 +213,9 @@ public class Parsing {
                         case "To":
                             to = Integer.parseInt(text);
                             break;
+                        case "Weight":
+                            weight = Integer.parseInt(text);
+                            break;
                     }
                     break;
 
@@ -228,11 +230,13 @@ public class Parsing {
                     if (end.equals("Edge")) {
                         Node from_node = nodes.get(from);
                         Node to_node = nodes.get(to);
-                        edges.add(new Edge(_sketch,from_node, to_node,0));
+                        edges.add(new BiEdge(_sketch,from_node, to_node,weight));
                     }
                     break;
             }
         }
+        Main.importing = false;
+
     }
 
     public static int convertX(String _x, double _bounds){

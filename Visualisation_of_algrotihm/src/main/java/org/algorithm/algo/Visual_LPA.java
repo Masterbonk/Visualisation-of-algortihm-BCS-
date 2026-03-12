@@ -36,8 +36,6 @@ public class  Visual_LPA extends LPA_Star{
             while (!Main.edge_update_map.isEmpty()) {
                 super.check_For_Edge_Change();
 
-
-
             }
 
             compute_Shortest_Path();
