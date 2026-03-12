@@ -25,7 +25,7 @@ public class Color_Scheme {
     //bla
     public void changeColors(boolean pink){
         if (pink){
-            bg = sketch.color(226,177,224);
+            bg = sketch.color(226,204,211);
             //make colors pink
             update_Button_Colors(true);
             update_Node_Colors(true);
@@ -46,7 +46,7 @@ public class Color_Scheme {
 
     private void update_Node_Colors(boolean _pink){
         if (_pink){
-            node = sketch.color(252,10,135);
+            node = sketch.color(247,126,196);
             cut_node = sketch.color(119,1,62);
             hover_node = sketch.color(207,99,249);
             in_PQ_node = sketch.color(252,183,200);

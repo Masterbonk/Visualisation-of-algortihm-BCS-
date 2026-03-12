@@ -2,7 +2,9 @@ package org.algorithm.ui.buttons;
 
 import processing.core.PApplet;
 
+import static org.algorithm.Main.button_height;
 import static org.algorithm.Util.delete_Graph;
+import static org.algorithm.ui.Color_Scheme.text_button;
 
 public class Clear_Button extends Button {
     public Clear_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
@@ -11,4 +13,18 @@ public class Clear_Button extends Button {
     public void click(){
         delete_Graph();
     }
+
+
+    public boolean mouse_Over() {
+
+        if (super.mouse_Over()) {
+            sketch.push();
+            sketch.fill(text_button);
+            sketch.textSize(16);
+            sketch.text("Clears the page", x_pos, y_pos + 1.5f * button_height);
+            sketch.pop();
+        }
+        return super.mouse_Over();
+    }
+
 }
