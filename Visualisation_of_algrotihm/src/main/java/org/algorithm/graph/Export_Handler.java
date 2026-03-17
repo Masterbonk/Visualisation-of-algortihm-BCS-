@@ -6,7 +6,7 @@ import org.algorithm.Main;
 import java.io.FileWriter;   // Import the FileWriter class
 import java.io.IOException;
 
-public class Export_Handler extends PApplet {
+public class Export_Handler {
 
 
     public static void Export(){
@@ -20,6 +20,7 @@ public class Export_Handler extends PApplet {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+
     }
     
     
@@ -38,6 +39,7 @@ public class Export_Handler extends PApplet {
             }
             \n\t\t</connected>
             */
+
             output.append("\n\t</Node>");
 
         }
@@ -48,7 +50,6 @@ public class Export_Handler extends PApplet {
                     append("\n\t\t<To>").append(e.get_To().get_Id()).append("</To>").
                     append("\n\t\t<From>").append(e.get_From().get_Id()).append("</From>").
                     append("\n\t\t<Weight>").append(e.get_Weight()).append("</Weight>\n\t</Edge>");
-
         }
 
         output.append("\n</Graph>");
