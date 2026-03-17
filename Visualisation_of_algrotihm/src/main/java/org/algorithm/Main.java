@@ -12,9 +12,13 @@ import processing.core.PFont;
 
 
 import java.io.File;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
+
+import org.algorithm.algo.AlgoBenchmark;
 
 import static org.algorithm.Util.generate_Name;
 
@@ -91,6 +95,13 @@ public class Main extends PApplet{
         String[] processingArgs = {"Main"};
         Main main = new Main();
         PApplet.runSketch(processingArgs, main);
+
+
+        try{
+            AlgoBenchmark.main(args);
+        }catch (Exception e){}
+
+
     }
 
 
