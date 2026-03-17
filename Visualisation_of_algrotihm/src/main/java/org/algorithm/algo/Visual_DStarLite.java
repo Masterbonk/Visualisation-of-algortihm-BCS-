@@ -61,7 +61,7 @@ public class Visual_DStarLite extends Algorithm {
     }
 
     /**
-     * D_Main is what calls all other functions in the right order.
+     * Main is what calls all other functions in the right order.
      * It starts by performing a start section, where it sets up the graph and
      * performs the first compute_shortest_path() call. Once it has completed that,
      * it will begin to move the start_node closer to the goal_node.
@@ -223,15 +223,7 @@ public class Visual_DStarLite extends Algorithm {
 
     }
 
-    /**
-     * A special function not part of the original paper on D* Lite.
-     * returns the shortest path that computeShortestPath() function finds.
-     * @param n Node n is the start node, that we try to get to goal with
-     * @return A list of nodes that are traveled over towards the goal
-     */
-    public ArrayList<Node> get_Shortest_Path(Node n){
-        return super.get_Shortest_Path(n,true);
-    }
+
 
 
     /**
@@ -240,28 +232,17 @@ public class Visual_DStarLite extends Algorithm {
      * @param _n The node to update.
      */
     public void update_Vertex(Node _n){
-        println("Updating node at x: "+_n.get_X()+" y: "+_n.get_Y());
-        if (_n !=goal_node){
+        if (_n != goal_node){
             _n.update_Rhs_Val(find_Min_G(_n));
         }
 
         if(U.contains(_n)){
-            try{
-                U.remove(_n);
-            } catch (Exception e){
-                println(e.getMessage());
-            }
+            U.remove(_n);
         }
-        //println("pq 3 " + U.get_Heap());
-        //println("pq to list 3 " + U.toList());
 
         if(_n.get_G_Val() != _n.get_Rhs_Val()){
             U.insert(_n, calculate_Key(_n));
-            println("Added node to list at x: "+_n.get_X()+" y: "+_n.get_Y());
         }
-        //println("pq 4 " + U.get_Heap());
-        //println("pq to list 4 " + U.toList());
-
     }
 
     /**

@@ -7,26 +7,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static java.lang.Math.min;
+import static org.algorithm.Util.find_Min_G;
+import static org.algorithm.Util.find_Min_G_Node;
 import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
 public class DStarLite extends Algorithm {
-    Node start;
-    Node goal;
     Node last;
     float km;
-    Priority_Queue U;
-
-
 
     DStarLite(){
         super();
     }
 
     public void initialize(){
-        if (start == null) throw new NullPointerException("Start not set!");
-        if (goal == null) throw new NullPointerException("Goal not set!");
-
+        if (start_node == null) throw new NullPointerException("start not set!");
+        if (goal_node == null) throw new NullPointerException("goal not set!");
 
         U = new Priority_Queue();
 
@@ -37,28 +33,28 @@ public class DStarLite extends Algorithm {
             n.update_Rhs_Val(MAX_INT);
         }
 
-        goal.update_Rhs_Val(0);
+        goal_node.update_Rhs_Val(0);
 
-        U.insert(goal, calculate_Key(goal));
+        U.insert(goal_node, calculate_Key(goal_node));
     }
 
     public void D_Main(){
-        last = start;
+        last = start_node;
         initialize();
         compute_Shortest_Path();
 
-        while (start != goal){
-            if (start.get_G_Val() == MAX_INT) {
+        while (start_node != goal_node){
+            if (start_node.get_G_Val() == MAX_INT) {
                 println("No valid path to start");
                 break;
             }
 
-            start = find_Min_G_Node(start);
+            start_node = find_Min_G_Node(start_node);
 
 
             if (!edge_update_map.isEmpty()){
-                km = km + heuristic(last,start);
-                last = start;
+                km = km + heuristic(last,start_node);
+                last = start_node;
 
                 for(Edge e: edge_update_map.keySet()){
                     e.update_Weight(edge_update_map.get(e));
@@ -75,7 +71,7 @@ public class DStarLite extends Algorithm {
     public void compute_Shortest_Path(){
         Tupple k_old;
         Node n;
-        while(U.top_Key().compareTo(calculate_Key(start)) < 0 || start.get_Rhs_Val() != start.get_G_Val()){
+        while(U.top_Key().compareTo(calculate_Key(start_node)) < 0 || start_node.get_Rhs_Val() != start_node.get_G_Val()){
             k_old = U.top_Key();
             n = U.pop();
             if(k_old.compareTo(calculate_Key(n)) < 0){
@@ -99,53 +95,14 @@ public class DStarLite extends Algorithm {
         }
     }
 
-    public ArrayList<Node> get_Shortest_Path(Node n){
-        return super.get_Shortest_Path(n,true);
-    }
-
-    public int find_Min_G(Node _n){
-        int min = MAX_INT;
-        for(Edge e: _n.get_Connected()){
-            Node other_node = e.get_From();
-            if (e.get_From() == _n) other_node = e.get_To();
-            if (other_node.get_G_Val() != MAX_INT) {
-                if (min > e.get_Weight()+other_node.get_G_Val()){
-                    min = e.get_Weight()+other_node.get_G_Val();
-                }
-            }
-
-        }
-        return min;
-    }
-
-    public Node find_Min_G_Node(Node _n){
-        int min = MAX_INT;
-        Node tmp = null;
-        for(Edge e: _n.get_Connected()){
-            Node other_node = e.get_From();
-            if (e.get_From() == _n) other_node = e.get_To();
-            if (other_node.get_G_Val() != MAX_INT) {
-                if (min > e.get_Weight()+other_node.get_G_Val()){
-                    min = e.get_Weight()+other_node.get_G_Val();
-                    tmp = other_node;
-                }
-            }
-
-        }
-        return tmp;
-    }
 
     public void update_Vertex(Node _n){
-        if (_n != goal){
+        if (_n != goal_node){
             _n.update_Rhs_Val(find_Min_G(_n));
         }
 
         if(U.contains(_n)){
-            try{
-                U.remove(_n);
-            } catch (Exception e){
-                println(e.getMessage());
-            }
+            U.remove(_n);
         }
 
         if(_n.get_G_Val() != _n.get_Rhs_Val()){
@@ -156,7 +113,7 @@ public class DStarLite extends Algorithm {
     public Tupple calculate_Key(Node s){
         float k1, k2;
 
-        k1 = min(s.get_G_Val(),s.get_Rhs_Val()) + heuristic(s, start) + km;
+        k1 = min(s.get_G_Val(),s.get_Rhs_Val()) + heuristic(s, start_node) + km;
 
         k2 = min(s.get_G_Val(),s.get_Rhs_Val());
 
@@ -170,32 +127,5 @@ public class DStarLite extends Algorithm {
     public float heuristic(Node a, Node b){
         return (float) (Math.round(Math.sqrt((Math.pow(a.get_X() - b.get_X(),2)) + (Math.pow(a.get_Y() - b.get_Y(),2)))* 100.0) / 100.0);
     }
-
-    public void remove_Node(Node n){
-        set_of_nodes.remove(n);
-
-        try {
-            U.remove(n);
-        } catch (Exception e){
-            println(e.getMessage());
-        }
-    }
-
-    public void set_Start(Node _n){
-        start = _n;
-    }
-
-    public void set_Goal(Node _n){
-        goal = _n;
-    }
-
-    public Node get_Start(){
-        return start;
-    }
-
-    public Node get_Goal(){
-        return goal;
-    }
-
 }
 

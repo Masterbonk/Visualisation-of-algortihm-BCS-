@@ -128,6 +128,12 @@ public abstract class Algorithm {
         return null;
     }
 
+    /**
+     * A special function not part of the original paper on D* Lite.
+     * returns the shortest path that computeShortestPath() function finds.
+     * @param n Node n is the start node, that we try to get to goal with
+     * @return A list of nodes that are traveled over towards the goal
+     */
     public ArrayList<Node> get_Shortest_Path(Node n){
         return get_Shortest_Path(n, true);
     }

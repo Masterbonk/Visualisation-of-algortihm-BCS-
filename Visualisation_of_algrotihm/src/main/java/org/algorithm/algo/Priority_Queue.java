@@ -65,7 +65,6 @@ public class Priority_Queue {
     public void remove(Node _n) {
         heap.remove(_n);
         keys.remove(_n);
-
     }
 
     /**
