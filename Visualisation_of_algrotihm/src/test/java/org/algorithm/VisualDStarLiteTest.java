@@ -1,6 +1,6 @@
 package org.algorithm;
 
-import org.algorithm.algo.DStarLite;
+import org.algorithm.algo.Visual_DStarLite;
 import org.algorithm.algo.Tupple;
 import org.algorithm.graph.edges.BiEdge;
 import org.algorithm.graph.edges.Edge;
@@ -16,7 +16,6 @@ import processing.core.PApplet;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 import static org.algorithm.Main.Ui;
 import static org.algorithm.Main.algorithm;
@@ -26,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
-class DStarLiteTest {
+class VisualDStarLiteTest {
     PApplet sketch;
     Main fake_main;
 
@@ -37,7 +36,7 @@ class DStarLiteTest {
     void setUp() {
 
         fake_main = new Main();
-        algorithm = new DStarLite();
+        algorithm = new Visual_DStarLite();
         sketch = new PApplet();
 
 
@@ -75,7 +74,7 @@ class DStarLiteTest {
         Ui.get_Button("pause").click();
         algorithm.Main();
 
-        DStarLite tmp = (DStarLite)algorithm;
+        Visual_DStarLite tmp = (Visual_DStarLite)algorithm;
 
         assertEquals(0, tmp.get_Km());
         assertEquals(algorithm.get_Goal(),algorithm.get_Start());
@@ -400,7 +399,7 @@ class DStarLiteTest {
 
         algorithm.set_Start(new Node(sketch, 0, 5));
 
-        DStarLite tmp = (DStarLite)algorithm;
+        Visual_DStarLite tmp = (Visual_DStarLite)algorithm;
         tmp.set_Km(100);
 
         Node a = new Node(sketch, 5, 5);
@@ -552,7 +551,7 @@ class DStarLiteTest {
             assertTrue(false);
         }
 
-        DStarLite tmp = (DStarLite)algorithm;
+        Visual_DStarLite tmp = (Visual_DStarLite)algorithm;
 
         assertEquals(0,tmp.get_Km());
         assertEquals(MAX_INT,algorithm.get_Start().get_G_Val());

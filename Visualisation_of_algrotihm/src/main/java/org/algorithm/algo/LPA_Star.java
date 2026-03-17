@@ -95,17 +95,7 @@ public class LPA_Star extends Algorithm{
      * @return ArrayList
      */
     public ArrayList<Node> get_Shortest_Path(Node n){
-        Node tmp = n;
-        if (n.get_G_Val() != MAX_INT) {
-            ArrayList<Node> result = new ArrayList<>();
-            while (!result.contains(start_node)) {
-                Node tmp2 = find_Min_G_Node(tmp);
-                result.add(tmp);
-                tmp = tmp2;
-            }
-            return result;
-        }
-        return null;
+        return super.get_Shortest_Path(n,false);
     }
 
 

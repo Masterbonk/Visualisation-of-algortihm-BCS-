@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import static org.algorithm.Util.find_Min_G_Node;
 import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
@@ -104,8 +105,31 @@ public abstract class Algorithm {
 
     }
 
-    public ArrayList<Node> get_Shortest_Path(Node n){
+    public ArrayList<Node> get_Shortest_Path(Node n, boolean _is_goal_node){
+        ArrayList<Node> result = new ArrayList<>();
+        Node tmp = n;
+        if (n.get_G_Val() != MAX_INT) {
+            if (_is_goal_node) {
+                while (!result.contains(goal_node)) {
+                    Node tmp2 = find_Min_G_Node(tmp);
+                    result.add(tmp);
+                    tmp = tmp2;
+                }
+                return result;
+            } else {
+                while (!result.contains(start_node)) {
+                    Node tmp2 = find_Min_G_Node(tmp);
+                    result.add(tmp);
+                    tmp = tmp2;
+                }
+                return result;
+            }
+        }
         return null;
+    }
+
+    public ArrayList<Node> get_Shortest_Path(Node n){
+        return get_Shortest_Path(n, true);
     }
 
     public void compute_Shortest_Path(){

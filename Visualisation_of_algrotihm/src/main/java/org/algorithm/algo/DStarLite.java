@@ -1,55 +1,31 @@
 package org.algorithm.algo;
 
-import org.algorithm.Main;
-import org.algorithm.graph.edges.Edge;
 import org.algorithm.graph.Node;
+import org.algorithm.graph.edges.Edge;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 import static java.lang.Math.min;
-import static org.algorithm.Util.*;
 import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
 public class DStarLite extends Algorithm {
-
-
+    Node start;
+    Node goal;
     Node last;
     float km;
+    Priority_Queue U;
 
 
 
-
-
-    public DStarLite(){
-
+    DStarLite(){
         super();
-
     }
 
-    /**
-     * Initialize is run to reset the values of the nodes, reset the color of the edges and create a new priority queue.
-     * First it checks whether we have a start and goal node.
-     * Then it resets the colors on all edges.
-     * Then it gives the U variable a new priority queue
-     * Then it set's km to 0
-     * Then it gives all nodes a infinite g and rhs value
-     * Then it updates the RHS value of the goal node to 0
-     * Then it add the goal node to the priority queue.
-     */
     public void initialize(){
-        if (start_node == null || goal_node == null) {
-            println("start and/or goal are null");
-            return;
-        }
-
-        for (Edge e:Main.edge_array) {
-            e.color(75,75,75);
-        }
-        //if (start == null) throw new NullPointerException("Start not set!");
-        //if (goal == null) throw new NullPointerException("Goal not set!");
+        if (start == null) throw new NullPointerException("Start not set!");
+        if (goal == null) throw new NullPointerException("Goal not set!");
 
 
         U = new Priority_Queue();
@@ -61,127 +37,47 @@ public class DStarLite extends Algorithm {
             n.update_Rhs_Val(MAX_INT);
         }
 
-        goal_node.update_Rhs_Val(0);
+        goal.update_Rhs_Val(0);
 
-        U.insert(goal_node, calculate_Key(goal_node));
-
+        U.insert(goal, calculate_Key(goal));
     }
 
-    /**
-     * D_Main is what calls all other functions in the right order.
-     * It starts by performing a start section, where it sets up the graph and
-     * performs the first compute_shortest_path() call. Once it has completed that,
-     * it will begin to move the start_node closer to the goal_node.
-     * During this process, it will check for changes in any edge in the graph.
-     * If it finds any, they are implemented, and the right nodes are updated.
-     * Those nodes are added to the priority queue, and a new shortest path is calculated.
-     * It then moves the start_node closer, just like before, in the updated graph.
-     *
-     * It has been given the ability to pause right before it checks for changes.
-     */
-    public void Main(){
-        if (first_run && start_node != null && goal_node != null){
-            last = start_node;
-            initialize();
-            compute_Shortest_Path();
-            first_run = false;
-            //println("Running first run part 1");
-        }else if (part_one_d_main && !first_run){
-            // This if statement activates if we stopped ourselves inside the first compute
-            // shortest path function call above
-            //println("Running first run part 2");
-            compute_Shortest_Path();
-        }
+    public void D_Main(){
+        last = start;
+        initialize();
+        compute_Shortest_Path();
 
-        if (!part_one_d_main && !first_run){
-            //println("Running while loop");
-            while (start_node != goal_node){
-
-                if (start_node.get_G_Val() == MAX_INT) {
-                    println("No valid path to start");
-                    println("update map has size = "+edge_update_map.size());
-                    check_For_Edge_Change();
-                    first_run = true;
-                    Main.Ui.get_Button("pause").click();
-                    break;
-                }
-
-                if (!has_been_paused && paused_once) {
-
-                    if (!U.get_Heap().isEmpty()) U.get_Heap().getFirst().change_In_PQ(false);
-                    Edge e = find_Shared_Edge(start_node, find_Min_G_Node(start_node));
-                    if (e != null) e.color(-1,-1,150);
-                    start_node = find_Min_G_Node(start_node);
-                    println("Moved start to node at x: "+start_node.get_X()+" y: "+start_node.get_Y());
-                }
-
-
-                if(Main.Ui.get_Button("pause").clicked || Main.Ui.get_Button("forward").clicked && paused_once){
-                    has_been_paused = true;
-                    paused_once = false;
-                    Main.Ui.get_Button("forward").clicked = false;
-                    Main.Ui.get_Button("pause").clicked = true;
-
-                    break;
-                }
-
-                check_For_Edge_Change();
-
-                //This makes sure that only the right parts of the code is run, when we click forward
-                //When we click forward it needs to do the check above once before it stops and breaks, this
-                //statement makes sure of it.
-                if (Main.Ui.get_Button("forward").clicked || !Main.Ui.get_Button("pause").clicked) {
-                    paused_once = true;
-                }
+        while (start != goal){
+            if (start.get_G_Val() == MAX_INT) {
+                println("No valid path to start");
+                break;
             }
 
-        }
-    }
+            start = find_Min_G_Node(start);
 
-    /**
-     * This code snipbit is used to check whether new changes has
-     * been made to edges in the graph, inside D_main.
-     * It will check for changes, update the relevant nodes,
-     * then call compute_Shortest_Path().
-     *
-     */
-    public void check_For_Edge_Change(){
-        if (!edge_update_map.isEmpty()) {
-            km = km + heuristic(last, start_node);
-            last = start_node;
 
-            for (Edge e : edge_update_map.keySet()) {
-                if (edge_update_map.get(e) != -1) { //Means that the
+            if (!edge_update_map.isEmpty()){
+                km = km + heuristic(last,start);
+                last = start;
+
+                for(Edge e: edge_update_map.keySet()){
                     e.update_Weight(edge_update_map.get(e));
+                    update_Vertex(e.get_To());
+                    update_Vertex(e.get_From());
                 }
-                update_Vertex(e.get_To());
-                update_Vertex(e.get_From());
-            }
-            edge_update_map = new HashMap<Edge, Integer>();
+                edge_update_map = new HashMap<>();
 
-            compute_Shortest_Path();
+                compute_Shortest_Path();
+            }
         }
     }
 
-    /**Finds the shortest path in the current graph, while only calculating
-     * enough of the graph to be sure it has found the shortest path from goal to start.
-     *
-     * It has been given the ability to stop.
-     */
     public void compute_Shortest_Path(){
-        //println("pq 1 " + U.get_Heap());
-        //println("pq to list 1 " + U.toList());
         Tupple k_old;
         Node n;
-
-        boolean done = true;
-        while(U.top_Key().compareTo(calculate_Key(start_node)) < 0 || start_node.get_Rhs_Val() != start_node.get_G_Val()){
-
+        while(U.top_Key().compareTo(calculate_Key(start)) < 0 || start.get_Rhs_Val() != start.get_G_Val()){
             k_old = U.top_Key();
             n = U.pop();
-            //println("pq 2 " + U.get_Heap());
-            //println("pq to list 2 " + U.toList());
-            //println("Popped node at x: "+n.x+" y: "+n.y);
             if(k_old.compareTo(calculate_Key(n)) < 0){
                 U.insert(n, calculate_Key(n));
             } else if (n.get_G_Val() > n.get_Rhs_Val()){
@@ -190,7 +86,6 @@ public class DStarLite extends Algorithm {
                     Node other_node = e.get_From();
                     if (e.get_From() == n) other_node = e.get_To();
                     update_Vertex(other_node);
-
                 }
             } else {
                 n.update_G_Val(MAX_INT);
@@ -201,64 +96,47 @@ public class DStarLite extends Algorithm {
                 }
                 update_Vertex(n);
             }
-            n.change_In_PQ(false);
-
-            //The pause mechanic, that stops the while loop from running more than a single step
-            if(Main.Ui.get_Button("forward").clicked ){
-                //println("Pausing inside compute shortest path");
-                has_been_paused = true;
-                paused_once = false;
-                part_one_d_main = true;
-                Main.Ui.get_Button("forward").clicked = false;
-                Main.Ui.get_Button("pause").clicked = true;
-                done = false;
-                break;
-            } else if(Main.Ui.get_Button("pause").clicked){
-                //println("Pausing inside compute shortest path");
-                has_been_paused = true;
-                paused_once = false;
-                part_one_d_main = true;
-                Main.Ui.get_Button("forward").clicked = false;
-                done = false;
-                break;
-            }
-
         }
-        if (done){
-            part_one_d_main = false;
-        }
-
     }
 
-    /**
-     * A special function not part of the original paper on D* Lite.
-     * returns the shortest path that computeShortestPath() function finds.
-     * @param n Node n is the start node, that we try to get to goal with
-     * @return A list of nodes that are traveled over towards the goal
-     */
     public ArrayList<Node> get_Shortest_Path(Node n){
-        ArrayList<Node> result = new ArrayList<>();
-        Node tmp = n;
-        if (n.get_G_Val() != MAX_INT) {
-            while (!result.contains(goal_node)) {
-                Node tmp2 = find_Min_G_Node(tmp);
-                result.add(tmp);
-                tmp = tmp2;
-            }
-            return result;
-        }
-        return null;
+        return super.get_Shortest_Path(n,true);
     }
 
+    public int find_Min_G(Node _n){
+        int min = MAX_INT;
+        for(Edge e: _n.get_Connected()){
+            Node other_node = e.get_From();
+            if (e.get_From() == _n) other_node = e.get_To();
+            if (other_node.get_G_Val() != MAX_INT) {
+                if (min > e.get_Weight()+other_node.get_G_Val()){
+                    min = e.get_Weight()+other_node.get_G_Val();
+                }
+            }
 
-    /**
-     * From the original D*Lite algorithm. Updates the Node's RHS value,
-     * and adds it to the PQ list if it's no longer locally consistent
-     * @param _n The node to update.
-     */
+        }
+        return min;
+    }
+
+    public Node find_Min_G_Node(Node _n){
+        int min = MAX_INT;
+        Node tmp = null;
+        for(Edge e: _n.get_Connected()){
+            Node other_node = e.get_From();
+            if (e.get_From() == _n) other_node = e.get_To();
+            if (other_node.get_G_Val() != MAX_INT) {
+                if (min > e.get_Weight()+other_node.get_G_Val()){
+                    min = e.get_Weight()+other_node.get_G_Val();
+                    tmp = other_node;
+                }
+            }
+
+        }
+        return tmp;
+    }
+
     public void update_Vertex(Node _n){
-        println("Updating node at x: "+_n.get_X()+" y: "+_n.get_Y());
-        if (_n !=goal_node){
+        if (_n != goal){
             _n.update_Rhs_Val(find_Min_G(_n));
         }
 
@@ -269,49 +147,55 @@ public class DStarLite extends Algorithm {
                 println(e.getMessage());
             }
         }
-        //println("pq 3 " + U.get_Heap());
-        //println("pq to list 3 " + U.toList());
 
         if(_n.get_G_Val() != _n.get_Rhs_Val()){
             U.insert(_n, calculate_Key(_n));
-            println("Added node to list at x: "+_n.get_X()+" y: "+_n.get_Y());
         }
-        //println("pq 4 " + U.get_Heap());
-        //println("pq to list 4 " + U.toList());
-
     }
-
-    /**
-     * Original function from the paper.
-     * Calculate key gives us a tupple with the values of [min(g, rhs)+km+h(this, start_node), min(g, rhs)]
-     * @param s The node we calculate
-     * @return [min(g, rhs)+km+h(this, start_node), min(g, rhs)]
-     */
 
     public Tupple calculate_Key(Node s){
         float k1, k2;
 
-        k1 = min(s.get_G_Val(),s.get_Rhs_Val()) + heuristic(s, start_node) + km;
-        if(k1 < 0) k1 = MAX_INT;
+        k1 = min(s.get_G_Val(),s.get_Rhs_Val()) + heuristic(s, start) + km;
 
         k2 = min(s.get_G_Val(),s.get_Rhs_Val());
-
 
         return new Tupple(k1, k2);
     }
 
 
-
-
-    public float get_Km(){
-        return km;
+    /** Calculates the heuristic between Node a & b
+     *  Heuristic = distance between the two points
+     * */
+    public float heuristic(Node a, Node b){
+        return (float) (Math.round(Math.sqrt((Math.pow(a.get_X() - b.get_X(),2)) + (Math.pow(a.get_Y() - b.get_Y(),2)))* 100.0) / 100.0);
     }
 
-    public void set_Km(float _km){
-        km = _km;
+    public void remove_Node(Node n){
+        set_of_nodes.remove(n);
+
+        try {
+            U.remove(n);
+        } catch (Exception e){
+            println(e.getMessage());
+        }
     }
 
+    public void set_Start(Node _n){
+        start = _n;
+    }
 
+    public void set_Goal(Node _n){
+        goal = _n;
+    }
+
+    public Node get_Start(){
+        return start;
+    }
+
+    public Node get_Goal(){
+        return goal;
+    }
 
 }
 

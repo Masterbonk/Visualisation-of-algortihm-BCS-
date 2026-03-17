@@ -1,7 +1,6 @@
 package org.algorithm.ui.buttons;
 
-import org.algorithm.Main;
-import org.algorithm.algo.DStarLite;
+import org.algorithm.algo.Visual_DStarLite;
 import org.algorithm.algo.Visual_LPA;
 import processing.core.PApplet;
 
@@ -39,7 +38,7 @@ public class Algo_Mode_Button extends Button {
 
         } else {
             text = "D* Lite"; //Pause
-            algorithm = new DStarLite();
+            algorithm = new Visual_DStarLite();
             //Ui.get_Button("reset").click();
             //algorithm.set_Start(start_node);
             //algorithm.set_Goal(goal_node);

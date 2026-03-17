@@ -1,7 +1,6 @@
 package org.algorithm;
 
-import org.algorithm.algo.Algorithm;
-import org.algorithm.algo.DStarLite;
+import org.algorithm.algo.Visual_DStarLite;
 import org.algorithm.algo.Priority_Queue;
 import org.algorithm.algo.Tupple;
 import org.algorithm.graph.Node;
@@ -10,8 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import processing.core.PApplet;
 
-
-import java.util.HashSet;
 
 import static org.algorithm.Main.algorithm;
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,7 +33,7 @@ class Priority_QueueTest {
     @BeforeEach
     void setUp() {
         sketch = new PApplet();
-        algorithm = new DStarLite();
+        algorithm = new Visual_DStarLite();
 
         pq = new Priority_Queue();
 

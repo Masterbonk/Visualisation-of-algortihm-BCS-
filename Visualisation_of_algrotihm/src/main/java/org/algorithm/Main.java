@@ -1,6 +1,6 @@
 package org.algorithm;
 import org.algorithm.algo.Algorithm;
-import org.algorithm.algo.DStarLite;
+import org.algorithm.algo.Visual_DStarLite;
 import org.algorithm.graph.*;
 import org.algorithm.graph.edges.BiEdge;
 import org.algorithm.graph.edges.Edge;
@@ -12,13 +12,7 @@ import processing.core.PFont;
 
 
 import java.io.File;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
-
-import org.algorithm.algo.AlgoBenchmark;
 
 import static org.algorithm.Util.generate_Name;
 
@@ -122,7 +116,7 @@ public class Main extends PApplet{
         pink_mode = false;
 
         //program always starts as D* lite
-        algorithm = new DStarLite();
+        algorithm = new Visual_DStarLite();
         //algorithm = new Visual_LPA();
 
         //fullScreen(); //Is the size of the canvas
