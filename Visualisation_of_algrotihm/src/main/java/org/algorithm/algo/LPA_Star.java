@@ -26,7 +26,7 @@ public class LPA_Star extends Algorithm{
       //AHHH shit i'm temporaraly running
       //NAH BITCH YOU RUNNIN FOREVA
       compute_Shortest_Path();
-      while (!Main.edge_update_map.isEmpty()){
+      while (!edge_update_map.isEmpty()){
           check_For_Edge_Change();
           compute_Shortest_Path();
       }
@@ -39,7 +39,7 @@ public class LPA_Star extends Algorithm{
        }
        U = new Priority_Queue();
 
-       for(Node n: Main.set_of_nodes){
+       for(Node n: set_of_nodes){
             n.update_G_Val(MAX_INT);
             n.update_Rhs_Val(MAX_INT);
        }
@@ -128,15 +128,15 @@ public class LPA_Star extends Algorithm{
     }
 
     void check_For_Edge_Change(){
-        if (!Main.edge_update_map.isEmpty()) {
-            for (Edge e : Main.edge_update_map.keySet()) {
-                if (Main.edge_update_map.get(e) != -1) {
-                    e.update_Weight(Main.edge_update_map.get(e));
+        if (!edge_update_map.isEmpty()) {
+            for (Edge e : edge_update_map.keySet()) {
+                if (edge_update_map.get(e) != -1) {
+                    e.update_Weight(edge_update_map.get(e));
                 }
                 update_Vertex(e.get_To());
                 update_Vertex(e.get_From());
             }
-            Main.edge_update_map = new HashMap<>();
+            edge_update_map = new HashMap<>();
         }
     }
 

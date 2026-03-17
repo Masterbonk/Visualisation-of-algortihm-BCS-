@@ -2,6 +2,7 @@ package org.algorithm.algo;
 
 import org.algorithm.Main;
 import org.algorithm.graph.Node;
+import org.algorithm.graph.edges.Edge;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,11 +22,14 @@ public abstract class Algorithm {
     public boolean part_one_d_main;
     public static boolean has_been_paused;
     boolean paused_once;
+    public HashSet<Node> set_of_nodes;
+    public HashMap<Edge,Integer> edge_update_map;
+
 
     public Algorithm(){
 
-        Main.set_of_nodes = new HashSet<>();
-        Main.edge_update_map = new HashMap<>();
+        set_of_nodes = new HashSet<>();
+        edge_update_map = new HashMap<>();
 
         start_node = null;
         goal_node = null;
@@ -90,7 +94,7 @@ public abstract class Algorithm {
      * @param n The node to remove
      */
     public void remove_Node(Node n){
-        Main.set_of_nodes.remove(n);
+        set_of_nodes.remove(n);
         if(U != null){
             U.remove(n);
         }
@@ -116,7 +120,7 @@ public abstract class Algorithm {
 
     public void reset(){
 
-        for(Node n: Main.set_of_nodes){
+        for(Node n: set_of_nodes){
             println("reseting node " + n.toString());
             n.update_G_Val(MAX_INT);
             n.update_Rhs_Val(MAX_INT);

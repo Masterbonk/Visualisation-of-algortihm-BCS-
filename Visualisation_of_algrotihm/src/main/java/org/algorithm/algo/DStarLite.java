@@ -56,7 +56,7 @@ public class DStarLite extends Algorithm {
 
         km = 0;
 
-        for(Node n: Main.set_of_nodes){
+        for(Node n: set_of_nodes){
             n.update_G_Val(MAX_INT);
             n.update_Rhs_Val(MAX_INT);
         }
@@ -99,7 +99,7 @@ public class DStarLite extends Algorithm {
 
                 if (start_node.get_G_Val() == MAX_INT) {
                     println("No valid path to start");
-                    println("update map has size = "+Main.edge_update_map.size());
+                    println("update map has size = "+edge_update_map.size());
                     check_For_Edge_Change();
                     first_run = true;
                     Main.Ui.get_Button("pause").click();
@@ -146,18 +146,18 @@ public class DStarLite extends Algorithm {
      *
      */
     public void check_For_Edge_Change(){
-        if (!Main.edge_update_map.isEmpty()) {
+        if (!edge_update_map.isEmpty()) {
             km = km + heuristic(last, start_node);
             last = start_node;
 
-            for (Edge e : Main.edge_update_map.keySet()) {
-                if (Main.edge_update_map.get(e) != -1) { //Means that the
-                    e.update_Weight(Main.edge_update_map.get(e));
+            for (Edge e : edge_update_map.keySet()) {
+                if (edge_update_map.get(e) != -1) { //Means that the
+                    e.update_Weight(edge_update_map.get(e));
                 }
                 update_Vertex(e.get_To());
                 update_Vertex(e.get_From());
             }
-            Main.edge_update_map = new HashMap<Edge, Integer>();
+            edge_update_map = new HashMap<Edge, Integer>();
 
             compute_Shortest_Path();
         }

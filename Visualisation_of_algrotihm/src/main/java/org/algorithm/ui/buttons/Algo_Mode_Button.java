@@ -46,7 +46,7 @@ public class Algo_Mode_Button extends Button {
         }
 
 
-        set_of_nodes.addAll(node_array);
+        algorithm.set_of_nodes.addAll(node_array);
 
     }
 }

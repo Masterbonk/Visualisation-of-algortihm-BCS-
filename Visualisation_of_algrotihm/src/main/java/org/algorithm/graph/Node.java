@@ -33,7 +33,7 @@ public class Node {
         sketch = _sketch;
         connected = new ArrayList<>();
 
-        set_of_nodes.add(this);
+        algorithm.set_of_nodes.add(this);
         node_array.add(this);
 
         id = node_array.size();
@@ -53,7 +53,7 @@ public class Node {
         sketch = _sketch;
         connected = new ArrayList<>();
 
-        set_of_nodes.add(this);
+        algorithm.set_of_nodes.add(this);
         node_array.add(this);
 
         id = node_array.size();
@@ -192,7 +192,7 @@ public class Node {
     public void strait_Edge_Connecting_Node(){
         if (connected.size() == 2) {
             node_array.remove(this);
-            set_of_nodes.remove(this);
+            algorithm.set_of_nodes.remove(this);
             if (algorithm.get_U() != null) algorithm.get_U().remove(this);
 
             Node other_1 = help_Get_Opposite(connected.getFirst());
@@ -211,7 +211,7 @@ public class Node {
 
         } else if(connected.isEmpty()) {
             node_array.remove(this);
-            set_of_nodes.remove(this);
+            algorithm.set_of_nodes.remove(this);
             if (algorithm.get_U() != null) algorithm.get_U().remove(this);
             println("Lone node removed");
 

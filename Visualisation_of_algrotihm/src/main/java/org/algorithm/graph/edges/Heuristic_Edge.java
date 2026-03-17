@@ -17,7 +17,7 @@ public class Heuristic_Edge extends Edge{
         super.from.get_Connected().remove(this);
         to.get_Connected().remove(this);
         edge_array.remove(this);
-        edge_update_map.remove(this);
+        algorithm.edge_update_map.remove(this);
     }
 
     public void set_To(Node _n){

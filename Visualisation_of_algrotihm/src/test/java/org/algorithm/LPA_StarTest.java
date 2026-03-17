@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import static org.algorithm.Main.algorithm;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static processing.core.PApplet.println;
@@ -23,7 +24,6 @@ import static processing.core.PConstants.MAX_INT;
 
 class LPA_StarTest {
 
-    LPA_Star algorithm;
     PApplet sketch;
 
 
@@ -34,8 +34,6 @@ class LPA_StarTest {
     void setUp() {
 
         sketch = new PApplet();
-        Main.set_of_nodes = new HashSet<>();
-        Main.edge_update_map = new HashMap<>();
 
         algorithm = new LPA_Star();
 
@@ -88,7 +86,7 @@ class LPA_StarTest {
         algorithm.set_Start(S);
         algorithm.set_Goal(G);
 
-        Main.edge_update_map.put(bg, MAX_INT);
+        algorithm.edge_update_map.put(bg, MAX_INT);
 
         algorithm.Main();
 

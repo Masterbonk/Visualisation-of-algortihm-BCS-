@@ -28,7 +28,7 @@ public class Reset_Button extends Button {
         for (Edge e: Main.edge_array) {
             e.color(75,75,75);
         }
-        for (Node n : set_of_nodes){
+        for (Node n : algorithm.set_of_nodes){
             n.color(Color_Scheme.node);
             n.change_In_PQ(false);
         }

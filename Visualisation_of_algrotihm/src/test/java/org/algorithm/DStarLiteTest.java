@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import static org.algorithm.Main.Ui;
+import static org.algorithm.Main.algorithm;
 import static org.algorithm.Util.heuristic;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,21 +27,20 @@ import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
 class DStarLiteTest {
-    DStarLite algorithm;
     PApplet sketch;
-
+    Main fake_main;
 
     Util util;
     int button_height = 1;
 
     @BeforeEach
     void setUp() {
+
+        fake_main = new Main();
+        algorithm = new DStarLite();
         sketch = new PApplet();
 
 
-        algorithm = new DStarLite();
-        Main.set_of_nodes = new HashSet<>();
-        Main.edge_update_map = new HashMap<>();
 
         util = new Util(sketch,button_height);
         Main.Ui = new UI(sketch);
@@ -50,7 +50,7 @@ class DStarLiteTest {
 
     @AfterEach
     void tearDown() {
-        Main.edge_update_map = new HashMap<>();
+        algorithm.edge_update_map = new HashMap<>();
         algorithm.set_Start(null);
         algorithm.set_Goal(null);
 
@@ -75,7 +75,9 @@ class DStarLiteTest {
         Ui.get_Button("pause").click();
         algorithm.Main();
 
-        assertEquals(0,algorithm.get_Km());
+        DStarLite tmp = (DStarLite)algorithm;
+
+        assertEquals(0, tmp.get_Km());
         assertEquals(algorithm.get_Goal(),algorithm.get_Start());
         Ui.get_Button("pause").click();
 
@@ -115,7 +117,7 @@ class DStarLiteTest {
         algorithm.set_Start(S);
         algorithm.set_Goal(G);
 
-        Main.edge_update_map.put(bg,MAX_INT);
+        algorithm.edge_update_map.put(bg,MAX_INT);
 
 
 
@@ -398,7 +400,8 @@ class DStarLiteTest {
 
         algorithm.set_Start(new Node(sketch, 0, 5));
 
-        algorithm.set_Km(100);
+        DStarLite tmp = (DStarLite)algorithm;
+        tmp.set_Km(100);
 
         Node a = new Node(sketch, 5, 5);
         a.update_G_Val(5);
@@ -548,7 +551,10 @@ class DStarLiteTest {
         } catch (Exception e){
             assertTrue(false);
         }
-        assertEquals(0,algorithm.get_Km());
+
+        DStarLite tmp = (DStarLite)algorithm;
+
+        assertEquals(0,tmp.get_Km());
         assertEquals(MAX_INT,algorithm.get_Start().get_G_Val());
         assertEquals(MAX_INT,algorithm.get_Start().get_Rhs_Val());
         assertEquals(MAX_INT,algorithm.get_Goal().get_G_Val());

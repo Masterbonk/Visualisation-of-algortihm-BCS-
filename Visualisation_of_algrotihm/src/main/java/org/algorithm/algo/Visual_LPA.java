@@ -33,7 +33,7 @@ public class  Visual_LPA extends LPA_Star{
 
         //while (!Main.Ui.get_Button("pause").clicked) {
 
-            while (!Main.edge_update_map.isEmpty()) {
+            while (!edge_update_map.isEmpty()) {
                 super.check_For_Edge_Change();
 
             }

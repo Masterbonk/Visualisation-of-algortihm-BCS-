@@ -27,7 +27,7 @@ public class Edge {
         to.get_Connected().add(this);
         edge_array.add(this);
         id = edge_array.size();
-        edge_update_map.put(this,weight);
+        algorithm.edge_update_map.put(this,weight);
 
 
     }

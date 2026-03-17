@@ -36,8 +36,8 @@ public class Main extends PApplet{
     public static ArrayList<Character> currentInput = new ArrayList<>();
     public static int maxValue = 9999999;
 
-    public static Set<Node> set_of_nodes;
-    public static HashMap<Edge,Integer> edge_update_map;
+    //public static Set<Node> set_of_nodes;
+    //public static HashMap<Edge,Integer> edge_update_map;
 
     //public static DStarLite algorithm;
     //public static Visual_LPA algorithm;
@@ -97,9 +97,6 @@ public class Main extends PApplet{
         PApplet.runSketch(processingArgs, main);
 
 
-        try{
-            AlgoBenchmark.main(args);
-        }catch (Exception e){}
 
 
     }
@@ -364,7 +361,7 @@ public class Main extends PApplet{
 
                     if (value <= maxValue) {
                         activeEdge.update_Weight(value);
-                        edge_update_map.put(activeEdge, activeEdge.get_Weight());
+                        algorithm.edge_update_map.put(activeEdge, activeEdge.get_Weight());
                     }
 
                 }
@@ -488,7 +485,7 @@ public class Main extends PApplet{
                             } else tmp = e.get_From();
                             tmp.get_Connected().remove(e);
                             edge_array.remove(e);
-                            edge_update_map.put(e,-1);
+                            algorithm.edge_update_map.put(e,-1);
                         }
                         println("Clicked on node at point " + n.get_X() + ", " + n.get_Y());
                         break;
@@ -581,7 +578,7 @@ public class Main extends PApplet{
                             to.get_Connected().remove(e);
                             from.get_Connected().remove(e);
                             println("Edge was deleted");
-                            edge_update_map.put(e,-1);
+                            algorithm.edge_update_map.put(e,-1);
                             edge_array.remove(e);
                             break;
                         }

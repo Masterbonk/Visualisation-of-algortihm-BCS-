@@ -2,19 +2,12 @@ package org.algorithm.algo;
 
 import org.algorithm.Main;
 import org.algorithm.Util;
-import org.algorithm.graph.Node;
-import org.algorithm.graph.edges.Edge;
 import org.algorithm.ui.UI;
 import org.algorithm.ui.buttons.Forward_Button;
 import org.algorithm.ui.buttons.Pause_Button;
 import org.openjdk.jmh.annotations.*;
 import processing.core.PApplet;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-
-import static org.algorithm.Main.Ui;
 
 public class AlgoBenchmark {
 
@@ -41,7 +34,7 @@ public class AlgoBenchmark {
         }
     }
 
-
+    /*
     @Benchmark
     public void test_D_Star(BenchmarkState state) {
 
@@ -53,6 +46,7 @@ public class AlgoBenchmark {
             d_star.Main();
         }
     }
+    */
 
     @Benchmark
     public void test_LPA_Star(BenchmarkState state) {
