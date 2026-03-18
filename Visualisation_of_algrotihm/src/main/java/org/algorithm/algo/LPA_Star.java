@@ -108,7 +108,7 @@ public class LPA_Star extends Algorithm{
             U.remove(_n);
         }
         if(_n.get_G_Val() != _n.get_Rhs_Val()){
-            U.insert(_n,calculate_Key(_n));
+            U.insert(_n, calculate_Key(_n));
         }
 
     }

@@ -213,7 +213,7 @@ public class Main extends PApplet{
 
 
         if (!Ui.get_Button("pause").clicked){
-            //algorithm.D_Main();
+            //algorithm.Main();
             algorithm.Main();
         }
 

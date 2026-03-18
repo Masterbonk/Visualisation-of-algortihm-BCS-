@@ -3,7 +3,6 @@ package org.algorithm.algo;
 import org.algorithm.graph.Node;
 import org.algorithm.graph.edges.Edge;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import static java.lang.Math.min;
@@ -16,7 +15,7 @@ public class DStarLite extends Algorithm {
     Node last;
     float km;
 
-    DStarLite(){
+    public DStarLite(){
         super();
     }
 
@@ -38,7 +37,7 @@ public class DStarLite extends Algorithm {
         U.insert(goal_node, calculate_Key(goal_node));
     }
 
-    public void D_Main(){
+    public void Main(){
         last = start_node;
         initialize();
         compute_Shortest_Path();
