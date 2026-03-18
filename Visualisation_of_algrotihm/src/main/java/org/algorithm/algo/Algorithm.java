@@ -105,38 +105,35 @@ public abstract class Algorithm {
 
     }
 
-    public ArrayList<Node> get_Shortest_Path(Node n, boolean _is_goal_node){
+    /**
+     * A special function not part of the original paper on D* Lite.
+     * returns the shortest path that computeShortestPath() function finds.
+     * @param n is the start node or goal node, that we try to get to the opposite with.
+     * @return A list of nodes that are traveled over towards the goal
+     */
+    public ArrayList<Node> get_Shortest_Path(Node n){
         ArrayList<Node> result = new ArrayList<>();
         Node tmp = n;
         if (n.get_G_Val() != MAX_INT) {
-            if (_is_goal_node) {
+            if (n.equals(start_node)) {
                 while (!result.contains(goal_node)) {
                     Node tmp2 = find_Min_G_Node(tmp);
                     result.add(tmp);
                     tmp = tmp2;
                 }
-                return result;
             } else {
                 while (!result.contains(start_node)) {
                     Node tmp2 = find_Min_G_Node(tmp);
                     result.add(tmp);
                     tmp = tmp2;
                 }
-                return result;
             }
+            return result;
         }
         return null;
     }
 
-    /**
-     * A special function not part of the original paper on D* Lite.
-     * returns the shortest path that computeShortestPath() function finds.
-     * @param n Node n is the start node, that we try to get to goal with
-     * @return A list of nodes that are traveled over towards the goal
-     */
-    public ArrayList<Node> get_Shortest_Path(Node n){
-        return get_Shortest_Path(n, true);
-    }
+
 
     public void compute_Shortest_Path(){
     }
