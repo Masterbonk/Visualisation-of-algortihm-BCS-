@@ -17,8 +17,7 @@ import java.util.HashSet;
 
 import java.util.ArrayList;
 
-import static org.algorithm.Main.algorithm;
-import static org.algorithm.Main.node_array;
+import static org.algorithm.Main.*;
 import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
@@ -43,6 +42,7 @@ class BenchmarkingTest {
         }
         algorithm = null;
         node_array = new ArrayList<>();
+        edge_array = new ArrayList<>();
     }
 
     @Test
@@ -126,7 +126,7 @@ class BenchmarkingTest {
 
         algorithm = new DStarLite();
 
-        Util.Make_Graph(sketch, 100, 100);
+        Util.Make_Graph(sketch, 1000, 1000);
 
         algorithm.set_Start(Main.node_array.getFirst());
         algorithm.set_Goal(Main.node_array.get((Main.node_array.size()-1)/2));
@@ -136,7 +136,6 @@ class BenchmarkingTest {
         algorithm.first_run = false;
 
         ArrayList<Node> path = algorithm.get_Shortest_Path(algorithm.get_Start());
-
 
         int n = path.size();
         int removeCount = n / 10;
@@ -148,40 +147,153 @@ class BenchmarkingTest {
         ArrayList<Node> removables = new ArrayList<>();
 
 
-
-        for (int i = 1; i <= half; i++) {
-            int idx = middle - i;
-            if (idx >= 0) {
-                removables.add(path.get(idx));
-            }
-        }
-
-        if (removeCount % 2 == 1) {
-            removables.add(path.get(middle));
+        for (int i = middle-half; i <= middle+half; i++) {
+            removables.add(path.get(i));
         }
 
 
-        for (int i = 1; i <= half; i++) {
-            int idx = middle + i;
-            if (idx < n) {
-                removables.add(path.get(idx));
-            }
-        }
-
-        for (int i = 0; i < removables.size()-1; i++){
+        for (int i = 0; i < removables.size()-2; i++){
 
             algorithm.edge_update_map.put(Util.find_Shared_Edge(removables.get(i),removables.get(i+1)),MAX_INT);
 
         }
-
-        //algorithm.set_of_nodes.removeAll(removables);
 
 
         while (algorithm.get_Goal() != algorithm.get_Start()){
             algorithm.Main();
         }
 
+    }
+
+    @Test
+    void test_LPA_Star_Update_Time(){
+
+        algorithm = new LPA_Star();
+
+        Util.Make_Graph(sketch, 1000, 1000);
+
+        algorithm.set_Start(Main.node_array.getFirst());
+        algorithm.set_Goal(Main.node_array.get((Main.node_array.size()-1)/2));
+
+        algorithm.initialize();
+        algorithm.compute_Shortest_Path();
+        algorithm.first_run = false;
+
+        ArrayList<Node> path = algorithm.get_Shortest_Path(algorithm.get_Goal());
+
+        int n = path.size();
+        int removeCount = n / 10;
+
+        int middle = n / 2;
+
+        int half = removeCount / 2;
+
+        ArrayList<Node> removables = new ArrayList<>();
+
+
+        for (int i = middle-half; i <= middle+half; i++) {
+            removables.add(path.get(i));
+        }
+
+
+        for (int i = 0; i < removables.size()-2; i++){
+
+            algorithm.edge_update_map.put(Util.find_Shared_Edge(removables.get(i),removables.get(i+1)),MAX_INT);
+
+        }
+
+
+        algorithm.Main();
+
 
     }
+
+    @Test
+    void test_D_Star_Update_Time_As_LPA_Star_Problem(){
+
+        algorithm = new DStarLite();
+
+        Util.Make_Graph(sketch, 1000, 1000);
+
+        algorithm.set_Start(Main.node_array.getFirst());
+        algorithm.set_Goal(Main.node_array.get((Main.node_array.size()-1)/2));
+
+        algorithm.initialize();
+        algorithm.compute_Shortest_Path();
+        algorithm.first_run = false;
+
+        ArrayList<Node> path = algorithm.get_Shortest_Path(algorithm.get_Start());
+
+        int n = path.size();
+        int removeCount = n / 10;
+
+        int middle = n / 2;
+
+        int half = removeCount / 2;
+
+        ArrayList<Node> removables = new ArrayList<>();
+
+
+        for (int i = middle-half; i <= middle+half; i++) {
+            removables.add(path.get(i));
+        }
+
+
+        for (int i = 0; i < removables.size()-2; i++){
+
+            algorithm.edge_update_map.put(Util.find_Shared_Edge(removables.get(i),removables.get(i+1)),MAX_INT);
+
+        }
+
+
+        while (algorithm.get_Goal() != algorithm.get_Start()){
+            algorithm.Main();
+        }
+
+    }
+
+    @Test
+    void test_LPA_Star_Update_Time_As_D_Star_Problem(){
+
+        algorithm = new LPA_Star();
+
+        Util.Make_Graph(sketch, 1000, 1000);
+
+        algorithm.set_Start(Main.node_array.getFirst());
+        algorithm.set_Goal(Main.node_array.get((Main.node_array.size()-1)/2));
+
+        algorithm.initialize();
+        algorithm.compute_Shortest_Path();
+        algorithm.first_run = false;
+
+        ArrayList<Node> path = algorithm.get_Shortest_Path(algorithm.get_Goal());
+
+        int n = path.size();
+        int removeCount = n / 10;
+
+        int middle = n / 2;
+
+        int half = removeCount / 2;
+
+        ArrayList<Node> removables = new ArrayList<>();
+
+
+        for (int i = middle-half; i <= middle+half; i++) {
+            removables.add(path.get(i));
+        }
+
+
+        for (int i = 0; i < removables.size()-2; i++){
+
+            algorithm.edge_update_map.put(Util.find_Shared_Edge(removables.get(i),removables.get(i+1)),MAX_INT);
+
+        }
+
+
+        algorithm.Main();
+
+
+    }
+
 }
 
