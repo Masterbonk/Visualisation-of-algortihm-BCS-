@@ -87,16 +87,12 @@ class BenchmarkingTest {
         start = path.get(path.size()-2);
         algorithm.set_Start(start);
 
-        while (goal != start && !path.isEmpty()){
+        //last element in path will be goal
+        while (path.size() > 1){
             algorithm.Main();
             path = algorithm.get_Shortest_Path(goal);
             start = path.get(path.size()-2);
             algorithm.set_Start(start);
-            if (path.get(0) == goal){
-                System.out.println("break");
-                break;
-
-            }
         }
 
     }
