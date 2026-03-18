@@ -87,7 +87,6 @@ public class LPA_Star extends Algorithm{
             }
         }
     }
-    //traverse from goal to start
 
 
     public void update_Vertex(Node _n){
