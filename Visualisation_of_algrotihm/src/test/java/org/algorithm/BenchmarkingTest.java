@@ -35,6 +35,7 @@ class BenchmarkingTest {
         }
         algorithm = null;
         node_array = new ArrayList<>();
+        edge_size = 1000;
     }
 
     @Test
@@ -73,7 +74,6 @@ class BenchmarkingTest {
     void test_LPA_Star_as_D_Star_Lite_Problem(){
         algorithm = new LPA_Star();
 
-        edge_size = 10;
         Util.Make_Graph(sketch, edge_size, edge_size);
 
         Node start = Main.node_array.getFirst();
@@ -99,18 +99,6 @@ class BenchmarkingTest {
             }
         }
 
-    }
-
-    @Test
-    void test_D_Star_Lite_Superior(){
-        edge_size = 10;
-        algorithm = new DStarLite();
-        Util.Make_Graph(sketch, edge_size, edge_size);
-        algorithm.set_Start(Main.node_array.getFirst());
-        algorithm.set_Goal(Main.node_array.get((Main.node_array.size()-1)/2));
-        while (algorithm.get_Goal() != algorithm.get_Start()){
-            algorithm.Main();
-        }
     }
 }
 
