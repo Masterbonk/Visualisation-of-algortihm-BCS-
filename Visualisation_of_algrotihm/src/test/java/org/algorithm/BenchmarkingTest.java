@@ -88,18 +88,15 @@ class BenchmarkingTest {
 
 
         int n = path.size();
-        int removeCount = n / 100;
+        int removeCount = n / 10;
 
         int middle = n / 2;
 
         int half = removeCount / 2;
 
-        HashSet<Node> removables = new HashSet<>();
+        ArrayList<Node> removables = new ArrayList<>();
 
 
-        if (removeCount % 2 == 1) {
-            removables.add(path.get(middle));
-        }
 
         for (int i = 1; i <= half; i++) {
             int idx = middle - i;
@@ -108,6 +105,11 @@ class BenchmarkingTest {
             }
         }
 
+        if (removeCount % 2 == 1) {
+            removables.add(path.get(middle));
+        }
+
+
         for (int i = 1; i <= half; i++) {
             int idx = middle + i;
             if (idx < n) {
@@ -115,11 +117,9 @@ class BenchmarkingTest {
             }
         }
 
+        for (int i = 0; i < removables.size()-1; i++){
 
-        for(Node node : removables){
-            for (Edge e : node.get_Connected()){
-                algorithm.edge_update_map.put(e,MAX_INT);
-            }
+            algorithm.edge_update_map.put(Util.find_Shared_Edge(removables.get(i),removables.get(i+1)),MAX_INT);
 
         }
 
