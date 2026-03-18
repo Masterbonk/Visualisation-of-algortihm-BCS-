@@ -89,16 +89,6 @@ public class LPA_Star extends Algorithm{
     }
     //traverse from goal to start
 
-    /**
-     * Finds the shortest path from the goal node to the goal node
-     * @param n the goal node
-     * @return ArrayList
-     */
-    public ArrayList<Node> get_Shortest_Path(Node n){
-        return super.get_Shortest_Path(n,false);
-    }
-
-
 
     public void update_Vertex(Node _n){
         if (_n != start_node){
