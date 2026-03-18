@@ -71,8 +71,4 @@ public class  Visual_LPA extends LPA_Star{
         super.compute_Shortest_Path();
     }
 
-    public ArrayList<Node> get_Shortest_Path(Node n){
-        return super.get_Shortest_Path(n);
-    }
-
     }
