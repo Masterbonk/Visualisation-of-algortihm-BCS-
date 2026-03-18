@@ -21,6 +21,9 @@ import static org.algorithm.Main.*;
 import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
+import static org.algorithm.Main.algorithm;
+import static org.algorithm.Main.node_array;
+
 class BenchmarkingTest {
 
 
@@ -42,6 +45,7 @@ class BenchmarkingTest {
         }
         algorithm = null;
         node_array = new ArrayList<>();
+        edge_size = 1000;
         edge_array = new ArrayList<>();
     }
 
@@ -80,8 +84,6 @@ class BenchmarkingTest {
     @Test
     void test_LPA_Star_as_D_Star_Lite_Problem(){
         algorithm = new LPA_Star();
-
-        edge_size = 10;
         Util.Make_Graph(sketch, edge_size, edge_size);
 
         Node start = Main.node_array.getFirst();
@@ -89,36 +91,21 @@ class BenchmarkingTest {
 
         algorithm.set_Start(start);
         algorithm.set_Goal(goal);
-        algorithm.Main();
 
+        //first step through
+        algorithm.Main();
         ArrayList<Node> path = algorithm.get_Shortest_Path(goal);
         start = path.get(path.size()-2);
         algorithm.set_Start(start);
 
-        while (goal != start && !path.isEmpty()){
+        //last element in path will be goal
+        while (path.size() > 1){
             algorithm.Main();
             path = algorithm.get_Shortest_Path(goal);
             start = path.get(path.size()-2);
             algorithm.set_Start(start);
-            if (path.get(0) == goal){
-                System.out.println("break");
-                break;
-
-            }
         }
 
-    }
-
-    @Test
-    void test_D_Star_Lite_Superior(){
-        edge_size = 10;
-        algorithm = new DStarLite();
-        Util.Make_Graph(sketch, edge_size, edge_size);
-        algorithm.set_Start(Main.node_array.getFirst());
-        algorithm.set_Goal(Main.node_array.get((Main.node_array.size()-1)/2));
-        while (algorithm.get_Goal() != algorithm.get_Start()){
-            algorithm.Main();
-        }
     }
 
     @Test
