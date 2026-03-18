@@ -84,7 +84,7 @@ class BenchmarkingTest {
     @Test
     void test_LPA_Star_as_D_Star_Lite_Problem(){
         algorithm = new LPA_Star();
-        Util.Make_Graph(sketch, edge_size, edge_size);
+        Util.Make_Graph(sketch, 300, 300);
 
         Node start = Main.node_array.getFirst();
         Node goal = Main.node_array.get((Main.node_array.size()-1)/2);
@@ -92,18 +92,13 @@ class BenchmarkingTest {
         algorithm.set_Start(start);
         algorithm.set_Goal(goal);
 
-        //first step through
-        algorithm.Main();
-        ArrayList<Node> path = algorithm.get_Shortest_Path(goal);
-        start = path.get(path.size()-2);
-        algorithm.set_Start(start);
-
         //last element in path will be goal
-        while (path.size() > 1){
+        while (algorithm.get_Start() != algorithm.get_Goal()){
             algorithm.Main();
-            path = algorithm.get_Shortest_Path(goal);
-            start = path.get(path.size()-2);
-            algorithm.set_Start(start);
+
+            Node next = Util.find_Min_G_Node(algorithm.get_Goal());
+            algorithm.set_Goal(next);
+
         }
 
     }
@@ -245,7 +240,7 @@ class BenchmarkingTest {
 
         algorithm = new LPA_Star();
 
-        Util.Make_Graph(sketch, 500, 500);
+        Util.Make_Graph(sketch, 300, 300);
 
         algorithm.set_Start(Main.node_array.getFirst());
         algorithm.set_Goal(Main.node_array.get((Main.node_array.size()-1)/2));

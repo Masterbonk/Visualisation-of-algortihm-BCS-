@@ -149,7 +149,7 @@ public class Main extends PApplet{
         button_height = displayHeight*10/144;
 
         Util.Make_UI(this, button_height);
-        Util.Make_Graph(this,8,7);
+        Util.Make_Graph(this,7,8);
 
 
         // Set the dash-gap pattern in pixels
