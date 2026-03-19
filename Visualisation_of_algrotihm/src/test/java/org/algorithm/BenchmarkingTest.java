@@ -4,23 +4,17 @@ import org.algorithm.algo.DStarLite;
 import org.algorithm.algo.D_Star_Lite_benchmarking_testing;
 import org.algorithm.algo.LPA_Star;
 import org.algorithm.graph.Node;
-import org.algorithm.graph.edges.Edge;
-import org.algorithm.graph.Node;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import processing.core.PApplet;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashSet;
 
-import java.util.ArrayList;
 
 import static org.algorithm.Main.*;
-import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
 import static org.algorithm.Main.algorithm;
