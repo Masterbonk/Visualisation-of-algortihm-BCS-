@@ -2,6 +2,7 @@ package org.algorithm;
 
 import org.algorithm.algo.DStarLite;
 import org.algorithm.algo.Tuple;
+import org.algorithm.algo.Visual_DStarLite;
 import org.algorithm.graph.edges.BiEdge;
 import org.algorithm.graph.edges.Edge;
 import org.algorithm.graph.Node;
