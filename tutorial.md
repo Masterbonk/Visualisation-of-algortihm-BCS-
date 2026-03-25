@@ -27,8 +27,29 @@ There are several ways to restart the program.
 - changing start and/or goal node manually. (Must be paused, otherwise the algorithm will update immediately.
 
 ## Nodes
+One can add nodes and delete them as preferred. This can be done regardless of the algorithm is active.
+The cut (scissor) button will delete a node that's clicked on by the mouse.
+The node button will add a node on the screen where the mouse has clicked
+<br/><br/>
+<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/265310c7-5752-405d-9a7d-2ed6c96dedd8" />
+<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/f883a655-584a-40ba-b37b-0cba0c24b086" />
+<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/38c02299-6a71-40b1-a3bd-101133f570e9" />
 
 ## Edges
+Edges can be added: either between two existing nodes or between one existing node and clicking somewhere on the screen.
+<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/fbc805f6-20aa-47f7-95ba-fcfd21a66ba8" />
+<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/5df3102f-af6c-4a76-b0fd-3451a82c6e60" />
+<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/c1f5995c-f87c-47b5-ab40-a328d5c503e6" />
+<br/><br/>
+Furthermore edges weight can be altered, which by default is the actual pixel distance. Turn on display E to see the weights of edges.
+The weight cannot be smaller than the heuristic between two nodes.
+<br/><br/>
+<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/2e990219-7ef1-4d08-86f0-87695597d5f6" />
+<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/65bfc990-d3ea-4216-8446-c4aed0f443e7" />
+<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/ac4dce39-ac1f-485b-86ba-2b131ad733f2" />
+
+
+
 
 ## Display
 
