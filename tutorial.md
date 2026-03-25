@@ -82,7 +82,7 @@ Specifically Node B is in the priority queue with the k1 = 880 and k2 = 247
 
 ## Export
 A specfic graph can be saved for later. By clicking export the file graph.xml will be updated.
-<img width="1129" height="790" alt="image" src="https://github.com/user-attachments/assets/73e0e605-da0e-4726-97ff-ed777a33f5fc" />
+<img width="565" height="355" alt="image" src="https://github.com/user-attachments/assets/73e0e605-da0e-4726-97ff-ed777a33f5fc" />
 
 ## Import
 We support to input types: osm and specific xml formats (meaning only our own). It might take a short while for the graph to load.
@@ -90,16 +90,17 @@ We support to input types: osm and specific xml formats (meaning only our own). 
 <br/><br/>
 To import a prevoiusly saved graph simply click the import button, and find the file graph.xml
 <br/><br/>
-<img width="1129" height="790" alt="image" src="https://github.com/user-attachments/assets/31213c0c-015a-47e4-b5a7-03e04592eeca" />
-<img width="1129" height="790" alt="image" src="https://github.com/user-attachments/assets/80a919cf-0ae8-44b4-bee6-3453e5c1f185" />
+<img width="490" height="275" alt="image" src="https://github.com/user-attachments/assets/31213c0c-015a-47e4-b5a7-03e04592eeca" />
+<img width="490" height="275" alt="image" src="https://github.com/user-attachments/assets/80a919cf-0ae8-44b4-bee6-3453e5c1f185" />
 
 To import osm files, simply find the osm you wish to import. It's is recommened to import smaller osm files.
+Second image is from https://www.openstreetmap.org/#map=16/55.65957/12.59312 which the osm was downloaded.
 <br/><br/>
-<img width="1440" height="899" alt="image" src="https://github.com/user-attachments/assets/afbcab3f-3a39-4811-b2c5-2f37705a75ca" />
-<img width="1112" height="614" alt="image" src="https://github.com/user-attachments/assets/caa8bb68-7d2b-4373-9a2c-334e3863d752" />
+<img width="480" height="300" alt="image" src="https://github.com/user-attachments/assets/afbcab3f-3a39-4811-b2c5-2f37705a75ca" />
+<img width="480" height="300" alt="image" src="https://github.com/user-attachments/assets/caa8bb68-7d2b-4373-9a2c-334e3863d752" />
 
 ## LPA*
-LPA* listens for changes in the graph, but does not move as shown. 
+LPA* listens for changes in the graph, but does not move the start flag as shown. 
 <br/><br/>
 <img width="287" height="190" alt="image" src="https://github.com/user-attachments/assets/fd821c16-66e3-4b2c-91af-0f1fe20d2206" />
 <img width="287" height="190" alt="image" src="https://github.com/user-attachments/assets/cdb8f4f9-5430-4452-bebf-48e37ccc94eb" />
