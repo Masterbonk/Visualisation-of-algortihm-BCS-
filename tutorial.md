@@ -36,10 +36,15 @@ The node button will add a node on the screen where the mouse has clicked
 <img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/38c02299-6a71-40b1-a3bd-101133f570e9" />
 
 ## Edges
-Edges can be added: either between two existing nodes or between one existing node and clicking somewhere on the screen.
+Edges can be added: 
+- between two existing nodes 
+- between one existing node and clicking somewhere on the screen
+- clicking two different places on the screen
 <img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/fbc805f6-20aa-47f7-95ba-fcfd21a66ba8" />
 <img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/5df3102f-af6c-4a76-b0fd-3451a82c6e60" />
 <img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/c1f5995c-f87c-47b5-ab40-a328d5c503e6" />
+<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/6290d517-5442-42e9-adc6-f20cc285203f" />
+
 <br/><br/>
 Furthermore edges weight can be altered, which by default is the actual pixel distance. Turn on display E to see the weights of edges.
 The weight cannot be smaller than the heuristic between two nodes.
@@ -47,6 +52,15 @@ The weight cannot be smaller than the heuristic between two nodes.
 <img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/2e990219-7ef1-4d08-86f0-87695597d5f6" />
 <img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/65bfc990-d3ea-4216-8446-c4aed0f443e7" />
 <img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/ac4dce39-ac1f-485b-86ba-2b131ad733f2" />
+<br/><br/>
+Deletion:
+Edges can be deleted. If a nodes has edges and is deleted, the edges are deleted as well.
+<br/><br/>
+<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/4cef02d3-cc4b-41b9-9ca9-1ed11c39a857" />
+<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/85bae99d-913d-4baa-b4fa-22061fd99c54" />
+<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/ffce44b3-bf05-48a3-be86-8a46ad26f781" />
+<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/1f5fe8bc-5719-4506-b61e-9373a6eae2bb" />
+
 
 
 
