@@ -47,7 +47,7 @@ Edges can be added:
 
 <br/><br/>
 Furthermore edges weight can be altered, which by default is the actual pixel distance. Turn on display E to see the weights of edges.
-The weight cannot be smaller than the heuristic between two nodes.
+The weight cannot be smaller than the actual pixel distance.
 <br/><br/>
 <img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/2e990219-7ef1-4d08-86f0-87695597d5f6" />
 <img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/65bfc990-d3ea-4216-8446-c4aed0f443e7" />
