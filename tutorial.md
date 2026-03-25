@@ -61,11 +61,59 @@ Edges can be deleted. If a nodes has edges and is deleted, the edges are deleted
 <img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/ffce44b3-bf05-48a3-be86-8a46ad26f781" />
 <img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/1f5fe8bc-5719-4506-b61e-9373a6eae2bb" />
 
-
-
-
-
 ## Display
+<img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/f454bc92-c19c-4a8d-8eab-faa5e5c11498" />
+<img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/7ec06976-ff2c-4333-a2c7-0dc0c6e58f38" />
+<img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/c1ae7315-3c60-4ead-8c96-1fb0baa60abc" />
+<img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/55923775-d22a-4913-a885-fb224bf6ecb7" />
+<img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/f37ded36-63e2-46b0-a57f-5e608d41b129" />
+<img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/0708c5a2-2fe5-4adc-a453-70c274116e95" />
+<img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/62d73815-ba28-441c-b5b1-528d5f22f55c" />
+<img width="278" height="170" alt="image" src="https://github.com/user-attachments/assets/1bd4265c-552b-4584-8fd5-fb9d27186a6b" />
+
+## Priority Queue
+As prevoiusly mentioned, one can see how the algorihtm finds the shortest path. This is done with a priority queue. The yellow colored node is the top node in the priority queue, meaning the one closest to start (d* lite does backwards search), and therfore the next node that will be evaluated. 
+
+The nodes are inserted in the priority queue with the key consisting of **rhs value + the heurtstic between current node and start**  and the **rhs value**
+
+<img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/109c8d0e-324f-4fcc-aae0-8879d2a8d065" />
+
+Specifically Node B is in the priority queue with the k1 = 880 and k2 = 247
+
+## Export
+A specfic graph can be saved for later. By clicking export the file graph.xml will be updated.
+<img width="1129" height="790" alt="image" src="https://github.com/user-attachments/assets/73e0e605-da0e-4726-97ff-ed777a33f5fc" />
+
+## Import
+We support to input types: osm and specific xml formats (meaning only our own). It might take a short while for the graph to load.
+<br/><br/>
+<br/><br/>
+To import a prevoiusly saved graph simply click the import button, and find the file graph.xml
+<br/><br/>
+<img width="1129" height="790" alt="image" src="https://github.com/user-attachments/assets/31213c0c-015a-47e4-b5a7-03e04592eeca" />
+<img width="1129" height="790" alt="image" src="https://github.com/user-attachments/assets/80a919cf-0ae8-44b4-bee6-3453e5c1f185" />
+
+To import osm files, simply find the osm you wish to import. It's is recommened to import smaller osm files.
+<br/><br/>
+<img width="1440" height="899" alt="image" src="https://github.com/user-attachments/assets/afbcab3f-3a39-4811-b2c5-2f37705a75ca" />
+<img width="1112" height="614" alt="image" src="https://github.com/user-attachments/assets/caa8bb68-7d2b-4373-9a2c-334e3863d752" />
+
+## LPA*
+LPA* listens for changes in the graph, but does not move as shown. 
+<br/><br/>
+<img width="287" height="190" alt="image" src="https://github.com/user-attachments/assets/fd821c16-66e3-4b2c-91af-0f1fe20d2206" />
+<img width="287" height="190" alt="image" src="https://github.com/user-attachments/assets/cdb8f4f9-5430-4452-bebf-48e37ccc94eb" />
+<img width="287" height="190" alt="image" src="https://github.com/user-attachments/assets/c9f1d2a8-11d9-4ef5-872b-b153007af73c" />
+
+
+
+
+
+
+
+
+
+
 
 
 
