@@ -2,17 +2,17 @@ package org.algorithm.algo;
 
 import org.algorithm.Util;
 
-public class Tupple implements Comparable<Tupple> {
+public class Tuple implements Comparable<Tuple> {
     public float k1, k2;
 
 
-    public Tupple(float _k1, float _k2){
+    public Tuple(float _k1, float _k2){
         k1 = _k1;
         k2 = _k2;
     }
 
     @Override
-    public int compareTo(Tupple other) {
+    public int compareTo(Tuple other) {
         if (this.k1 < other.k1) return -1;
         if (this.k1 > other.k1) return 1;
 
@@ -23,7 +23,7 @@ public class Tupple implements Comparable<Tupple> {
         return 0;
     }
 
-    public boolean same_Key(Tupple other){
+    public boolean same_Key(Tuple other){
         return this.k1 == other.k1 && this.k2 == other.k2;
     }
 

@@ -1,7 +1,7 @@
 package org.algorithm;
 
 import org.algorithm.algo.LPA_Star;
-import org.algorithm.algo.Tupple;
+import org.algorithm.algo.Tuple;
 import org.algorithm.graph.edges.BiEdge;
 import org.algorithm.graph.edges.Edge;
 import org.algorithm.graph.Node;
@@ -141,9 +141,9 @@ class LPA_StarTest {
         a.update_G_Val(100);
         a.update_Rhs_Val(100);
 
-        Tupple result = algorithm.calculate_Key(a);
+        Tuple result = algorithm.calculate_Key(a);
 
-        Tupple expected_result = new Tupple(105, 100);
+        Tuple expected_result = new Tuple(105, 100);
 
         assertTrue(expected_result.same_Key(result));
     }
@@ -158,9 +158,9 @@ class LPA_StarTest {
         a.update_G_Val(7);
         a.update_Rhs_Val(100);
 
-        Tupple result = algorithm.calculate_Key(a);
+        Tuple result = algorithm.calculate_Key(a);
 
-        Tupple expected_result = new Tupple(12, 7);
+        Tuple expected_result = new Tuple(12, 7);
 
         assertTrue(expected_result.same_Key(result));
 

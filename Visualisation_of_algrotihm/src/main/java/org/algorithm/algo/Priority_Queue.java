@@ -9,7 +9,7 @@ public class Priority_Queue {
 
     private ArrayList<Node> heap;
 
-    private HashMap<Node, Tupple> keys;
+    private HashMap<Node, Tuple> keys;
 
     public Priority_Queue(){
         heap = new ArrayList<>();
@@ -21,7 +21,7 @@ public class Priority_Queue {
      * @param _n Node to be inserted
      * @param _k Key to be inserted
      * */
-    public void insert(Node _n, Tupple _k){
+    public void insert(Node _n, Tuple _k){
         heap.add(_n);
         keys.put(_n,_k);
         swim(heap.size() - 1);
@@ -46,8 +46,8 @@ public class Priority_Queue {
      * Gives us the TopKey in the queue, without removing it
      * @return The Key object with the highest priority
      */
-    public Tupple top_Key(){
-        if(is_empty()) return new Tupple(MAX_INT,MAX_INT);
+    public Tuple top_Key(){
+        if(is_empty()) return new Tuple(MAX_INT,MAX_INT);
         return keys.get(heap.getFirst());
     }
 
@@ -159,9 +159,9 @@ public class Priority_Queue {
         heap = new ArrayList<>();
     }
 
-    public HashMap<Node,Tupple> get_Keys(){return keys;}
+    public HashMap<Node, Tuple> get_Keys(){return keys;}
     public void clear_Keys(){
-        keys = new HashMap<Node,Tupple>();
+        keys = new HashMap<Node, Tuple>();
     }
 
 

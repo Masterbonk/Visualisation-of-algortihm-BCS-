@@ -1,7 +1,7 @@
 package org.algorithm;
 
 import org.algorithm.algo.Priority_Queue;
-import org.algorithm.algo.Tupple;
+import org.algorithm.algo.Tuple;
 import org.algorithm.graph.Node;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,9 +19,9 @@ class Priority_QueueTest {
     Node b;
     Node c;
 
-    Tupple a1;
-    Tupple b1;
-    Tupple c1;
+    Tuple a1;
+    Tuple b1;
+    Tuple c1;
 
     PApplet sketch;
 
@@ -43,9 +43,9 @@ class Priority_QueueTest {
         c = new Node(sketch, 3,3);
 
 
-        a1 = new Tupple(20, 5);
-        b1 = new Tupple(30, 2);
-        c1 = new Tupple(20, 2);
+        a1 = new Tuple(20, 5);
+        b1 = new Tuple(30, 2);
+        c1 = new Tuple(20, 2);
 
 
 
@@ -148,9 +148,9 @@ class Priority_QueueTest {
     @Test
     void popTest() {
 
-        a1 = new Tupple(20, 5);
-        b1 = new Tupple(30, 2);
-        c1 = new Tupple(20, 2);
+        a1 = new Tuple(20, 5);
+        b1 = new Tuple(30, 2);
+        c1 = new Tuple(20, 2);
 
         pq.insert(b, b1);
         pq.insert(c, c1);
@@ -176,9 +176,9 @@ class Priority_QueueTest {
     @Test
     void popTest_fails_if_empty() {
 
-        a1 = new Tupple(20, 5);
-        b1 = new Tupple(30, 2);
-        c1 = new Tupple(20, 2);
+        a1 = new Tuple(20, 5);
+        b1 = new Tuple(30, 2);
+        c1 = new Tuple(20, 2);
 
         pq.insert(b, b1);
         pq.insert(c, c1);
@@ -192,9 +192,9 @@ class Priority_QueueTest {
     @Test
     void size() {
 
-        a1 = new Tupple(20, 5);
-        b1 = new Tupple(30, 2);
-        c1 = new Tupple(20, 2);
+        a1 = new Tuple(20, 5);
+        b1 = new Tuple(30, 2);
+        c1 = new Tuple(20, 2);
         pq.insert(a, a1);
         pq.insert(b, b1);
         pq.insert(c, c1);
