@@ -68,7 +68,9 @@ public class DStarLite extends Algorithm {
     }
 
     public void compute_Shortest_Path(){
-        Tupple k_old;
+        //println("pq 1 " + U.get_Heap());
+        //println("pq to list 1 " + U.toList());
+        Tuple k_old;
         Node n;
         while(U.top_Key().compareTo(calculate_Key(start_node)) < 0 || start_node.get_Rhs_Val() != start_node.get_G_Val()){
             k_old = U.top_Key();
@@ -109,14 +111,15 @@ public class DStarLite extends Algorithm {
         }
     }
 
-    public Tupple calculate_Key(Node s){
+    public Tuple calculate_Key(Node s){
         float k1, k2;
 
         k1 = min(s.get_G_Val(),s.get_Rhs_Val()) + heuristic(s, start_node) + km;
 
         k2 = min(s.get_G_Val(),s.get_Rhs_Val());
 
-        return new Tupple(k1, k2);
+
+        return new Tuple(k1, k2);
     }
 
 

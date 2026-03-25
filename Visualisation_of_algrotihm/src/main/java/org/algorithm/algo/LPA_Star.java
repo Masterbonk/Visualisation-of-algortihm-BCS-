@@ -6,7 +6,6 @@ import org.algorithm.graph.Node;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 import static org.algorithm.Util.*;
 import static processing.core.PApplet.println;
@@ -49,14 +48,14 @@ public class LPA_Star extends Algorithm{
        U.insert(start_node, calculate_Key(start_node));
     }
 
-    public Tupple calculate_Key(Node _n){
+    public Tuple calculate_Key(Node _n){
 
         float k = Math.min(_n.get_G_Val(), _n.get_Rhs_Val()) + heuristic(_n,goal_node);
         if(k < 0) k = MAX_INT;
 
         int v = Math.min(_n.get_G_Val(), _n.get_Rhs_Val());
 
-        return new Tupple(k,v);
+        return new Tuple(k,v);
     }
 
     public void compute_Shortest_Path(){

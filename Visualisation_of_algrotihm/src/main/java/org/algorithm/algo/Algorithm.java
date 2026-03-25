@@ -138,7 +138,7 @@ public abstract class Algorithm {
     public void compute_Shortest_Path(){
     }
 
-    public Tupple calculate_Key(Node _n){
+    public Tuple calculate_Key(Node _n){
         return null;
     }
 
