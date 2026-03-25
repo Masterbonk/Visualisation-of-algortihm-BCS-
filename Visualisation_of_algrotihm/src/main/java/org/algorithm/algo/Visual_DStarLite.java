@@ -164,7 +164,7 @@ public class Visual_DStarLite extends Algorithm {
     public void compute_Shortest_Path(){
         //println("pq 1 " + U.get_Heap());
         //println("pq to list 1 " + U.toList());
-        Tupple k_old;
+        Tuple k_old;
         Node n;
 
         boolean done = true;
@@ -247,12 +247,12 @@ public class Visual_DStarLite extends Algorithm {
 
     /**
      * Original function from the paper.
-     * Calculate key gives us a tupple with the values of [min(g, rhs)+km+h(this, start_node), min(g, rhs)]
+     * Calculate key gives us a tuple with the values of [min(g, rhs)+km+h(this, start_node), min(g, rhs)]
      * @param s The node we calculate
      * @return [min(g, rhs)+km+h(this, start_node), min(g, rhs)]
      */
 
-    public Tupple calculate_Key(Node s){
+    public Tuple calculate_Key(Node s){
         float k1, k2;
 
         k1 = min(s.get_G_Val(),s.get_Rhs_Val()) + heuristic(s, start_node) + km;
@@ -261,7 +261,7 @@ public class Visual_DStarLite extends Algorithm {
         k2 = min(s.get_G_Val(),s.get_Rhs_Val());
 
 
-        return new Tupple(k1, k2);
+        return new Tuple(k1, k2);
     }
 
     public float get_Km(){
