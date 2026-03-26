@@ -2,6 +2,7 @@ package org.algorithm.ui.buttons;
 
 import processing.core.PApplet;
 
+import static org.algorithm.Main.Ui;
 import static org.algorithm.Main.button_height;
 import static org.algorithm.Util.delete_Graph;
 import static org.algorithm.ui.Color_Scheme.text_button;
@@ -11,7 +12,12 @@ public class Clear_Button extends Button {
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
     }
     public void click(){
-        delete_Graph();
+        if (Ui.get_Button("pause").clicked){
+            delete_Graph();
+        } else {
+            Ui.get_Button("pause").click();
+            delete_Graph();
+        }
     }
 
 
