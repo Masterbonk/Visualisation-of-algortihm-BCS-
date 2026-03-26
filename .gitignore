@@ -19,3 +19,6 @@ graph.xml
 /Pictures_for_report
 Visualisation_of_algrotihm/Test Results - BenchmarkingTest.html
 Visualisation_of_algrotihm/Test Results - BenchmarkingTest.xml
+.idea/libraries/dashedlines1.xml
+*.html
+*.xml

@@ -229,8 +229,8 @@ public class Util {
                 if(old != null){
                     new BiEdge(_sketch,old,_new,1);
                 }
-                if (node_array.size()>8){
-                    new BiEdge(_sketch,node_array.get(node_array.size()-1-7),_new,1);
+                if (node_array.size()>_x){
+                    new BiEdge(_sketch,node_array.get(node_array.size()-1-_y),_new,1);
                 }
 
                 old = _new;
@@ -239,7 +239,7 @@ public class Util {
             old = null;
         }
 
-        new BiEdge(_sketch, node_array.getFirst(),node_array.get(7),1);
+        new BiEdge(_sketch, node_array.getFirst(),node_array.get(_y),1);
 
     }
 }
