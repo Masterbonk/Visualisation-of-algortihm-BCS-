@@ -195,6 +195,9 @@ public class Node {
             algorithm.set_of_nodes.remove(this);
             if (algorithm.get_U() != null) algorithm.get_U().remove(this);
 
+            int weight1 = connected.getFirst().get_Weight();
+            int weight2 = connected.getLast().get_Weight();
+
             Node other_1 = help_Get_Opposite(connected.getFirst());
             Node other_2 = help_Get_Opposite(connected.getLast());
 
@@ -202,7 +205,7 @@ public class Node {
             other_2.connected.remove(connected.getLast());
 
 
-            new BiEdge(sketch, other_1, other_2, connected.getFirst().get_Weight() + connected.getLast().get_Weight());
+            new BiEdge(sketch, other_1, other_2, weight1 + weight2);
 
             edge_array.remove(connected.getFirst());
             edge_array.remove(connected.getLast());
