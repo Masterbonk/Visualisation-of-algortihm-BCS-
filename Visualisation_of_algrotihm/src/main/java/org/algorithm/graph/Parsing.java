@@ -44,7 +44,8 @@ public class Parsing {
         // Each node is saved as it's string refrence in the OSM file. We only add nodes if they are in ways
         // with the highway tag.
 
-        name_to_node = new HashMap<>(); //Has a nodes id connected to the node object we create. This way we can refrence the node object without having to add a id to the node object.
+        name_to_node = new HashMap<>(); //Has a nodes id connected to the node object we create.
+        // This way we can refrence the node object without having to add a id to the node object.
 
         double minlonX = 0; //according to the osm bounding box, this value will be the smallest x value of
         // the nodes. used to help convert the x and y cordinates to our own cordinates.
