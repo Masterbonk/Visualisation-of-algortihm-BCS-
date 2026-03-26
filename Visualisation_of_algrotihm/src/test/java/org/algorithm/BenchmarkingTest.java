@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 import static org.algorithm.Main.*;
@@ -49,7 +50,7 @@ class BenchmarkingTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {10, 100, 1000})
+    @ValueSource(ints = {10, 10, 10, 10, 10, 10, 100, 100, 100, 100, 100, 100, 1000, 1000, 1000, 1000, 1000, 1000})
     void test_D_Star(int edge_size){
 
         algorithm = new DStarLite();
@@ -67,7 +68,7 @@ class BenchmarkingTest {
 
 
     @ParameterizedTest
-    @ValueSource(ints = {10, 100, 1000})
+    @ValueSource(ints = {10, 10, 10, 10, 10, 10, 100, 100, 100, 100, 100, 100, 1000, 1000, 1000, 1000, 1000, 1000})
     void test_D_Star_no_step_through(int edge_size){
 
         algorithm = new D_Star_Lite_benchmarking_testing();
@@ -81,7 +82,7 @@ class BenchmarkingTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {10, 100, 1000})
+    @ValueSource(ints = {10, 10, 10, 10, 10, 10, 100, 100, 100, 100, 100, 100, 1000, 1000, 1000, 1000, 1000, 1000})
     void test_D_Star_Update_Time(int edge_size){
 
         algorithm = new DStarLite();
@@ -124,7 +125,7 @@ class BenchmarkingTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {10, 100, 1000})
+    @ValueSource(ints = {10, 10, 10, 10, 10, 10, 100, 100, 100, 100, 100, 100, 1000, 1000, 1000, 1000, 1000, 1000})
     void test_D_Star_Update_Time_As_LPA_Star_Problem(int edge_size){
 
         algorithm = new D_Star_Lite_benchmarking_testing();
@@ -166,7 +167,7 @@ class BenchmarkingTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {10, 100, 1000})
+    @ValueSource(ints = {10, 10, 10, 10, 10, 10, 100, 100, 100, 100, 100, 100, 1000, 1000, 1000, 1000, 1000, 1000})
     void test_LPA_Star(int edge_size){
         algorithm = new LPA_Star();
 
@@ -178,7 +179,7 @@ class BenchmarkingTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {10, 100, 1000})
+    @ValueSource(ints = {10, 10, 10, 10, 10, 10, 100, 100, 100, 100, 100, 100, 1000, 1000, 1000, 1000, 1000, 1000})
     void test_LPA_Star_as_D_Star_Lite_Problem(int edge_size){
         algorithm = new LPA_Star();
         Util.Make_Graph(sketch, edge_size, edge_size);
@@ -189,9 +190,11 @@ class BenchmarkingTest {
         algorithm.set_Start(start);
         algorithm.set_Goal(goal);
 
+        algorithm.Main();
+
         //last element in path will be goal
         while (algorithm.get_Start() != algorithm.get_Goal()){
-            algorithm.Main();
+            if (!algorithm.edge_update_map.isEmpty()) algorithm.Main();
 
             Node next = Util.find_Min_G_Node(algorithm.get_Goal());
             algorithm.set_Goal(next);
@@ -202,7 +205,7 @@ class BenchmarkingTest {
 
 
     @ParameterizedTest
-    @ValueSource(ints = {10, 100, 1000})
+    @ValueSource(ints = {10, 10, 10, 10, 10, 10, 100, 100, 100, 100, 100, 100, 1000, 1000, 1000, 1000, 1000, 1000})
     void test_LPA_Star_Update_Time(int edge_size){
 
         algorithm = new LPA_Star();
@@ -242,7 +245,7 @@ class BenchmarkingTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {10, 100, 1000})
+    @ValueSource(ints = {10, 10, 10, 10, 10, 10, 100, 100, 100, 100, 100, 100, 1000, 1000, 1000, 1000, 1000, 1000})
     void test_LPA_Star_Update_Time_As_D_Star_Problem(int edge_size){
 
         algorithm = new LPA_Star();
@@ -281,13 +284,78 @@ class BenchmarkingTest {
         //last element in path will be goal
         while (algorithm.get_Start() != algorithm.get_Goal()){
 
-            algorithm.Main();
+            if (!algorithm.edge_update_map.isEmpty()) algorithm.Main();
 
             Node next = Util.find_Min_G_Node(algorithm.get_Goal());
             algorithm.set_Goal(next);
         }
 
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = {10, 10, 10, 10, 10, 10, 100, 100, 100, 100, 100, 100, 1000, 1000, 1000, 1000, 1000, 1000})
+    void test_D_Star_Update_Time_continous(int edge_size){
+
+        algorithm = new DStarLite();
+
+        Util.Make_Graph(sketch, edge_size, edge_size);
+
+        algorithm.set_Start(Main.node_array.getFirst());
+        algorithm.set_Goal(Main.node_array.get((Main.node_array.size()-1)/2));
+
+        boolean flip = true;
+
+        while (algorithm.get_Goal() != algorithm.get_Start()){
+
+            if (flip) {
+                Util.find_Shared_Edge(Main.node_array.get(((Main.node_array.size()-1)/2)-1), Main.node_array.get(((Main.node_array.size()-1)/2))).update_Weight(MAX_INT);
+                flip = false;
+            } else {
+                Util.find_Shared_Edge(Main.node_array.get(((Main.node_array.size()-1)/2)-1), Main.node_array.get(((Main.node_array.size()-1)/2))).update_Weight(1);
+                flip = true;
+            }
+            algorithm.Main();
+        }
+
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {10, 10, 10, 10, 10, 10, 100, 100, 100, 100, 100, 100, 1000, 1000, 1000, 1000, 1000, 1000})
+    void test_LPA_Star_Update_Time_As_D_Star_Problem_continous(int edge_size){
+
+        algorithm = new LPA_Star();
+
+        Util.Make_Graph(sketch, edge_size, edge_size);
+
+        algorithm.set_Start(Main.node_array.getFirst());
+        algorithm.set_Goal(Main.node_array.get((Main.node_array.size()-1)/2));
+
+        boolean flip = true;
+
+        algorithm.Main();
+
+        while (algorithm.get_Start() != algorithm.get_Goal()){
+
+            if (flip) {
+                Util.find_Shared_Edge(Main.node_array.get(((Main.node_array.size()-1)/2)-1), Main.node_array.get(((Main.node_array.size()-1)/2))).update_Weight(MAX_INT);
+                flip = false;
+            } else {
+                Util.find_Shared_Edge(Main.node_array.get(((Main.node_array.size()-1)/2)-1), Main.node_array.get(((Main.node_array.size()-1)/2))).update_Weight(1);
+                flip = true;
+            }
+
+            if (!algorithm.edge_update_map.isEmpty()) algorithm.Main();
+
+            Node next = Util.find_Min_G_Node(algorithm.get_Goal());
+            algorithm.set_Goal(next);
+
+        }
+
+    }
+
+
+
+
 
 }
 
