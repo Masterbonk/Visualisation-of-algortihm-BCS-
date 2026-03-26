@@ -36,7 +36,9 @@ public class LPA_Star extends Algorithm{
             println("start and/or goal are null");
             return;
        }
-       U = new Priority_Queue();
+       //To change between counting, switch these two
+       //U = new Priority_Queue();
+        U = new Priority_Queue_count_testing();
 
        for(Node n: set_of_nodes){
             n.update_G_Val(MAX_INT);

@@ -13,7 +13,9 @@ import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
 public abstract class Algorithm {
-    public Priority_Queue U;
+
+    //public Priority_Queue U;
+    public Priority_Queue_count_testing U;
     protected Node start_node;
     protected Node goal_node;
 

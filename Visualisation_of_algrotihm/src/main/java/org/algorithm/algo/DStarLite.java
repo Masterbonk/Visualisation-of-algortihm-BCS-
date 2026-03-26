@@ -23,7 +23,9 @@ public class DStarLite extends Algorithm {
         if (start_node == null) throw new NullPointerException("start not set!");
         if (goal_node == null) throw new NullPointerException("goal not set!");
 
-        U = new Priority_Queue();
+        //To change between counting, switch these two
+        //U = new Priority_Queue();
+        U = new Priority_Queue_count_testing();
 
         km = 0;
 
