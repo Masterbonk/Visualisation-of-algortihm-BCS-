@@ -94,7 +94,6 @@ To import a prevoiusly saved graph simply click the import button, and find the 
 
 To import osm files, simply find the osm you wish to import. It's is recommened to import smaller osm files.
 Second image is from https://www.openstreetmap.org/#map=16/55.65957/12.59312 from which the osm file was downloaded.
-Please note that the osm file must be complete, meaning it cannot handle a reference to an object that has not been included in the file.
 <br/><br/>
 <img width="480" height="300" alt="image" src="https://github.com/user-attachments/assets/afbcab3f-3a39-4811-b2c5-2f37705a75ca" />
 <img width="480" height="300" alt="image" src="https://github.com/user-attachments/assets/caa8bb68-7d2b-4373-9a2c-334e3863d752" />
