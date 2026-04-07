@@ -360,12 +360,6 @@ class BenchmarkingTest {
             algorithm.set_Goal(next);
 
         }
-
     }
-
-
-
-
-
 }
 
