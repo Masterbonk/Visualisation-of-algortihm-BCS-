@@ -53,15 +53,15 @@ class BenchmarkingTest {
     @ValueSource(ints = {10, 10, 10, 10, 10, 10, 100, 100, 100, 100, 100, 100, 1000, 1000, 1000, 1000, 1000, 1000})
     void test_D_Star(int edge_size){
 
-        algorithm = new DStarLite();
+        algorithm = new D_Star_Lite_benchmarking_testing();
 
         Util.Make_Graph(sketch, edge_size, edge_size);
         algorithm.set_Start(Main.node_array.getFirst());
 
         algorithm.set_Goal(Main.node_array.get((Main.node_array.size()-1)/2));
 
-        algorithm.Main();
-
+        D_Star_Lite_benchmarking_testing tmp = (D_Star_Lite_benchmarking_testing)algorithm;
+        tmp.fake_Main();
 
     }
 

@@ -68,4 +68,30 @@ public class D_Star_Lite_benchmarking_testing extends DStarLite {
     public void Main(){
         Main(true);
     }
+
+    public void fake_Main(){
+        last = start_node;
+        initialize();
+        compute_Shortest_Path();
+
+        while (start_node != goal_node){
+
+            start_node = find_Min_G_Node(start_node);
+
+
+            if (!edge_update_map.isEmpty()){
+                km = km + heuristic(last,start_node);
+                last = start_node;
+
+                for(Edge e: edge_update_map.keySet()){
+                    e.update_Weight(edge_update_map.get(e));
+                    update_Vertex(e.get_To());
+                    update_Vertex(e.get_From());
+                }
+                edge_update_map = new HashMap<>();
+
+                compute_Shortest_Path();
+            }
+        }
+    }
 }
