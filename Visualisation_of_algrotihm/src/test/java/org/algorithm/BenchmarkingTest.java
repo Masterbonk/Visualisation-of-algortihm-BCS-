@@ -59,9 +59,9 @@ class BenchmarkingTest {
         algorithm.set_Start(Main.node_array.getFirst());
 
         algorithm.set_Goal(Main.node_array.get((Main.node_array.size()-1)/2));
-        while (algorithm.get_Goal() != algorithm.get_Start()){
-            algorithm.Main();
-        }
+
+        algorithm.Main();
+
 
     }
 
@@ -81,6 +81,7 @@ class BenchmarkingTest {
         tmp.Main(false);
     }
 
+    //we make shortest path, then we take 10% of the shortest path and deletes, then the algorithm is properly run
     @ParameterizedTest
     @ValueSource(ints = {10, 10, 10, 10, 10, 10, 100, 100, 100, 100, 100, 100, 1000, 1000, 1000, 1000, 1000, 1000})
     void test_D_Star_Update_Time(int edge_size){
@@ -184,11 +185,8 @@ class BenchmarkingTest {
         algorithm = new LPA_Star();
         Util.Make_Graph(sketch, edge_size, edge_size);
 
-        Node start = Main.node_array.getFirst();
-        Node goal = Main.node_array.get((Main.node_array.size()-1)/2);
-
-        algorithm.set_Start(start);
-        algorithm.set_Goal(goal);
+        algorithm.set_Start(Main.node_array.getFirst());
+        algorithm.set_Goal(Main.node_array.get((Main.node_array.size()-1)/2));
 
         algorithm.Main();
 
@@ -203,7 +201,7 @@ class BenchmarkingTest {
 
     }
 
-
+    //we make shortest path, then we take 10% of the shortest path and deletes, then the algorithm is properly run
     @ParameterizedTest
     @ValueSource(ints = {10, 10, 10, 10, 10, 10, 100, 100, 100, 100, 100, 100, 1000, 1000, 1000, 1000, 1000, 1000})
     void test_LPA_Star_Update_Time(int edge_size){
@@ -292,6 +290,7 @@ class BenchmarkingTest {
 
     }
 
+    //we keep updating weights while the algorithms is running
     @ParameterizedTest
     @ValueSource(ints = {10, 10, 10, 10, 10, 10, 100, 100, 100, 100, 100, 100, 1000, 1000, 1000, 1000, 1000, 1000})
     void test_D_Star_Update_Time_continous(int edge_size){
@@ -319,6 +318,7 @@ class BenchmarkingTest {
 
     }
 
+    //we keep updating weights while the algorithms is running
     @ParameterizedTest
     @ValueSource(ints = {10, 10, 10, 10, 10, 10, 100, 100, 100, 100, 100, 100, 1000, 1000, 1000, 1000, 1000, 1000})
     void test_LPA_Star_Update_Time_As_D_Star_Problem_continous(int edge_size){
