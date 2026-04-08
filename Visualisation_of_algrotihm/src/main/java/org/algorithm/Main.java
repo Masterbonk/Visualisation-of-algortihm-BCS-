@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import static org.algorithm.Util.generate_Name;
+import static org.algorithm.Util.random_Node;
 
 //used this code to implement zoom feature https://forum.processing.org/one/topic/zooming-in-and-zooming-out.html
 
@@ -80,6 +81,11 @@ public class Main extends PApplet{
     public static int letter = 64;
 
     public static boolean importing = false;
+
+    public static boolean render_switch = true;
+    public static boolean running = false;
+
+    int i = 0;
 
 
 
@@ -182,9 +188,15 @@ public class Main extends PApplet{
         textSize(30);
         scale(zoom_level);
         if(!importing){
-            for (Edge edge : edge_array) {
-                edge.render();
-                //edge_array.get(i).color(); //for animating
+            if (render_switch){
+                for (Edge edge : edge_array) {
+                    edge.render();
+                    //edge_array.get(i).color(); //for animating
+                }
+            } else {
+                for (Edge edge : colored_edges){
+                    edge.render();
+                }
             }
         }
         pop();
@@ -194,11 +206,19 @@ public class Main extends PApplet{
         scale(zoom_level);
 
         if(!importing) {
-            for (Node node : node_array) {
-                node.render();
+            if (render_switch){
+                for (Node node : node_array) {
+                    node.render();
+                }
             }
         }
 
+        if (!render_switch){
+
+            circle(algorithm.get_Start().get_X(),algorithm.get_Start().get_Y(),50);
+            circle(algorithm.get_Goal().get_X(),algorithm.get_Goal().get_Y(),50);
+
+        }
 
         if(h != null){
             h.render();
@@ -214,6 +234,21 @@ public class Main extends PApplet{
 
         if (!Ui.get_Button("pause").clicked){
             algorithm.Main();
+        }
+
+        if (running){
+
+            i++;
+            if (i == 5) {
+                Ui.get_Button("forward").click();
+                i = 0;
+            }
+            if(algorithm.get_Goal() != null && algorithm.get_Start() != null){
+                if (algorithm.get_Goal() == algorithm.get_Start()){
+                    algorithm.first_run = true;
+                    algorithm.set_Goal(random_Node());
+                }
+            }
         }
 
 
@@ -318,6 +353,25 @@ public class Main extends PApplet{
         if (key == 'p'){
             //print("key pressed p");
             debug = !debug;
+        }
+
+        if (key == 'r'){
+            render_switch = !render_switch;
+        }
+
+        if (key == 'b'){
+            initial_start_node = Util.random_Node();
+
+            algorithm.set_Start(initial_start_node);
+
+
+            initial_goal_node = Util.random_Node();
+
+            algorithm.set_Goal(initial_goal_node);
+        }
+
+        if(key == 'n'){
+            running = !running;
         }
 
         if (keyCode == UP){

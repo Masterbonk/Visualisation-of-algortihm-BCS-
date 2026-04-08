@@ -6,6 +6,7 @@ import org.algorithm.graph.edges.Edge;
 import org.algorithm.graph.Node;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import static processing.core.PApplet.println;
 
@@ -27,9 +28,11 @@ public class  Visual_LPA extends LPA_Star{
         if (start_node == null || goal_node == null){ println("Start and or goal are null"); return;}
 
         if (first_run) {
-            for (Edge e:Main.edge_array) {
+            for (Edge e:Main.colored_edges) {
                 e.color(75,75,75);
             }
+            Main.colored_edges = new HashSet<>();
+
             initialize();
             first_run = false;
 
@@ -43,6 +46,8 @@ public class  Visual_LPA extends LPA_Star{
                 for (Edge e:Main.colored_edges) {
                     e.color(75,75,75);
                 }
+                Main.colored_edges = new HashSet<>();
+
 
 
             }

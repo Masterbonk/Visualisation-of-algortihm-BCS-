@@ -7,6 +7,7 @@ import org.algorithm.graph.Node;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import static java.lang.Math.min;
 import static org.algorithm.Util.*;
@@ -43,6 +44,7 @@ public class Visual_DStarLite extends Algorithm {
             for (Edge e : Main.colored_edges) {
                 e.color(75, 75, 75);
             }
+            Main.colored_edges = new HashSet<>();
         }
         //if (start == null) throw new NullPointerException("Start not set!");
         //if (goal == null) throw new NullPointerException("Goal not set!");
@@ -208,7 +210,7 @@ public class Visual_DStarLite extends Algorithm {
             n.change_In_PQ(false);
 
             //The pause mechanic, that stops the while loop from running more than a single step
-            if(Main.Ui.get_Button("forward").clicked ){
+            if(Main.Ui.get_Button("forward").clicked && !Main.running){
                 println("Pausing inside compute shortest path");
                 has_been_paused = true;
                 paused_once = false;

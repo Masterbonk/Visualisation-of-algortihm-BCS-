@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import static org.algorithm.Main.*;
 import static processing.core.PApplet.print;
 import static processing.core.PApplet.println;
+import java.util.Random;
 
 
 public class Util {
@@ -279,5 +280,13 @@ public class Util {
     public static void exchange(Edge _a){
         edge_array.remove(_a);
         edge_array.add(_a);
+    }
+
+    public static Node random_Node(){
+
+        Random r = new Random();
+        int r1 = r.nextInt(node_array.size()-1);
+
+        return node_array.get(r1);
     }
 }

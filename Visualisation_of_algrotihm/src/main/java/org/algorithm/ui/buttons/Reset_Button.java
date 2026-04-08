@@ -6,6 +6,8 @@ import org.algorithm.graph.Node;
 import org.algorithm.ui.Color_Scheme;
 import processing.core.PApplet;
 
+import java.util.HashSet;
+
 import static org.algorithm.Main.*;
 import static org.algorithm.ui.Color_Scheme.text_button;
 
@@ -28,6 +30,7 @@ public class Reset_Button extends Button {
         for (Edge e: Main.edge_array) {
             e.color(75,75,75);
         }
+        Main.colored_edges = new HashSet<>();
         for (Node n : algorithm.set_of_nodes){
             n.color(Color_Scheme.node);
             n.change_In_PQ(false);
