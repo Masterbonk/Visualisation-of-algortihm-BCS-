@@ -25,7 +25,7 @@ public class DStarLite extends Algorithm {
 
         //To change between counting, switch these two
         //U = new Priority_Queue();
-        U = new Priority_Queue_count_testing();
+        U = new Priority_Queue();
 
         km = 0;
 

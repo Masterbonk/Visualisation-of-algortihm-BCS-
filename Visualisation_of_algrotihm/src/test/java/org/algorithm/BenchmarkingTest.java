@@ -3,7 +3,6 @@ package org.algorithm;
 import org.algorithm.algo.DStarLite;
 import org.algorithm.algo.D_Star_Lite_benchmarking_testing;
 import org.algorithm.algo.LPA_Star;
-import org.algorithm.algo.Priority_Queue_count_testing;
 import org.algorithm.graph.Node;
 
 import org.junit.jupiter.api.AfterEach;
@@ -36,7 +35,8 @@ class BenchmarkingTest {
 
     @AfterEach
     void tearDown() {
-
+        /*
+        Used for getting priority queue usage
         println("New test");
         println("Pop amount: "+Priority_Queue_count_testing.pop_counter);
         println("Push amount: "+Priority_Queue_count_testing.push_counter);
@@ -45,6 +45,7 @@ class BenchmarkingTest {
         Priority_Queue_count_testing.pop_counter = 0;
         Priority_Queue_count_testing.push_counter = 0;
         Priority_Queue_count_testing.remove_counter = 0;
+         */
 
         sketch = new PApplet();
 

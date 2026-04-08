@@ -38,7 +38,7 @@ public class LPA_Star extends Algorithm{
        }
        //To change between counting, switch these two
        //U = new Priority_Queue();
-        U = new Priority_Queue_count_testing();
+        U = new Priority_Queue();
 
        for(Node n: set_of_nodes){
             n.update_G_Val(MAX_INT);
