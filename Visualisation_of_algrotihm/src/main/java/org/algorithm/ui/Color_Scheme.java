@@ -16,6 +16,7 @@ public class Color_Scheme {
     public static  int border_button;
     public static int line;
     public static int node;
+    public static int touched_node;
     public static  int cut_node;
     public static  int hover_node;
     public static int in_PQ_node;
@@ -43,6 +44,7 @@ public class Color_Scheme {
     private void update_Node_Colors(boolean _pink){
         if (_pink){
             node = sketch.color(247,126,196);
+            touched_node = sketch.color(181, 3, 252);
             cut_node = sketch.color(119,1,62);
             hover_node = sketch.color(207,99,249);
             in_PQ_node = sketch.color(252,183,200);
@@ -50,6 +52,7 @@ public class Color_Scheme {
         } else{
             //default
             node = sketch.color(232,25,25);
+            touched_node = sketch.color(181, 3, 252);
             cut_node = sketch.color(160, 4, 4);
             hover_node = sketch.color(24,204,24);
             in_PQ_node = sketch.color(238,218,18);
