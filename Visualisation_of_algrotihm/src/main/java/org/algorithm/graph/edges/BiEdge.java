@@ -15,6 +15,9 @@ public class BiEdge extends Edge{
 
     @Override
     public void render() {
+        super.sketch.push();
+
         super.render();
+        super.sketch.pop();
     }
 }

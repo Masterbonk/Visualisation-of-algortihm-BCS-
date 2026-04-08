@@ -72,8 +72,15 @@ public class Edge {
             }else {color(-1,75,-1);}
         } else{color(-1,75,-1);}
         sketch.stroke(r,g,b);
+        if(b >= 150){
+            sketch.strokeWeight(20);
+        }
         sketch.line(from.get_X(),from.get_Y(), to.get_X(), to.get_Y());
         sketch.pop();
+
+
+
+
 
 
 

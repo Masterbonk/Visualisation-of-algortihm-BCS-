@@ -1,6 +1,7 @@
 package org.algorithm.algo;
 
 import org.algorithm.Main;
+import org.algorithm.Util;
 import org.algorithm.graph.edges.Edge;
 import org.algorithm.graph.Node;
 
@@ -103,7 +104,10 @@ public class Visual_DStarLite extends Algorithm {
 
                     if (!U.get_Heap().isEmpty()) U.get_Heap().getFirst().change_In_PQ(false);
                     Edge e = find_Shared_Edge(start_node, find_Min_G_Node(start_node));
-                    if (e != null) e.color(-1,-1,150);
+                    if (e != null) {
+                        e.color(-1,-1,150);
+                        Util.exchange(e);
+                    }
                     start_node = find_Min_G_Node(start_node);
                     println("Moved start to node at x: "+start_node.get_X()+" y: "+start_node.get_Y());
                 }
