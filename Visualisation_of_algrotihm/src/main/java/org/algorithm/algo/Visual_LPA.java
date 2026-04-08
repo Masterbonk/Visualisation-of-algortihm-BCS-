@@ -7,6 +7,8 @@ import org.algorithm.graph.Node;
 
 import java.util.ArrayList;
 
+import static processing.core.PApplet.println;
+
 public class  Visual_LPA extends LPA_Star{
     public boolean part_one_d_main = true; // delete sometime soon
 
@@ -21,7 +23,10 @@ public class  Visual_LPA extends LPA_Star{
     }
 
     public void Main(){
-        if (first_run && start_node != null || goal_node != null) {
+
+        if (start_node == null || goal_node == null){ println("Start and or goal are null"); return;}
+
+        if (first_run) {
             for (Edge e:Main.edge_array) {
                 e.color(75,75,75);
             }

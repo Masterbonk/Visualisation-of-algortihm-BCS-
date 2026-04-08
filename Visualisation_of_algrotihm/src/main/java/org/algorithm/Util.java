@@ -3,6 +3,7 @@ package org.algorithm;
 import org.algorithm.graph.edges.BiEdge;
 import org.algorithm.graph.edges.Edge;
 import org.algorithm.graph.Node;
+import org.algorithm.ui.Color_Scheme;
 import org.algorithm.ui.buttons.*;
 import processing.core.PApplet;
 
@@ -241,5 +242,37 @@ public class Util {
 
         new BiEdge(_sketch, node_array.getFirst(),node_array.get(_y),1);
 
+    }
+
+
+    public static void Make_Graph(PApplet _sketch, int _x, int _y, boolean diagonals) {
+        Node[][] nodes = new Node[_y][_x];
+
+        // Create nodes
+        for (int i = 0; i < _y; i++) {
+            for (int j = 0; j < _x; j++) {
+                nodes[i][j] = new Node(_sketch, 100 * j + 100, i * 100 + 100, generate_Name());
+            }
+        }
+
+        for (int i = 0; i < _y; i++) {
+            for (int j = 0; j < _x; j++) {
+                for (int di = 0; di <= 1; di++) {
+                    for (int dj = -1; dj <= 1; dj++) {
+
+                        if (di == 0 && dj == 0) continue;
+                        if (dj == 1 && di == 0) continue;;
+                        int ni = i + di;
+                        int nj = j + dj;
+
+                        if (ni >= 0 && ni < _y && nj >= 0 && nj < _x) {
+
+                            new BiEdge(_sketch, nodes[i][j], nodes[ni][nj], 1);
+
+                        }
+                    }
+                }
+            }
+        }
     }
 }
