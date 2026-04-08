@@ -13,6 +13,7 @@ import processing.core.PFont;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import static org.algorithm.Util.generate_Name;
 
@@ -71,6 +72,7 @@ public class Main extends PApplet{
     public static UI Ui;
 
     public static ArrayList<Edge> edge_array = new ArrayList<>();
+    public static HashSet<Edge> colored_edges = new HashSet<>();
     public static ArrayList<Node> node_array = new ArrayList<>();
 
     Heuristic_Edge h;

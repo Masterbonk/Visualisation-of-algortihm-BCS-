@@ -40,7 +40,7 @@ public class  Visual_LPA extends LPA_Star{
             while (!edge_update_map.isEmpty()) {
                 super.check_For_Edge_Change();
 
-                for (Edge e:Main.edge_array) {
+                for (Edge e:Main.colored_edges) {
                     e.color(75,75,75);
                 }
 
@@ -57,6 +57,7 @@ public class  Visual_LPA extends LPA_Star{
                 Edge e = Util.find_Shared_Edge(traveres_edges.get(i), traveres_edges.get(i + 1));
                 if (e != null) {
                     e.color(-1,-1,150);
+                    Main.colored_edges.add(e);
                     Util.exchange(e);
                 }
             }

@@ -40,7 +40,7 @@ public class Visual_DStarLite extends Algorithm {
         }
 
         if (Main.initial_start_node == start_node) {
-            for (Edge e : Main.edge_array) {
+            for (Edge e : Main.colored_edges) {
                 e.color(75, 75, 75);
             }
         }
@@ -111,6 +111,7 @@ public class Visual_DStarLite extends Algorithm {
                     Edge e = find_Shared_Edge(start_node, find_Min_G_Node(start_node));
                     if (e != null) {
                         e.color(-1,-1,150);
+                        Main.colored_edges.add(e);
                         Util.exchange(e);
                     }
                     start_node = find_Min_G_Node(start_node);
