@@ -305,27 +305,15 @@ class BenchmarkingTest {
     @ValueSource(ints = {10, 10, 10, 10, 10, 10, 100, 100, 100, 100, 100, 100, 1000, 1000, 1000, 1000, 1000, 1000})
     void test_D_Star_Update_Time_continous(int edge_size){
 
-        algorithm = new DStarLite();
+        algorithm = new D_Star_Lite_benchmarking_testing();
 
         Util.Make_Graph(sketch, edge_size, edge_size);
 
         algorithm.set_Start(Main.node_array.getFirst());
         algorithm.set_Goal(Main.node_array.get((Main.node_array.size()-1)/2));
 
-        boolean flip = true;
-
-        while (algorithm.get_Goal() != algorithm.get_Start()){
-
-            if (flip) {
-                Util.find_Shared_Edge(Main.node_array.get(((Main.node_array.size()-1)/2)-1), Main.node_array.get(((Main.node_array.size()-1)/2))).update_Weight(MAX_INT);
-                flip = false;
-            } else {
-                Util.find_Shared_Edge(Main.node_array.get(((Main.node_array.size()-1)/2)-1), Main.node_array.get(((Main.node_array.size()-1)/2))).update_Weight(100);
-                flip = true;
-            }
-            algorithm.Main();
-        }
-
+        D_Star_Lite_benchmarking_testing tmp = (D_Star_Lite_benchmarking_testing)algorithm;
+        tmp.fake_Main_That_Flips_Every_Step();
     }
 
     //we keep updating weights while the algorithms is running
