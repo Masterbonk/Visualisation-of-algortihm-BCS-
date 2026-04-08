@@ -198,13 +198,11 @@ public class Main extends PApplet{
         }
 
 
-
-        pop();
-        popMatrix();
-
         if(h != null){
             h.render();
         }
+        pop();
+        popMatrix();
 
         Ui.render();
 
