@@ -38,8 +38,10 @@ public class Visual_DStarLite extends Algorithm {
             return;
         }
 
-        for (Edge e:Main.edge_array) {
-            e.color(75,75,75);
+        if (Main.initial_start_node == start_node) {
+            for (Edge e : Main.edge_array) {
+                e.color(75, 75, 75);
+            }
         }
         //if (start == null) throw new NullPointerException("Start not set!");
         //if (goal == null) throw new NullPointerException("Goal not set!");
@@ -96,7 +98,9 @@ public class Visual_DStarLite extends Algorithm {
                     println("update map has size = "+edge_update_map.size());
                     check_For_Edge_Change();
                     first_run = true;
-                    Main.Ui.get_Button("pause").click();
+                    if (!Main.Ui.get_Button("pause").clicked){
+                        Main.Ui.get_Button("pause").click();
+                    }
                     break;
                 }
 
@@ -145,7 +149,7 @@ public class Visual_DStarLite extends Algorithm {
             last = start_node;
 
             for (Edge e : edge_update_map.keySet()) {
-                if (edge_update_map.get(e) != -1) { //Means that the
+                if (edge_update_map.get(e) != -1) { //Means that the edge was deleted.
                     e.update_Weight(edge_update_map.get(e));
                 }
                 update_Vertex(e.get_To());
@@ -199,7 +203,7 @@ public class Visual_DStarLite extends Algorithm {
 
             //The pause mechanic, that stops the while loop from running more than a single step
             if(Main.Ui.get_Button("forward").clicked ){
-                //println("Pausing inside compute shortest path");
+                println("Pausing inside compute shortest path");
                 has_been_paused = true;
                 paused_once = false;
                 part_one_d_main = true;
