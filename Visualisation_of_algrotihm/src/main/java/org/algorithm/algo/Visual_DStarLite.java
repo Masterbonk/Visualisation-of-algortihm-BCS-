@@ -152,6 +152,7 @@ public class Visual_DStarLite extends Algorithm {
                 if (edge_update_map.get(e) != -1) { //Means that the
                     e.update_Weight(edge_update_map.get(e));
                 }
+
                 update_Vertex(e.get_To());
                 update_Vertex(e.get_From());
             }
