@@ -279,9 +279,17 @@ public class Main extends PApplet{
     public void zoom(){
         if(keyPressed) {
             if (key == '+' && zoom_level < 3) {
-                zoom_level += zoom_increase;
-            } else if (key == '-' && zoom_level > 0.1) {
-                zoom_level -= zoom_increase;
+                if (zoom_level<0.2){
+                    zoom_level += zoom_increase/10;
+                } else {
+                    zoom_level += zoom_increase;
+                }
+            } else if (key == '-' && zoom_level > 0.02) {
+                if (zoom_level<0.2){
+                    zoom_level -= zoom_increase/10;
+                } else {
+                    zoom_level -= zoom_increase;
+                }
             }
         }
     }
@@ -292,10 +300,19 @@ public class Main extends PApplet{
         float wheel_number = _mouse_event.getCount();
 
         if(zoom_level < 3 && wheel_number < 0) {
+            if (zoom_level<0.2){
+                zoom_level += zoom_increase/10;
+            } else {
                 zoom_level += zoom_increase;
+            }
         }
-        if(zoom_level > 0.1 && wheel_number > 0) {
-            zoom_level -= zoom_increase;
+        if(zoom_level > 0.02 && wheel_number > 0) {
+            if (zoom_level<0.2){
+                zoom_level -= zoom_increase/10;
+            } else {
+                zoom_level -= zoom_increase;
+            }
+
         }
     }
 
