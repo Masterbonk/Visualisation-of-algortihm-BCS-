@@ -51,7 +51,10 @@ public class  Visual_LPA extends LPA_Star{
             }
             for (int i = 0; i < traveres_edges.size() - 1; i++) {
                 Edge e = Util.find_Shared_Edge(traveres_edges.get(i), traveres_edges.get(i + 1));
-                if (e != null) e.color(-1, -1, 150);
+                if (e != null) {
+                    e.color(-1,-1,150);
+                    Util.exchange(e);
+                }
             }
             // to here
             // pause here

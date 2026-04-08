@@ -37,10 +37,6 @@ public class Color_Scheme {
 
             //buttons
 
-
-
-
-
         }
     }
 
@@ -57,9 +53,7 @@ public class Color_Scheme {
             cut_node = sketch.color(160, 4, 4);
             hover_node = sketch.color(24,204,24);
             in_PQ_node = sketch.color(238,218,18);
-
         }
-
     }
 
     private void update_Button_Colors(boolean _pink){

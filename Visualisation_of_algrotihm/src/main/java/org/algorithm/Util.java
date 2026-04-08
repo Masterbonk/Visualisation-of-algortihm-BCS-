@@ -275,4 +275,9 @@ public class Util {
             }
         }
     }
+
+    public static void exchange(Edge _a){
+        edge_array.remove(_a);
+        edge_array.add(_a);
+    }
 }
