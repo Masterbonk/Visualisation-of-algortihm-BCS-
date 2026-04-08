@@ -35,6 +35,17 @@ class BenchmarkingTest {
 
     @AfterEach
     void tearDown() {
+        /*
+        Used for getting priority queue usage
+        println("New test");
+        println("Pop amount: "+Priority_Queue_count_testing.pop_counter);
+        println("Push amount: "+Priority_Queue_count_testing.push_counter);
+        println("Remove amount: "+Priority_Queue_count_testing.remove_counter);
+        println("Total operations: "+(Priority_Queue_count_testing.remove_counter+Priority_Queue_count_testing.push_counter+Priority_Queue_count_testing.pop_counter));
+        Priority_Queue_count_testing.pop_counter = 0;
+        Priority_Queue_count_testing.push_counter = 0;
+        Priority_Queue_count_testing.remove_counter = 0;
+         */
 
         sketch = new PApplet();
 
@@ -53,15 +64,15 @@ class BenchmarkingTest {
     @ValueSource(ints = {10, 10, 10, 10, 10, 10, 100, 100, 100, 100, 100, 100, 1000, 1000, 1000, 1000, 1000, 1000})
     void test_D_Star(int edge_size){
 
-        algorithm = new DStarLite();
+        algorithm = new D_Star_Lite_benchmarking_testing();
 
         Util.Make_Graph(sketch, edge_size, edge_size);
         algorithm.set_Start(Main.node_array.getFirst());
 
         algorithm.set_Goal(Main.node_array.get((Main.node_array.size()-1)/2));
-        while (algorithm.get_Goal() != algorithm.get_Start()){
-            algorithm.Main();
-        }
+
+        D_Star_Lite_benchmarking_testing tmp = (D_Star_Lite_benchmarking_testing)algorithm;
+        tmp.fake_Main();
 
     }
 
@@ -81,6 +92,7 @@ class BenchmarkingTest {
         tmp.Main(false);
     }
 
+    //we make shortest path, then we take 10% of the shortest path and deletes, then the algorithm is properly run
     @ParameterizedTest
     @ValueSource(ints = {10, 10, 10, 10, 10, 10, 100, 100, 100, 100, 100, 100, 1000, 1000, 1000, 1000, 1000, 1000})
     void test_D_Star_Update_Time(int edge_size){
@@ -184,11 +196,8 @@ class BenchmarkingTest {
         algorithm = new LPA_Star();
         Util.Make_Graph(sketch, edge_size, edge_size);
 
-        Node start = Main.node_array.getFirst();
-        Node goal = Main.node_array.get((Main.node_array.size()-1)/2);
-
-        algorithm.set_Start(start);
-        algorithm.set_Goal(goal);
+        algorithm.set_Start(Main.node_array.getFirst());
+        algorithm.set_Goal(Main.node_array.get((Main.node_array.size()-1)/2));
 
         algorithm.Main();
 
@@ -203,7 +212,7 @@ class BenchmarkingTest {
 
     }
 
-
+    //we make shortest path, then we take 10% of the shortest path and deletes, then the algorithm is properly run
     @ParameterizedTest
     @ValueSource(ints = {10, 10, 10, 10, 10, 10, 100, 100, 100, 100, 100, 100, 1000, 1000, 1000, 1000, 1000, 1000})
     void test_LPA_Star_Update_Time(int edge_size){
@@ -292,33 +301,23 @@ class BenchmarkingTest {
 
     }
 
+    //we keep updating weights while the algorithms is running
     @ParameterizedTest
     @ValueSource(ints = {10, 10, 10, 10, 10, 10, 100, 100, 100, 100, 100, 100, 1000, 1000, 1000, 1000, 1000, 1000})
     void test_D_Star_Update_Time_continous(int edge_size){
 
-        algorithm = new DStarLite();
+        algorithm = new D_Star_Lite_benchmarking_testing();
 
         Util.Make_Graph(sketch, edge_size, edge_size);
 
         algorithm.set_Start(Main.node_array.getFirst());
         algorithm.set_Goal(Main.node_array.get((Main.node_array.size()-1)/2));
 
-        boolean flip = true;
-
-        while (algorithm.get_Goal() != algorithm.get_Start()){
-
-            if (flip) {
-                Util.find_Shared_Edge(Main.node_array.get(((Main.node_array.size()-1)/2)-1), Main.node_array.get(((Main.node_array.size()-1)/2))).update_Weight(MAX_INT);
-                flip = false;
-            } else {
-                Util.find_Shared_Edge(Main.node_array.get(((Main.node_array.size()-1)/2)-1), Main.node_array.get(((Main.node_array.size()-1)/2))).update_Weight(1);
-                flip = true;
-            }
-            algorithm.Main();
-        }
-
+        D_Star_Lite_benchmarking_testing tmp = (D_Star_Lite_benchmarking_testing)algorithm;
+        tmp.fake_Main_That_Flips_Every_Step();
     }
 
+    //we keep updating weights while the algorithms is running
     @ParameterizedTest
     @ValueSource(ints = {10, 10, 10, 10, 10, 10, 100, 100, 100, 100, 100, 100, 1000, 1000, 1000, 1000, 1000, 1000})
     void test_LPA_Star_Update_Time_As_D_Star_Problem_continous(int edge_size){
@@ -340,7 +339,7 @@ class BenchmarkingTest {
                 Util.find_Shared_Edge(Main.node_array.get(((Main.node_array.size()-1)/2)-1), Main.node_array.get(((Main.node_array.size()-1)/2))).update_Weight(MAX_INT);
                 flip = false;
             } else {
-                Util.find_Shared_Edge(Main.node_array.get(((Main.node_array.size()-1)/2)-1), Main.node_array.get(((Main.node_array.size()-1)/2))).update_Weight(1);
+                Util.find_Shared_Edge(Main.node_array.get(((Main.node_array.size()-1)/2)-1), Main.node_array.get(((Main.node_array.size()-1)/2))).update_Weight(100);
                 flip = true;
             }
 
@@ -350,12 +349,6 @@ class BenchmarkingTest {
             algorithm.set_Goal(next);
 
         }
-
     }
-
-
-
-
-
 }
 

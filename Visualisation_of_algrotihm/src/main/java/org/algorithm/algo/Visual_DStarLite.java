@@ -45,7 +45,8 @@ public class Visual_DStarLite extends Algorithm {
         //if (start == null) throw new NullPointerException("Start not set!");
         //if (goal == null) throw new NullPointerException("Goal not set!");
 
-
+        //To change between counting, switch these two
+        //U = new Priority_Queue();
         U = new Priority_Queue();
 
         km = 0;
