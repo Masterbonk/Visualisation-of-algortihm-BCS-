@@ -32,6 +32,7 @@ public class LPA_Star extends Algorithm{
     }
     
     public void initialize(){
+        println("Initializing");
        if (start_node == null || goal_node == null) {
             println("start and/or goal are null");
             return;

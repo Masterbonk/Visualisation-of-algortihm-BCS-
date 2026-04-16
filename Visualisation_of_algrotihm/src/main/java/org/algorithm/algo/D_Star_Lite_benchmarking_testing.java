@@ -115,9 +115,12 @@ public class D_Star_Lite_benchmarking_testing extends DStarLite {
 
             if (flip) {
                 Util.find_Shared_Edge(Main.node_array.get(((Main.node_array.size()-1)/2)-1), Main.node_array.get(((Main.node_array.size()-1)/2))).update_Weight(MAX_INT);
+                edge_update_map.put(Util.find_Shared_Edge(Main.node_array.get(((Main.node_array.size()-1)/2)-1), Main.node_array.get(((Main.node_array.size()-1)/2))), MAX_INT);
+
                 flip = false;
             } else {
                 Util.find_Shared_Edge(Main.node_array.get(((Main.node_array.size()-1)/2)-1), Main.node_array.get(((Main.node_array.size()-1)/2))).update_Weight(100);
+                edge_update_map.put(Util.find_Shared_Edge(Main.node_array.get(((Main.node_array.size()-1)/2)-1), Main.node_array.get(((Main.node_array.size()-1)/2))), 100);
                 flip = true;
             }
 

@@ -337,9 +337,11 @@ class BenchmarkingTest {
 
             if (flip) {
                 Util.find_Shared_Edge(Main.node_array.get(((Main.node_array.size()-1)/2)-1), Main.node_array.get(((Main.node_array.size()-1)/2))).update_Weight(MAX_INT);
+                algorithm.edge_update_map.put(Util.find_Shared_Edge(Main.node_array.get(((Main.node_array.size()-1)/2)-1), Main.node_array.get(((Main.node_array.size()-1)/2))), MAX_INT);
                 flip = false;
             } else {
                 Util.find_Shared_Edge(Main.node_array.get(((Main.node_array.size()-1)/2)-1), Main.node_array.get(((Main.node_array.size()-1)/2))).update_Weight(100);
+                algorithm.edge_update_map.put(Util.find_Shared_Edge(Main.node_array.get(((Main.node_array.size()-1)/2)-1), Main.node_array.get(((Main.node_array.size()-1)/2))), 100);
                 flip = true;
             }
 
