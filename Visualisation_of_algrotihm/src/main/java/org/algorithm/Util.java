@@ -225,7 +225,7 @@ public class Util {
 
                 String name;
 
-                _new = new Node(_sketch,i*100+100,100*j+100, generate_Name());
+                _new = new Node(_sketch,i*200+200,200*j+200, generate_Name());
 
                 if(old != null){
                     new BiEdge(_sketch,old,_new,1);
@@ -251,7 +251,7 @@ public class Util {
         // Create nodes
         for (int i = 0; i < _y; i++) {
             for (int j = 0; j < _x; j++) {
-                nodes[i][j] = new Node(_sketch, 100 * j + 100, i * 100 + 100, generate_Name());
+                nodes[i][j] = new Node(_sketch, 200 * j + 200, i * 200 + 200, generate_Name());
             }
         }
 
