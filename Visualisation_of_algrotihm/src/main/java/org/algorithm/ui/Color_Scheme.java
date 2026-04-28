@@ -20,6 +20,7 @@ public class Color_Scheme {
     public static  int cut_node;
     public static  int hover_node;
     public static int in_PQ_node;
+    public static int bg_button_algo;
     public Color_Scheme(PApplet _sketch){
         sketch = _sketch;
     }
@@ -91,7 +92,11 @@ public class Color_Scheme {
 
             //normal
             border_button = sketch.color(162f,162f,162f);
+
+            bg_button_algo = sketch.color(40,40,178);
+
             bg_button = sketch.color(80f);
+
             text_button = sketch.color(255f);
 
         }
