@@ -203,19 +203,34 @@ public class UI {
             sketch.textSize(20);
             sketch.text(Util.make_digit_fit_range("N", 5)+Util.make_digit_fit_range("k1", 13)+","+Util.make_digit_fit_range("k2", 13) , sketch.displayWidth-290/*325*/, 200-sketch.getGraphics().textSize);
 
+            sketch.textMode(CENTER);
+            //sketch.text("N", sketch.displayWidth-325, 290);
+            //sketch.text(tmp_tupple[0], sketch.displayWidth-325 + sketch.textWidth(tmp_tupple[0]), 200+40*i);
+            //sketch.text(tmp_tupple[1], sketch.displayWidth-325 + sketch.textWidth(tmp_tupple[1])*2 , 200+40*i);
             if (algorithm != null && algorithm.get_U() != null){
+
                 if (!algorithm.get_U().is_empty() && algorithm.part_one_d_main) { //Makes the main node yellow
                     algorithm.get_U().get_Heap().getFirst().change_In_PQ(true);
                 } else if(!algorithm.get_U().is_empty()) { algorithm.get_U().get_Heap().getFirst().change_In_PQ(false);}
+
+                sketch.push();
+                sketch.fill(238,218,18);
+                int tmp = Util.round_To_10(sketch.textWidth( algorithm.get_U().get_Heap().getFirst().toString()));
+                sketch.circle(sketch.displayWidth-280 - tmp, 192,20);
+                sketch.pop();
+
                 for (int i = 0; i < Math.min(algorithm.get_U().get_Heap().size(), 11); i++){
                     //getting the elements in the queue
                     String tmp_node = algorithm.get_U().get_Heap().get(i).toString();
-                    String tmp_tupple = algorithm.get_U().get_Keys().get(algorithm.get_U().get_Heap().get(i)).toString();
+                    String[] tmp_tupple = algorithm.get_U().get_Keys().get(algorithm.get_U().get_Heap().get(i)).toStrings();
 
                     //for each key in the pq, following is printed
 
 
-                    sketch.text(tmp_node + " " + tmp_tupple, sketch.displayWidth-325, 200+40*i);
+                    sketch.textMode(CENTER);
+                    sketch.text(tmp_node, sketch.displayWidth-265 - (sketch.textWidth(tmp_node))/2, 200+40*i);
+                    sketch.text(tmp_tupple[0], sketch.displayWidth-200 - (sketch.textWidth(tmp_tupple[0]))/2, 200+40*i);
+                    sketch.text(tmp_tupple[1], sketch.displayWidth-115 - (sketch.textWidth(tmp_tupple[1]))/2, 200+40*i);
                 }
 
            }

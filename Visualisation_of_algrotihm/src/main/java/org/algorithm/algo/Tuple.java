@@ -33,6 +33,10 @@ public class Tuple implements Comparable<Tuple> {
         return "[" + Util.make_digit_fit_range(Math.round(k1), 10) + ", " + Util.make_digit_fit_range(Math.round(k2),10) + "]";
     }
 
+    public String[] toStrings() {
+        return new String[]{ Util.make_digit_fit_range(Math.round(k1), 10),  Util.make_digit_fit_range(Math.round(k2),10) };
+    }
+
 
 }
 

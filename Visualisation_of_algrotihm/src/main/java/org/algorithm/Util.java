@@ -280,4 +280,14 @@ public class Util {
         edge_array.remove(_a);
         edge_array.add(_a);
     }
+
+    public static int round_To_10(float n)
+    {
+        int a = (int) ((n / 50) * 50);
+
+        int b = a + 50;
+
+        // Return of closest of two
+        return (n - a >= b - n)? b : a;
+    }
 }
