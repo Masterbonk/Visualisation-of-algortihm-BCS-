@@ -5,6 +5,7 @@ import processing.core.PApplet;
 
 import static org.algorithm.Main.*;
 import static org.algorithm.ui.Color_Scheme.text_button;
+import static org.algorithm.ui.Color_Scheme.text_button_hover;
 
 public class Forward_Button extends Button {
     public Forward_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
@@ -24,7 +25,7 @@ public class Forward_Button extends Button {
 
         if (super.mouse_Over()) {
             sketch.push();
-            sketch.fill(text_button);
+            sketch.fill(text_button_hover);
             sketch.textSize(16);
             sketch.text("Go through the algorithm \n one step at the time", x_pos, y_pos - 0.5f * button_height);
             sketch.pop();
