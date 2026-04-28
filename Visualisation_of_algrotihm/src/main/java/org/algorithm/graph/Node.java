@@ -129,7 +129,7 @@ public class Node {
         }
         if (Ui.get_Button("Node_display").clicked){
             sketch.push();
-            sketch.fill(247,247,247);
+            sketch.fill(0,0,0);
             sketch.textSize(25);
             sketch.textAlign(LEFT,TOP);
             String tmp = "g(" + display_Infinity(g) + "), rhs(" + display_Infinity(rhs) + ")";
