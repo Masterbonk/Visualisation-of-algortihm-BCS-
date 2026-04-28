@@ -129,11 +129,11 @@ public class Node {
         }
         if (Ui.get_Button("Node_display").clicked){
             sketch.push();
-            sketch.fill(247,247,247);
-            sketch.textSize(20);
+            sketch.fill(0,0,0);
+            sketch.textSize(25);
             sketch.textAlign(LEFT,TOP);
             String tmp = "g(" + display_Infinity(g) + "), rhs(" + display_Infinity(rhs) + ")";
-            sketch.text(tmp,x-sketch.textWidth(tmp)/2,(y+dim/2f)+sketch.getGraphics().textSize);
+            sketch.text(tmp,x-sketch.textWidth(tmp)/2,((y+dim/2f)+sketch.getGraphics().textSize)-25f);
             sketch.pop();
         }
         if (Ui.get_Button("Name_display").clicked){

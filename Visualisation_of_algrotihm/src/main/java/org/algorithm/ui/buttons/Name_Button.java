@@ -4,6 +4,7 @@ import processing.core.PApplet;
 
 import static org.algorithm.Main.button_height;
 import static org.algorithm.ui.Color_Scheme.text_button;
+import static org.algorithm.ui.Color_Scheme.text_button_hover;
 
 public class Name_Button extends Button {
     public Name_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
@@ -17,7 +18,7 @@ public class Name_Button extends Button {
 
         if (super.mouse_Over()) {
             sketch.push();
-            sketch.fill(text_button);
+            sketch.fill(text_button_hover);
             sketch.textSize(16);
             sketch.text("Displays the names of the nodes", x_pos, y_pos + 1.5f * button_height);
             sketch.pop();

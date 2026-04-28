@@ -3,7 +3,7 @@ package org.algorithm.ui.buttons;
 import processing.core.PApplet;
 
 import static org.algorithm.Main.button_height;
-import static org.algorithm.ui.Color_Scheme.text_button;
+import static org.algorithm.ui.Color_Scheme.*;
 
 public class Cut_Button extends Button {
     public Cut_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
@@ -18,7 +18,7 @@ public class Cut_Button extends Button {
 
         if (super.mouse_Over()) {
             sketch.push();
-            sketch.fill(text_button);
+            sketch.fill(text_button_hover);
             sketch.textSize(16);
             sketch.text("Delete nodes or lines \n from the graph", x_pos, y_pos - 0.5f * button_height);
             sketch.pop();

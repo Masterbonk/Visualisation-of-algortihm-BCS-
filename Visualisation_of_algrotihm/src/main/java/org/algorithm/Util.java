@@ -213,7 +213,7 @@ public class Util {
     }
 
     /**
-     * Makes the base graph objects. All are added to the node and edge arrays so they are rendered.
+     * Makes the base graph objects. All are added to the node and edge arrays so they are rendered.[Square structure]
      */
 
     public static void Make_Graph(PApplet _sketch, int _x, int _y){
@@ -225,7 +225,7 @@ public class Util {
 
                 String name;
 
-                _new = new Node(_sketch,i*100+100,100*j+100, generate_Name());
+                _new = new Node(_sketch,i*200+200,200*j+200, generate_Name());
 
                 if(old != null){
                     new BiEdge(_sketch,old,_new,1);
@@ -244,6 +244,9 @@ public class Util {
 
     }
 
+    /**
+     * Makes the base graph objects. All are added to the node and edge arrays so they are rendered. [Hexagon structure]
+     */
 
     public static void Make_Graph(PApplet _sketch, int _x, int _y, boolean diagonals) {
         Node[][] nodes = new Node[_y][_x];
@@ -251,7 +254,7 @@ public class Util {
         // Create nodes
         for (int i = 0; i < _y; i++) {
             for (int j = 0; j < _x; j++) {
-                nodes[i][j] = new Node(_sketch, 100 * j + 100, i * 100 + 100, generate_Name());
+                nodes[i][j] = new Node(_sketch, 200 * j + 200, i * 200 + 200, generate_Name());
             }
         }
 

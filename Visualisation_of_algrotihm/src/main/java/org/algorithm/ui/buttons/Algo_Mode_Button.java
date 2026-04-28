@@ -6,6 +6,7 @@ import processing.core.PApplet;
 
 import static org.algorithm.Main.*;
 import static org.algorithm.ui.Color_Scheme.text_button;
+import static org.algorithm.ui.Color_Scheme.text_button_hover;
 
 public class Algo_Mode_Button extends Button {
     public Algo_Mode_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
@@ -17,7 +18,7 @@ public class Algo_Mode_Button extends Button {
 
         if (super.mouse_Over()) {
             sketch.push();
-            sketch.fill(text_button);
+            sketch.fill(text_button_hover);
             sketch.textSize(16);
             sketch.text("Change which \n algorithm is run", x_pos, y_pos + 1.5f * button_height);
             sketch.pop();
