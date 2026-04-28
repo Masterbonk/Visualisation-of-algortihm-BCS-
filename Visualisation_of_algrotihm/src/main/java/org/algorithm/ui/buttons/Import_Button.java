@@ -3,6 +3,7 @@ package org.algorithm.ui.buttons;
 import org.algorithm.Main;
 import processing.core.PApplet;
 
+import static org.algorithm.Main.algorithm;
 import static org.algorithm.Util.delete_Graph;
 
 public class Import_Button extends File_Type_Buttons{
@@ -12,6 +13,15 @@ public class Import_Button extends File_Type_Buttons{
 
     public void click(){
         super.click();
+
+        if(!Main.Ui.get_Button("pause").clicked){
+            Main.Ui.get_Button("pause").click();
+        }
+        algorithm.set_Goal(null);
+        algorithm.set_Start(null);
+
+        Main.initial_start_node = null;
+        Main.initial_goal_node = null;
 
         delete_Graph();
         Main.zoom_level = 1f;
