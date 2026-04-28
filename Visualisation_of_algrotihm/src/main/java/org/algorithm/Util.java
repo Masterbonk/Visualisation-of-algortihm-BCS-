@@ -213,7 +213,7 @@ public class Util {
     }
 
     /**
-     * Makes the base graph objects. All are added to the node and edge arrays so they are rendered.
+     * Makes the base graph objects. All are added to the node and edge arrays so they are rendered.[Square structure]
      */
 
     public static void Make_Graph(PApplet _sketch, int _x, int _y){
@@ -244,6 +244,9 @@ public class Util {
 
     }
 
+    /**
+     * Makes the base graph objects. All are added to the node and edge arrays so they are rendered. [Hexagon structure]
+     */
 
     public static void Make_Graph(PApplet _sketch, int _x, int _y, boolean diagonals) {
         Node[][] nodes = new Node[_y][_x];
