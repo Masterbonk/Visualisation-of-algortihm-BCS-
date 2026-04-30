@@ -54,7 +54,7 @@ public class Main extends PApplet{
 
     //zoom functionality
     public static float zoom_level = 1f;
-    final float zoom_increase = 0.1f;
+    float zoom_increase = 0.1f;
 
     //Pan functionality
     public static int translate_x = 0;
@@ -137,9 +137,6 @@ public class Main extends PApplet{
 
         // The font must be located in the sketch's
         // "data" directory to load successfully
-
-
-
         surface.setResizable(true);
         surface.setLocation(0,0);
 
@@ -153,9 +150,7 @@ public class Main extends PApplet{
         Util.Make_UI(this, button_height);
         Util.Make_Graph(this,5,5,true);
 
-
         // Set the dash-gap pattern in pixels
-
     }
 
 
@@ -170,17 +165,16 @@ public class Main extends PApplet{
         background(Color_Scheme.bg);
         //background(204); //Draws over everything on screen clearing it for the next frame
 
-        //zoom functionality
-        zoom();
         pushMatrix();
+        //zoom functionality
+        //zoom();
         translate(translate_x,translate_y);
-
+        scale(zoom_level);
 
         //line formatting
         push();
         strokeWeight(10);
         textSize(30);
-        scale(zoom_level);
         if(!importing){
             for (Edge edge : edge_array) {
                 edge.render();
@@ -188,10 +182,6 @@ public class Main extends PApplet{
             }
         }
         pop();
-
-
-        push();
-        scale(zoom_level);
 
         if(!importing) {
             for (Node node : node_array) {
@@ -203,7 +193,8 @@ public class Main extends PApplet{
         if(h != null){
             h.render();
         }
-        pop();
+        
+
         popMatrix();
 
         Ui.render();
@@ -289,8 +280,17 @@ public class Main extends PApplet{
     }
 
     /** Zoom functionality works when scrolling the mouse wheel (on an actual mouse)
+     *  Source for zoom func https://discourse.processing.org/t/smooth-zooming-in-and-out-on-your-mouse-tip/46117
      * */
     public void mouseWheel(processing.event.MouseEvent _mouse_event){
+        float xrd = (mouseX - translate_x) / zoom_level;
+        float yrd = (mouseY - translate_y) / zoom_level;
+        zoom_increase = (float) _mouse_event.getCount()-zoom_increase;
+        zoom_level = pow(1.1f, zoom_increase);
+        translate_x = (int)(mouseX - xrd * zoom_level);
+        translate_y = (int)(mouseY - yrd * zoom_level);
+
+        /*
         float wheel_number = _mouse_event.getCount();
 
         if(zoom_level < 3 && wheel_number < 0) {
@@ -298,7 +298,7 @@ public class Main extends PApplet{
         }
         if(zoom_level > 0.1 && wheel_number > 0) {
             zoom_level -= zoom_increase;
-        }
+        }*/
     }
 
 
@@ -636,6 +636,9 @@ public class Main extends PApplet{
                 }
             }
             if (!is_over_ui) {
+                translate_x += mouseX - pmouseX;
+                translate_y += mouseY - pmouseY;
+                /*
                 if (mouse_x_start_of_pan == -1 || mouse_y_start_of_pan == -1) {
                     mouse_x_start_of_pan = mouseX;
                     mouse_y_start_of_pan = mouseY;
@@ -649,7 +652,7 @@ public class Main extends PApplet{
 
                     mouse_x_start_of_pan = mouseX;
                     mouse_y_start_of_pan = mouseY;
-                }
+                }*/
             }
         }
     }
