@@ -65,7 +65,11 @@ public abstract class Button {
             sketch.fill(Color_Scheme.bg_button_hover);
             sketch.rect(x_pos + changeVal, y_pos + changeVal, x_size - changeVal * 2, y_size - changeVal * 2);
             sketch.fill(Color_Scheme.text_button_hover); //Text color
-            sketch.textSize((x_size - changeVal) / 5f);
+
+            if (dropdown_control_button == null) {
+                sketch.textSize((x_size - changeVal) / 5f);
+            }else sketch.textSize((x_size - changeVal)  / 6f);
+
             sketch.textAlign(sketch.CENTER);
             sketch.text(text, (x_pos + changeVal) + (x_size - changeVal * 2) / 2f, (y_pos + changeVal) + (y_size - changeVal * 2) / 2f + 10);
             sketch.pop();
@@ -76,7 +80,11 @@ public abstract class Button {
             sketch.fill(Color_Scheme.bg_button_clicked);
             sketch.rect(x_pos + changeVal, y_pos + changeVal, x_size - changeVal * 2, y_size - changeVal * 2);
             sketch.fill(Color_Scheme.text_button_clicked); //Text color
-            sketch.textSize((x_size - changeVal) / 5f);
+
+            if (dropdown_control_button == null) {
+                sketch.textSize((x_size - changeVal) / 5f);
+            }else sketch.textSize((x_size - changeVal)  / 6f);
+
             sketch.textAlign(sketch.CENTER);
             sketch.text(text, (x_pos + changeVal) + (x_size - changeVal * 2) / 2f, (y_pos + changeVal) + (y_size - changeVal * 2) / 2f + 10);
             sketch.pop();
@@ -86,7 +94,11 @@ public abstract class Button {
             sketch.fill(Color_Scheme.bg_button);
             sketch.rect(x_pos, y_pos, x_size, y_size);
             sketch.fill(Color_Scheme.text_button);
-            sketch.textSize(x_size / 5f);
+
+            if (dropdown_control_button == null) {
+                sketch.textSize(x_size / 5f);
+            }else sketch.textSize(x_size / 6f);
+
             sketch.textAlign(sketch.CENTER);
             sketch.text(text, (x_pos) + (x_size) / 2f, (y_pos) + (y_size) / 2f + 10);
             sketch.pop();
