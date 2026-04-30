@@ -44,7 +44,7 @@ public abstract class Button {
         }
     }
 
-    private void visual_Render_Logic(){
+    public void visual_Render_Logic(){
         sketch.fill(Color_Scheme.border_button);
         sketch.rect(x_pos, y_pos, x_size, y_size);
 

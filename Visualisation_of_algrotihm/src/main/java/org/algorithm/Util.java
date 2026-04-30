@@ -69,7 +69,7 @@ public class Util {
 
         Ui.add_Button("Name_display", (_sketch.displayWidth)/9f*8f,_button_height+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"Name", Name_Button.class, false, display_button);
 
-        Ui.add_Button("Node_display", (_sketch.displayWidth)/9f*8f,_button_height*2+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"rhs & g", Node_Button.class, false, display_button);
+        Ui.add_Button("Node_display", (_sketch.displayWidth)/9f*8f,_button_height*2+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"Rhs & g", Node_Button.class, false, display_button);
 
         Ui.add_Button("Edge_display",(_sketch.displayWidth)/9f*8f, _button_height*3+_button_height/10f, _sketch.width/9f, _button_height-_button_height/10f,"Weight", Edge_Button.class, false, display_button);
 
