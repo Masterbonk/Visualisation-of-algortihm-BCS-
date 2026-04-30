@@ -13,7 +13,7 @@ public abstract class Button {
     public boolean clicked = false;
     public boolean bottom;
     public Button dropdown_control_button = null;
-    String tool_tip = "";
+    public String tool_tip = "";
 
     public PApplet sketch;
     /**
@@ -31,6 +31,10 @@ public abstract class Button {
 
     public void add_Dropdown_Control_Button(Button _dropdown_button){
         dropdown_control_button = _dropdown_button;
+    }
+
+    public void set_Tool_Tip(String _tool_tip){
+        tool_tip = _tool_tip;
     }
 
     /**
