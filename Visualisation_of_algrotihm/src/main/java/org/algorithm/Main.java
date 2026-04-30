@@ -287,10 +287,19 @@ public class Main extends PApplet{
         float yrd = (mouseY - translate_y) / zoom_level;
 
         zoom_increase = (float) _mouse_event.getCount()+zoom_increase;
+        if (zoom_increase < -45f){
+            zoom_increase = -45f;
+        } else if (zoom_increase > 20f) {
+            zoom_increase = 20f;
+        }
         zoom_level = pow(1.1f, zoom_increase);
 
         translate_x = (int)(mouseX - xrd * zoom_level);
         translate_y = (int)(mouseY - yrd * zoom_level);
+
+        System.out.println("zoom_level: " + zoom_level);
+        System.out.println("zoom_increase: " + zoom_increase);
+
 
         /*
         float wheel_number = _mouse_event.getCount();
