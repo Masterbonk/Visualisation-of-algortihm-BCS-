@@ -286,29 +286,29 @@ public class Main extends PApplet{
         float xrd = (mouseX - translate_x) / zoom_level;
         float yrd = (mouseY - translate_y) / zoom_level;
 
-        //zoom_increase = (float) _mouse_event.getCount()-zoom_increase;
-        //zoom_level = pow(1.1f, zoom_increase);
+        zoom_increase = (float) _mouse_event.getCount()+zoom_increase;
+        zoom_level = pow(1.1f, zoom_increase);
 
-        //translate_x = (int)(mouseX - xrd * zoom_level);
-        //translate_y = (int)(mouseY - yrd * zoom_level);
+        translate_x = (int)(mouseX - xrd * zoom_level);
+        translate_y = (int)(mouseY - yrd * zoom_level);
 
-
+        /*
         float wheel_number = _mouse_event.getCount();
 
-        if(zoom_level < 10 && wheel_number < 0) {
+        if( wheel_number < 0) {
             zoom_increase = (float) _mouse_event.getCount()+zoom_increase;
             zoom_level = pow(1.1f, zoom_increase);
 
             translate_x = (int)(mouseX + xrd * zoom_level);
             translate_y = (int)(mouseY + yrd * zoom_level);
         }
-        if(zoom_level > 0.1 && wheel_number > 0) {
+        if(wheel_number > 0) {
             zoom_increase = (float) _mouse_event.getCount()-zoom_increase;
             zoom_level = pow(1.1f, zoom_increase);
 
             translate_x = (int)(mouseX - xrd * zoom_level);
             translate_y = (int)(mouseY - yrd * zoom_level);
-        }
+        }*/
     }
 
 
