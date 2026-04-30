@@ -11,6 +11,8 @@ public class File_Type_Buttons extends Button {
 
     public File_Type_Buttons(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
+        super.tool_tip = "??";
+
     }
 
     public void render(){
@@ -40,14 +42,8 @@ public class File_Type_Buttons extends Button {
                 sketch.pop();
             }
         }
+
+        super.render_Tooltip();
     }
 
-    @Override
-    public boolean mouse_Over() {
-        if (Ui.get_Button("file").clicked) {
-            return super.mouse_Over();
-        } else {
-            return false;
-        }
-    }
 }

@@ -4,6 +4,7 @@ import org.algorithm.ui.Color_Scheme;
 import processing.core.PApplet;
 
 import static org.algorithm.Main.*;
+import static org.algorithm.ui.Color_Scheme.text_button_hover;
 
 
 public abstract class Button {
@@ -11,6 +12,7 @@ public abstract class Button {
     public String text, name;
     public boolean clicked = false;
     public boolean bottom;
+    String tool_tip = "";
 
     public PApplet sketch;
     /**
@@ -67,6 +69,7 @@ public abstract class Button {
             sketch.textAlign(sketch.CENTER);
             sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
             sketch.pop();
+            render_Tooltip();
 
         } else {
                 sketch.push();
@@ -79,6 +82,8 @@ public abstract class Button {
                 sketch.pop();
 
         }
+
+        render_Tooltip();
     }
 
 
@@ -111,6 +116,49 @@ public abstract class Button {
         node_1 = null;
         Ui.turn_Off_All_Buttons(this);
         //sketch.println("Not implemented");
+    }
+
+    protected void render_Tooltip(){
+        if(mouse_Over()){
+
+        sketch.push();
+        sketch.fill(text_button_hover);
+        sketch.fill(255,255,255);
+        sketch.textSize(25);
+        //sketch.textSize(16);
+        sketch.textAlign(CENTER,CENTER);
+
+        //sketch.text(tmp,x-sketch.textWidth(tmp)/2,((y+dim/2f)+sketch.getGraphics().textSize)-25f);
+
+        sketch.push();
+        sketch.fill(100);
+        //sketch.noStroke();
+        sketch.stroke(100);
+        sketch.strokeWeight(5);
+
+        float top = y_pos + 1.5f * button_height;
+        float bottom = y_pos - 0.5f * button_height;
+
+        float textbox_width = sketch.textWidth(tool_tip)/2;
+        float textbox_height = sketch.getGraphics().textSize;
+
+        float v = sketch.textWidth(tool_tip) / textbox_width;
+        int lines = (int) Math.ceil(v);
+
+        if(y_pos <= sketch.displayHeight/2f){
+            sketch.rect(x_pos, top,textbox_width,textbox_height*(lines+1));
+        }else{
+            sketch.rect(x_pos,bottom- (textbox_height * lines) ,textbox_width,textbox_height*(lines+1));
+        }
+        sketch.pop();
+        if(y_pos <= sketch.displayHeight/2f){
+            sketch.text(tool_tip, x_pos, top,textbox_width,textbox_height*(lines+1));
+
+        }else{
+            sketch.text(tool_tip, x_pos, bottom - (textbox_height * lines) ,textbox_width,textbox_height*(lines+1));
+        }
+        sketch.pop();
+        }
     }
 
 }

@@ -11,6 +11,8 @@ import static org.algorithm.ui.Color_Scheme.text_button_hover;
 public class Clear_Button extends Button {
     public Clear_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
+        super.tool_tip = "Clears the page";
+
     }
     public void click(){
         if (Ui.get_Button("pause").clicked){
@@ -22,16 +24,5 @@ public class Clear_Button extends Button {
     }
 
 
-    public boolean mouse_Over() {
-
-        if (super.mouse_Over()) {
-            sketch.push();
-            sketch.fill(text_button_hover);
-            sketch.textSize(16);
-            sketch.text("Clears the page", x_pos, y_pos + 1.5f * button_height);
-            sketch.pop();
-        }
-        return super.mouse_Over();
-    }
 
 }

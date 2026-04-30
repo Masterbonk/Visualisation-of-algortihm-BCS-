@@ -226,7 +226,6 @@ public class UI {
 
                     //for each key in the pq, following is printed
 
-
                     sketch.textMode(CENTER);
                     sketch.text(tmp_node, sketch.displayWidth-265 - (sketch.textWidth(tmp_node))/2, 200+40*i);
                     sketch.text(tmp_tupple[0], sketch.displayWidth-200 - (sketch.textWidth(tmp_tupple[0]))/2, 200+40*i);
