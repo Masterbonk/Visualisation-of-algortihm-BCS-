@@ -79,6 +79,7 @@ public class PQueue_Button extends Button{
             sketch.pop();
 
         }
+        render_Tooltip();
     }
 
 

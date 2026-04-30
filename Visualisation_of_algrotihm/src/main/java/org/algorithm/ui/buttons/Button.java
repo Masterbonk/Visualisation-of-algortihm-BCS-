@@ -175,13 +175,34 @@ public abstract class Button {
         int lines = (int) Math.ceil(v);
 
         if(y_pos <= sketch.displayHeight/2f){
-            sketch.rect(x_pos, top,textbox_width,textbox_height*(v+2));
+
+
+            if (dropdown_control_button == null) {
+                if (!clicked) sketch.rect(x_pos, top,textbox_width,textbox_height*(v+2));
+            }else {
+
+                if(x_pos <= sketch.displayWidth/2f){
+                    sketch.rect(x_pos + x_size, y_pos,textbox_width,textbox_height*(v+2));
+
+                }else {sketch.rect(x_pos - textbox_width, y_pos,textbox_width,textbox_height*(v+2));
+                }
+            }
+
         }else{
             sketch.rect(x_pos,bottom- (textbox_height * lines) ,textbox_width,textbox_height*(v+2));
         }
         sketch.pop();
         if(y_pos <= sketch.displayHeight/2f){
-            sketch.text(tool_tip, x_pos, top,textbox_width,textbox_height*(v+2));
+            if (dropdown_control_button == null) {
+                if (!clicked) sketch.text(tool_tip, x_pos, top, textbox_width, textbox_height * (v + 2));
+            }else {
+                if(x_pos <= sketch.displayWidth/2f){
+                    sketch.text(tool_tip, x_pos + x_size, y_pos, textbox_width, textbox_height * (v + 2));
+
+                }else {sketch.text(tool_tip, x_pos - textbox_width, y_pos, textbox_width, textbox_height * (v + 2));}
+
+            }
+
 
         }else{
             sketch.text(tool_tip, x_pos, bottom - (textbox_height * lines) ,textbox_width,textbox_height*(v+2));
