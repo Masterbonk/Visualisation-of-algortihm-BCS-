@@ -29,11 +29,13 @@ public class UI {
      * render, calls render on all UI elements
      * */
     public void render(){
-        for(String s: button_map.keySet()){
-            button_map.get(s).render();
-        }
+
         render_Edge_Weight_UI();
         display_PQ();
+        for(String s: button_map.keySet()){
+            //println(button_map.get(s).name);
+            button_map.get(s).render();
+        }
     }
 
     /**
@@ -66,7 +68,7 @@ public class UI {
      * @param buttonClass the class of the button
      * @param _bottom if true, then apart bottom UI, else apart of top UI
      * */
-    public <T extends Button> void add_Button(String _name, float _x, float _y, float _width, float _height, String _text, Class<T> buttonClass, boolean _bottom) {
+    public <T extends Button> Button add_Button(String _name, float _x, float _y, float _width, float _height, String _text, Class<T> buttonClass, boolean _bottom) {
         Button tmp_button;
         try {
             tmp_button = buttonClass.getConstructor(PApplet.class, float.class, float.class, float.class, float.class, String.class)
@@ -76,13 +78,22 @@ public class UI {
             button_map.put(_name,tmp_button);
             if (_bottom) {
                 bottom_ui.add(_name);
+                return tmp_button;
             }
             else {
                 top_ui.add(_name);
+                return tmp_button;
             }
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
+    }
+
+    public <T extends Button> void add_Button(String _name, float _x, float _y, float _width, float _height, String _text, Class<T> buttonClass, boolean _bottom, Button _dropdown) {
+        Button tmp = add_Button(_name, _x, _y, _width, _height, _text, buttonClass, _bottom);
+        tmp.add_Dropdown_Control_Button(_dropdown);
+        println(_name);
     }
 
     /**
@@ -189,7 +200,7 @@ public class UI {
     private void display_PQ(){
 
         if(Ui.get_Button("PQ_display").clicked){
-            sketch.rect(sketch.displayWidth-400,0,400,sketch.displayHeight- Main.button_height);
+            sketch.rect(sketch.displayWidth-400,Main.button_height,400,sketch.displayHeight- Main.button_height*2);
             sketch.push();
             sketch.fill(0,0,0);
             sketch.textSize(40);
@@ -207,7 +218,7 @@ public class UI {
             //sketch.text("N", sketch.displayWidth-325, 290);
             //sketch.text(tmp_tupple[0], sketch.displayWidth-325 + sketch.textWidth(tmp_tupple[0]), 200+40*i);
             //sketch.text(tmp_tupple[1], sketch.displayWidth-325 + sketch.textWidth(tmp_tupple[1])*2 , 200+40*i);
-            if (algorithm != null && algorithm.get_U() != null){
+            if (algorithm != null && algorithm.get_U() != null && !algorithm.get_U().get_Heap().isEmpty()){
 
                 if (!algorithm.get_U().is_empty() && algorithm.part_one_d_main) { //Makes the main node yellow
                     algorithm.get_U().get_Heap().getFirst().change_In_PQ(true);
