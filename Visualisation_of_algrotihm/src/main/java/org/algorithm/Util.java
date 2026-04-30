@@ -64,21 +64,24 @@ public class Util {
         Ui.add_Button("import", 0, _button_height*2+_button_height/10f, _sketch.displayWidth/10f, _button_height-_button_height/10f,"Import", Import_Button.class, false);
 
         //CORRECT X & Y COORDINATES DO NOT CHNAGE
-        Ui.add_Button("Name_display", _sketch.displayWidth / 9f,0, _sketch.displayWidth/10f, _button_height,"Name", Name_Button.class, false);
 
-        Ui.add_Button("Node_display", _sketch.displayWidth / 9f*2f,0, _sketch.displayWidth/10f, _button_height,"Display N", Node_Button.class, false);
+        Button display_button = Ui.add_Button("Display_parameter", (_sketch.displayWidth) / 9f*8f, 0, _sketch.displayWidth/10f, _button_height, "Display...", Dropdown_Button.class, false);
 
-        Ui.add_Button("Edge_display",_sketch.displayWidth/9f*3f, 0, _sketch.width/9f, _button_height,"Display E", Edge_Button.class, false);
+        Ui.add_Button("Name_display", (_sketch.displayWidth)/9f*8f,_button_height+_button_height/10f, _sketch.displayWidth/10f, _button_height-_button_height/10f,"Name", Name_Button.class, false, display_button);
 
-        Ui.add_Button("heuristic",_sketch.displayWidth/9f*4f, 0, _sketch.width/9f, _button_height,"Display H", Heuristic_Button.class, false);
+        Ui.add_Button("Node_display", (_sketch.displayWidth)/9f*8f,_button_height*2+_button_height/10f, _sketch.displayWidth/10f, _button_height-_button_height/10f,"Display N", Node_Button.class, false, display_button);
 
-        Ui.add_Button("PQ_display",(_sketch.displayWidth)/9f*5f, 0, _sketch.displayWidth/9f, _button_height,"Display Q", PQueue_Button.class, false);
+        Ui.add_Button("Edge_display",(_sketch.displayWidth)/9f*8f, _button_height*3+_button_height/10f, _sketch.width/9f, _button_height-_button_height/10f,"Display E", Edge_Button.class, false, display_button);
+
+        Ui.add_Button("heuristic",(_sketch.displayWidth)/9f*8f, _button_height*4+_button_height/10f, _sketch.width/9f, _button_height-_button_height/10f,"Display H", Heuristic_Button.class, false, display_button);
+
+        Ui.add_Button("PQ_display",(_sketch.displayWidth)/9f*8f, _button_height*5+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"Display Q", PQueue_Button.class, false, display_button);
 
         Ui.add_Button("clear",(_sketch.displayWidth)/9f*6f, 0, _sketch.displayWidth/9f, _button_height,"Clear", Clear_Button.class, false);
 
         Ui.add_Button("algo_mode",(_sketch.displayWidth)/9f*7f, 0, _sketch.displayWidth/9f, _button_height,"D* Lite", Algo_Mode_Button.class, false);
 
-        Ui.add_Button("color_scheme",(_sketch.displayWidth)/9f*8f, 0, _sketch.displayWidth/9f, _button_height,"Pink", Color_Scheme_Button.class, false);
+        Ui.add_Button("color_scheme",(_sketch.displayWidth)/9f*8f, _button_height*6+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"Pink", Color_Scheme_Button.class, false, display_button);
 
         //debugging slash testing
         //System.out.println("display: " + _sketch.displayWidth + ", " + _sketch.displayHeight);

@@ -30,6 +30,7 @@ public class UI {
      * */
     public void render(){
         for(String s: button_map.keySet()){
+            //println(button_map.get(s).name);
             button_map.get(s).render();
         }
         render_Edge_Weight_UI();
@@ -66,7 +67,7 @@ public class UI {
      * @param buttonClass the class of the button
      * @param _bottom if true, then apart bottom UI, else apart of top UI
      * */
-    public <T extends Button> void add_Button(String _name, float _x, float _y, float _width, float _height, String _text, Class<T> buttonClass, boolean _bottom) {
+    public <T extends Button> Button add_Button(String _name, float _x, float _y, float _width, float _height, String _text, Class<T> buttonClass, boolean _bottom) {
         Button tmp_button;
         try {
             tmp_button = buttonClass.getConstructor(PApplet.class, float.class, float.class, float.class, float.class, String.class)
@@ -76,13 +77,22 @@ public class UI {
             button_map.put(_name,tmp_button);
             if (_bottom) {
                 bottom_ui.add(_name);
+                return tmp_button;
             }
             else {
                 top_ui.add(_name);
+                return tmp_button;
             }
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
+    }
+
+    public <T extends Button> void add_Button(String _name, float _x, float _y, float _width, float _height, String _text, Class<T> buttonClass, boolean _bottom, Button _dropdown) {
+        Button tmp = add_Button(_name, _x, _y, _width, _height, _text, buttonClass, _bottom);
+        tmp.add_Dropdown_Control_Button(_dropdown);
+        println(_name);
     }
 
     /**

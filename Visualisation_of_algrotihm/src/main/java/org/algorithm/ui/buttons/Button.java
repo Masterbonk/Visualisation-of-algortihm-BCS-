@@ -11,6 +11,7 @@ public abstract class Button {
     public String text, name;
     public boolean clicked = false;
     public boolean bottom;
+    public Button dropdown_control_button = null;
 
     public PApplet sketch;
     /**
@@ -26,14 +27,26 @@ public abstract class Button {
         sketch = _sketch; x_pos = _x_pos; y_pos = _y_pos; x_size = _x_size; y_size = _y_size; text = _text;
     }
 
+    public void add_Dropdown_Control_Button(Button _dropdown_button){
+        dropdown_control_button = _dropdown_button;
+    }
+
     /**
      * Draw is used to draw the button at the end of every draw loop. ALso makes it change size and color
      * if the mouse button hovers over it, or clicks it
      */
 
     public void render(){
+        if (dropdown_control_button == null) {
+            visual_Render_Logic();
+        } else if (dropdown_control_button.clicked){
+            visual_Render_Logic();
+        }
+    }
+
+    private void visual_Render_Logic(){
         sketch.fill(Color_Scheme.border_button);
-        sketch.rect(x_pos,y_pos, x_size, y_size);
+        sketch.rect(x_pos, y_pos, x_size, y_size);
 
         int changeVal = 5;
         if (debug) {
@@ -47,36 +60,36 @@ public abstract class Button {
 
 
         //hover
-        if (mouse_Over()){
+        if (mouse_Over()) {
             sketch.push();
             sketch.fill(Color_Scheme.bg_button_hover);
-            sketch.rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
+            sketch.rect(x_pos + changeVal, y_pos + changeVal, x_size - changeVal * 2, y_size - changeVal * 2);
             sketch.fill(Color_Scheme.text_button_hover); //Text color
-            sketch.textSize((x_size-changeVal)/5f);
+            sketch.textSize((x_size - changeVal) / 5f);
             sketch.textAlign(sketch.CENTER);
-            sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
+            sketch.text(text, (x_pos + changeVal) + (x_size - changeVal * 2) / 2f, (y_pos + changeVal) + (y_size - changeVal * 2) / 2f + 10);
             sketch.pop();
 
-        } else if (clicked){
+        } else if (clicked) {
 
             sketch.push();
             sketch.fill(Color_Scheme.bg_button_clicked);
-            sketch.rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
+            sketch.rect(x_pos + changeVal, y_pos + changeVal, x_size - changeVal * 2, y_size - changeVal * 2);
             sketch.fill(Color_Scheme.text_button_clicked); //Text color
-            sketch.textSize((x_size-changeVal)/5f);
+            sketch.textSize((x_size - changeVal) / 5f);
             sketch.textAlign(sketch.CENTER);
-            sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
+            sketch.text(text, (x_pos + changeVal) + (x_size - changeVal * 2) / 2f, (y_pos + changeVal) + (y_size - changeVal * 2) / 2f + 10);
             sketch.pop();
 
         } else {
-                sketch.push();
-                sketch.fill(Color_Scheme.bg_button);
-                sketch.rect(x_pos,y_pos, x_size, y_size);
-                sketch.fill(Color_Scheme.text_button);
-                sketch.textSize(x_size/5f);
-                sketch.textAlign(sketch.CENTER);
-                sketch.text(text, (x_pos)+(x_size)/2f, (y_pos)+(y_size)/2f+10);
-                sketch.pop();
+            sketch.push();
+            sketch.fill(Color_Scheme.bg_button);
+            sketch.rect(x_pos, y_pos, x_size, y_size);
+            sketch.fill(Color_Scheme.text_button);
+            sketch.textSize(x_size / 5f);
+            sketch.textAlign(sketch.CENTER);
+            sketch.text(text, (x_pos) + (x_size) / 2f, (y_pos) + (y_size) / 2f + 10);
+            sketch.pop();
 
         }
     }
@@ -95,6 +108,11 @@ public abstract class Button {
      */
 
     public boolean mouse_Over(){
+        if (dropdown_control_button != null){
+            if (!dropdown_control_button.clicked){
+                return false;
+            }
+        }
         if (sketch.mouseX >= x_pos && sketch.mouseX <= x_pos+x_size &&
                 sketch.mouseY >= y_pos && sketch.mouseY <= y_pos+y_size){
             return true;
