@@ -245,7 +245,7 @@ public class Main extends PApplet{
                 Ui.get_Map().get(Ui.top_ui.get(i)).resize(0,i*button_height,dWidth/9f - (a * (dWidth/9f)/10f ), button_height);
 
                 //buttons are in the top bar not under file
-                if (i >2){
+                if (i < 2){
                     Ui.get_Map().get(Ui.top_ui.get(i)).resize((i-2)*(width/9f),0,dWidth/9f, button_height);
                 }
 

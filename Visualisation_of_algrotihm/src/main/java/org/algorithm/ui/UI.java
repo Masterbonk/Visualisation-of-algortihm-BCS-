@@ -29,12 +29,13 @@ public class UI {
      * render, calls render on all UI elements
      * */
     public void render(){
+
+        render_Edge_Weight_UI();
+        display_PQ();
         for(String s: button_map.keySet()){
             //println(button_map.get(s).name);
             button_map.get(s).render();
         }
-        render_Edge_Weight_UI();
-        display_PQ();
     }
 
     /**
