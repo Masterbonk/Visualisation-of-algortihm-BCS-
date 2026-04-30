@@ -189,7 +189,7 @@ public class UI {
     private void display_PQ(){
 
         if(Ui.get_Button("PQ_display").clicked){
-            sketch.rect(sketch.displayWidth-400,0,400,sketch.displayHeight- Main.button_height);
+            sketch.rect(sketch.displayWidth-400,Main.button_height,400,sketch.displayHeight- Main.button_height*2);
             sketch.push();
             sketch.fill(0,0,0);
             sketch.textSize(40);
