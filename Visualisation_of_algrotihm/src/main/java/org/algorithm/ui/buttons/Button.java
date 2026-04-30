@@ -156,26 +156,33 @@ public abstract class Button {
         float top = y_pos + 1.5f * button_height;
         float bottom = y_pos - 0.5f * button_height;
 
-        float textbox_width = sketch.textWidth(tool_tip)/2;
+        float textbox_width = sketch.textWidth(tool_tip)*0.65f;
         float textbox_height = sketch.getGraphics().textSize;
 
         float v = sketch.textWidth(tool_tip) / textbox_width;
         int lines = (int) Math.ceil(v);
 
         if(y_pos <= sketch.displayHeight/2f){
-            sketch.rect(x_pos, top,textbox_width,textbox_height*(lines+1));
+            sketch.rect(x_pos, top,textbox_width,textbox_height*(v+2));
         }else{
-            sketch.rect(x_pos,bottom- (textbox_height * lines) ,textbox_width,textbox_height*(lines+1));
+            sketch.rect(x_pos,bottom- (textbox_height * lines) ,textbox_width,textbox_height*(v+2));
         }
         sketch.pop();
         if(y_pos <= sketch.displayHeight/2f){
-            sketch.text(tool_tip, x_pos, top,textbox_width,textbox_height*(lines+1));
+            sketch.text(tool_tip, x_pos, top,textbox_width,textbox_height*(v+2));
 
         }else{
-            sketch.text(tool_tip, x_pos, bottom - (textbox_height * lines) ,textbox_width,textbox_height*(lines+1));
+            sketch.text(tool_tip, x_pos, bottom - (textbox_height * lines) ,textbox_width,textbox_height*(v+2));
         }
         sketch.pop();
         }
+    }
+
+    public float getX_pos(){
+        return x_pos;
+    }
+    public float getY_pos(){
+        return y_pos;
     }
 
 }

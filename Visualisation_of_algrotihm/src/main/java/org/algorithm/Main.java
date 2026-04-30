@@ -14,6 +14,7 @@ import processing.core.PFont;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Objects;
 
 import static org.algorithm.Util.generate_Name;
 
@@ -208,7 +209,7 @@ public class Main extends PApplet{
 
         Ui.render();
 
-        //rescale();
+        rescale();
 
 
 
@@ -235,19 +236,23 @@ public class Main extends PApplet{
 
             for(int i = 0; i < Ui.top_ui.size(); i++){
 
-               // only do this if the buttons are file stuff
-                int a;
-                if (i != 0) {
-                    a = 1;
-                } else {
-                    a = 0;
+                if(Objects.equals(Ui.get_Map().get(Ui.top_ui.get(i)).name, "clear") || Objects.equals(Ui.get_Map().get(Ui.top_ui.get(i)).name, "File") || Objects.equals(Ui.get_Map().get(Ui.top_ui.get(i)).name, "Display_parameter") || Objects.equals(Ui.get_Map().get(Ui.top_ui.get(i)).name, "algo_mode")){
+                    Ui.get_Map().get(Ui.top_ui.get(i)).resize((i)*(width/9f),0,dWidth/9f, button_height);
                 }
-                Ui.get_Map().get(Ui.top_ui.get(i)).resize(0,i*button_height,dWidth/9f - (a * (dWidth/9f)/10f ), button_height);
+                else
+                {   if( Ui.get_Map().get(Ui.top_ui.get(i)).dropdown_control_button == null ){
+                    continue;
+                    }
+                    if(Objects.equals(Ui.get_Map().get(Ui.top_ui.get(i)).dropdown_control_button.name, "Display_parameter")){
+                        Ui.get_Map().get(Ui.top_ui.get(i)).resize(Ui.get_Map().get(Ui.top_ui.get(i)).dropdown_control_button.getX_pos(),(i-3)*button_height,dWidth/9f - ((dWidth/9f)/10f ), button_height);
 
-                //buttons are in the top bar not under file
-                if (i < 2){
-                    Ui.get_Map().get(Ui.top_ui.get(i)).resize((i-2)*(width/9f),0,dWidth/9f, button_height);
+                    }
+
                 }
+
+                //
+                //
+
 
             }
 
@@ -655,7 +660,7 @@ public class Main extends PApplet{
     }
 
     /**
-     * When the mouse is clicked, ie. the very moment the mouse is lifted from being pressed.
+     * When the mouse is clicked, i.e. the very moment the mouse is lifted from being pressed.
      */
 
     public void mouseReleased(){
