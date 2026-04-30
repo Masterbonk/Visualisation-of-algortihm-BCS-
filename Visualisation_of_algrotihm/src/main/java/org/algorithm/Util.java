@@ -65,11 +65,11 @@ public class Util {
 
         Ui.add_Button("algo_mode",(_sketch.displayWidth)/9f*7f, 0, _sketch.displayWidth/9f, _button_height,"D* Lite", Algo_Mode_Button.class, false);
 
-        Button display_button = Ui.add_Button("Display_parameter", (_sketch.displayWidth) / 9f*8f, 0, _sketch.displayWidth/10f, _button_height, "Display...", Dropdown_Button.class, false);
+        Button display_button = Ui.add_Button("Display_parameter", (_sketch.displayWidth) / 9f*8f, 0, _sketch.displayWidth/9f, _button_height, "Display...", Dropdown_Button.class, false);
 
-        Ui.add_Button("Name_display", (_sketch.displayWidth)/9f*8f,_button_height+_button_height/10f, _sketch.displayWidth/10f, _button_height-_button_height/10f,"Name", Name_Button.class, false, display_button);
+        Ui.add_Button("Name_display", (_sketch.displayWidth)/9f*8f,_button_height+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"Name", Name_Button.class, false, display_button);
 
-        Ui.add_Button("Node_display", (_sketch.displayWidth)/9f*8f,_button_height*2+_button_height/10f, _sketch.displayWidth/10f, _button_height-_button_height/10f,"rhs & g", Node_Button.class, false, display_button);
+        Ui.add_Button("Node_display", (_sketch.displayWidth)/9f*8f,_button_height*2+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"Rhs & g", Node_Button.class, false, display_button);
 
         Ui.add_Button("Edge_display",(_sketch.displayWidth)/9f*8f, _button_height*3+_button_height/10f, _sketch.width/9f, _button_height-_button_height/10f,"Weight", Edge_Button.class, false, display_button);
 
@@ -80,9 +80,9 @@ public class Util {
         Ui.add_Button("color_scheme",(_sketch.displayWidth)/9f*8f, _button_height*6+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"Pink mode", Color_Scheme_Button.class, false, display_button);
 
         //Under File
-        Ui.add_Button("export", 0, _button_height+_button_height/10f, _sketch.displayWidth/10f ,_button_height-_button_height/10f,"Export", Export_Button.class, false, file);
+        Ui.add_Button("export", 0, _button_height+_button_height/10f, _sketch.displayWidth/9f ,_button_height-_button_height/10f,"Export", Export_Button.class, false, file);
 
-        Ui.add_Button("import", 0, _button_height*2+_button_height/10f, _sketch.displayWidth/10f, _button_height-_button_height/10f,"Import", Import_Button.class, false, file);
+        Ui.add_Button("import", 0, _button_height*2+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"Import", Import_Button.class, false, file);
 
         //debugging slash testing
         //System.out.println("display: " + _sketch.displayWidth + ", " + _sketch.displayHeight);

@@ -30,5 +30,6 @@ public class Import_Button extends Button{
         //calls the function file_Selected in main
         Main.importing = true;
         sketch.selectInput("Select a file to process:", "file_Selected");
+        clicked = false;
     }
 }
