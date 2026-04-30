@@ -54,7 +54,7 @@ public class Main extends PApplet{
 
     //zoom functionality
     public static float zoom_level = 1f;
-    float zoom_increase = 0.1f;
+    float zoom_increase = 0f;
 
     //Pan functionality
     public static int translate_x = 0;
@@ -193,7 +193,7 @@ public class Main extends PApplet{
         if(h != null){
             h.render();
         }
-        
+
 
         popMatrix();
 
@@ -285,20 +285,30 @@ public class Main extends PApplet{
     public void mouseWheel(processing.event.MouseEvent _mouse_event){
         float xrd = (mouseX - translate_x) / zoom_level;
         float yrd = (mouseY - translate_y) / zoom_level;
-        zoom_increase = (float) _mouse_event.getCount()-zoom_increase;
-        zoom_level = pow(1.1f, zoom_increase);
-        translate_x = (int)(mouseX - xrd * zoom_level);
-        translate_y = (int)(mouseY - yrd * zoom_level);
 
-        /*
+        //zoom_increase = (float) _mouse_event.getCount()-zoom_increase;
+        //zoom_level = pow(1.1f, zoom_increase);
+
+        //translate_x = (int)(mouseX - xrd * zoom_level);
+        //translate_y = (int)(mouseY - yrd * zoom_level);
+
+
         float wheel_number = _mouse_event.getCount();
 
-        if(zoom_level < 3 && wheel_number < 0) {
-                zoom_level += zoom_increase;
+        if(zoom_level < 10 && wheel_number < 0) {
+            zoom_increase = (float) _mouse_event.getCount()+zoom_increase;
+            zoom_level = pow(1.1f, zoom_increase);
+
+            translate_x = (int)(mouseX + xrd * zoom_level);
+            translate_y = (int)(mouseY + yrd * zoom_level);
         }
         if(zoom_level > 0.1 && wheel_number > 0) {
-            zoom_level -= zoom_increase;
-        }*/
+            zoom_increase = (float) _mouse_event.getCount()-zoom_increase;
+            zoom_level = pow(1.1f, zoom_increase);
+
+            translate_x = (int)(mouseX - xrd * zoom_level);
+            translate_y = (int)(mouseY - yrd * zoom_level);
+        }
     }
 
 
