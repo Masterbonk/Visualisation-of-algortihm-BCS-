@@ -207,7 +207,7 @@ public class UI {
             //sketch.text("N", sketch.displayWidth-325, 290);
             //sketch.text(tmp_tupple[0], sketch.displayWidth-325 + sketch.textWidth(tmp_tupple[0]), 200+40*i);
             //sketch.text(tmp_tupple[1], sketch.displayWidth-325 + sketch.textWidth(tmp_tupple[1])*2 , 200+40*i);
-            if (algorithm != null && algorithm.get_U() != null){
+            if (algorithm != null && algorithm.get_U() != null && !algorithm.get_U().get_Heap().isEmpty()){
 
                 if (!algorithm.get_U().is_empty() && algorithm.part_one_d_main) { //Makes the main node yellow
                     algorithm.get_U().get_Heap().getFirst().change_In_PQ(true);
