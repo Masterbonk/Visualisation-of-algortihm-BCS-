@@ -607,8 +607,14 @@ public class Main extends PApplet{
                 pink_mode = false;
             }
 
-            if (!Ui.get_Button("file").mouse_Over() && !Ui.get_Button("export").mouse_Over() && !Ui.get_Button("import").mouse_Over() && Ui.get_Button("file").clicked) { //Lukker file menuen hvis man klikker uden for den mens den er åben.
+            //Lukker file menuen hvis man klikker uden for den mens den er åben.
+            if (!Ui.get_Button("file").mouse_Over() && !Ui.get_Button("export").mouse_Over() && !Ui.get_Button("import").mouse_Over() && Ui.get_Button("file").clicked) {
                 Ui.get_Button("file").clicked = false;
+            }
+
+            //Lukker display menuen hvis man klikker uden for den mens den er åben.
+            if (!Ui.get_Button("Display_parameter").mouse_Over() && !Ui.get_Button("Name_display").mouse_Over() && !Ui.get_Button("Node_display").mouse_Over() && !Ui.get_Button("Edge_display").mouse_Over() && !Ui.get_Button("heuristic").mouse_Over() && !Ui.get_Button("PQ_display").mouse_Over() && !Ui.get_Button("color_scheme").mouse_Over() && Ui.get_Button("Display_parameter").clicked) {
+                Ui.get_Button("Display_parameter").clicked = false;
             }
 
 
