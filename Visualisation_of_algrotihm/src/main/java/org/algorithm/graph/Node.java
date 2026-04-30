@@ -127,15 +127,39 @@ public class Node {
             sketch.square(x-dim/2f,y-dim/2f,dim);
             sketch.pop();
         }
+
+        render_g_and_rhs();
+        render_Name();
+
+
+    }
+
+
+
+    public void render_g_and_rhs(){
         if (Ui.get_Button("Node_display").clicked){
             sketch.push();
-            sketch.fill(0,0,0);
+            sketch.fill(255,255,255);
             sketch.textSize(25);
             sketch.textAlign(LEFT,TOP);
             String tmp = "g(" + display_Infinity(g) + "), rhs(" + display_Infinity(rhs) + ")";
+            sketch.push();
+            sketch.fill(100);
+            sketch.stroke(100);
+            sketch.strokeWeight(5);
+            sketch.rect(
+                    x-sketch.textWidth(tmp)/2,((y+dim/2f)+sketch.getGraphics().textSize)-25f,
+                    sketch.textWidth(tmp),
+                    (sketch.getGraphics().textSize)
+
+            );
+            sketch.pop();
             sketch.text(tmp,x-sketch.textWidth(tmp)/2,((y+dim/2f)+sketch.getGraphics().textSize)-25f);
             sketch.pop();
         }
+    }
+
+    public void render_Name(){
         if (Ui.get_Button("Name_display").clicked){
             sketch.push();
             sketch.fill(247,247,247);
@@ -144,8 +168,6 @@ public class Node {
             sketch.text(name,x-sketch.textWidth(name)/2,y);
             sketch.pop();
         }
-
-
     }
 
     public String display_Infinity(int _i){
