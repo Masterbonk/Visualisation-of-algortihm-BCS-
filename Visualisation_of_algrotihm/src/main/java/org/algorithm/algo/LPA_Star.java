@@ -62,7 +62,7 @@ public class LPA_Star extends Algorithm{
 
     public void compute_Shortest_Path(){
 
-        while(U.top_Key().compareTo(calculate_Key(goal_node)) < 0 || goal_node.get_Rhs_Val() != goal_node.get_G_Val() || !U.is_empty()){
+        while(U.top_Key().compareTo(calculate_Key(goal_node)) < 0 || goal_node.get_Rhs_Val() != goal_node.get_G_Val() /*|| !U.is_empty()*/){
             Node n = U.pop();
 
             if (n.get_G_Val() > n.get_Rhs_Val()){
