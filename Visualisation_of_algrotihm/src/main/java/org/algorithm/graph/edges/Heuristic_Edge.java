@@ -30,7 +30,7 @@ public class Heuristic_Edge extends Edge{
 
     @Override
     public void render() {
-        if(to != null && from != null){
+        if(to != null && from != null && algorithm.get_Start() != null && algorithm.get_Goal() != null){
             update_Weight(0);
             set_To(algorithm.get_Start());
             set_From(algorithm.get_Goal());
