@@ -59,6 +59,24 @@ public class Node {
         id = node_array.size();
     }
 
+    public Node(PApplet _sketch, int _x, int _y, boolean _is_this_dijkstra){
+        //float tempX = mouseX/zoom_level;
+        //float tempY = mouseY/zoom_level;
+        g = MAX_INT;
+        rhs = MAX_INT;
+
+
+        x = Math.round((_x-translate_x)/zoom_level);
+        y = Math.round((_y-translate_y)/zoom_level);
+        sketch = _sketch;
+        connected = new ArrayList<>();
+
+        node_array.add(this);
+
+        id = node_array.size();
+
+    }
+
     public int get_Rhs_Val(){
         return  rhs;
     }

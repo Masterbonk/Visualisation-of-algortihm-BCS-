@@ -32,6 +32,21 @@ public class Edge {
 
     }
 
+    public Edge(PApplet _sketch, Node _from, Node _to, int _weight, boolean _is_this_dijkstra){
+        sketch = _sketch;
+        from = _from;
+        to = _to;
+
+        update_Weight(_weight);
+
+        from.get_Connected().add(this);
+        to.get_Connected().add(this);
+        edge_array.add(this);
+        id = edge_array.size();
+
+
+    }
+
     public void update_Weight(int _i){
         if (_i < 0){
             weight =  (int)Math.ceil(heuristic(to, from));
@@ -77,12 +92,6 @@ public class Edge {
         }
         sketch.line(from.get_X(),from.get_Y(), to.get_X(), to.get_Y());
         sketch.pop();
-
-
-
-
-
-
 
         render_Weight() ;
 

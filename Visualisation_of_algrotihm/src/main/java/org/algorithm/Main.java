@@ -68,8 +68,6 @@ public class Main extends PApplet{
     Color_Scheme cs;
     public static Export_Handler file;
 
-
-
     public static UI Ui;
 
     public static ArrayList<Edge> edge_array = new ArrayList<>();
