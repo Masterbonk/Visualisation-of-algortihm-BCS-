@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import processing.core.PApplet;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static processing.core.PConstants.MAX_INT;
 
@@ -18,6 +20,7 @@ class DijkstraTest {
     Node source;
     Node target;
     PApplet sketch;
+    Node A;
 
     @BeforeEach
     void setUp() {
@@ -27,7 +30,7 @@ class DijkstraTest {
         source = new Node(sketch, 0,0, true);
         target = new Node(sketch, 100, 100, true);
         //Edges & nodes connecting them
-        Node A = new Node(sketch, 50, 75, true);
+        A = new Node(sketch, 50, 50, true);
         Node B = new Node (sketch, 25, 75, true);
         Edge SA = new Edge(sketch, source, A, 0, true);
         Edge AT = new Edge(sketch, A, target, 0, true);
@@ -77,5 +80,18 @@ class DijkstraTest {
         assertTrue(algo.Q.is_empty());
         assertNotEquals(MAX_INT, algo.dist.get(target));
         assertEquals(0, algo.dist.get(source));
+    }
+
+    @Test
+    void get_shortest_path(){
+        algo.initialize();
+        algo.compute_Shortest_Path();
+
+        ArrayList<Node> shortest_path = algo.get_Shortest_Path();
+
+        assertEquals(shortest_path.getFirst(), source);
+        assertEquals(shortest_path.getLast(), target);
+        assertEquals(shortest_path.get(1), A);
+
     }
 }
