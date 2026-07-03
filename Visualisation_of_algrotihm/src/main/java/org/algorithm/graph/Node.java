@@ -109,8 +109,10 @@ public class Node {
             color(Color_Scheme.cut_node);
         }  else if (in_PQ){
             color(Color_Scheme.in_PQ_node);
-        } else if(debug && (g != MAX_INT || rhs != MAX_INT)){
+        } else if(debug && (g != MAX_INT || rhs != MAX_INT)) {
             color(Color_Scheme.touched_node);
+        } else if (!algorithm.dynamic && algorithm.highlighted_node == this){
+            color(Color_Scheme.node_highlighted);
         }else{
             color(Color_Scheme.node);
         }

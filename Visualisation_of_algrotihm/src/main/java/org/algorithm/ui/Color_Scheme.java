@@ -22,6 +22,9 @@ public class Color_Scheme {
     public static int in_PQ_node;
     public static int bg_button_algo_one;
     public static int bg_button_algo_two;
+
+    public static int node_highlighted;
+
     public Color_Scheme(PApplet _sketch){
         sketch = _sketch;
     }
@@ -51,6 +54,8 @@ public class Color_Scheme {
             hover_node = sketch.color(207,99,249);
             in_PQ_node = sketch.color(252,183,200);
 
+            node_highlighted = sketch.color(249, 52, 216);
+
         } else{
             //default
             node = sketch.color(232,25,25);
@@ -58,6 +63,7 @@ public class Color_Scheme {
             cut_node = sketch.color(160, 4, 4);
             hover_node = sketch.color(24,204,24);
             in_PQ_node = sketch.color(238,218,18);
+            node_highlighted = sketch.color(47, 163, 1);
         }
     }
 

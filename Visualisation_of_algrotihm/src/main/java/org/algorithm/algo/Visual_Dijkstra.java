@@ -29,6 +29,8 @@ public class Visual_Dijkstra extends Dijkstra{
 
     ArrayList<Edge> shortest_path;
 
+    HashSet<Edge> checked;
+
 
     public Visual_Dijkstra(){
         super();
@@ -41,6 +43,7 @@ public class Visual_Dijkstra extends Dijkstra{
         edges_considered = new ArrayList<>();
         u = null;
         shortest_path = new ArrayList<>();
+        checked = new HashSet<>();
 
         //println("Visual Dijkstra called");
     }
@@ -86,6 +89,7 @@ public class Visual_Dijkstra extends Dijkstra{
             //Pulls out the closest node to source in the PQ
             if (u == null) {
                 u = U.pop();
+                highlighted_node = u;
             }
 
             Edge e;
@@ -94,41 +98,73 @@ public class Visual_Dijkstra extends Dijkstra{
             if (edges_considered.size() != u.get_Connected().size()){
                 stage = 2;
                 //Gets the edge that has not yet been covered
-                ArrayList<Edge> tmp = new ArrayList<Edge>(u.get_Connected());
+                ArrayList<Edge> tmp = new ArrayList<>(u.get_Connected());
                 tmp.removeAll(edges_considered);
-                e = tmp.getFirst();
-                edges_considered.add(e);
-                e.color(-1,-1,150);
-                Main.colored_edges.add(e);
-                Util.exchange(e);
+                if (!tmp.isEmpty()) {
+                    e = tmp.getFirst();
 
-                //Gets the other node connected to edge e
-                Node v = u.help_Get_Opposite(e);
+                    while (checked.contains(e)) {
+                        edges_considered.add(e);
+                        tmp.removeFirst();
+                        if (!tmp.isEmpty()) {
+                            e = tmp.getFirst();
+                        } else {
+                            //This will create a problem when the last edge removed from node is already considered
+                            //This is because the user will see the program "Stutter", not sure how to fix.
+                            //WILL FIX LATER
+                            break;
+                        }
+                    }
+                    if (e != null) {
+                        checked.add(e);
+                        edges_considered.add(e);
+                        e.color(-1, -1, 150);
+                        Main.colored_edges.add(e);
+                        Util.exchange(e);
 
-                //v is the other node on the edge connected to our current focus, u
+                        //Gets the other node connected to edge e
+                        Node v = u.help_Get_Opposite(e);
 
-                //We get the distance to travel to the node u, and the weight of the edge as the
-                // total alternative distance to travel to v
-                int alt = dist.get(u) + e.get_Weight();
+                        //v is the other node on the edge connected to our current focus, u
 
-                //If it's smaller, we update it with the new shortest path and remove it.
-                if (alt < dist.get(v)){
-                    prev.put(v, u);
-                    dist.put(v, alt);
+                        //We get the distance to travel to the node u, and the weight of the edge as the
+                        // total alternative distance to travel to v
+                        int alt = dist.get(u) + e.get_Weight();
 
-                    //It's removed and readded to the PQ to make sure everything is balanced.
-                    U.remove(v);
-                    U.insert(v, alt);
+                        //If it's smaller, we update it with the new shortest path and remove it.
+                        if (alt < dist.get(v)) {
+                            prev.put(v, u);
+                            dist.put(v, alt);
+
+                            //It's removed and readded to the PQ to make sure everything is balanced.
+                            U.remove(v);
+                            U.insert(v, alt);
+                        }
+                    } else {
+                        //Size is same, need to prepare for next iteration
+                        stage = 1;
+                        edges_considered = new ArrayList<>();
+                        u = null;
+                        highlighted_node = U.get_Heap().getFirst();
+                    }
+                } else {
+                    //Size is same, need to prepare for next iteration
+                    stage = 1;
+                    edges_considered = new ArrayList<>();
+                    u = null;
+                    highlighted_node = U.get_Heap().getFirst();
                 }
             } else {
                 //Size is same, need to prepare for next iteration
                 stage = 1;
                 edges_considered = new ArrayList<>();
                 u = null;
+                highlighted_node = U.get_Heap().getFirst();
             }
         } else {
             //U is now empty, so we move to last stage, finished stage.
             stage = 3;
+            highlighted_node = null;
         }
         //println("Visual Dijkstra Compute shortest path called");
     }

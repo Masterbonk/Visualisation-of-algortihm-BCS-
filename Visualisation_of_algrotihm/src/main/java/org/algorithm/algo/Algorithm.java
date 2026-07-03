@@ -23,6 +23,7 @@ public abstract class Algorithm {
 
     public boolean dynamic = true;
 
+    public Node highlighted_node;
 
 
 
