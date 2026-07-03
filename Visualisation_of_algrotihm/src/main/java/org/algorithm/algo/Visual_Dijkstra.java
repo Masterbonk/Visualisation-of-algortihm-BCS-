@@ -1,5 +1,7 @@
 package org.algorithm.algo;
 
+import org.algorithm.Main;
+import org.algorithm.Util;
 import org.algorithm.graph.Node;
 import org.algorithm.graph.edges.Edge;
 
@@ -34,7 +36,7 @@ public class Visual_Dijkstra extends Dijkstra{
         edges_considered = new ArrayList<>();
         u = null;
 
-        println("Visual Dijkstra called");
+        //println("Visual Dijkstra called");
     }
 
     public void Main(){
@@ -42,12 +44,18 @@ public class Visual_Dijkstra extends Dijkstra{
             initialize();
             stage = 1;
 
-            println("Visual Dijkstra initialize called");
+            //println("Visual Dijkstra initialize called");
 
         } else if (stage == 1 || stage == 2){
             compute_Shortest_Path();
         }
-        println("Visual Dijkstra Main called");
+        //println("Visual Dijkstra Main called");
+
+        //Steps forward once before stopping itself again.
+        if(Main.Ui.get_Button("forward").clicked){
+            Main.Ui.get_Button("forward").clicked = false;
+            Main.Ui.get_Button("pause").clicked = true;
+        }
     }
 
     public void compute_Shortest_Path() {
@@ -69,6 +77,9 @@ public class Visual_Dijkstra extends Dijkstra{
                 tmp.removeAll(edges_considered);
                 e = tmp.getFirst();
                 edges_considered.add(e);
+                e.color(-1,-1,150);
+                Main.colored_edges.add(e);
+                Util.exchange(e);
 
                 //Gets the other node connected to edge e
                 Node v = u.help_Get_Opposite(e);
@@ -98,6 +109,6 @@ public class Visual_Dijkstra extends Dijkstra{
             //U is now empty, so we move to last stage, finished stage.
             stage = 3;
         }
-        println("Visual Dijkstra Compute shortest path called");
+        //println("Visual Dijkstra Compute shortest path called");
     }
 }

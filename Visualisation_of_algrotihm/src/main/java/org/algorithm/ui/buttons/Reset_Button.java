@@ -1,6 +1,7 @@
 package org.algorithm.ui.buttons;
 
 import org.algorithm.Main;
+import org.algorithm.algo.Visual_Dijkstra;
 import org.algorithm.graph.edges.Edge;
 import org.algorithm.graph.Node;
 import org.algorithm.ui.Color_Scheme;
@@ -22,8 +23,16 @@ public class Reset_Button extends Button {
         if(algorithm.get_Start() != null && algorithm.get_Goal() != null) {
             algorithm.set_Start(initial_start_node);
             algorithm.set_Goal(initial_goal_node);
-            algorithm.initialize();
+            if (algorithm.dynamic) {
+                algorithm.initialize();
+            }
 
+        }
+
+        if (!algorithm.dynamic){
+            algorithm = new Visual_Dijkstra();
+            algorithm.set_Start(initial_start_node);
+            algorithm.set_Goal(initial_goal_node);
         }
 
 

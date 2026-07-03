@@ -187,8 +187,9 @@ public class Node {
             sketch.textSize(25);
             sketch.textAlign(LEFT,TOP);
             Visual_Dijkstra tmp_algo = (Visual_Dijkstra) algorithm;
-            int value = tmp_algo.dist.get(this);
-            String tmp = "dist(" + display_Infinity(value) + ")";
+            Integer value = tmp_algo.dist.get(this);
+            Node previous = tmp_algo.prev.get(this);
+            String tmp = "dist(" + display_Infinity(value) + "), prev(" + display_Previous_Node(previous) + ")";
             sketch.push();
             sketch.fill(100);
             sketch.stroke(100);
@@ -216,11 +217,21 @@ public class Node {
         }
     }
 
-    public String display_Infinity(int _i){
-        if (_i == MAX_INT){
+    public String display_Infinity(Integer _i){
+        if (_i == null){
+            return "Na";
+        }else if (_i == MAX_INT){
             return "∞";
         } else {
             return _i + "";
+        }
+    }
+
+    public String display_Previous_Node(Node _n){
+        if (_n == null){
+            return "Na";
+        }else {
+            return _n.get_Name();
         }
     }
 
