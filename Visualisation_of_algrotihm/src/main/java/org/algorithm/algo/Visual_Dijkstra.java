@@ -6,14 +6,10 @@ import org.algorithm.graph.Node;
 import org.algorithm.graph.edges.Edge;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
 import static org.algorithm.Main.Ui;
-import static org.algorithm.Main.node_array;
-import static processing.core.PApplet.println;
-import static processing.core.PConstants.MAX_INT;
 
 public class Visual_Dijkstra extends Dijkstra{
     int stage; //Value determining what code is run per step
@@ -28,8 +24,10 @@ public class Visual_Dijkstra extends Dijkstra{
     Node u;
     ArrayList<Edge> edges_considered;
 
+    //Eventually collects the shortest path in edges, which are then colored one at a time.
     ArrayList<Edge> shortest_path;
 
+    //All edges that have been considered are added to this set.
     HashSet<Edge> checked;
 
 
@@ -46,32 +44,42 @@ public class Visual_Dijkstra extends Dijkstra{
         shortest_path = new ArrayList<>();
         checked = new HashSet<>();
 
+        //Lock the heuristic button since it won't work with the Dijkstra algorithm.
         Ui.get_Button("heuristic").locked = true;
 
-        //println("Visual Dijkstra called");
     }
 
+    /**
+     * Every time it runs, it performs more and more operations, going through a specific flow which ends
+     * with the whole graph considered and handled.
+     */
     public void Main(){
+        //Initial stage is used to initialize the algorithm and is only used once.
         if (stage == 0){
             initialize();
             stage = 1;
 
+            //All buttons that can change the algorithm are locked down after the algorithm has started
             lock_Buttons();
 
-            //println("Visual Dijkstra initialize called");
-
         } else if (stage == 1 || stage == 2){
+            //First and second stage, used to analyse the whole graph.
+
             compute_Shortest_Path();
         } else if (stage == 3 && goal_node != null){
+            //If we have a goal, we find the shortest path and highlight the first of the edges on the path
+            //If we don't have a goal, we just skip to the final stage.
+
             shortest_path = get_Shortest_Path_Edges();
             Edge tmp_edge = shortest_path.getLast();
             shortest_path.removeLast();
             tmp_edge.color(265,-1,75);
             Util.exchange(tmp_edge);
             stage = 4;
-        } else if (stage == 3){
-            stage = 5;
         }else if (stage == 4){
+            // At this stage we have the whole path we need, so we highlight each edge one at a time.
+            // When we have gone through the whole path, we move on.
+
             Edge tmp_edge = shortest_path.getLast();
             shortest_path.removeLast();
             tmp_edge.color(265,-1,75);
@@ -79,10 +87,11 @@ public class Visual_Dijkstra extends Dijkstra{
             if (shortest_path.isEmpty()){
                 stage = 5;
             }
-        } else if (stage == 5){
+        } else if (stage == 5 || stage == 3){
+            //We go to last stage which does nothing but open the chance to make changes to the graph again.
+            stage = 5;
             unlock_Buttons();
         }
-        //println("Visual Dijkstra Main called");
 
         //Steps forward once before stopping itself again.
         if(Main.Ui.get_Button("forward").clicked){
@@ -180,8 +189,8 @@ public class Visual_Dijkstra extends Dijkstra{
 
     /**
      * After compute shortest path has finished, this function can be used to acquire the whole path that DIjkstra found
-     * It does this by taking the prev array from the target to the source.
-     * @return The shortest path from source to target.
+     * It does this by taking the prev array from the goal to the start.
+     * @return The shortest path from target to start in edges.
      */
     public ArrayList<Edge> get_Shortest_Path_Edges(){
         Node e = goal_node;
