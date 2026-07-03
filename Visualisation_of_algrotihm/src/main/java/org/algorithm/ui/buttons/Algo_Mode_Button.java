@@ -1,6 +1,7 @@
 package org.algorithm.ui.buttons;
 
 import org.algorithm.algo.Visual_DStarLite;
+import org.algorithm.algo.Visual_Dijkstra;
 import org.algorithm.algo.Visual_LPA;
 import org.algorithm.ui.Color_Scheme;
 import processing.core.PApplet;
@@ -24,14 +25,18 @@ public class Algo_Mode_Button extends Button {
 
         Ui.get_Button("reset").click();
 
-
-        if (!clicked) {
+        if (text.equals("LPA*")){
+            text = "Dijkstra";
+            algorithm = new Visual_Dijkstra();
+            algorithm.set_Start(initial_start_node);
+            algorithm.set_Goal(initial_goal_node);
+        } else if (text.equals("D* Lite")) {
             text = "LPA*";
             algorithm = new Visual_LPA();
             algorithm.set_Start(initial_start_node);
             algorithm.set_Goal(initial_goal_node);
 
-        } else {
+        } else if (text.equals("Dijkstra")){
             text = "D* Lite"; //Pause
             algorithm = new Visual_DStarLite();
             algorithm.set_Start(initial_start_node);
@@ -72,7 +77,7 @@ public class Algo_Mode_Button extends Button {
             sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
             sketch.pop();
 
-        } else if (clicked){
+        } else if (text.equals("Dijkstra")){
 
             sketch.push();
             sketch.fill(Color_Scheme.bg_button_clicked);
@@ -83,9 +88,18 @@ public class Algo_Mode_Button extends Button {
             sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
             sketch.pop();
 
-        } else {
+        } else if (text.equals("LPA*")){
             sketch.push();
-            sketch.fill(Color_Scheme.bg_button_algo);
+            sketch.fill(Color_Scheme.bg_button_algo_one);
+            sketch.rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
+            sketch.fill(Color_Scheme.text_button_clicked); //Text color
+            sketch.textSize((x_size-changeVal)/5f);
+            sketch.textAlign(sketch.CENTER);
+            sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
+            sketch.pop();
+        } else if (text.equals("D* Lite")){
+            sketch.push();
+            sketch.fill(Color_Scheme.bg_button_algo_two);
             sketch.rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
             sketch.fill(Color_Scheme.text_button_clicked); //Text color
             sketch.textSize((x_size-changeVal)/5f);

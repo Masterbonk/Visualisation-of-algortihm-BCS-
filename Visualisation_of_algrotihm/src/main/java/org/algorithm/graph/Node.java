@@ -1,5 +1,6 @@
 package org.algorithm.graph;
 
+import org.algorithm.algo.Visual_Dijkstra;
 import org.algorithm.graph.edges.*;
 import org.algorithm.ui.Color_Scheme;
 import processing.core.PApplet;
@@ -146,7 +147,9 @@ public class Node {
             sketch.pop();
         }
 
-        render_g_and_rhs();
+        if (algorithm.dynamic) {
+            render_g_and_rhs();
+        } else render_dist();
         render_Name();
 
 
@@ -161,6 +164,31 @@ public class Node {
             sketch.textSize(25);
             sketch.textAlign(LEFT,TOP);
             String tmp = "g(" + display_Infinity(g) + "), rhs(" + display_Infinity(rhs) + ")";
+            sketch.push();
+            sketch.fill(100);
+            sketch.stroke(100);
+            sketch.strokeWeight(5);
+            sketch.rect(
+                    x-sketch.textWidth(tmp)/2,((y+dim/2f)+sketch.getGraphics().textSize)-25f,
+                    sketch.textWidth(tmp),
+                    (sketch.getGraphics().textSize)
+
+            );
+            sketch.pop();
+            sketch.text(tmp,x-sketch.textWidth(tmp)/2,((y+dim/2f)+sketch.getGraphics().textSize)-25f);
+            sketch.pop();
+        }
+    }
+
+    public void render_dist(){
+        if (Ui.get_Button("Node_display").clicked){
+            sketch.push();
+            sketch.fill(255,255,255);
+            sketch.textSize(25);
+            sketch.textAlign(LEFT,TOP);
+            Visual_Dijkstra tmp_algo = (Visual_Dijkstra) algorithm;
+            int value = tmp_algo.dist.get(this);
+            String tmp = "dist(" + display_Infinity(value) + ")";
             sketch.push();
             sketch.fill(100);
             sketch.stroke(100);
@@ -265,7 +293,7 @@ public class Node {
         }
     }
 
-    private Node help_Get_Opposite(Edge _e){
+    public Node help_Get_Opposite(Edge _e){
         if (_e.get_To() == this) {
             return _e.get_From();
         } else return _e.get_To();

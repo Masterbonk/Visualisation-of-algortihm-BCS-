@@ -7,6 +7,7 @@ import org.algorithm.graph.edges.Edge;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import static org.algorithm.Main.node_array;
 import static processing.core.PConstants.MAX_INT;
@@ -16,15 +17,9 @@ public class Dijkstra extends Algorithm{
     public HashMap<Node, Integer> dist;
     public HashMap<Node, Node> prev;
 
-    public Node source;
-    public Node target;
 
 
-
-    public Dijkstra(Node _source, Node _target){
-        source = _source;
-        target = _target;
-
+    public Dijkstra(){
         dist = new HashMap<>();
         prev = new HashMap<>();
         U = new Priority_Queue<Integer>();
@@ -50,14 +45,14 @@ public class Dijkstra extends Algorithm{
      */
     public void initialize(){
         for (Node v: node_array) {
-            if (v != source) {
+            if (v != start_node) {
                 dist.put(v, MAX_INT);
                 prev.put(v, null);
                 U.insert(v, MAX_INT);
             }
         }
-        dist.put(source, 0);
-        U.insert(source, 0);
+        dist.put(start_node, 0);
+        U.insert(start_node, 0);
     }
 
     /**
@@ -74,8 +69,7 @@ public class Dijkstra extends Algorithm{
             //Look at all edges connected to our node u
             for (Edge e: u.get_Connected()){
                 //Gets the other node connected to edge e
-                Node v = e.get_From();
-                if (v == u) v = e.get_To();
+                Node v = u.help_Get_Opposite(e);
 
                 //v is the other node on the edge connected to our current focus, u
 
@@ -102,11 +96,11 @@ public class Dijkstra extends Algorithm{
      * @return The shortest path from source to target.
      */
     public ArrayList<Node> get_Shortest_Path(){
-        Node e = target;
+        Node e = goal_node;
         ArrayList<Node> shortest_path = new ArrayList<>();
 
         // Goes through the previous list and collects all nodes on the way, starting with target and ending with source.
-        while(e != source){
+        while(e != start_node){
             shortest_path.add(e);
             e = prev.get(e);
         }

@@ -22,7 +22,6 @@ public abstract class Dynamic_Algorithm extends Algorithm {
 
 
     public Dynamic_Algorithm(){
-
         set_of_nodes = new HashSet<>();
         edge_update_map = new HashMap<>();
 

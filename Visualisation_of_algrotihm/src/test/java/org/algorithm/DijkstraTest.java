@@ -26,9 +26,14 @@ class DijkstraTest {
     void setUp() {
 
         sketch = new PApplet();
+        algo = new Dijkstra();
 
         source = new Node(sketch, 0,0, true);
         target = new Node(sketch, 100, 100, true);
+
+        algo.set_Start(source);
+        algo.set_Goal(target);
+
         //Edges & nodes connecting them
         A = new Node(sketch, 50, 50, true);
         Node B = new Node (sketch, 25, 75, true);
@@ -37,7 +42,7 @@ class DijkstraTest {
         Edge SB = new Edge(sketch, source, B, 0, true);
         Edge BT = new Edge(sketch, B, target, 0, true);
 
-        algo = new Dijkstra(source, target);
+
 
 
     }
