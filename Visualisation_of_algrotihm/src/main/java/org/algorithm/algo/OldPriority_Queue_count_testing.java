@@ -2,7 +2,7 @@ package org.algorithm.algo;
 
 import org.algorithm.graph.Node;
 
-public class OldPriority_Queue_count_testing extends Old_Priority_Queue {
+public class OldPriority_Queue_count_testing extends Priority_Queue<Tuple> {
     public static int push_counter = 0;
     public static int remove_counter = 0;
     public static int pop_counter = 0;

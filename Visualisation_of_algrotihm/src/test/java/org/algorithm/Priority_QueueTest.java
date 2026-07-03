@@ -2,7 +2,6 @@ package org.algorithm;
 
 import org.algorithm.algo.Priority_Queue;
 import org.algorithm.algo.Visual_DStarLite;
-import org.algorithm.algo.Old_Priority_Queue;
 import org.algorithm.algo.Tuple;
 import org.algorithm.graph.Node;
 import org.junit.jupiter.api.AfterEach;
@@ -206,7 +205,7 @@ class Priority_QueueTest {
      * */
     @Test
     void is_empty() {
-        Old_Priority_Queue pq = new Old_Priority_Queue();
+        Priority_Queue<Tuple> pq = new Priority_Queue<>();
         assertEquals(true, pq.is_empty());
     }
 }
