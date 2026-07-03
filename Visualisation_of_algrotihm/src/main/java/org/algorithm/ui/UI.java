@@ -291,5 +291,11 @@ public class UI {
         }
     }
 
+    public void unlock_All_Buttons(){
+        for(String s: button_map.keySet()){
+            button_map.get(s).locked = false;
+        }
+    }
+
 }
 

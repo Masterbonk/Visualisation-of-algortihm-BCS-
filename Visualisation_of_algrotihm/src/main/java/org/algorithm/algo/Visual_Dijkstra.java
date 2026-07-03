@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import static org.algorithm.Main.Ui;
 import static org.algorithm.Main.node_array;
 import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
@@ -22,7 +23,7 @@ public class Visual_Dijkstra extends Dijkstra{
     //2 = Considering a node, one edge at a time
     //3 = All nodes have been considered and so we are done running compute_shortest_path
     //4 = Means that we have the shortest path and is showing one step of it at a time
-    //5 = We are now completly done with the algorithm
+    //5 = We are now completely done with the algorithm
 
     Node u;
     ArrayList<Edge> edges_considered;
@@ -45,6 +46,8 @@ public class Visual_Dijkstra extends Dijkstra{
         shortest_path = new ArrayList<>();
         checked = new HashSet<>();
 
+        Ui.get_Button("heuristic").locked = true;
+
         //println("Visual Dijkstra called");
     }
 
@@ -53,18 +56,22 @@ public class Visual_Dijkstra extends Dijkstra{
             initialize();
             stage = 1;
 
+            lock_Buttons();
+
             //println("Visual Dijkstra initialize called");
 
         } else if (stage == 1 || stage == 2){
             compute_Shortest_Path();
-        } else if (stage == 3){
+        } else if (stage == 3 && goal_node != null){
             shortest_path = get_Shortest_Path_Edges();
             Edge tmp_edge = shortest_path.getLast();
             shortest_path.removeLast();
             tmp_edge.color(265,-1,75);
             Util.exchange(tmp_edge);
             stage = 4;
-        } else if (stage == 4){
+        } else if (stage == 3){
+            stage = 5;
+        }else if (stage == 4){
             Edge tmp_edge = shortest_path.getLast();
             shortest_path.removeLast();
             tmp_edge.color(265,-1,75);
@@ -72,6 +79,8 @@ public class Visual_Dijkstra extends Dijkstra{
             if (shortest_path.isEmpty()){
                 stage = 5;
             }
+        } else if (stage == 5){
+            unlock_Buttons();
         }
         //println("Visual Dijkstra Main called");
 
@@ -193,5 +202,24 @@ public class Visual_Dijkstra extends Dijkstra{
         //Collections.reverse(shortest_path);
 
         return shortest_path; //returns shortest path starting from source to target
+    }
+
+
+    public void lock_Buttons(){
+        Ui.get_Button("cut").locked = true;
+        Ui.get_Button("circle").locked = true;
+        Ui.get_Button("line").locked = true;
+        Ui.get_Button("flag_a").locked = true;
+        Ui.get_Button("flag_b").locked = true;
+        Ui.get_Button("weight").locked = true;
+    }
+
+    public void unlock_Buttons(){
+        Ui.get_Button("cut").locked = false;
+        Ui.get_Button("circle").locked = false;
+        Ui.get_Button("line").locked = false;
+        Ui.get_Button("flag_a").locked = false;
+        Ui.get_Button("flag_b").locked = false;
+        Ui.get_Button("weight").locked = false;
     }
 }

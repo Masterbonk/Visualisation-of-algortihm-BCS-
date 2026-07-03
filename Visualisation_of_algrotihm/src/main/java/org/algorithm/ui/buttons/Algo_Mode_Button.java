@@ -4,6 +4,7 @@ import org.algorithm.algo.Visual_DStarLite;
 import org.algorithm.algo.Visual_Dijkstra;
 import org.algorithm.algo.Visual_LPA;
 import org.algorithm.ui.Color_Scheme;
+import org.algorithm.ui.UI;
 import processing.core.PApplet;
 
 import static org.algorithm.Main.*;
@@ -22,6 +23,7 @@ public class Algo_Mode_Button extends Button {
     public void click(){
         super.click();
 
+        Ui.unlock_All_Buttons();
 
         Ui.get_Button("reset").click();
 

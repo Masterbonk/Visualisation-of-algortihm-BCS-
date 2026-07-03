@@ -15,6 +15,8 @@ public abstract class Button {
     public Button dropdown_control_button = null;
     public String tool_tip = "";
 
+    public boolean locked = false;
+
     public PApplet sketch;
     /**
      * Button class is used to make all buttons in the program. They have their size, position and a text inside them all built in.
@@ -111,6 +113,15 @@ public abstract class Button {
 
         }
 
+        if (locked){
+            sketch.push();
+            sketch.fill(Color_Scheme.line);
+            sketch.strokeWeight(4);
+            sketch.line(x_pos, y_pos, x_pos+x_size, y_pos+y_size);//Top left to bottom right
+            sketch.line(x_pos+x_size, y_pos, x_pos, y_pos+y_size);//Top right to bottom left
+            sketch.pop();
+        }
+
         render_Tooltip();
     }
 
@@ -128,6 +139,8 @@ public abstract class Button {
      */
 
     public boolean mouse_Over(){
+        if (locked) return false;
+
         if (dropdown_control_button != null){
             if (!dropdown_control_button.clicked){
                 return false;
@@ -145,10 +158,11 @@ public abstract class Button {
      * Click is extended to all subclass of buttons and is used to activate the functionality of the button once it's clicked.
      */
     public void click(){
-        clicked = !clicked;
-        node_1 = null;
-        Ui.turn_Off_All_Buttons(this);
-        //sketch.println("Not implemented");
+        if (!locked) {
+            clicked = !clicked;
+            node_1 = null;
+            Ui.turn_Off_All_Buttons(this);
+        }
     }
 
     protected void render_Tooltip(){
