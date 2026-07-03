@@ -219,7 +219,7 @@ public class Node {
         }
     }
 
-    public String display_Infinity(Integer _i){
+    public static String display_Infinity(Integer _i){
         if (_i == null){
             return "Na";
         }else if (_i == MAX_INT){

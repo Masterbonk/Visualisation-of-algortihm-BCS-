@@ -256,7 +256,38 @@ public class UI {
            }
             sketch.pop();
         } else if (Ui.get_Button("PQ_display").clicked && !algorithm.dynamic) {
-            println("Will be implemented later");
+            sketch.rect(sketch.displayWidth-400,Main.button_height,400,sketch.displayHeight- Main.button_height*2);
+            sketch.push();
+            sketch.fill(0,0,0);
+            sketch.textSize(40);
+            sketch.text("Priority Queue",sketch.displayWidth-350,100);
+            sketch.pop();
+
+
+            sketch.push();
+            sketch.textFont(mono);
+            sketch.fill(0,0,0);
+            sketch.textSize(20);
+            sketch.text(Util.make_digit_fit_range("N", 5)+Util.make_digit_fit_range("Dist", 28), sketch.displayWidth-290/*325*/, 200-sketch.getGraphics().textSize);
+
+            sketch.textMode(CENTER);
+
+            if (algorithm != null && algorithm.get_U() != null && !algorithm.get_U().get_Heap().isEmpty()){
+
+                for (int i = 0; i < Math.min(algorithm.get_U().get_Heap().size(), 11); i++){
+                    //getting the elements in the queue
+                    String tmp_node = algorithm.get_U().get_Heap().get(i).toString();
+                    Integer temporary = (Integer) (algorithm.get_U().get_Keys().get(algorithm.get_U().get_Heap().get(i)));
+
+                    //for each key in the pq, following is printed
+
+                    sketch.textMode(CENTER);
+                    sketch.text(tmp_node, sketch.displayWidth-265 - (sketch.textWidth(tmp_node))/2, 200+40*i);
+                    sketch.text(Node.display_Infinity(temporary), sketch.displayWidth-100 - (sketch.textWidth(Node.display_Infinity(temporary)))/2, 200+40*i);
+                }
+
+            }
+            sketch.pop();
         }
     }
 
