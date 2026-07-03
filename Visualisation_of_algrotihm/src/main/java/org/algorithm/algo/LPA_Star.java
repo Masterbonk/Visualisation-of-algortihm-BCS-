@@ -1,17 +1,15 @@
 package org.algorithm.algo;
 
-import org.algorithm.Main;
 import org.algorithm.graph.edges.Edge;
 import org.algorithm.graph.Node;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import static org.algorithm.Util.*;
 import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
-public class LPA_Star extends Algorithm{
+public class LPA_Star extends Dynamic_Algorithm{
 
 
 
@@ -38,7 +36,7 @@ public class LPA_Star extends Algorithm{
        }
        //To change between counting, switch these two
        //U = new Priority_Queue();
-        U = new Priority_Queue();
+        U = new Priority_Queue<Tuple>();
 
        for(Node n: set_of_nodes){
             n.update_G_Val(MAX_INT);
@@ -101,10 +99,6 @@ public class LPA_Star extends Algorithm{
             U.insert(_n, calculate_Key(_n));
         }
 
-    }
-
-    public Priority_Queue get_U(){
-        return U;
     }
 
     void check_For_Edge_Change(){

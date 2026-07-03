@@ -11,7 +11,7 @@ import static org.algorithm.Util.find_Min_G_Node;
 import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
-public class DStarLite extends Algorithm {
+public class DStarLite extends Dynamic_Algorithm {
     Node last;
     float km;
 

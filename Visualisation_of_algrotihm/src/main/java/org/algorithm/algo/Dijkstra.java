@@ -12,10 +12,9 @@ import static org.algorithm.Main.node_array;
 import static processing.core.PConstants.MAX_INT;
 
 //Source: https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
-public class Dijkstra {
+public class Dijkstra extends Algorithm{
     public HashMap<Node, Integer> dist;
     public HashMap<Node, Node> prev;
-    public Dijkstra_Priority_Queue Q;
 
     public Node source;
     public Node target;
@@ -28,7 +27,9 @@ public class Dijkstra {
 
         dist = new HashMap<>();
         prev = new HashMap<>();
-        Q = new Dijkstra_Priority_Queue();
+        U = new Priority_Queue<Integer>();
+
+        dynamic = false;
 
     }
 
@@ -52,11 +53,11 @@ public class Dijkstra {
             if (v != source) {
                 dist.put(v, MAX_INT);
                 prev.put(v, null);
-                Q.insert(v, MAX_INT);
+                U.insert(v, MAX_INT);
             }
         }
         dist.put(source, 0);
-        Q.insert(source, 0);
+        U.insert(source, 0);
     }
 
     /**
@@ -65,10 +66,10 @@ public class Dijkstra {
      */
     public void compute_Shortest_Path(){
         //Runs so long as we still haven't considered all nodes
-        while(!Q.is_empty()){
+        while(!U.is_empty()){
 
             //Pulls out the closest node to source in the PQ
-            Node u = Q.pop();
+            Node u = U.pop();
 
             //Look at all edges connected to our node u
             for (Edge e: u.get_Connected()){
@@ -88,8 +89,8 @@ public class Dijkstra {
                     dist.put(v, alt);
 
                     //It's removed and readded to the PQ to make sure everything is balanced.
-                    Q.remove(v);
-                    Q.insert(v, alt);
+                    U.remove(v);
+                    U.insert(v, alt);
                 }
             }
         }

@@ -1,15 +1,19 @@
 package org.algorithm.algo;
+
 import org.algorithm.graph.Node;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import static processing.core.PConstants.MAX_INT;
 
-
-public class Priority_Queue {
+public class Priority_Queue <T extends Comparable<T>>{
 
     private ArrayList<Node> heap;
 
-    private HashMap<Node, Tuple> keys;
+    private HashMap<Node, T> keys;
+
+    //public boolean dynamic_algo = false;
 
     public Priority_Queue(){
         heap = new ArrayList<>();
@@ -21,15 +25,26 @@ public class Priority_Queue {
      * @param _n Node to be inserted
      * @param _k Key to be inserted
      * */
+    public void insert(Node _n, Integer _k){
+        heap.add(_n);
+        keys.put(_n, (T) _k);
+        swim(heap.size() - 1);
+    }
+
+    /**
+     * insert Node _n with a Key _k into the priority queue
+     * @param _n Node to be inserted
+     * @param _k Key to be inserted
+     * */
     public void insert(Node _n, Tuple _k){
         heap.add(_n);
-        keys.put(_n,_k);
+        keys.put(_n, (T) _k);
         swim(heap.size() - 1);
     }
 
     /**
      * @return and delete the top key of queue
-    * */
+     * */
     public Node pop(){
         if (is_empty()) return null;
 
@@ -44,11 +59,12 @@ public class Priority_Queue {
 
     /**
      * Gives us the TopKey in the queue, without removing it
+     * ONLY WORKS WITH DYNAMIC ALGOS
      * @return The Key object with the highest priority
      */
     public Tuple top_Key(){
         if(is_empty()) return new Tuple(MAX_INT,MAX_INT);
-        return keys.get(heap.getFirst());
+        return (Tuple)keys.get(heap.getFirst());
     }
 
     /**
@@ -58,6 +74,7 @@ public class Priority_Queue {
     public boolean contains(Node _n){
         return heap.contains(_n);
     }
+
     /**
      * Removes the given node n from the queue
      * @param _n the given node to be removed
@@ -139,7 +156,8 @@ public class Priority_Queue {
 
     //using the compareTo function of key to compare elements
     private boolean greater(int _i, int _j) {
-        return keys.get(heap.get(_i)).compareTo(keys.get(heap.get(_j))) > 0;
+        return ((T) keys.get( heap.get(_i))).compareTo( (T) keys.get(heap.get(_j))) > 0;
+
     }
 
     //exchange 2 elements
@@ -158,10 +176,8 @@ public class Priority_Queue {
         heap = new ArrayList<>();
     }
 
-    public HashMap<Node, Tuple> get_Keys(){return keys;}
+    public HashMap<Node, T> get_Keys(){return keys;}
     public void clear_Keys(){
-        keys = new HashMap<Node, Tuple>();
+        keys = new HashMap<>();
     }
-
-
 }

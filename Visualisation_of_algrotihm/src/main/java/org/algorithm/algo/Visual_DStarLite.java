@@ -5,7 +5,6 @@ import org.algorithm.Util;
 import org.algorithm.graph.edges.Edge;
 import org.algorithm.graph.Node;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import static java.lang.Math.min;
@@ -13,7 +12,7 @@ import static org.algorithm.Util.*;
 import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
-public class Visual_DStarLite extends Algorithm {
+public class Visual_DStarLite extends Dynamic_Algorithm {
     Node last;
     float km;
 

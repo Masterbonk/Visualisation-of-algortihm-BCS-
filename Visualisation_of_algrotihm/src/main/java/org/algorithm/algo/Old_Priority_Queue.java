@@ -1,19 +1,17 @@
 package org.algorithm.algo;
-
 import org.algorithm.graph.Node;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import java.util.*;
 import static processing.core.PConstants.MAX_INT;
 
-public class Dijkstra_Priority_Queue {
+
+public class Old_Priority_Queue {
 
     private ArrayList<Node> heap;
 
-    private HashMap<Node, Integer> keys;
+    private HashMap<Node, Tuple> keys;
 
-    public Dijkstra_Priority_Queue(){
+    public Old_Priority_Queue(){
         heap = new ArrayList<>();
         keys = new HashMap<>();
     }
@@ -23,7 +21,7 @@ public class Dijkstra_Priority_Queue {
      * @param _n Node to be inserted
      * @param _k Key to be inserted
      * */
-    public void insert(Node _n, int _k){
+    public void insert(Node _n, Tuple _k){
         heap.add(_n);
         keys.put(_n,_k);
         swim(heap.size() - 1);
@@ -31,7 +29,7 @@ public class Dijkstra_Priority_Queue {
 
     /**
      * @return and delete the top key of queue
-     * */
+    * */
     public Node pop(){
         if (is_empty()) return null;
 
@@ -46,10 +44,10 @@ public class Dijkstra_Priority_Queue {
 
     /**
      * Gives us the TopKey in the queue, without removing it
-     * @return The Key object with the highest priority. If empty, returns -1
+     * @return The Key object with the highest priority
      */
-    public Integer top_Key(){
-        if(is_empty()) return -1;
+    public Tuple top_Key(){
+        if(is_empty()) return new Tuple(MAX_INT,MAX_INT);
         return keys.get(heap.getFirst());
     }
 
@@ -60,7 +58,6 @@ public class Dijkstra_Priority_Queue {
     public boolean contains(Node _n){
         return heap.contains(_n);
     }
-
     /**
      * Removes the given node n from the queue
      * @param _n the given node to be removed
@@ -161,11 +158,10 @@ public class Dijkstra_Priority_Queue {
         heap = new ArrayList<>();
     }
 
-    public HashMap<Node, Integer> get_Keys(){return keys;}
+    public HashMap<Node, Tuple> get_Keys(){return keys;}
     public void clear_Keys(){
-        keys = new HashMap<Node, Integer>();
+        keys = new HashMap<Node, Tuple>();
     }
-
 
 
 }

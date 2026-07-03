@@ -2,6 +2,8 @@ package org.algorithm.ui;
 
 import org.algorithm.Main;
 import org.algorithm.Util;
+import org.algorithm.algo.Tuple;
+import org.algorithm.graph.Node;
 import org.algorithm.ui.buttons.Button;
 import processing.core.PApplet;
 
@@ -199,7 +201,7 @@ public class UI {
      * */
     private void display_PQ(){
 
-        if(Ui.get_Button("PQ_display").clicked){
+        if(Ui.get_Button("PQ_display").clicked && algorithm.dynamic){
             sketch.rect(sketch.displayWidth-400,Main.button_height,400,sketch.displayHeight- Main.button_height*2);
             sketch.push();
             sketch.fill(0,0,0);
@@ -221,8 +223,15 @@ public class UI {
             if (algorithm != null && algorithm.get_U() != null && !algorithm.get_U().get_Heap().isEmpty()){
 
                 if (!algorithm.get_U().is_empty() && algorithm.part_one_d_main) { //Makes the main node yellow
-                    algorithm.get_U().get_Heap().getFirst().change_In_PQ(true);
-                } else if(!algorithm.get_U().is_empty()) { algorithm.get_U().get_Heap().getFirst().change_In_PQ(false);}
+                    //It's really confused about types. Heap is never anything but nodes, yet it kept thinking
+                    //it would be returning objects.
+                    Node tmp = (Node) algorithm.get_U().get_Heap().getFirst();
+                    tmp.change_In_PQ(true);
+                } else if(!algorithm.get_U().is_empty()) {
+                    Node tmp = (Node) algorithm.get_U().get_Heap().getFirst();
+                    tmp.change_In_PQ(false);
+                    //algorithm.get_U().get_Heap().getFirst().change_In_PQ(false);
+                }
 
                 sketch.push();
                 sketch.fill(238,218,18);
@@ -233,7 +242,8 @@ public class UI {
                 for (int i = 0; i < Math.min(algorithm.get_U().get_Heap().size(), 11); i++){
                     //getting the elements in the queue
                     String tmp_node = algorithm.get_U().get_Heap().get(i).toString();
-                    String[] tmp_tupple = algorithm.get_U().get_Keys().get(algorithm.get_U().get_Heap().get(i)).toStrings();
+                    Tuple tmporary = (Tuple) (algorithm.get_U().get_Keys().get(algorithm.get_U().get_Heap().get(i)));
+                    String[] tmp_tupple = tmporary.toStrings();
 
                     //for each key in the pq, following is printed
 
@@ -245,6 +255,8 @@ public class UI {
 
            }
             sketch.pop();
+        } else if (Ui.get_Button("PQ_display").clicked && !algorithm.dynamic) {
+            println("Will be implemented later");
         }
     }
 

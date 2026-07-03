@@ -54,18 +54,18 @@ class DijkstraTest {
     void initialize() {
         assertTrue(algo.dist.isEmpty());
         assertTrue(algo.prev.isEmpty());
-        assertTrue(algo.Q.is_empty());
+        assertTrue(algo.U.is_empty());
 
         algo.initialize();
 
         assertFalse(algo.dist.isEmpty());
         assertFalse(algo.prev.isEmpty());
-        assertFalse(algo.Q.is_empty());
+        assertFalse(algo.U.is_empty());
 
         assertEquals(algo.dist.get(source), 0);
         assertEquals(algo.dist.get(target), MAX_INT);
-        assertTrue(algo.Q.contains(source));
-        assertTrue(algo.Q.contains(target));
+        assertTrue(algo.U.contains(source));
+        assertTrue(algo.U.contains(target));
     }
 
     @Test
@@ -73,11 +73,11 @@ class DijkstraTest {
 
         algo.initialize();
 
-        assertFalse(algo.Q.is_empty());
+        assertFalse(algo.U.is_empty());
 
         algo.compute_Shortest_Path();
 
-        assertTrue(algo.Q.is_empty());
+        assertTrue(algo.U.is_empty());
         assertNotEquals(MAX_INT, algo.dist.get(target));
         assertEquals(0, algo.dist.get(source));
     }
