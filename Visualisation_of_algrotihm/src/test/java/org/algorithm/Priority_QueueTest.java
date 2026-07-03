@@ -1,5 +1,6 @@
 package org.algorithm;
 
+import org.algorithm.algo.Priority_Queue;
 import org.algorithm.algo.Visual_DStarLite;
 import org.algorithm.algo.Old_Priority_Queue;
 import org.algorithm.algo.Tuple;
@@ -13,7 +14,7 @@ import processing.core.PApplet;
 import static org.algorithm.Main.algorithm;
 import static org.junit.jupiter.api.Assertions.*;
 
-class OldPriority_QueueTest {
+class Priority_QueueTest {
 
     Node a;
     Node b;
@@ -25,7 +26,7 @@ class OldPriority_QueueTest {
 
     PApplet sketch;
 
-    Old_Priority_Queue pq;
+    Priority_Queue<Tuple> pq;
 
 
     /** Setup nodes & keys to use for each test
@@ -35,7 +36,7 @@ class OldPriority_QueueTest {
         sketch = new PApplet();
         algorithm = new Visual_DStarLite();
 
-        pq = new Old_Priority_Queue();
+        pq = new Priority_Queue<>();
 
         a = new Node(sketch, 0,0);
         b = new Node(sketch, 2,2);
