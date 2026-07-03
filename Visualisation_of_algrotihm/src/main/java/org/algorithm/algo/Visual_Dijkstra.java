@@ -6,6 +6,7 @@ import org.algorithm.graph.Node;
 import org.algorithm.graph.edges.Edge;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -20,9 +21,13 @@ public class Visual_Dijkstra extends Dijkstra{
     //1 = Have to begin checking a new node
     //2 = Considering a node, one edge at a time
     //3 = All nodes have been considered and so we are done running compute_shortest_path
+    //4 = Means that we have the shortest path and is showing one step of it at a time
+    //5 = We are now completly done with the algorithm
 
     Node u;
     ArrayList<Edge> edges_considered;
+
+    ArrayList<Edge> shortest_path;
 
 
     public Visual_Dijkstra(){
@@ -35,6 +40,7 @@ public class Visual_Dijkstra extends Dijkstra{
         stage = 0;
         edges_considered = new ArrayList<>();
         u = null;
+        shortest_path = new ArrayList<>();
 
         //println("Visual Dijkstra called");
     }
@@ -48,6 +54,21 @@ public class Visual_Dijkstra extends Dijkstra{
 
         } else if (stage == 1 || stage == 2){
             compute_Shortest_Path();
+        } else if (stage == 3){
+            shortest_path = get_Shortest_Path_Edges();
+            Edge tmp_edge = shortest_path.getLast();
+            shortest_path.removeLast();
+            tmp_edge.color(265,-1,75);
+            Util.exchange(tmp_edge);
+            stage = 4;
+        } else if (stage == 4){
+            Edge tmp_edge = shortest_path.getLast();
+            shortest_path.removeLast();
+            tmp_edge.color(265,-1,75);
+            Util.exchange(tmp_edge);
+            if (shortest_path.isEmpty()){
+                stage = 5;
+            }
         }
         //println("Visual Dijkstra Main called");
 
@@ -110,5 +131,31 @@ public class Visual_Dijkstra extends Dijkstra{
             stage = 3;
         }
         //println("Visual Dijkstra Compute shortest path called");
+    }
+
+    /**
+     * After compute shortest path has finished, this function can be used to acquire the whole path that DIjkstra found
+     * It does this by taking the prev array from the target to the source.
+     * @return The shortest path from source to target.
+     */
+    public ArrayList<Edge> get_Shortest_Path_Edges(){
+        Node e = goal_node;
+        ArrayList<Edge> shortest_path = new ArrayList<>();
+
+        // Goes through the previous list and collects all nodes on the way, starting with target and ending with source.
+        while(e != start_node){
+            Edge tmp_edge = Util.find_Shared_Edge(e,prev.get(e));
+
+            shortest_path.add(tmp_edge);
+
+            e = prev.get(e);
+        }
+
+        //Edge tmp_edge = Util.find_Shared_Edge(e,prev.get(e));
+        //shortest_path.add(tmp_edge); //e is now source
+
+        //Collections.reverse(shortest_path);
+
+        return shortest_path; //returns shortest path starting from source to target
     }
 }
