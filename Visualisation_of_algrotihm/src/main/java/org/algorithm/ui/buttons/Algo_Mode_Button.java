@@ -32,20 +32,22 @@ public class Algo_Mode_Button extends Button {
             algorithm = new Visual_Dijkstra();
             algorithm.set_Start(initial_start_node);
             algorithm.set_Goal(initial_goal_node);
+
+            Ui.get_Button("Node_display").text = "Dist";
         } else if (text.equals("D* Lite")) {
             text = "LPA*";
             algorithm = new Visual_LPA();
             algorithm.set_Start(initial_start_node);
             algorithm.set_Goal(initial_goal_node);
 
+            Ui.get_Button("Node_display").text = "Rhs & g";
         } else if (text.equals("Dijkstra")){
             text = "D* Lite"; //Pause
             algorithm = new Visual_DStarLite();
             algorithm.set_Start(initial_start_node);
             algorithm.set_Goal(initial_goal_node);
-            //Ui.get_Button("reset").click();
-            //algorithm.set_Start(start_node);
-            //algorithm.set_Goal(goal_node);
+
+            Ui.get_Button("Node_display").text = "Rhs & g";
         }
 
 
