@@ -13,14 +13,23 @@ public class A_Star extends Non_Dynamic_Algorithm{
 
     public A_Star(){
         super();
-
     }
 
+    /**
+     * Main runs both initialize and compute_Shortest_Path(), effectively creating the whole graph
+     */
     public void Main(){
         initialize();
         compute_Shortest_Path();
     }
 
+    /**
+     * Sets up the initial state for the algorithm to begin working.
+     * Including:
+     * Adding all nodes to the lists with the max values they can have
+     * Making the source node into the start value by giving it a distance to
+     * travel into heuristic between start and goal).
+     */
     public void initialize(){
         for (Node v: node_array) {
             if (v != start_node) {
@@ -36,7 +45,7 @@ public class A_Star extends Non_Dynamic_Algorithm{
 
     /**
      * Computes the shortest path by checking all nodes in the order of how close the travel time
-     * to the node is from the source.
+     * to the node is from the source. It also uses heuristic to make it even more directed.
      */
     public void compute_Shortest_Path() {
 
@@ -64,6 +73,8 @@ public class A_Star extends Non_Dynamic_Algorithm{
 
                     //It's removed and readded to the PQ to make sure everything is balanced.
                     U.remove(v);
+                    //Note how we add the heuristic, and thereby prioritises the nodes
+                    // closest to the goal
                     U.insert(v, tentative_g_score + (int) Util.heuristic(v,goal_node));
                 }
             }
