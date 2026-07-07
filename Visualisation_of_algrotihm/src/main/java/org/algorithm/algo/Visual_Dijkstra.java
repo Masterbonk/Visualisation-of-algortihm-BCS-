@@ -55,7 +55,7 @@ public class Visual_Dijkstra extends Dijkstra{
      */
     public void Main(){
         //Initial stage is used to initialize the algorithm and is only used once.
-        if (stage == 0){
+        if (stage == 0 && start_node != null){
             initialize();
             stage = 1;
 
@@ -64,12 +64,14 @@ public class Visual_Dijkstra extends Dijkstra{
 
         } else if (stage == 1 || stage == 2){
             //First and second stage, used to analyse the whole graph.
-
             compute_Shortest_Path();
+
         } else if (stage == 3 && goal_node != null){
             //If we have a goal, we find the shortest path and highlight the first of the edges on the path
             //If we don't have a goal, we just skip to the final stage.
 
+            lock_Buttons();
+            
             shortest_path = get_Shortest_Path_Edges();
             Edge tmp_edge = shortest_path.getLast();
             shortest_path.removeLast();
@@ -89,7 +91,6 @@ public class Visual_Dijkstra extends Dijkstra{
             }
         } else if (stage == 5 || stage == 3){
             //We go to last stage which does nothing but open the chance to make changes to the graph again.
-            stage = 5;
             unlock_Buttons();
         }
 
