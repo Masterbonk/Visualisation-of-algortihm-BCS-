@@ -33,6 +33,7 @@ public class Reset_Button extends Button {
             algorithm = new Visual_Dijkstra();
             algorithm.set_Start(initial_start_node);
             algorithm.set_Goal(initial_goal_node);
+            Ui.unlock_All_Buttons();
         }
 
 
