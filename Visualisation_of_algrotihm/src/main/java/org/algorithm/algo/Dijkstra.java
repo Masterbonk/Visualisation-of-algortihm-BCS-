@@ -87,6 +87,11 @@ public class Dijkstra extends Algorithm{
                     U.insert(v, alt);
                 }
             }
+
+            if(u==goal_node){
+                //If we look at all nodes connected to the goal, we know that we have found the shortest path
+                break;
+            }
         }
     }
 
