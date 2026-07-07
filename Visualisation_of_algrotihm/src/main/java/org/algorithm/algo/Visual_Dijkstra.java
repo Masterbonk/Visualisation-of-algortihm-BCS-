@@ -101,6 +101,8 @@ public class Visual_Dijkstra extends Dijkstra{
     }
 
     public void compute_Shortest_Path() {
+        boolean next_node = false;
+
         //Runs so long as we still haven't considered all nodes
         if (!U.is_empty()){
 
@@ -159,47 +161,35 @@ public class Visual_Dijkstra extends Dijkstra{
                             U.insert(v, alt);
                         }
                     } else {
-                        //Size is same, need to prepare for next iteration
-                        stage = 1;
-                        edges_considered = new ArrayList<>();
-                        highlighted_node = U.get_Heap().getFirst();
-                        if (u!=goal_node) {
-                            u = null;
-                        } else{
-                            stage = 3;
-                            highlighted_node = null;
-                        }
+                        //Current edge is null
+                        next_node = true;
                     }
                 } else {
-                    //Size is same, need to prepare for next iteration
-                    stage = 1;
-                    edges_considered = new ArrayList<>();
-                    highlighted_node = U.get_Heap().getFirst();
-                    if (u!=goal_node) {
-                        u = null;
-                    } else{
-                        stage = 3;
-                        highlighted_node = null;
-                    }
+                    //All edges has been covered
+                    next_node = true;
                 }
             } else {
                 //Size is same, need to prepare for next iteration
-                stage = 1;
-                edges_considered = new ArrayList<>();
-                highlighted_node = U.get_Heap().getFirst();
-                if (u!=goal_node) {
-                    u = null;
-                } else{
-                    stage = 3;
-                    highlighted_node = null;
-                }
+                next_node = true;
             }
         } else {
             //U is now empty, so we move to last stage, finished stage.
             stage = 3;
             highlighted_node = null;
         }
-        //println("Visual Dijkstra Compute shortest path called");
+
+        if (next_node){
+            stage = 1;
+            edges_considered = new ArrayList<>();
+            highlighted_node = U.get_Heap().getFirst();
+            if (u!=goal_node) {
+                u = null;
+            } else{
+                u = null;
+                stage = 3;
+                highlighted_node = null;
+            }
+        }
     }
 
     /**
