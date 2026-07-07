@@ -13,9 +13,8 @@ import static org.algorithm.Main.node_array;
 import static processing.core.PConstants.MAX_INT;
 
 //Source: https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
-public class Dijkstra extends Algorithm{
-    public HashMap<Node, Integer> dist;
-    public HashMap<Node, Node> prev;
+public class Dijkstra extends Non_Dynamic_Algorithm{
+
 
 
 
@@ -23,8 +22,6 @@ public class Dijkstra extends Algorithm{
         dist = new HashMap<>();
         prev = new HashMap<>();
         U = new Priority_Queue<Integer>();
-
-        dynamic = false;
 
     }
 
@@ -94,29 +91,4 @@ public class Dijkstra extends Algorithm{
             }
         }
     }
-
-    /**
-     * After compute shortest path has finished, this function can be used to acquire the whole path that DIjkstra found
-     * It does this by taking the prev array from the target to the source.
-     * @return The shortest path from source to target.
-     */
-    public ArrayList<Node> get_Shortest_Path(){
-        Node e = goal_node;
-        ArrayList<Node> shortest_path = new ArrayList<>();
-
-        // Goes through the previous list and collects all nodes on the way, starting with target and ending with source.
-        while(e != start_node){
-            shortest_path.add(e);
-            e = prev.get(e);
-        }
-
-        shortest_path.add(e); //e is now source
-
-        Collections.reverse(shortest_path);
-
-        return shortest_path; //returns shortest path starting from source to target
-    }
-
-
-
 }
