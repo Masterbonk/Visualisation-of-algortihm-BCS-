@@ -80,7 +80,7 @@ public class Visual_Dijkstra extends Dijkstra{
             tmp_edge.color(265,-1,75);
             Util.exchange(tmp_edge);
             stage = 4;
-        }else if (stage == 4){
+        }else if (stage == 4 && !shortest_path.isEmpty()){
             // At this stage we have the whole path we need, so we highlight each edge one at a time.
             // When we have gone through the whole path, we move on.
 
@@ -91,9 +91,15 @@ public class Visual_Dijkstra extends Dijkstra{
             if (shortest_path.isEmpty()){
                 stage = 5;
             }
+        } else if (stage == 4) {
+            //If there is a direct edge between goal and start,
+            // we just go to the last stage, as the first edge is covered by stage 3
+            stage = 5;
+
         } else if (stage == 3) {
             //We go to last stage which does nothing but open the chance to make changes to the graph again.
             unlock_Buttons();
+            former_goal_node = goal_node;
         } else if (stage == 5 ){
             //We go to last stage which does nothing but open the chance to make changes to the graph again.
             unlock_Buttons();
