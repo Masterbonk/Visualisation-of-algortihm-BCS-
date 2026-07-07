@@ -68,7 +68,7 @@ public class Visual_Dijkstra extends Dijkstra{
             //First and second stage, used to analyse the whole graph.
             compute_Shortest_Path();
 
-        } else if (stage == 3 && goal_node != null){
+        } else if (stage == 3 && goal_node != null && prev.containsKey(goal_node)){
             //If we have a goal, we find the shortest path and highlight the first of the edges on the path
             //If we don't have a goal, we just skip to the final stage.
             former_goal_node = goal_node;
