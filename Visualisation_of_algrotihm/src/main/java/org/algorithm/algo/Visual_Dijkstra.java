@@ -162,22 +162,37 @@ public class Visual_Dijkstra extends Dijkstra{
                         //Size is same, need to prepare for next iteration
                         stage = 1;
                         edges_considered = new ArrayList<>();
-                        u = null;
                         highlighted_node = U.get_Heap().getFirst();
+                        if (u!=goal_node) {
+                            u = null;
+                        } else{
+                            stage = 3;
+                            highlighted_node = null;
+                        }
                     }
                 } else {
                     //Size is same, need to prepare for next iteration
                     stage = 1;
                     edges_considered = new ArrayList<>();
-                    u = null;
                     highlighted_node = U.get_Heap().getFirst();
+                    if (u!=goal_node) {
+                        u = null;
+                    } else{
+                        stage = 3;
+                        highlighted_node = null;
+                    }
                 }
             } else {
                 //Size is same, need to prepare for next iteration
                 stage = 1;
                 edges_considered = new ArrayList<>();
-                u = null;
                 highlighted_node = U.get_Heap().getFirst();
+                if (u!=goal_node) {
+                    u = null;
+                } else{
+                    stage = 3;
+                    highlighted_node = null;
+                }
             }
         } else {
             //U is now empty, so we move to last stage, finished stage.
