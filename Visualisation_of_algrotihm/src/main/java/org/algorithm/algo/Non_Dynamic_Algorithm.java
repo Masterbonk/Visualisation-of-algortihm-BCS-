@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 import static org.algorithm.Main.Ui;
 
-public class Non_Dynamic_Algorithm extends Algorithm{
+public abstract class Non_Dynamic_Algorithm extends Algorithm{
     public HashMap<Node, Integer> dist;
     public HashMap<Node, Node> prev;
 
