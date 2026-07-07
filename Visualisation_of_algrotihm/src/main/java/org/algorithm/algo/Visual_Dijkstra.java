@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import static org.algorithm.Main.Ui;
+import static org.algorithm.Main.*;
 
 public class Visual_Dijkstra extends Dijkstra{
     int stage; //Value determining what code is run per step
@@ -29,6 +29,8 @@ public class Visual_Dijkstra extends Dijkstra{
 
     //All edges that have been considered are added to this set.
     HashSet<Edge> checked;
+
+    Node former_goal_node;
 
 
     public Visual_Dijkstra(){
@@ -69,9 +71,9 @@ public class Visual_Dijkstra extends Dijkstra{
         } else if (stage == 3 && goal_node != null){
             //If we have a goal, we find the shortest path and highlight the first of the edges on the path
             //If we don't have a goal, we just skip to the final stage.
-
+            former_goal_node = goal_node;
             lock_Buttons();
-            
+
             shortest_path = get_Shortest_Path_Edges();
             Edge tmp_edge = shortest_path.getLast();
             shortest_path.removeLast();
@@ -89,9 +91,21 @@ public class Visual_Dijkstra extends Dijkstra{
             if (shortest_path.isEmpty()){
                 stage = 5;
             }
-        } else if (stage == 5 || stage == 3){
+        } else if (stage == 3) {
             //We go to last stage which does nothing but open the chance to make changes to the graph again.
             unlock_Buttons();
+        } else if (stage == 5 ){
+            //We go to last stage which does nothing but open the chance to make changes to the graph again.
+            unlock_Buttons();
+
+            //This allows us to detect that the goal node has been changed, meaning we will search for a new shortest path
+            if (former_goal_node != goal_node){
+                lock_Buttons();
+                stage = 3;
+                for (Edge e: colored_edges){
+                    e.color(75, -1, 150);
+                }
+            }
         }
 
         //Steps forward once before stopping itself again.
