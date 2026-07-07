@@ -1,5 +1,6 @@
 package org.algorithm;
 
+import org.algorithm.algo.A_Star;
 import org.algorithm.algo.Dijkstra;
 import org.algorithm.graph.Node;
 import org.algorithm.graph.edges.Edge;
@@ -13,9 +14,9 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 import static processing.core.PConstants.MAX_INT;
 
-class DijkstraTest {
+class A_StarTest {
 
-    Dijkstra algo;
+    A_Star algo;
 
     Node source;
     Node target;
@@ -26,7 +27,7 @@ class DijkstraTest {
     void setUp() {
 
         sketch = new PApplet();
-        algo = new Dijkstra();
+        algo = new A_Star();
 
         source = new Node(sketch, 0,0, true);
         target = new Node(sketch, 100, 100, true);
@@ -41,10 +42,6 @@ class DijkstraTest {
         Edge AT = new Edge(sketch, A, target, 0, true);
         Edge SB = new Edge(sketch, source, B, 0, true);
         Edge BT = new Edge(sketch, B, target, 0, true);
-
-
-
-
     }
 
     @AfterEach
@@ -71,7 +68,6 @@ class DijkstraTest {
 
     @Test
     void compute_Shortest_Path() {
-
         algo.initialize();
 
         assertFalse(algo.U.is_empty());

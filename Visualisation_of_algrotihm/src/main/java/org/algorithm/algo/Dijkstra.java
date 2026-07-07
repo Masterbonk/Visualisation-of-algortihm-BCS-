@@ -14,10 +14,6 @@ import static processing.core.PConstants.MAX_INT;
 
 //Source: https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
 public class Dijkstra extends Non_Dynamic_Algorithm{
-
-
-
-
     public Dijkstra(){
         dist = new HashMap<>();
         prev = new HashMap<>();

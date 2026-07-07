@@ -43,11 +43,11 @@ public abstract class Non_Dynamic_Algorithm extends Algorithm{
         return shortest_path; //returns shortest path starting from source to target
     }
 
-    /**
-     * After compute shortest path has finished, this function can be used to acquire the whole path that DIjkstra found
-     * It does this by taking the prev array from the goal to the start.
-     * @return The shortest path from target to start in edges.
-     */
+        /**
+         * After compute shortest path has finished, this function can be used to acquire the whole path that DIjkstra found
+         * It does this by taking the prev array from the goal to the start.
+         * @return The shortest path from target to start in edges.
+         */
     public ArrayList<Edge> get_Shortest_Path_Edges(){
         Node e = goal_node;
         ArrayList<Edge> shortest_path = new ArrayList<>();
