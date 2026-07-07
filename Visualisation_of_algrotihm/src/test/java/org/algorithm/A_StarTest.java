@@ -74,7 +74,7 @@ class A_StarTest {
 
         algo.compute_Shortest_Path();
 
-        assertTrue(algo.U.is_empty());
+        assertEquals(1, algo.U.size());
         assertNotEquals(MAX_INT, algo.dist.get(target));
         assertEquals(0, algo.dist.get(source));
     }

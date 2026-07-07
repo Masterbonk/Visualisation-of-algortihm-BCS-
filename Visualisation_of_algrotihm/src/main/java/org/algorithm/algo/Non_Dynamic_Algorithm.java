@@ -17,6 +17,9 @@ public abstract class Non_Dynamic_Algorithm extends Algorithm{
 
     public Non_Dynamic_Algorithm(){
         super();
+        dist = new HashMap<>();
+        prev = new HashMap<>();
+        U = new Priority_Queue<Integer>();
 
         dynamic = false;
     }
