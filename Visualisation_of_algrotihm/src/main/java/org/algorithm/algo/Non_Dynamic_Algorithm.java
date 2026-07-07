@@ -13,6 +13,7 @@ import static org.algorithm.Main.Ui;
 public abstract class Non_Dynamic_Algorithm extends Algorithm{
     public HashMap<Node, Integer> dist;
     public HashMap<Node, Node> prev;
+    public int stage;
 
     public Non_Dynamic_Algorithm(){
         super();

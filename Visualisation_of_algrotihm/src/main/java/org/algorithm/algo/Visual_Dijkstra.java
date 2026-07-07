@@ -12,7 +12,7 @@ import java.util.HashSet;
 import static org.algorithm.Main.*;
 
 public class Visual_Dijkstra extends Dijkstra{
-    int stage; //Value determining what code is run per step
+    //int stage; //Value determining what code is run per step
     //Stage meaning:
     //0 = haven't run initialize yet
     //1 = Have to begin checking a new node
