@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import static org.algorithm.Main.*;
+import static org.algorithm.Main.colored_edges;
 
-public class Visual_Dijkstra extends Dijkstra{
+public class Visual_AStar extends A_Star{
     //stage = Value determining what code is run per step
     //Stage meaning:
     //0 = haven't run initialize yet
@@ -32,8 +32,7 @@ public class Visual_Dijkstra extends Dijkstra{
 
     Node former_goal_node;
 
-
-    public Visual_Dijkstra(){
+    public Visual_AStar(){
         super();
         set_of_nodes = new HashSet<>();
         edge_update_map = new HashMap<>();
@@ -45,10 +44,6 @@ public class Visual_Dijkstra extends Dijkstra{
         u = null;
         shortest_path = new ArrayList<>();
         checked = new HashSet<>();
-
-        //Lock the heuristic button since it won't work with the Dijkstra algorithm.
-        Ui.get_Button("heuristic").locked = true;
-
     }
 
     /**
@@ -56,8 +51,10 @@ public class Visual_Dijkstra extends Dijkstra{
      * with the whole graph considered and handled.
      */
     public void Main(){
+        //lock run and unpause button while start and goal undefined?
+
         //Initial stage is used to initialize the algorithm and is only used once.
-        if (stage == 0 && start_node != null){
+        if (stage == 0 && start_node != null && goal_node != null){
             initialize();
             stage = 1;
 
@@ -170,16 +167,16 @@ public class Visual_Dijkstra extends Dijkstra{
 
                         //We get the distance to travel to the node u, and the weight of the edge as the
                         // total alternative distance to travel to v
-                        int alt = dist.get(u) + e.get_Weight();
+                        int tentative_g_score = dist.get(u) + e.get_Weight();
 
                         //If it's smaller, we update it with the new shortest path and remove it.
-                        if (alt < dist.get(v)) {
+                        if (tentative_g_score < dist.get(v)) {
                             prev.put(v, u);
-                            dist.put(v, alt);
+                            dist.put(v, tentative_g_score);
 
                             //It's removed and readded to the PQ to make sure everything is balanced.
                             U.remove(v);
-                            U.insert(v, alt);
+                            U.insert(v, tentative_g_score + (int) Util.heuristic(v,goal_node));
                         }
                     } else {
                         //Current edge is null
@@ -212,4 +209,6 @@ public class Visual_Dijkstra extends Dijkstra{
             }
         }
     }
+
+
 }
