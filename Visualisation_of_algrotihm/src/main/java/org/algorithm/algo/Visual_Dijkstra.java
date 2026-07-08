@@ -113,11 +113,11 @@ public class Visual_Dijkstra extends Dijkstra{
             //This allows us to detect that the goal node has been changed, meaning we will search for a new shortest path
             if (former_goal_node != goal_node && prev.get(goal_node) == null){
                 //lock_Buttons();
-                stage = 0;
+                stage = 1;
                 for (Edge e: colored_edges){
-                    e.color(75, -1, 75);
+                    e.color(75, -1, 150);
                 }
-                Ui.get_Button("reset").click();
+                //Ui.get_Button("reset").click();
             } else if (former_goal_node != goal_node){
                 //lock_Buttons();
                 stage = 3;
