@@ -1,5 +1,6 @@
 package org.algorithm.ui.buttons;
 
+import org.algorithm.algo.Visual_AStar;
 import org.algorithm.algo.Visual_DStarLite;
 import org.algorithm.algo.Visual_Dijkstra;
 import org.algorithm.algo.Visual_LPA;
@@ -27,21 +28,28 @@ public class Algo_Mode_Button extends Button {
 
         Ui.get_Button("reset").click();
 
-        if (text.equals("LPA*")){
+        if (text.equals("D* Lite")){
             text = "Dijkstra";
             algorithm = new Visual_Dijkstra();
             algorithm.set_Start(initial_start_node);
             algorithm.set_Goal(initial_goal_node);
 
             Ui.get_Button("Node_display").text = "Dist";
-        } else if (text.equals("D* Lite")) {
+        } else if (text.equals("Dijkstra")){
+            text = "A*";
+            algorithm = new Visual_AStar();
+            algorithm.set_Start(initial_start_node);
+            algorithm.set_Goal(initial_goal_node);
+
+            Ui.get_Button("Node_display").text = "F()";
+        } else if (text.equals("A*")) {
             text = "LPA*";
             algorithm = new Visual_LPA();
             algorithm.set_Start(initial_start_node);
             algorithm.set_Goal(initial_goal_node);
 
             Ui.get_Button("Node_display").text = "Rhs & g";
-        } else if (text.equals("Dijkstra")){
+        } else if (text.equals("LPA*")){
             text = "D* Lite"; //Pause
             algorithm = new Visual_DStarLite();
             algorithm.set_Start(initial_start_node);
@@ -50,9 +58,7 @@ public class Algo_Mode_Button extends Button {
             Ui.get_Button("Node_display").text = "Rhs & g";
         }
 
-
         algorithm.set_of_nodes.addAll(node_array);
-
     }
 
     public void render(){
@@ -84,7 +90,7 @@ public class Algo_Mode_Button extends Button {
         } else if (text.equals("Dijkstra")){
 
             sketch.push();
-            sketch.fill(Color_Scheme.bg_button_clicked);
+            sketch.fill(Color_Scheme.bg_button_algo_zero);
             sketch.rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
             sketch.fill(Color_Scheme.text_button_clicked); //Text color
             sketch.textSize((x_size-changeVal)/5f);
@@ -92,7 +98,7 @@ public class Algo_Mode_Button extends Button {
             sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
             sketch.pop();
 
-        } else if (text.equals("LPA*")){
+        } else if (text.equals("A*")) {
             sketch.push();
             sketch.fill(Color_Scheme.bg_button_algo_one);
             sketch.rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
@@ -101,9 +107,18 @@ public class Algo_Mode_Button extends Button {
             sketch.textAlign(sketch.CENTER);
             sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
             sketch.pop();
-        } else if (text.equals("D* Lite")){
+        } else if (text.equals("LPA*")){
             sketch.push();
             sketch.fill(Color_Scheme.bg_button_algo_two);
+            sketch.rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
+            sketch.fill(Color_Scheme.text_button_clicked); //Text color
+            sketch.textSize((x_size-changeVal)/5f);
+            sketch.textAlign(sketch.CENTER);
+            sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
+            sketch.pop();
+        } else if (text.equals("D* Lite")){
+            sketch.push();
+            sketch.fill(Color_Scheme.bg_button_algo_three);
             sketch.rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
             sketch.fill(Color_Scheme.text_button_clicked); //Text color
             sketch.textSize((x_size-changeVal)/5f);

@@ -1,5 +1,6 @@
 package org.algorithm.graph;
 
+import org.algorithm.algo.Visual_AStar;
 import org.algorithm.algo.Visual_Dijkstra;
 import org.algorithm.graph.edges.*;
 import org.algorithm.ui.Color_Scheme;
@@ -151,7 +152,9 @@ public class Node {
 
         if (algorithm.dynamic) {
             render_g_and_rhs();
-        } else render_dist();
+        } else if (algorithm.getClass().equals(Visual_Dijkstra.class)) {
+            render_dist();
+        } else render_f();
         render_Name();
 
 
@@ -192,6 +195,32 @@ public class Node {
             Integer value = tmp_algo.dist.get(this);
             Node previous = tmp_algo.prev.get(this);
             String tmp = "dist(" + display_Infinity(value) + "), prev(" + display_Previous_Node(previous) + ")";
+            sketch.push();
+            sketch.fill(100);
+            sketch.stroke(100);
+            sketch.strokeWeight(5);
+            sketch.rect(
+                    x-sketch.textWidth(tmp)/2,((y+dim/2f)+sketch.getGraphics().textSize)-25f,
+                    sketch.textWidth(tmp),
+                    (sketch.getGraphics().textSize)
+
+            );
+            sketch.pop();
+            sketch.text(tmp,x-sketch.textWidth(tmp)/2,((y+dim/2f)+sketch.getGraphics().textSize)-25f);
+            sketch.pop();
+        }
+    }
+
+    public void render_f(){
+        if (Ui.get_Button("Node_display").clicked){
+            sketch.push();
+            sketch.fill(255,255,255);
+            sketch.textSize(25);
+            sketch.textAlign(LEFT,TOP);
+            Visual_AStar tmp_algo = (Visual_AStar) algorithm;
+            Integer value = tmp_algo.dist.get(this);
+            Node previous = tmp_algo.prev.get(this);
+            String tmp = "f(" + display_Infinity(value) + "), prev(" + display_Previous_Node(previous) + ")";
             sketch.push();
             sketch.fill(100);
             sketch.stroke(100);

@@ -20,8 +20,10 @@ public class Color_Scheme {
     public static  int cut_node;
     public static  int hover_node;
     public static int in_PQ_node;
+    public static int bg_button_algo_zero;
     public static int bg_button_algo_one;
     public static int bg_button_algo_two;
+    public static int bg_button_algo_three;
 
     public static int node_highlighted;
 
@@ -100,8 +102,10 @@ public class Color_Scheme {
             //normal
             border_button = sketch.color(162f,162f,162f);
 
-            bg_button_algo_one = sketch.color(40,40,178);
-            bg_button_algo_two = sketch.color(80,220,65);
+            bg_button_algo_zero = sketch.color(220,220,60); //Yellow
+            bg_button_algo_one = sketch.color(40,40,178); //Blue
+            bg_button_algo_two = sketch.color(80,220,65); //Green
+            bg_button_algo_three = sketch.color(224,60,60); //Red
 
             bg_button = sketch.color(80f);
 

@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.HashMap;
 
 import static org.algorithm.Main.Ui;
+import static processing.core.PApplet.println;
 
 public abstract class Non_Dynamic_Algorithm extends Algorithm{
     public HashMap<Node, Integer> dist;
@@ -58,6 +59,7 @@ public abstract class Non_Dynamic_Algorithm extends Algorithm{
         // Goes through the previous list and collects all nodes on the way, starting with target and ending with source.
         while(e != start_node){
             Edge tmp_edge = Util.find_Shared_Edge(e,prev.get(e));
+            println("Prev for "+e.get_Name()+" is "+prev.get(e).get_Name());
 
             shortest_path.add(tmp_edge);
 

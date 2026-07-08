@@ -1,6 +1,7 @@
 package org.algorithm.ui.buttons;
 
 import org.algorithm.Main;
+import org.algorithm.algo.Visual_AStar;
 import org.algorithm.algo.Visual_Dijkstra;
 import org.algorithm.graph.edges.Edge;
 import org.algorithm.graph.Node;
@@ -28,13 +29,16 @@ public class Reset_Button extends Button {
             }
 
         }
+        Ui.unlock_All_Buttons();
 
-        if (!algorithm.dynamic){
+        if (!algorithm.dynamic && algorithm.getClass().equals(Visual_Dijkstra.class)){
             algorithm = new Visual_Dijkstra();
-            algorithm.set_Start(initial_start_node);
-            algorithm.set_Goal(initial_goal_node);
-            Ui.unlock_All_Buttons();
+        } else if (algorithm.getClass().equals(Visual_AStar.class)) {
+            algorithm = new Visual_AStar();
         }
+
+        algorithm.set_Start(initial_start_node);
+        algorithm.set_Goal(initial_goal_node);
 
 
         for (Edge e: Main.edge_array) {

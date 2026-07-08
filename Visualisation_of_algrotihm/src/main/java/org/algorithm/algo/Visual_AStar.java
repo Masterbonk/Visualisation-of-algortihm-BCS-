@@ -6,10 +6,12 @@ import org.algorithm.graph.Node;
 import org.algorithm.graph.edges.Edge;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import static org.algorithm.Main.colored_edges;
+import static org.algorithm.Main.*;
+import static processing.core.PConstants.MAX_INT;
 
 public class Visual_AStar extends A_Star{
     //stage = Value determining what code is run per step
@@ -65,7 +67,7 @@ public class Visual_AStar extends A_Star{
             //First and second stage, used to analyse the whole graph.
             compute_Shortest_Path();
 
-        } else if (stage == 3 && goal_node != null && prev.containsKey(goal_node)){
+        } else if (stage == 3 && goal_node != null && prev.get(goal_node) != null){
             //If we have a goal, we find the shortest path and highlight the first of the edges on the path
             //If we don't have a goal, we just skip to the final stage.
             former_goal_node = goal_node;
@@ -77,6 +79,10 @@ public class Visual_AStar extends A_Star{
             tmp_edge.color(265,-1,75);
             Util.exchange(tmp_edge);
             stage = 4;
+        } else if (stage == 3 && goal_node != null && prev.get(goal_node) == null){
+            stage = 0;
+            Ui.get_Button("reset").click();
+
         }else if (stage == 4 && !shortest_path.isEmpty()){
             // At this stage we have the whole path we need, so we highlight each edge one at a time.
             // When we have gone through the whole path, we move on.
@@ -95,7 +101,7 @@ public class Visual_AStar extends A_Star{
 
         } else if (stage == 3) {
             //We go to last stage which does nothing but open the chance to make changes to the graph again.
-            unlock_Buttons();
+            Ui.get_Button("flag_b").locked = false;
             former_goal_node = goal_node;
         } else if (stage == 5 ){
             //We go to last stage which does nothing but open the chance to make changes to the graph again.
@@ -104,10 +110,11 @@ public class Visual_AStar extends A_Star{
             //This allows us to detect that the goal node has been changed, meaning we will search for a new shortest path
             if (former_goal_node != goal_node){
                 lock_Buttons();
-                stage = 3;
+                stage = 0;
                 for (Edge e: colored_edges){
-                    e.color(75, -1, 150);
+                    e.color(75, -1, 75);
                 }
+                Ui.get_Button("reset").click();
             }
         }
 
