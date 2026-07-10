@@ -45,6 +45,8 @@ public class Visual_Dijkstra extends Dijkstra{
         u = null;
         shortest_path = new ArrayList<>();
         checked = new HashSet<>();
+        colored_edges = new HashSet<>();
+        former_goal_node = null;
 
         //Lock the heuristic button since it won't work with the Dijkstra algorithm.
         Ui.get_Button("heuristic").locked = true;
@@ -183,6 +185,7 @@ public class Visual_Dijkstra extends Dijkstra{
 
                         //We get the distance to travel to the node u, and the weight of the edge as the
                         // total alternative distance to travel to v
+                        if (dist.get(u) == MAX_INT) println("ALERT: Node "+u.get_Name()+" going to node "+v.get_Name()+" creates an error");
                         int alt = dist.get(u) + e.get_Weight();
 
                         //If it's smaller, we update it with the new shortest path and remove it.

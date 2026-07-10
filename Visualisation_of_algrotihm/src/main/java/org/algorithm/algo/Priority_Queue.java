@@ -5,6 +5,7 @@ import org.algorithm.graph.Node;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
 public class Priority_Queue <T extends Comparable<T>>{
@@ -26,6 +27,7 @@ public class Priority_Queue <T extends Comparable<T>>{
      * @param _k Key to be inserted
      * */
     public void insert(Node _n, Integer _k){
+        println("Adding Node "+_n.get_Name());
         heap.add(_n);
         keys.put(_n, (T) _k);
         swim(heap.size() - 1);
@@ -156,8 +158,15 @@ public class Priority_Queue <T extends Comparable<T>>{
 
     //using the compareTo function of key to compare elements
     private boolean greater(int _i, int _j) {
-        return ((T) keys.get( heap.get(_i))).compareTo( (T) keys.get(heap.get(_j))) > 0;
-
+        //return ((T) keys.get( heap.get(_i))).compareTo( (T) keys.get(heap.get(_j))) > 0;
+        T tmp = (T) keys.get( heap.get(_i));
+        if (tmp.getClass().equals(Integer.class)){
+            println("Integer");
+            return (Integer)keys.get(heap.get(_i)) >= (Integer) keys.get(heap.get(_j));
+        } else {
+            println("Tuple");
+            return ((Tuple) keys.get( heap.get(_i))).compareTo( (Tuple) keys.get(heap.get(_j))) > 0;
+        }
     }
 
     //exchange 2 elements
