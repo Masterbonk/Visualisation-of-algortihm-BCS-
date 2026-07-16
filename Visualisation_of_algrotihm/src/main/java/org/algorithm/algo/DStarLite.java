@@ -25,7 +25,7 @@ public class DStarLite extends Dynamic_Algorithm {
 
         //To change between counting, switch these two
         //U = new Priority_Queue();
-        U = new Priority_Queue();
+        U = new Key_Priority_Queue();
 
         km = 0;
 

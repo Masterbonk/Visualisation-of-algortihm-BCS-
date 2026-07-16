@@ -17,7 +17,7 @@ public abstract class Algorithm {
 
     public boolean first_run;
 
-    public Priority_Queue<?> U;
+    public Priority_Queue U;
 
     public boolean part_one_d_main;
 

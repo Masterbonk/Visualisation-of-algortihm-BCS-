@@ -20,7 +20,7 @@ public abstract class Non_Dynamic_Algorithm extends Algorithm{
         super();
         dist = new HashMap<>();
         prev = new HashMap<>();
-        U = new Priority_Queue<Integer>();
+        U = new Integer_Priority_Queue();
 
         dynamic = false;
     }

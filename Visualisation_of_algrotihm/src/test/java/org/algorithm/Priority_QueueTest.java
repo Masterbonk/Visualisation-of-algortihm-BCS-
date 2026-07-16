@@ -1,5 +1,6 @@
 package org.algorithm;
 
+import org.algorithm.algo.Key_Priority_Queue;
 import org.algorithm.algo.Priority_Queue;
 import org.algorithm.algo.Visual_DStarLite;
 import org.algorithm.algo.Tuple;
@@ -25,7 +26,7 @@ class Priority_QueueTest {
 
     PApplet sketch;
 
-    Priority_Queue<Tuple> pq;
+    Key_Priority_Queue pq;
 
 
     /** Setup nodes & keys to use for each test
@@ -35,7 +36,7 @@ class Priority_QueueTest {
         sketch = new PApplet();
         algorithm = new Visual_DStarLite();
 
-        pq = new Priority_Queue<>();
+        pq = new Key_Priority_Queue();
 
         a = new Node(sketch, 0,0);
         b = new Node(sketch, 2,2);
@@ -45,9 +46,6 @@ class Priority_QueueTest {
         a1 = new Tuple(20, 5);
         b1 = new Tuple(30, 2);
         c1 = new Tuple(20, 2);
-
-
-
     }
 
     @AfterEach
@@ -205,7 +203,7 @@ class Priority_QueueTest {
      * */
     @Test
     void is_empty() {
-        Priority_Queue<Tuple> pq = new Priority_Queue<>();
+        Key_Priority_Queue pq = new Key_Priority_Queue();
         assertEquals(true, pq.is_empty());
     }
 }

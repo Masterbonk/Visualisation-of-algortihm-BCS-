@@ -36,7 +36,7 @@ public class LPA_Star extends Dynamic_Algorithm{
        }
        //To change between counting, switch these two
        //U = new Priority_Queue();
-        U = new Priority_Queue<Tuple>();
+        U = new Key_Priority_Queue();
 
        for(Node n: set_of_nodes){
             n.update_G_Val(MAX_INT);

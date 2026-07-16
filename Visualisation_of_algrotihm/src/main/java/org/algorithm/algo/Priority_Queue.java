@@ -5,20 +5,18 @@ import org.algorithm.graph.Node;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static processing.core.PApplet.print;
 import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
 
-public class Priority_Queue <T extends Comparable<T>>{
+public abstract class Priority_Queue {
 
-    private ArrayList<Node> heap;
-
-    private HashMap<Node, T> keys;
+    public ArrayList<Node> heap;
 
     //public boolean dynamic_algo = false;
 
     public Priority_Queue(){
         heap = new ArrayList<>();
-        keys = new HashMap<>();
     }
 
     /**
@@ -26,12 +24,7 @@ public class Priority_Queue <T extends Comparable<T>>{
      * @param _n Node to be inserted
      * @param _k Key to be inserted
      * */
-    public void insert(Node _n, Integer _k){
-        println("Adding Node "+_n.get_Name());
-        heap.add(_n);
-        keys.put(_n, (T) _k);
-        swim(heap.size() - 1);
-    }
+    public void insert(Node _n, Integer _k){}
 
     /**
      * insert Node _n with a Key _k into the priority queue
@@ -39,9 +32,6 @@ public class Priority_Queue <T extends Comparable<T>>{
      * @param _k Key to be inserted
      * */
     public void insert(Node _n, Tuple _k){
-        heap.add(_n);
-        keys.put(_n, (T) _k);
-        swim(heap.size() - 1);
     }
 
     /**
@@ -60,16 +50,6 @@ public class Priority_Queue <T extends Comparable<T>>{
     }
 
     /**
-     * Gives us the TopKey in the queue, without removing it
-     * ONLY WORKS WITH DYNAMIC ALGOS
-     * @return The Key object with the highest priority
-     */
-    public Tuple top_Key(){
-        if(is_empty()) return new Tuple(MAX_INT,MAX_INT);
-        return (Tuple)keys.get(heap.getFirst());
-    }
-
-    /**
      * @return true if the given node n is in the queue
      * @param _n the node to check if it is in the queue
      * */
@@ -81,10 +61,7 @@ public class Priority_Queue <T extends Comparable<T>>{
      * Removes the given node n from the queue
      * @param _n the given node to be removed
      * */
-    public void remove(Node _n) {
-        heap.remove(_n);
-        keys.remove(_n);
-    }
+    public void remove(Node _n) {}
 
     /**
      * @return the size of the queue
@@ -116,7 +93,7 @@ public class Priority_Queue <T extends Comparable<T>>{
     }
 
     //swim the key up the heap
-    private void swim(int i) {
+    public void swim(int i) {
         while (i > 0 && greater(parent(i), i)) {
             exch(i, parent(i));
             i = parent(i);
@@ -126,7 +103,7 @@ public class Priority_Queue <T extends Comparable<T>>{
 
 
     //sink the key down the heap
-    private void sink(int _i) {
+    public void sink(int _i) {
         while (left(_i) < heap.size()) {
 
             int smallest = left(_i);
@@ -157,36 +134,41 @@ public class Priority_Queue <T extends Comparable<T>>{
     }
 
     //using the compareTo function of key to compare elements
-    private boolean greater(int _i, int _j) {
-        //return ((T) keys.get( heap.get(_i))).compareTo( (T) keys.get(heap.get(_j))) > 0;
-        T tmp = (T) keys.get( heap.get(_i));
-        if (tmp.getClass().equals(Integer.class)){
-            println("Integer");
-            return (Integer)keys.get(heap.get(_i)) >= (Integer) keys.get(heap.get(_j));
-        } else {
-            println("Tuple");
-            return ((Tuple) keys.get( heap.get(_i))).compareTo( (Tuple) keys.get(heap.get(_j))) > 0;
-        }
+    public boolean greater(int _i, int _j) {
+        return false;
     }
 
     //exchange 2 elements
     private void exch(int _i, int _j) {
+        println("Switching node "+get_Heap().get(_i)+" with "+get_Heap().get(_j));
+
         Node temp = heap.get(_i);
         heap.set(_i, heap.get(_j));
         heap.set(_j, temp);
+    }
+
+    /**
+     * Gives us the TopKey in the queue, without removing it
+     * ONLY WORKS WITH DYNAMIC ALGOS
+     * @return The Key object with the highest priority
+     */
+    public Tuple top_Key(){
+        return null;
     }
 
     public ArrayList<Node> get_Heap(){
         return heap;
     }
 
+    public HashMap get_Keys(){return null;}
+
+
 
     public void clear_Heap(){
         heap = new ArrayList<>();
     }
 
-    public HashMap<Node, T> get_Keys(){return keys;}
-    public void clear_Keys(){
-        keys = new HashMap<>();
-    }
+    public void clear_Keys(){}
+
+
 }

@@ -2,6 +2,7 @@ package org.algorithm.ui;
 
 import org.algorithm.Main;
 import org.algorithm.Util;
+import org.algorithm.algo.Integer_Priority_Queue;
 import org.algorithm.algo.Tuple;
 import org.algorithm.graph.Node;
 import org.algorithm.ui.buttons.Button;
