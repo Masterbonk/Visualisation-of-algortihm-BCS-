@@ -54,6 +54,8 @@ public class Visual_AStar extends A_Star{
      */
     public void Main(){
         //lock run and unpause button while start and goal undefined?
+        
+        //Make the program reset if you click on any of the buttons that can be used to change stuff after it has completed
 
         //Initial stage is used to initialize the algorithm and is only used once.
         if (stage == 0 && start_node != null && goal_node != null){
