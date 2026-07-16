@@ -32,8 +32,11 @@ public class Integer_Priority_Queue extends Priority_Queue{
      * @param _n the given node to be removed
      * */
     public void remove(Node _n) {
-        heap.remove(_n);
+        Node highest = heap.getFirst();
+        exch(heap.indexOf(_n), 0); //Exchange with top
+        pop();
         keys.remove(_n);
+        swim(heap.indexOf(highest));
     }
 
     //using the compareTo function of key to compare elements
