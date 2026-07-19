@@ -24,7 +24,6 @@ public class Integer_Priority_Queue extends Priority_Queue{
         keys.put(_n, _k);
         swim(heap.size() - 1);
 
-        println("Adding Node "+_n.get_Name()+" with value "+_k+" but actual value is "+keys.get(_n));
     }
 
     /**
@@ -44,7 +43,6 @@ public class Integer_Priority_Queue extends Priority_Queue{
     public boolean greater(int _i, int _j) {
 
         if (keys.get(heap.get(_i)) == MAX_INT && keys.get(heap.get(_j))!= MAX_INT){
-            println("inf was exchanged");
             return true;
         }
         return keys.get(heap.get(_i)) > keys.get(heap.get(_j));

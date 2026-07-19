@@ -140,8 +140,6 @@ public abstract class Priority_Queue {
 
     //exchange 2 elements
     public void exch(int _i, int _j) {
-        println("Switching node "+get_Heap().get(_i)+" with "+get_Heap().get(_j));
-
         Node temp = heap.get(_i);
         heap.set(_i, heap.get(_j));
         heap.set(_j, temp);
