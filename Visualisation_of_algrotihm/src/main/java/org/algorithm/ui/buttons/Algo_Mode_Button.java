@@ -35,6 +35,8 @@ public class Algo_Mode_Button extends Button {
             algorithm.set_Goal(initial_goal_node);
 
             Ui.get_Button("Node_display").text = "Dist";
+            Ui.get_Button("Node_display").tool_tip = "Display the dist and prev values of the nodes";
+
         } else if (text.equals("Dijkstra")){
             text = "A*";
             algorithm = new Visual_AStar();
@@ -42,6 +44,7 @@ public class Algo_Mode_Button extends Button {
             algorithm.set_Goal(initial_goal_node);
 
             Ui.get_Button("Node_display").text = "F()";
+            Ui.get_Button("Node_display").tool_tip = "Display the dist and prev values of the nodes";
         } else if (text.equals("A*")) {
             text = "LPA*";
             algorithm = new Visual_LPA();
@@ -49,6 +52,7 @@ public class Algo_Mode_Button extends Button {
             algorithm.set_Goal(initial_goal_node);
 
             Ui.get_Button("Node_display").text = "Rhs & g";
+            Ui.get_Button("Node_display").tool_tip = "Display the G & RHS values of the nodes";
         } else if (text.equals("LPA*")){
             text = "D* Lite"; //Pause
             algorithm = new Visual_DStarLite();
@@ -56,6 +60,7 @@ public class Algo_Mode_Button extends Button {
             algorithm.set_Goal(initial_goal_node);
 
             Ui.get_Button("Node_display").text = "Rhs & g";
+            Ui.get_Button("Node_display").tool_tip = "Display the G & RHS values of the nodes";
         }
 
         algorithm.set_of_nodes.addAll(node_array);
