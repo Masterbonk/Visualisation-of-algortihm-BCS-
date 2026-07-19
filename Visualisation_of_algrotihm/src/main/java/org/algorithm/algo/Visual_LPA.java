@@ -101,7 +101,10 @@ public class  Visual_LPA extends LPA_Star{
     public void compute_Shortest_Path(){
 
         if (U.top_Key().compareTo(calculate_Key(goal_node)) < 0 || goal_node.get_Rhs_Val() != goal_node.get_G_Val()){
-            if (n == null) n = U.get_Heap().getFirst();
+            if (n == null) {
+                n = U.get_Heap().getFirst();
+                highlighted_node = n;
+            }
 
             if ((n.get_G_Val() > n.get_Rhs_Val() && stage == 2) || stage == 3){
 
@@ -155,6 +158,7 @@ public class  Visual_LPA extends LPA_Star{
             }
         } else {
             stage = 6;
+            highlighted_node = null;
         }
     }
 
