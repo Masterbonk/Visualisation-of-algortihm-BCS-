@@ -49,7 +49,10 @@ public class Visual_Dijkstra extends Dijkstra{
         former_goal_node = null;
 
         //Lock the heuristic button since it won't work with the Dijkstra algorithm.
-        Ui.get_Button("heuristic").locked = true;
+        if (Ui != null) {
+            Ui.get_Button("heuristic").clicked = false;
+            Ui.get_Button("heuristic").locked = true;
+        }
 
     }
 
@@ -58,6 +61,8 @@ public class Visual_Dijkstra extends Dijkstra{
      * with the whole graph considered and handled.
      */
     public void Main(){
+        Ui.get_Button("heuristic").clicked = false;
+        Ui.get_Button("heuristic").locked = true;
         //Initial stage is used to initialize the algorithm and is only used once.
         if (stage == 0 && start_node != null){
             initialize();

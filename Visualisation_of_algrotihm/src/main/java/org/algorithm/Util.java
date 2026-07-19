@@ -63,7 +63,7 @@ public class Util {
 
         Ui.add_Button("clear",(_sketch.displayWidth)/9f*6f, 0, _sketch.displayWidth/9f, _button_height,"Clear", Clear_Button.class, false);
 
-        Ui.add_Button("algo_mode",(_sketch.displayWidth)/9f*7f, 0, _sketch.displayWidth/9f, _button_height,"D* Lite", Algo_Mode_Button.class, false);
+        Ui.add_Button("algo_mode",(_sketch.displayWidth)/9f*7f, 0, _sketch.displayWidth/9f, _button_height,"Dijkstra", Algo_Mode_Button.class, false);
 
         Button display_button = Ui.add_Button("Display_parameter", (_sketch.displayWidth) / 9f*8f, 0, _sketch.displayWidth/9f, _button_height, "Display...", Dropdown_Button.class, false);
 

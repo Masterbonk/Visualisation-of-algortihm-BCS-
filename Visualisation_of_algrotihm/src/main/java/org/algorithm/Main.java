@@ -118,8 +118,9 @@ public class Main extends PApplet{
         cs = new Color_Scheme(this);
         pink_mode = false;
 
-        //program always starts as D* lite
-        algorithm = new Visual_DStarLite();
+        //program always starts as Dijkstra
+        //algorithm = new Visual_DStarLite();
+        algorithm = new Visual_Dijkstra();
         //algorithm = new Visual_LPA();
 
         //fullScreen(); //Is the size of the canvas
