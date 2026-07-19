@@ -54,69 +54,76 @@ public class Visual_AStar extends A_Star{
      */
     public void Main(){
         //lock run and unpause button while start and goal undefined?
-        
+
+
         //Make the program reset if you click on any of the buttons that can be used to change stuff after it has completed
-
-        //Initial stage is used to initialize the algorithm and is only used once.
-        if (stage == 0 && start_node != null && goal_node != null){
-            initialize();
-            stage = 1;
-
-            //All buttons that can change the algorithm are locked down after the algorithm has started
-            lock_Buttons();
-
-        } else if (stage == 1 || stage == 2){
-            //First and second stage, used to analyse the whole graph.
-            compute_Shortest_Path();
-
-        } else if (stage == 3 && goal_node != null && prev.get(goal_node) != null){
-            //If we have a goal, we find the shortest path and highlight the first of the edges on the path
-            //If we don't have a goal, we just skip to the final stage.
-            former_goal_node = goal_node;
-            lock_Buttons();
-
-            shortest_path = get_Shortest_Path_Edges();
-            Edge tmp_edge = shortest_path.getLast();
-            shortest_path.removeLast();
-            tmp_edge.color(265,-1,75);
-            Util.exchange(tmp_edge);
-            stage = 4;
-        } else if (stage == 3 && goal_node != null && prev.get(goal_node) == null){
+        if (!edge_update_map.isEmpty() && (Main.Ui.get_Button("forward").clicked || !Main.Ui.get_Button("pause").clicked)){
             stage = 0;
             Ui.get_Button("reset").click();
+            edge_update_map = new HashMap<>();
+        } else {
 
-        }else if (stage == 4 && !shortest_path.isEmpty()){
-            // At this stage we have the whole path we need, so we highlight each edge one at a time.
-            // When we have gone through the whole path, we move on.
+            //Initial stage is used to initialize the algorithm and is only used once.
+            if (stage == 0 && start_node != null && goal_node != null) {
+                initialize();
+                stage = 1;
 
-            Edge tmp_edge = shortest_path.getLast();
-            shortest_path.removeLast();
-            tmp_edge.color(265,-1,75);
-            Util.exchange(tmp_edge);
-            if (shortest_path.isEmpty()){
-                stage = 5;
-            }
-        } else if (stage == 4) {
-            //If there is a direct edge between goal and start,
-            // we just go to the last stage, as the first edge is covered by stage 3
-            stage = 5;
-
-        } else if (stage == 3) {
-            //We go to last stage which does nothing but open the chance to make changes to the graph again.
-            Ui.get_Button("flag_b").locked = false;
-            former_goal_node = goal_node;
-        } else if (stage == 5 ){
-            //We go to last stage which does nothing but open the chance to make changes to the graph again.
-            unlock_Buttons();
-
-            //This allows us to detect that the goal node has been changed, meaning we will search for a new shortest path
-            if (former_goal_node != goal_node){
+                //All buttons that can change the algorithm are locked down after the algorithm has started
                 lock_Buttons();
+
+            } else if (stage == 1 || stage == 2) {
+                //First and second stage, used to analyse the whole graph.
+                compute_Shortest_Path();
+
+            } else if (stage == 3 && goal_node != null && prev.get(goal_node) != null) {
+                //If we have a goal, we find the shortest path and highlight the first of the edges on the path
+                //If we don't have a goal, we just skip to the final stage.
+                former_goal_node = goal_node;
+                lock_Buttons();
+
+                shortest_path = get_Shortest_Path_Edges();
+                Edge tmp_edge = shortest_path.getLast();
+                shortest_path.removeLast();
+                tmp_edge.color(265, -1, 75);
+                Util.exchange(tmp_edge);
+                stage = 4;
+            } else if (stage == 3 && goal_node != null && prev.get(goal_node) == null) {
                 stage = 0;
-                for (Edge e: colored_edges){
-                    e.color(75, -1, 75);
-                }
                 Ui.get_Button("reset").click();
+
+            } else if (stage == 4 && !shortest_path.isEmpty()) {
+                // At this stage we have the whole path we need, so we highlight each edge one at a time.
+                // When we have gone through the whole path, we move on.
+
+                Edge tmp_edge = shortest_path.getLast();
+                shortest_path.removeLast();
+                tmp_edge.color(265, -1, 75);
+                Util.exchange(tmp_edge);
+                if (shortest_path.isEmpty()) {
+                    stage = 5;
+                }
+            } else if (stage == 4) {
+                //If there is a direct edge between goal and start,
+                // we just go to the last stage, as the first edge is covered by stage 3
+                stage = 5;
+
+            } else if (stage == 3) {
+                //We go to last stage which does nothing but open the chance to make changes to the graph again.
+                Ui.get_Button("flag_b").locked = false;
+                former_goal_node = goal_node;
+            } else if (stage == 5) {
+                //We go to last stage which does nothing but open the chance to make changes to the graph again.
+                unlock_Buttons();
+
+                //This allows us to detect that the goal node has been changed, meaning we will search for a new shortest path
+                if (former_goal_node != goal_node) {
+                    lock_Buttons();
+                    stage = 0;
+                    for (Edge e : colored_edges) {
+                        e.color(75, -1, 75);
+                    }
+                    Ui.get_Button("reset").click();
+                }
             }
         }
 
