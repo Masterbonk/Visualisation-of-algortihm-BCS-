@@ -25,7 +25,8 @@ public abstract class Algorithm {
 
     public Node highlighted_node;
 
-
+    public int stage;
+    ArrayList<Node> edges_considered;
 
     /**
      * Sets the goal node.

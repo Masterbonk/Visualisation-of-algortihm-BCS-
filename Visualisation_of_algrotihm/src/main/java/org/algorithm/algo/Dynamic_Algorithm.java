@@ -15,8 +15,6 @@ public abstract class Dynamic_Algorithm extends Algorithm {
     //public Priority_Queue U;
     //public Priority_Queue U;
 
-
-
     //d* specific find a better way
     boolean paused_once;
 
