@@ -1,6 +1,8 @@
 package org.algorithm;
 import org.algorithm.algo.Algorithm;
+import org.algorithm.algo.Visual_AStar;
 import org.algorithm.algo.Visual_DStarLite;
+import org.algorithm.algo.Visual_Dijkstra;
 import org.algorithm.graph.*;
 import org.algorithm.graph.edges.BiEdge;
 import org.algorithm.graph.edges.Edge;
@@ -209,7 +211,13 @@ public class Main extends PApplet{
 
         //rescale();
 
-
+        if ((algorithm.get_Goal() == null || algorithm.get_Start() == null) && !algorithm.getClass().equals(Visual_Dijkstra.class)){
+                Ui.get_Button("forward").locked = true;
+                Ui.get_Button("pause").locked = true;
+        } else {
+            Ui.get_Button("forward").locked = false;
+            Ui.get_Button("pause").locked = false;
+        }
 
         if (!Ui.get_Button("pause").clicked){
             algorithm.Main();
