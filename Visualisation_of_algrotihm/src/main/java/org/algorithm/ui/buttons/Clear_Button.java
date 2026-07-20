@@ -21,6 +21,8 @@ public class Clear_Button extends Button {
             Ui.get_Button("pause").click();
             delete_Graph();
         }
+
+        Ui.get_Button("reset").click();
     }
 
 

@@ -98,7 +98,6 @@ public class LPA_Star extends Dynamic_Algorithm{
         if(_n.get_G_Val() != _n.get_Rhs_Val()){
             U.insert(_n, calculate_Key(_n));
         }
-
     }
 
     void check_For_Edge_Change(){

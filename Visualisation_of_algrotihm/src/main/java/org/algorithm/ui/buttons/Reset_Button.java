@@ -2,7 +2,9 @@ package org.algorithm.ui.buttons;
 
 import org.algorithm.Main;
 import org.algorithm.algo.Visual_AStar;
+import org.algorithm.algo.Visual_DStarLite;
 import org.algorithm.algo.Visual_Dijkstra;
+import org.algorithm.algo.Visual_LPA;
 import org.algorithm.graph.edges.Edge;
 import org.algorithm.graph.Node;
 import org.algorithm.ui.Color_Scheme;
@@ -20,21 +22,24 @@ public class Reset_Button extends Button {
 
     public void click(){
         super.click();
+        println("Clicked reset");
         algorithm.first_run = true;
         if(algorithm.get_Start() != null && algorithm.get_Goal() != null) {
             algorithm.set_Start(initial_start_node);
             algorithm.set_Goal(initial_goal_node);
-            if (algorithm.dynamic) {
+            if (algorithm.dynamic && algorithm.getClass().equals(Visual_DStarLite.class)) {
                 algorithm.initialize();
             }
 
         }
         Ui.unlock_All_Buttons();
 
-        if (!algorithm.dynamic && algorithm.getClass().equals(Visual_Dijkstra.class)){
+        if (algorithm.getClass().equals(Visual_Dijkstra.class)){
             algorithm = new Visual_Dijkstra();
         } else if (algorithm.getClass().equals(Visual_AStar.class)) {
             algorithm = new Visual_AStar();
+        } else if (algorithm.getClass().equals(Visual_LPA.class)){
+            algorithm = new Visual_LPA();
         }
 
         algorithm.set_Start(initial_start_node);

@@ -75,17 +75,23 @@ public class Edge {
         sketch.push();
         if (Ui.get_Button("cut").clicked){
             if(mouseOver() || to.mouse_Over() || from.mouse_Over()){
-                color(150,-1,-1);
+                color(-1,265,-1);
 
-            } else {color(75,-1,-1);}
+            } else {
+                color(-1,75,-1);
+            }
         }
         if (Ui.get_Button("weight").clicked){
             if(mouseOver()){
                 color(-1,150,-1);
             } else if(display_edge_weight_ui && activeEdge == this){
                 color(-1,150,-1);
-            }else {color(-1,75,-1);}
-        } else{color(-1,75,-1);}
+            }else {
+                color(-1,75,-1);
+            }
+        } else{
+            //color(-1,75,-1);
+        }
         sketch.stroke(r,g,b);
         if(b >= 150 || r >= 150){
             sketch.strokeWeight(20);
