@@ -84,7 +84,7 @@ public class Visual_AStar extends A_Star{
                 shortest_path = get_Shortest_Path_Edges();
                 Edge tmp_edge = shortest_path.getLast();
                 shortest_path.removeLast();
-                tmp_edge.color(265, -1, 75);
+                tmp_edge.color(-1, 265, 75);
                 Util.exchange(tmp_edge);
                 stage = 4;
             } else if (stage == 3 && goal_node != null && prev.get(goal_node) == null) {
@@ -97,7 +97,7 @@ public class Visual_AStar extends A_Star{
 
                 Edge tmp_edge = shortest_path.getLast();
                 shortest_path.removeLast();
-                tmp_edge.color(265, -1, 75);
+                tmp_edge.color(-1, 265, 75);
                 Util.exchange(tmp_edge);
                 if (shortest_path.isEmpty()) {
                     stage = 5;
@@ -120,7 +120,7 @@ public class Visual_AStar extends A_Star{
                     lock_Buttons();
                     stage = 0;
                     for (Edge e : colored_edges) {
-                        e.color(75, -1, 75);
+                        e.color(-1, 75, 75);
                     }
                     Ui.get_Button("reset").click();
                 }

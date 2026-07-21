@@ -75,14 +75,14 @@ public class  Visual_LPA extends LPA_Star{
             println("Computing shortest path");
             compute_Shortest_Path();
             for (Edge e: Main.colored_edges){
-                e.color(75, -1, 150);
+                e.color(-1, 75, 150);
             }
         } else if (stage == 6) {
             edges_considered = super.get_Shortest_Path(goal_node);
 
 
             for (Edge e: Main.colored_edges){
-                e.color(75, -1, 150);
+                e.color(-1, 75, 150);
             }
 
 
@@ -106,7 +106,7 @@ public class  Visual_LPA extends LPA_Star{
             check_For_Edge_Change();
 
             for (Edge e:Main.colored_edges) {
-                e.color(75,-1,-1);
+                e.color(-1,75,-1);
             }
 
 
@@ -125,7 +125,7 @@ public class  Visual_LPA extends LPA_Star{
     private void color_Edge_On_Path() {
         Edge e = Util.find_Shared_Edge(edges_considered.get(0), edges_considered.get(1));
         if (e != null) {
-            e.color(265,-1,75);
+            e.color(-1,265,75);
             Main.colored_edges.add(e);
             Util.exchange(e);
         }
