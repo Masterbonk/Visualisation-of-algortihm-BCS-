@@ -31,7 +31,6 @@ public class  Visual_LPA extends LPA_Star{
         start_node = null;
         goal_node = null;
 
-        stage = 0;
         edges_considered = new ArrayList<>();
         colored_edges = new HashSet<>();
     }
@@ -47,7 +46,7 @@ public class  Visual_LPA extends LPA_Star{
     }
 
     public void Main(){
-        println("Current stage is: "+stage);
+        //println("Current stage is: "+stage);
         if (start_node == null || goal_node == null){ println("Start and or goal are null"); return;}
 
         if (stage == 0) {
@@ -143,7 +142,7 @@ public class  Visual_LPA extends LPA_Star{
     public void compute_Shortest_Path(){
 
         if ((U.top_Key().compareTo(calculate_Key(goal_node)) < 0 || goal_node.get_Rhs_Val() != goal_node.get_G_Val() ) && !U.get_Heap().isEmpty()){
-            println("Running pathfinding");
+            //println("Running pathfinding");
             if (n == null) {
                 n = U.get_Heap().getFirst();
                 highlighted_node = n;
