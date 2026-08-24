@@ -301,11 +301,13 @@ public class Node {
         }
     }
 
-    public void strait_Edge_Connecting_Node(){
+    public void straight_Edge_Connecting_Node(){
+
         if (connected.size() == 2) {
             node_array.remove(this);
             algorithm.set_of_nodes.remove(this);
-            if (algorithm.get_U() != null) algorithm.get_U().remove(this);
+
+            //if (algorithm.get_U() != null) algorithm.get_U().remove(this);
 
             int weight1 = connected.getFirst().get_Weight();
             int weight2 = connected.getLast().get_Weight();

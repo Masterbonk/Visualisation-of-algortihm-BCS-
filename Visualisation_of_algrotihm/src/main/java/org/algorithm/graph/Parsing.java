@@ -163,7 +163,7 @@ public class Parsing {
             //When we have made the initial nodes and edges, we will completly remove the intersections
             ArrayList<Node> array = (ArrayList<Node>) Main.node_array.clone();
             for (int i = 0; i < array.size(); i++) {
-                array.get(i).strait_Edge_Connecting_Node();
+                array.get(i).straight_Edge_Connecting_Node();
             }
         }
         //Clears the name to node map, so we don't save a lot of objects we might not need.
@@ -224,7 +224,7 @@ public class Parsing {
                     String end = input.getLocalName();
 
                     if (end.equals("Node")) {
-                        Node node = new Node(_sketch, x, y);
+                        Node node = new Node(_sketch, x, y, generate_Name());
                         nodes.put(ref, node);
                     }
 
