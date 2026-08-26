@@ -155,28 +155,31 @@ public class  Visual_LPA extends LPA_Star{
                     stage = 3;
                     checked_edges = new ArrayList<>();
                 } else if (stage == 3){
-                    if (checked_edges.size() != n.get_Connected().size() - 1) {
-                        Edge e = n.get_Connected().get(checked_edges.size());
-                        e.color(-1, -1, 150);
-                        Main.colored_edges.add(e);
-                        Util.exchange(e);
+                    print("checked edges : " + checked_edges.size() + " vs n.getcon : " + (n.get_Connected().size() - 1));
+                    if(!n.get_Connected().isEmpty()){
+                        if (checked_edges.size() != n.get_Connected().size() - 1) {
+                            Edge e = n.get_Connected().get(checked_edges.size());
+                            e.color(-1, -1, 150);
+                            Main.colored_edges.add(e);
+                            Util.exchange(e);
 
-                        Node other_node = e.get_From();
-                        if (e.get_From() == n) other_node = e.get_To();
-                        update_Vertex(other_node);
-                        checked_edges.add(e);
-                    } else {
-                        Edge e = n.get_Connected().get(checked_edges.size());
-                        e.color(-1, -1, 150);
-                        Main.colored_edges.add(e);
-                        Util.exchange(e);
+                            Node other_node = e.get_From();
+                            if (e.get_From() == n) other_node = e.get_To();
+                            update_Vertex(other_node);
+                            checked_edges.add(e);
+                        } else {
+                            Edge e = n.get_Connected().get(checked_edges.size());
+                            e.color(-1, -1, 150);
+                            Main.colored_edges.add(e);
+                            Util.exchange(e);
 
-                        Node other_node = e.get_From();
-                        if (e.get_From() == n) other_node = e.get_To();
-                        update_Vertex(other_node);
-                        stage = 2;
-                        n = null;
-                        U.pop();
+                            Node other_node = e.get_From();
+                            if (e.get_From() == n) other_node = e.get_To();
+                            update_Vertex(other_node);
+                            stage = 2;
+                            n = null;
+                            U.pop();
+                        }
                     }
                 }
             } else if (stage == 2 || stage == 4 || stage == 5){
