@@ -618,7 +618,7 @@ public class Main extends PApplet{
             }
 
             //Lukker file menuen hvis man klikker uden for den mens den er åben.
-            if (!Ui.get_Button("file").mouse_Over() && !Ui.get_Button("export").mouse_Over() && !Ui.get_Button("import").mouse_Over() && Ui.get_Button("file").clicked) {
+            if (!Ui.get_Button("file").mouse_Over() && !Ui.get_Button("save").mouse_Over() && !Ui.get_Button("import").mouse_Over() && Ui.get_Button("file").clicked) {
                 Ui.get_Button("file").clicked = false;
             }
 

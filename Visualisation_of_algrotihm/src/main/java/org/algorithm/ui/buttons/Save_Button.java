@@ -4,10 +4,10 @@ import processing.core.PApplet;
 
 import static org.algorithm.graph.Export_Handler.Export;
 
-public class Export_Button extends Button{
-    public Export_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
+public class Save_Button extends Button{
+    public Save_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
-        super.tool_tip = "export to xml";
+        super.tool_tip = "Save to new graph file";
 
     }
 
