@@ -3,7 +3,7 @@ package org.algorithm.ui.buttons;
 import org.algorithm.algo.Algorithm;
 import processing.core.PApplet;
 
-import static org.algorithm.Main.button_height;
+import static org.algorithm.Main.*;
 import static org.algorithm.ui.Color_Scheme.text_button;
 import static org.algorithm.ui.Color_Scheme.text_button_hover;
 
@@ -22,6 +22,7 @@ public class Pause_Button extends Button {
         } else text = "⏯"; //Pause
 
         Algorithm.has_been_paused = !Algorithm.has_been_paused;
+
 
         super.click();
     }

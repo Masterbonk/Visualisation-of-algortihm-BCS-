@@ -522,12 +522,18 @@ public class Main extends PApplet{
                         //algorithm starts:
 
                     } else if(Ui.get_Button("flag_a").clicked && algorithm.get_Goal() != n && n.mouse_Over()){
+                        //so we don't crash lpa* but can move goal
+                        if (Ui.get_Button("algo_mode").text.equals("LPA*")){
+                            Ui.get_Button("reset").click();
+
+                        }
                         clicked_on_node = true;
                         algorithm.first_run = true;
                         algorithm.set_Start(n);
                         initial_start_node = n;
 
                     } else if(Ui.get_Button("flag_b").clicked && algorithm.get_Start() != n && n.mouse_Over()){
+
                         clicked_on_node = true;
                         algorithm.first_run = true;
                         algorithm.set_Goal(n);
