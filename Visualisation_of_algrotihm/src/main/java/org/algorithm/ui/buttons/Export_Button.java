@@ -11,7 +11,9 @@ public class Export_Button extends Button{
 
     }
 
-    public void click(){super.click();
+    public void click(){
+        super.click();
         Export();
+        this.clicked = false;
     }
 }

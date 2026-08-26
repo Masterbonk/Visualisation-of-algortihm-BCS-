@@ -3,8 +3,11 @@ package org.algorithm.graph;
 import org.algorithm.graph.edges.Edge;
 import processing.core.PApplet;
 import org.algorithm.Main;
+
+import java.io.File;
 import java.io.FileWriter;   // Import the FileWriter class
 import java.io.IOException;
+import java.nio.file.Path;
 
 public class Export_Handler {
 
@@ -12,9 +15,22 @@ public class Export_Handler {
     public static void Export(){
 
         try {
-            FileWriter myWriter = new FileWriter("graph.xml");
+
+
+            File dir = new File("Export");
+            dir.mkdir();
+
+            File file = new File("Export","graph.xml");
+            FileWriter myWriter = null;
+            int count = 1;
+            while (file.exists()) {
+                file = new File("Export", "graph (" + count + ").xml");
+                count++;
+            }
+            myWriter = new FileWriter(file);
+
             myWriter.write(convert_To_XML());
-            myWriter.close();  // must close manually
+            myWriter.close();// must close manually
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");

@@ -153,7 +153,7 @@ public class Main extends PApplet{
         button_height = displayHeight*10/144;
 
         Util.Make_UI(this, button_height);
-        Util.Make_Graph(this,5,5,true);
+        Util.Make_Graph(this,5,5);
 
 
         // Set the dash-gap pattern in pixels
@@ -269,6 +269,7 @@ public class Main extends PApplet{
      * */
     public void file_Selected(File selection) throws Exception {
         if (selection == null) {
+            importing = false;
             println("Window was closed or the user hit cancel.");
         } else {
             if (debug) {
