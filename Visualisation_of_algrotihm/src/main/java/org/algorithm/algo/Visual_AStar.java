@@ -150,6 +150,8 @@ public class Visual_AStar extends A_Star{
 
             //Look at all edges connected to our node u
             if (edges_considered.size() != u.get_Connected().size()){
+                //we could check if we are actually connected to
+                //the node, but that it's wrong behavoir of A-star
                 stage = 2;
                 //Gets the edge that has not yet been covered
                 ArrayList<Edge> tmp = new ArrayList<>(u.get_Connected());
