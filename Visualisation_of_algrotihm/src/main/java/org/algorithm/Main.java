@@ -477,21 +477,23 @@ public class Main extends PApplet{
                 for (Node n : node_array) {
                     if (Ui.get_Button("cut").clicked && n.mouse_Over()) {
                         clicked_on_node = true;
-                        node_array.remove(n);
-                        algorithm.remove_Node(n);
-                        if (algorithm.get_Start() == n) algorithm.set_Start(null);
-                        if (algorithm.get_Goal() == n) algorithm.set_Goal(null);
-                        for (Edge e : n.get_Connected()) {
-                            Node tmp;
-                            if (e.get_From() == n) {
-                                tmp = e.get_To();
-                            } else tmp = e.get_From();
-                            tmp.get_Connected().remove(e);
-                            edge_array.remove(e);
-                            algorithm.edge_update_map.put(e,-1);
+                        if(n != algorithm.highlighted_node) {
+                            node_array.remove(n);
+                            algorithm.remove_Node(n);
+                            if (algorithm.get_Start() == n) algorithm.set_Start(null);
+                            if (algorithm.get_Goal() == n) algorithm.set_Goal(null);
+                            for (Edge e : n.get_Connected()) {
+                                Node tmp;
+                                if (e.get_From() == n) {
+                                    tmp = e.get_To();
+                                } else tmp = e.get_From();
+                                tmp.get_Connected().remove(e);
+                                edge_array.remove(e);
+                                algorithm.edge_update_map.put(e,-1);
+                            }
+                            println("Clicked on node at point " + n.get_X() + ", " + n.get_Y());
+                            break;
                         }
-                        println("Clicked on node at point " + n.get_X() + ", " + n.get_Y());
-                        break;
                     } else if (Ui.get_Button("line").clicked && n.mouse_Over()) {
                         clicked_on_node = true;
                         //If we click on node with line button down, we need to make an edge or connect it to
