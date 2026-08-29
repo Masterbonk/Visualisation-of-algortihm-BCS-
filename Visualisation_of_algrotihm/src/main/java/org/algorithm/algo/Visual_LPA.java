@@ -17,6 +17,11 @@ import static processing.core.PConstants.MAX_INT;
 public class  Visual_LPA extends LPA_Star{
     //Stage meanings:
     //0 = haven't run initialize yet
+    // = we should not be checking for edge change while running algo
+    //1,2,3,4,5 = computing shortest path
+    //7 = coloring edges
+    //8 = ensuring there is no changes to graph
+
 
     private Node n = null;
     private ArrayList<Edge> checked_edges;
@@ -46,7 +51,7 @@ public class  Visual_LPA extends LPA_Star{
     }
 
     public void Main(){
-        //println("Current stage is: "+stage);
+        println("Current stage is: "+stage);
         if (start_node == null || goal_node == null){ println("Start and or goal are null"); return;}
 
         if (stage == 0) {
@@ -55,23 +60,17 @@ public class  Visual_LPA extends LPA_Star{
             }
              */
             initialize();
-            first_run = false;
-            stage = 1;
+
             Ui.get_Button("flag_b").locked = true;
             Ui.get_Button("flag_b").clicked = false;
-        } else if (stage == 1 && !edge_update_map.isEmpty()){
-            check_For_Edge_Change();
 
-            /*for (Edge e:Main.colored_edges) {
-                e.color(75,75,75);
+            if (first_run && Ui.get_Button("forward").clicked){
+                first_run =false;
+                compute_Shortest_Path();
             }
-             */
-
-            if (edge_update_map.isEmpty()) stage = 2;
-        } else if (stage == 1) {
             stage = 2;
-        } else if (stage == 2 || stage == 3 || stage == 4 || stage == 5) {
-            println("Computing shortest path");
+
+        } else if (stage == 1 || stage == 2 || stage == 3 || stage == 4 || stage == 5) {
             compute_Shortest_Path();
             for (Edge e: Main.colored_edges){
                 e.color(-1, 75, 150);
@@ -79,11 +78,9 @@ public class  Visual_LPA extends LPA_Star{
         } else if (stage == 6) {
             edges_considered = super.get_Shortest_Path(goal_node);
 
-
             for (Edge e: Main.colored_edges){
                 e.color(-1, 75, 150);
             }
-
 
             if(edges_considered == null){
                 println("Entering stage 1");
@@ -110,7 +107,7 @@ public class  Visual_LPA extends LPA_Star{
 
 
             if (edge_update_map.isEmpty()) {
-                stage = 2;
+                stage = 1;
             }
         }
 
