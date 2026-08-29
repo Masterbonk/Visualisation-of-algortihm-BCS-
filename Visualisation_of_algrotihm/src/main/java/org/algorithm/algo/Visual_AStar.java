@@ -61,15 +61,22 @@ public class Visual_AStar extends A_Star{
             stage = 0;
             Ui.get_Button("reset").click();
             edge_update_map = new HashMap<>();
+
+
         } else {
 
             //Initial stage is used to initialize the algorithm and is only used once.
             if (stage == 0 && start_node != null && goal_node != null) {
                 initialize();
                 stage = 1;
-
                 //All buttons that can change the algorithm are locked down after the algorithm has started
                 lock_Buttons();
+
+                //skip initialization if forward button is pressed
+                if(first_run && Main.Ui.get_Button("forward").clicked){
+                    first_run = false;
+                    compute_Shortest_Path();
+                }
 
             } else if (stage == 1 || stage == 2) {
                 //First and second stage, used to analyse the whole graph.
@@ -131,6 +138,7 @@ public class Visual_AStar extends A_Star{
         if(Main.Ui.get_Button("forward").clicked){
             Main.Ui.get_Button("forward").clicked = false;
             Main.Ui.get_Button("pause").clicked = true;
+            System.out.println("01 Im here and stepping");
         }
     }
 

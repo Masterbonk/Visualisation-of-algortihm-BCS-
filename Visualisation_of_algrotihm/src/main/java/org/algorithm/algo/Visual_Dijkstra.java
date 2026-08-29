@@ -71,6 +71,11 @@ public class Visual_Dijkstra extends Dijkstra{
             //All buttons that can change the algorithm are locked down after the algorithm has started
             lock_Buttons();
 
+            if(first_run && Main.Ui.get_Button("forward").clicked){
+                first_run = false;
+                compute_Shortest_Path();
+            }
+
         } else if (stage == 1 || stage == 2){
             //First and second stage, used to analyse the whole graph.
             compute_Shortest_Path();
