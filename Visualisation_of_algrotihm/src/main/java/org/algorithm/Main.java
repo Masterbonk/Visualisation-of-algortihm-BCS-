@@ -1,9 +1,9 @@
 package org.algorithm;
 import org.algorithm.algo.Algorithm;
-import org.algorithm.algo.Visual_AStar;
-import org.algorithm.algo.Visual_DStarLite;
 import org.algorithm.algo.Visual_Dijkstra;
 import org.algorithm.graph.*;
+import org.algorithm.graph.IO.Export_Handler;
+import org.algorithm.graph.IO.Parsing;
 import org.algorithm.graph.edges.BiEdge;
 import org.algorithm.graph.edges.Edge;
 import org.algorithm.graph.edges.Heuristic_Edge;
@@ -254,8 +254,7 @@ public class Main extends PApplet{
 
                 }
 
-                //
-                //
+
 
 
             }
@@ -265,7 +264,7 @@ public class Main extends PApplet{
     }
 
     /**
-     * runs pareseOSM on the selected file
+     * runs pareseOSM/XML on the selected file
      * */
     public void file_Selected(File selection) throws Exception {
         if (selection == null) {

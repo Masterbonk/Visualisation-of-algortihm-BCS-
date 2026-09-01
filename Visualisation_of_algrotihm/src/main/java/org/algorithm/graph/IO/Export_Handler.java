@@ -1,5 +1,6 @@
-package org.algorithm.graph;
+package org.algorithm.graph.IO;
 
+import org.algorithm.graph.Node;
 import org.algorithm.graph.edges.Edge;
 import processing.core.PApplet;
 import org.algorithm.Main;
