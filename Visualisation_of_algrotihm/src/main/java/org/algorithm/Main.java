@@ -212,9 +212,12 @@ public class Main extends PApplet{
 
         //rescale();
 
-        if (algorithm.get_Goal() == null || algorithm.get_Start() == null){
+        if (algorithm.get_Goal() == null && algorithm.get_Start() == null){
                 Ui.get_Button("forward").lock();
                 Ui.get_Button("pause").lock();
+        } else if(algorithm.get_Goal() == null && algorithm.getClass().equals(Visual_Dijkstra.class)){
+            Ui.get_Button("forward").unlock();
+            Ui.get_Button("pause").unlock();
         } else {
             Ui.get_Button("forward").unlock();
             Ui.get_Button("pause").unlock();
