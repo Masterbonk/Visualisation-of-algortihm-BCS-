@@ -1,9 +1,9 @@
 package org.algorithm;
 import org.algorithm.algo.Algorithm;
-import org.algorithm.algo.Visual_AStar;
-import org.algorithm.algo.Visual_DStarLite;
 import org.algorithm.algo.Visual_Dijkstra;
 import org.algorithm.graph.*;
+import org.algorithm.graph.IO.Export_Handler;
+import org.algorithm.graph.IO.Parsing;
 import org.algorithm.graph.edges.BiEdge;
 import org.algorithm.graph.edges.Edge;
 import org.algorithm.graph.edges.Heuristic_Edge;
@@ -212,12 +212,15 @@ public class Main extends PApplet{
 
         //rescale();
 
-        if ((algorithm.get_Goal() == null || algorithm.get_Start() == null) && !algorithm.getClass().equals(Visual_Dijkstra.class)){
-                Ui.get_Button("forward").locked = true;
-                Ui.get_Button("pause").locked = true;
+        if (algorithm.get_Goal() == null && algorithm.get_Start() == null){
+                Ui.get_Button("forward").lock();
+                Ui.get_Button("pause").lock();
+        } else if(algorithm.get_Goal() == null && algorithm.getClass().equals(Visual_Dijkstra.class)){
+            Ui.get_Button("forward").unlock();
+            Ui.get_Button("pause").unlock();
         } else {
-            Ui.get_Button("forward").locked = false;
-            Ui.get_Button("pause").locked = false;
+            Ui.get_Button("forward").unlock();
+            Ui.get_Button("pause").unlock();
         }
 
         if (!Ui.get_Button("pause").clicked){
@@ -254,8 +257,7 @@ public class Main extends PApplet{
 
                 }
 
-                //
-                //
+
 
 
             }
@@ -265,11 +267,12 @@ public class Main extends PApplet{
     }
 
     /**
-     * runs pareseOSM on the selected file
+     * runs pareseOSM/XML on the selected file
      * */
     public void file_Selected(File selection) throws Exception {
         if (selection == null) {
             importing = false;
+            Ui.unlock_All_Buttons();
             println("Window was closed or the user hit cancel.");
         } else {
             if (debug) {
@@ -626,7 +629,7 @@ public class Main extends PApplet{
             }
 
             //Lukker file menuen hvis man klikker uden for den mens den er åben.
-            if (!Ui.get_Button("file").mouse_Over() && !Ui.get_Button("export").mouse_Over() && !Ui.get_Button("import").mouse_Over() && Ui.get_Button("file").clicked) {
+            if (!Ui.get_Button("file").mouse_Over() && !Ui.get_Button("save").mouse_Over() && !Ui.get_Button("import").mouse_Over() && Ui.get_Button("file").clicked) {
                 Ui.get_Button("file").clicked = false;
             }
 

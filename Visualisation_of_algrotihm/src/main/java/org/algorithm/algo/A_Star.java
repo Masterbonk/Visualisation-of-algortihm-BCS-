@@ -41,6 +41,7 @@ public class A_Star extends Non_Dynamic_Algorithm{
         dist.put(start_node, 0);
         //Saving it as int instead of as float could create problems later, not sure.
         U.insert(start_node, (int) Util.heuristic(start_node,goal_node));
+        first_run = true;
     }
 
     /**

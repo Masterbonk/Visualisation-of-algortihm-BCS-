@@ -1,6 +1,7 @@
-package org.algorithm.graph;
+package org.algorithm.graph.IO;
 
 import org.algorithm.Main;
+import org.algorithm.graph.Node;
 import org.algorithm.graph.edges.BiEdge;
 import org.algorithm.graph.edges.Edge;
 import processing.core.PApplet;

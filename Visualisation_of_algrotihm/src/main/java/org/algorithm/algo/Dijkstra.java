@@ -43,6 +43,7 @@ public class Dijkstra extends Non_Dynamic_Algorithm{
         }
         dist.put(start_node, 0);
         U.insert(start_node, 0);
+        first_run = true;
     }
 
     /**
