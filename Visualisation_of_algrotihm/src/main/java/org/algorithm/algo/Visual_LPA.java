@@ -19,7 +19,7 @@ public class  Visual_LPA extends LPA_Star{
     //0 = haven't run initialize yet
     // = we should not be checking for edge change while running algo
     //1,2,3,4,5 = computing shortest path
-    //7 = coloring edges
+    //7 = coloring edges‰
     //8 = ensuring there is no changes to graph
 
 
@@ -52,6 +52,7 @@ public class  Visual_LPA extends LPA_Star{
 
     public void Main(){
         println("Current stage is: "+stage);
+
         if (start_node == null || goal_node == null){ println("Start and or goal are null"); return;}
 
         if (stage == 0) {
@@ -62,10 +63,9 @@ public class  Visual_LPA extends LPA_Star{
             initialize();
 
             Ui.get_Button("flag_b").lock();
-            Ui.get_Button("flag_b").clicked = false;
 
             if (first_run && Ui.get_Button("forward").clicked){
-                first_run =false;
+                first_run = false;
                 compute_Shortest_Path();
             }
             stage = 2;
@@ -105,11 +105,11 @@ public class  Visual_LPA extends LPA_Star{
                 e.color(-1,75,-1);
             }
 
-
             if (edge_update_map.isEmpty()) {
                 stage = 1;
             }
         }
+
 
         //Steps forward once before stopping itself again.
         if(Main.Ui.get_Button("forward").clicked){
@@ -152,9 +152,11 @@ public class  Visual_LPA extends LPA_Star{
                     stage = 3;
                     checked_edges = new ArrayList<>();
                 } else if (stage == 3){
-                    print("checked edges : " + checked_edges.size() + " vs n.getcon : " + (n.get_Connected().size() - 1));
+                    println("checked edges : " + checked_edges.size() + " vs n.getcon : " + (n.get_Connected().size() - 1));
                     if(!n.get_Connected().isEmpty()){
                         if (checked_edges.size() != n.get_Connected().size() - 1) {
+                            println("connected: " + n.get_Connected());
+                            //bug
                             Edge e = n.get_Connected().get(checked_edges.size());
                             e.color(-1, -1, 150);
                             Main.colored_edges.add(e);
@@ -234,5 +236,6 @@ public class  Visual_LPA extends LPA_Star{
 
             break;
         }
+        edge_update_map = new HashMap<>(); //broke it more somehow?
     }
 }
