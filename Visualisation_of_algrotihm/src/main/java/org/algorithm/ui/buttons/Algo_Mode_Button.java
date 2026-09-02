@@ -61,6 +61,7 @@ public class Algo_Mode_Button extends Button {
                 algorithm.set_Goal(initial_goal_node);
                 break;
         }
+        super.tool_tip = "Change which algorithm is run. The program is currently using: " + text;
 
         algorithm.set_of_nodes.addAll(node_array);
     }
