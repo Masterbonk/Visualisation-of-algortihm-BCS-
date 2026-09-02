@@ -81,6 +81,7 @@ public class Main extends PApplet{
     public static int letter = 64;
 
     public static boolean importing = false;
+    public static int algo_state = 0;
 
 
 

@@ -13,6 +13,8 @@ import static org.algorithm.ui.Color_Scheme.text_button;
 import static org.algorithm.ui.Color_Scheme.text_button_hover;
 
 public class Algo_Mode_Button extends Button {
+
+
     public Algo_Mode_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
         clicked = true;
@@ -28,39 +30,36 @@ public class Algo_Mode_Button extends Button {
 
         Ui.get_Button("reset").click();
 
-        if (text.equals("D* Lite")){
-            text = "Dijkstra";
-            algorithm = new Visual_Dijkstra();
-            algorithm.set_Start(initial_start_node);
-            algorithm.set_Goal(initial_goal_node);
+        algo_state++;
+        if(algo_state>3){
+            algo_state = 0;
+        }
 
-            Ui.get_Button("Node_display").text = "Dist";
-            Ui.get_Button("Node_display").tool_tip = "Display the dist and prev values of the nodes";
-
-        } else if (text.equals("Dijkstra")){
-            text = "A*";
-            algorithm = new Visual_AStar();
-            algorithm.set_Start(initial_start_node);
-            algorithm.set_Goal(initial_goal_node);
-
-            Ui.get_Button("Node_display").text = "F()";
-            Ui.get_Button("Node_display").tool_tip = "Display the dist and prev values of the nodes";
-        } else if (text.equals("A*")) {
-            text = "LPA*";
-            algorithm = new Visual_LPA();
-            algorithm.set_Start(initial_start_node);
-            algorithm.set_Goal(initial_goal_node);
-
-            Ui.get_Button("Node_display").text = "Rhs & g";
-            Ui.get_Button("Node_display").tool_tip = "Display the G & RHS values of the nodes";
-        } else if (text.equals("LPA*")){
-            text = "D* Lite"; //Pause
-            algorithm = new Visual_DStarLite();
-            algorithm.set_Start(initial_start_node);
-            algorithm.set_Goal(initial_goal_node);
-
-            Ui.get_Button("Node_display").text = "Rhs & g";
-            Ui.get_Button("Node_display").tool_tip = "Display the G & RHS values of the nodes";
+        switch (algo_state) {
+            case 0:
+                text = "Dijkstra";
+                algorithm = new Visual_Dijkstra();
+                algorithm.set_Start(initial_start_node);
+                algorithm.set_Goal(initial_goal_node);
+                break;
+            case 1:
+                text = "A*";
+                algorithm = new Visual_AStar();
+                algorithm.set_Start(initial_start_node);
+                algorithm.set_Goal(initial_goal_node);
+                break;
+            case 2:
+                text = "LPA*";
+                algorithm = new Visual_LPA();
+                algorithm.set_Start(initial_start_node);
+                algorithm.set_Goal(initial_goal_node);
+                break;
+            case 3:
+                text = "D* Lite"; //Pause
+                algorithm = new Visual_DStarLite();
+                algorithm.set_Start(initial_start_node);
+                algorithm.set_Goal(initial_goal_node);
+                break;
         }
 
         algorithm.set_of_nodes.addAll(node_array);
@@ -92,7 +91,7 @@ public class Algo_Mode_Button extends Button {
             sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
             sketch.pop();
 
-        } else if (text.equals("Dijkstra")){
+        } else if (algo_state == 0){
 
             sketch.push();
             sketch.fill(Color_Scheme.bg_button_algo_zero);
@@ -103,7 +102,7 @@ public class Algo_Mode_Button extends Button {
             sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
             sketch.pop();
 
-        } else if (text.equals("A*")) {
+        } else if (algo_state == 1) {
             sketch.push();
             sketch.fill(Color_Scheme.bg_button_algo_one);
             sketch.rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
@@ -112,7 +111,8 @@ public class Algo_Mode_Button extends Button {
             sketch.textAlign(sketch.CENTER);
             sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
             sketch.pop();
-        } else if (text.equals("LPA*")){
+
+        } else if (algo_state == 2){
             sketch.push();
             sketch.fill(Color_Scheme.bg_button_algo_two);
             sketch.rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
@@ -121,7 +121,8 @@ public class Algo_Mode_Button extends Button {
             sketch.textAlign(sketch.CENTER);
             sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
             sketch.pop();
-        } else if (text.equals("D* Lite")){
+
+        } else if (algo_state == 3){
             sketch.push();
             sketch.fill(Color_Scheme.bg_button_algo_three);
             sketch.rect(x_pos+changeVal,y_pos+changeVal, x_size-changeVal*2, y_size-changeVal*2);
@@ -134,7 +135,5 @@ public class Algo_Mode_Button extends Button {
 
         render_Tooltip();
     }
-
-
 
 }
