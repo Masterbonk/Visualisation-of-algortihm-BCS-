@@ -51,7 +51,7 @@ public class Visual_Dijkstra extends Dijkstra{
         //Lock the heuristic button since it won't work with the Dijkstra algorithm.
         if (Ui != null) {
             Ui.get_Button("heuristic").clicked = false;
-            Ui.get_Button("heuristic").locked = true;
+            Ui.get_Button("heuristic").lock();
         }
 
     }
@@ -62,7 +62,8 @@ public class Visual_Dijkstra extends Dijkstra{
      */
     public void Main(){
         Ui.get_Button("heuristic").clicked = false;
-        Ui.get_Button("heuristic").locked = true;
+        Ui.get_Button("heuristic").lock();
+
         //Initial stage is used to initialize the algorithm and is only used once.
         if (stage == 0 && start_node != null){
             initialize();
@@ -119,7 +120,7 @@ public class Visual_Dijkstra extends Dijkstra{
         } else if (stage == 5){
             //We go to last stage which does nothing but open the chance to make changes to the graph again.
             //unlock_Buttons();
-            Ui.get_Button("flag_b").locked = false;
+            Ui.get_Button("flag_b").unlock();
 
 
             //This allows us to detect that the goal node has been changed, meaning we will search for a new shortest path

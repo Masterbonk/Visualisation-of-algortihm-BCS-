@@ -116,7 +116,7 @@ public class Visual_AStar extends A_Star{
 
             } else if (stage == 3) {
                 //We go to last stage which does nothing but open the chance to make changes to the graph again.
-                Ui.get_Button("flag_b").locked = false;
+                Ui.get_Button("flag_b").unlock();
                 former_goal_node = goal_node;
             } else if (stage == 5) {
                 //We go to last stage which does nothing but open the chance to make changes to the graph again.

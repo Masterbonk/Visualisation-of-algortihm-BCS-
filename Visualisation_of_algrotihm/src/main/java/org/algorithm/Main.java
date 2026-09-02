@@ -212,12 +212,12 @@ public class Main extends PApplet{
 
         //rescale();
 
-        if ((algorithm.get_Goal() == null || algorithm.get_Start() == null) && !algorithm.getClass().equals(Visual_Dijkstra.class)){
-                Ui.get_Button("forward").locked = true;
-                Ui.get_Button("pause").locked = true;
+        if (algorithm.get_Goal() == null || algorithm.get_Start() == null){
+                Ui.get_Button("forward").lock();
+                Ui.get_Button("pause").lock();
         } else {
-            Ui.get_Button("forward").locked = false;
-            Ui.get_Button("pause").locked = false;
+            Ui.get_Button("forward").unlock();
+            Ui.get_Button("pause").unlock();
         }
 
         if (!Ui.get_Button("pause").clicked){
@@ -269,6 +269,7 @@ public class Main extends PApplet{
     public void file_Selected(File selection) throws Exception {
         if (selection == null) {
             importing = false;
+            Ui.unlock_All_Buttons();
             println("Window was closed or the user hit cancel.");
         } else {
             if (debug) {

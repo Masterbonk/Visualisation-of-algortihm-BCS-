@@ -61,7 +61,7 @@ public class  Visual_LPA extends LPA_Star{
              */
             initialize();
 
-            Ui.get_Button("flag_b").locked = true;
+            Ui.get_Button("flag_b").lock();
             Ui.get_Button("flag_b").clicked = false;
 
             if (first_run && Ui.get_Button("forward").clicked){

@@ -74,20 +74,17 @@ public abstract class Non_Dynamic_Algorithm extends Algorithm{
     }
 
     public void lock_Buttons(){
-        Ui.get_Button("cut").locked = true;
-        Ui.get_Button("circle").locked = true;
-        Ui.get_Button("line").locked = true;
-        Ui.get_Button("flag_a").locked = true;
-        Ui.get_Button("flag_b").locked = true;
-        Ui.get_Button("weight").locked = true;
+        for (String name : Ui.bottom_ui) {
+            if(name.equals("reset") || name.equals("pause") || name.equals("forward")) {
+               continue;
+            }
+            Ui.get_Button(name).lock();
+        }
     }
 
     public void unlock_Buttons(){
-        Ui.get_Button("cut").locked = false;
-        Ui.get_Button("circle").locked = false;
-        Ui.get_Button("line").locked = false;
-        Ui.get_Button("flag_a").locked = false;
-        Ui.get_Button("flag_b").locked = false;
-        Ui.get_Button("weight").locked = false;
+        for (String name : Ui.bottom_ui) {
+            Ui.get_Button(name).unlock();
+        }
     }
 }

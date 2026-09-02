@@ -15,7 +15,7 @@ public abstract class Button {
     public Button dropdown_control_button = null;
     public String tool_tip = "";
 
-    public boolean locked = false;
+    private boolean locked = false;
 
     public PApplet sketch;
     /**
@@ -236,5 +236,12 @@ public abstract class Button {
         return y_pos;
     }
 
+    public void lock(){
+        locked = true;
+    }
+
+    public void unlock(){
+        locked = false;
+    }
 }
 
