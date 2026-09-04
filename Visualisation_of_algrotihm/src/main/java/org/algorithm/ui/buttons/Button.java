@@ -168,6 +168,8 @@ public abstract class Button {
     protected void render_Tooltip(){
         if(mouse_Over()){
 
+            if (debug) sketch.circle(500,500,70);
+
         sketch.push();
         sketch.fill(text_button_hover);
         sketch.fill(255,255,255);
@@ -192,27 +194,52 @@ public abstract class Button {
         float v = sketch.textWidth(tool_tip) / textbox_width;
         int lines = (int) Math.ceil(v);
 
-        if(y_pos <= sketch.displayHeight/2f){
-
+        if(y_pos <= sketch.displayHeight/2f) {
 
             if (dropdown_control_button == null) {
-                if (!clicked) sketch.rect(x_pos, top,textbox_width,textbox_height*(v+2));
-            }else {
+                //if (!clicked) sketch.rect(x_pos, top,textbox_width,textbox_height*(v+2));
+                if(x_pos >= sketch.displayWidth * 0.80) {
+                    if(!clicked) sketch.rect(x_pos, top,textbox_width,textbox_height*(v+2));
+                } else
+                    if(x_pos >= sketch.displayWidth * 0.75) {
+                        sketch.rect(x_pos- textbox_width/2, top,textbox_width,textbox_height*(v+2));
+                    }
+                else {
+                        if (!clicked) sketch.rect(x_pos, top,textbox_width,textbox_height*(v+2));
+                }
 
-                if(x_pos <= sketch.displayWidth/2f){
+            } else {
+
+                if(x_pos <= sketch.displayWidth/2f) {
+                    //if(debug) sketch.rect(x_pos, top,textbox_width*100,textbox_height*(v+2));
                     sketch.rect(x_pos + x_size, y_pos,textbox_width,textbox_height*(v+2));
 
-                }else {sketch.rect(x_pos - textbox_width, y_pos,textbox_width,textbox_height*(v+2));
+                }else {
+                    //if(debug) sketch.rect(x_pos, top,textbox_width*100,textbox_height*(v+2));
+                    sketch.rect(x_pos - textbox_width, y_pos,textbox_width,textbox_height*(v+2));
                 }
             }
 
         }else{
-            sketch.rect(x_pos,bottom- (textbox_height * lines) ,textbox_width,textbox_height*(v+2));
+            if(x_pos >= sketch.displayWidth * 0.80) {
+                sketch.rect(x_pos-textbox_width/2, bottom - ((textbox_height * lines) * 1.5f), textbox_width, textbox_height * (v + 2));
+            }else {
+                sketch.rect(x_pos, bottom - ((textbox_height * lines) * 1.5f), textbox_width, textbox_height * (v + 2));
+            }
         }
         sketch.pop();
         if(y_pos <= sketch.displayHeight/2f){
             if (dropdown_control_button == null) {
-                if (!clicked) sketch.text(tool_tip, x_pos, top, textbox_width, textbox_height * (v + 2));
+                //if (!clicked) sketch.text(tool_tip, x_pos, top, textbox_width, textbox_height * (v + 2));
+                if(x_pos >= sketch.displayWidth * 0.80) {
+                    if (!clicked) sketch.text(tool_tip, x_pos, top, textbox_width, textbox_height * (v + 2));
+                } else
+                if(x_pos >= sketch.displayWidth * 0.75) {
+                    sketch.text(tool_tip, x_pos - textbox_width/2, top, textbox_width, textbox_height * (v + 2));
+                }
+                else {
+                    if (!clicked) sketch.text(tool_tip, x_pos, top, textbox_width, textbox_height * (v + 2));
+                }
             }else {
                 if(x_pos <= sketch.displayWidth/2f){
                     sketch.text(tool_tip, x_pos + x_size, y_pos, textbox_width, textbox_height * (v + 2));
@@ -223,7 +250,12 @@ public abstract class Button {
 
 
         }else{
-            sketch.text(tool_tip, x_pos, bottom - (textbox_height * lines) ,textbox_width,textbox_height*(v+2));
+//            sketch.text(tool_tip, x_pos, bottom - (textbox_height * lines) ,textbox_width,textbox_height*(v+2));
+            if(x_pos >= sketch.displayWidth * 0.80) {
+                sketch.text(tool_tip, x_pos-textbox_width/2, bottom - ((textbox_height * lines) * 1.5f),textbox_width,textbox_height*(v+2));
+            }else {
+                sketch.text(tool_tip, x_pos, bottom - ((textbox_height * lines) * 1.5f),textbox_width,textbox_height*(v+2));
+            }
         }
         sketch.pop();
         }

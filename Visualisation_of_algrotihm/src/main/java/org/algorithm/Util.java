@@ -61,7 +61,11 @@ public class Util {
 
         //CORRECT X & Y COORDINATES DO NOT CHNAGE
 
-        Ui.add_Button("clear",(_sketch.displayWidth)/9f*6f, 0, _sketch.displayWidth/9f, _button_height,"Clear", Clear_Button.class, false);
+        Ui.add_Button("clear",(_sketch.displayWidth)/9f*5f, 0, _sketch.displayWidth/9f, _button_height,"Clear", Clear_Button.class, false);
+
+        Button graph_Button = Ui.add_Button("Graph_Button",(_sketch.displayWidth)/9f*6f, 0, _sketch.displayWidth/9f, _button_height,"Graphs", Dropdown_Button.class, false);
+        Ui.add_Button("Square", (_sketch.displayWidth)/9f*6f,_button_height+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"Square 5x5", Square_Graph_Button.class, false, graph_Button);
+        Ui.add_Button("Diagonal", (_sketch.displayWidth)/9f*6f,_button_height*2+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"Diagonal 5x5", Diagonal_Graph_Button.class, false, graph_Button);
 
         Ui.add_Button("algo_mode",(_sketch.displayWidth)/9f*7f, 0, _sketch.displayWidth/9f, _button_height,"Dijkstra", Algo_Mode_Button.class, false);
 

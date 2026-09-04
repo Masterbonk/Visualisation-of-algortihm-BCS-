@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import static org.algorithm.Main.Ui;
+
 public abstract class Algorithm {
     protected Node start_node;
     protected Node goal_node;
@@ -97,5 +99,20 @@ public abstract class Algorithm {
 
     public ArrayList<Node> get_Shortest_Path(Node n){
         return null;
+    }
+
+    public void lock_Buttons(){
+        for (String name : Ui.bottom_ui) {
+            if(name.equals("reset") || name.equals("pause") || name.equals("forward")) {
+                continue;
+            }
+            Ui.get_Button(name).lock();
+        }
+    }
+
+    public void unlock_Buttons(){
+        for (String name : Ui.bottom_ui) {
+            Ui.get_Button(name).unlock();
+        }
     }
 }

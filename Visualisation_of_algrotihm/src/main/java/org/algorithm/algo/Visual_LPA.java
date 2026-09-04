@@ -55,47 +55,52 @@ public class  Visual_LPA extends LPA_Star{
 
         if (start_node == null || goal_node == null){ println("Start and or goal are null"); return;}
 
+        //initilize stage
         if (stage == 0) {
-            /*for (Edge e:Main.edge_array) {
-                e.color(75,75,75);
-            }
-             */
+            /*
+                for (Edge e:Main.edge_array) {
+                    e.color(75,75,75);
+                }
+            */
             initialize();
 
             Ui.get_Button("flag_b").lock();
+            Ui.get_Button("flag_b").clicked = false;
 
             if (first_run && Ui.get_Button("forward").clicked){
-                first_run = false;
+                first_run =false;
                 compute_Shortest_Path();
             }
             stage = 2;
 
-        } else if (stage == 1 || stage == 2 || stage == 3 || stage == 4 || stage == 5) {
+        } else if (stage == 2 || stage == 3 || stage == 4 || stage == 5) {
+            lock_Buttons();
             compute_Shortest_Path();
-            for (Edge e: Main.colored_edges){
+            for (Edge e: Main.colored_edges) {
                 e.color(-1, 75, 150);
             }
         } else if (stage == 6) {
             edges_considered = super.get_Shortest_Path(goal_node);
 
-            for (Edge e: Main.colored_edges){
+            for (Edge e: Main.colored_edges) {
                 e.color(-1, 75, 150);
             }
 
-            if(edges_considered == null){
+            if(edges_considered == null) {
                 println("Entering stage 1");
-                stage = 1;
+                stage = 2;
                 return;
             }
+
             color_Edge_On_Path();
-            if (edges_considered.size() > 1){
+            if (edges_considered.size() > 1) {
                 stage = 7;
             } else {
                 stage = 8;
             }
         } else if (stage == 7) {
             color_Edge_On_Path();
-            if (edges_considered.size() == 1){
+            if (edges_considered.size() == 1) {
                 stage = 8;
             }
         } else if (stage == 8 && !edge_update_map.isEmpty()) {
@@ -105,14 +110,14 @@ public class  Visual_LPA extends LPA_Star{
                 e.color(-1,75,-1);
             }
 
+
             if (edge_update_map.isEmpty()) {
-                stage = 1;
+                stage = 2;
             }
         }
 
-
         //Steps forward once before stopping itself again.
-        if(Main.Ui.get_Button("forward").clicked){
+        if(Main.Ui.get_Button("forward").clicked) {
             Main.Ui.get_Button("forward").clicked = false;
             Main.Ui.get_Button("pause").clicked = true;
         }
@@ -152,33 +157,36 @@ public class  Visual_LPA extends LPA_Star{
                     stage = 3;
                     checked_edges = new ArrayList<>();
                 } else if (stage == 3){
-                    println("checked edges : " + checked_edges.size() + " vs n.getcon : " + (n.get_Connected().size() - 1));
-                    if(!n.get_Connected().isEmpty()){
-                        if (checked_edges.size() != n.get_Connected().size() - 1) {
-                            println("connected: " + n.get_Connected());
-                            //bug
-                            Edge e = n.get_Connected().get(checked_edges.size());
-                            e.color(-1, -1, 150);
-                            Main.colored_edges.add(e);
-                            Util.exchange(e);
+                    if (checked_edges.size() != n.get_Connected().size() - 1) {
+                        //color the edge blue
+                        //bug too
+                        Edge e = n.get_Connected().get(checked_edges.size());
+                        e.color(-1, -1, 150);
+                        Main.colored_edges.add(e);
+                        Util.exchange(e);
 
-                            Node other_node = e.get_From();
-                            if (e.get_From() == n) other_node = e.get_To();
-                            update_Vertex(other_node);
-                            checked_edges.add(e);
-                        } else {
-                            Edge e = n.get_Connected().get(checked_edges.size());
-                            e.color(-1, -1, 150);
-                            Main.colored_edges.add(e);
-                            Util.exchange(e);
+                        //update neighboring vertex
+                        Node other_node = e.get_From();
+                        if (e.get_From() == n) other_node = e.get_To();
+                        update_Vertex(other_node);
+                        checked_edges.add(e);
 
-                            Node other_node = e.get_From();
-                            if (e.get_From() == n) other_node = e.get_To();
-                            update_Vertex(other_node);
-                            stage = 2;
-                            n = null;
-                            U.pop();
-                        }
+                    } else {
+                        //color edge blue
+                        Edge e = n.get_Connected().get(checked_edges.size());
+                        e.color(-1, -1, 150);
+                        Main.colored_edges.add(e);
+                        Util.exchange(e);
+
+                        //update neighboring vertex
+                        Node other_node = e.get_From();
+                        if (e.get_From() == n) other_node = e.get_To();
+                        update_Vertex(other_node);
+
+                        //set stage back to 2
+                        stage = 2;
+                        n = null;
+                        U.pop();
                     }
                 }
             } else if (stage == 2 || stage == 4 || stage == 5){
@@ -190,10 +198,12 @@ public class  Visual_LPA extends LPA_Star{
                     if (checked_edges.size() != n.get_Connected().size() - 1) {
                         Edge e = n.get_Connected().get(checked_edges.size());
 
+                        //color edge
                         e.color(-1, -1, 75);
                         Main.colored_edges.remove(e);
                         Util.exchange(e);
 
+                        //update neighboring vertex
                         Node other_node = e.get_From();
                         if (e.get_From() == n) other_node = e.get_To();
                         update_Vertex(other_node);
@@ -201,16 +211,23 @@ public class  Visual_LPA extends LPA_Star{
 
                     } else {
                         Edge e = n.get_Connected().get(checked_edges.size());
+
+                        //color edge
                         e.color(-1, -1, 75);
                         Main.colored_edges.remove(e);
                         Util.exchange(e);
+
+                        //update neighboring vertex
                         Node other_node = e.get_From();
                         if (e.get_From() == n) other_node = e.get_To();
                         update_Vertex(other_node);
+
+                        //go to stage 5
                         stage = 5;
                     }
 
                 } else if (stage == 5){
+                    //reset tmp & n
                     Node tmp = n;
                     n = null;
                     U.pop();
@@ -219,6 +236,9 @@ public class  Visual_LPA extends LPA_Star{
                 }
             }
         } else {
+            //compute shortest path done / not running
+            //unlock buttons here
+            unlock_Buttons();
             stage = 6;
             highlighted_node = null;
         }
@@ -236,6 +256,6 @@ public class  Visual_LPA extends LPA_Star{
 
             break;
         }
-        edge_update_map = new HashMap<>(); //broke it more somehow?
+        //edge_update_map = new HashMap<>(); //broke it more somehow?
     }
 }
