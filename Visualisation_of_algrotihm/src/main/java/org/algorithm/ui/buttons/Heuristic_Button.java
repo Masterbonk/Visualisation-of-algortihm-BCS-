@@ -2,6 +2,7 @@ package org.algorithm.ui.buttons;
 
 import processing.core.PApplet;
 
+import static org.algorithm.Main.algo_state;
 import static org.algorithm.Main.button_height;
 import static org.algorithm.ui.Color_Scheme.text_button;
 import static org.algorithm.ui.Color_Scheme.text_button_hover;
@@ -11,6 +12,16 @@ public class Heuristic_Button extends Button {
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
         super.tool_tip = "Shows the heuristic from start to goal node";
 
+    }
+
+    public void render(){
+        super.render();
+
+        if (algo_state == 0){
+            this.lock();
+        } else {
+            this.unlock();
+        }
     }
 
 }

@@ -48,11 +48,7 @@ public class Visual_Dijkstra extends Dijkstra{
         colored_edges = new HashSet<>();
         former_goal_node = null;
 
-        //Lock the heuristic button since it won't work with the Dijkstra algorithm.
-        if (Ui != null) {
-            Ui.get_Button("heuristic").clicked = false;
-            Ui.get_Button("heuristic").lock();
-        }
+
 
     }
 
