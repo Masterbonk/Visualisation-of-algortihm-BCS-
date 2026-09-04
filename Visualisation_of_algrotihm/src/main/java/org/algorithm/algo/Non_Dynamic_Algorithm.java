@@ -73,18 +73,5 @@ public abstract class Non_Dynamic_Algorithm extends Algorithm{
         return shortest_path; //returns shortest path starting from source to target
     }
 
-    public void lock_Buttons(){
-        for (String name : Ui.bottom_ui) {
-            if(name.equals("reset") || name.equals("pause") || name.equals("forward")) {
-               continue;
-            }
-            Ui.get_Button(name).lock();
-        }
-    }
 
-    public void unlock_Buttons(){
-        for (String name : Ui.bottom_ui) {
-            Ui.get_Button(name).unlock();
-        }
-    }
 }
