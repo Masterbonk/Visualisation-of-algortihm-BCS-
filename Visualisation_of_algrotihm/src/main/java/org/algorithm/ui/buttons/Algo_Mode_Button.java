@@ -39,28 +39,22 @@ public class Algo_Mode_Button extends Button {
             case 0:
                 text = "Dijkstra";
                 algorithm = new Visual_Dijkstra();
-                algorithm.set_Start(initial_start_node);
-                algorithm.set_Goal(initial_goal_node);
                 break;
             case 1:
                 text = "A*";
                 algorithm = new Visual_AStar();
-                algorithm.set_Start(initial_start_node);
-                algorithm.set_Goal(initial_goal_node);
                 break;
             case 2:
                 text = "LPA*";
                 algorithm = new Visual_LPA();
-                algorithm.set_Start(initial_start_node);
-                algorithm.set_Goal(initial_goal_node);
                 break;
             case 3:
                 text = "D* Lite"; //Pause
                 algorithm = new Visual_DStarLite();
-                algorithm.set_Start(initial_start_node);
-                algorithm.set_Goal(initial_goal_node);
                 break;
         }
+        algorithm.set_Start(initial_start_node);
+        algorithm.set_Goal(initial_goal_node);
         super.tool_tip = "Change which algorithm is run. The program is currently using: " + text;
 
         algorithm.set_of_nodes.addAll(node_array);
