@@ -5,6 +5,7 @@ import org.algorithm.Util;
 import org.algorithm.graph.edges.Edge;
 import org.algorithm.graph.Node;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -51,7 +52,9 @@ public class  Visual_LPA extends LPA_Star{
     }
 
     public void Main(){
-        println("Current stage is: "+stage);
+        println("Current stage is: " + stage);
+        System.out.println("We are ressearching Node: " + n);
+
 
         if (start_node == null || goal_node == null){ println("Start and or goal are null"); return;}
 
@@ -92,6 +95,7 @@ public class  Visual_LPA extends LPA_Star{
                 return;
             }
 
+            //weird code, does it activite properly?
             color_Edge_On_Path();
             if (edges_considered.size() > 1) {
                 stage = 7;
@@ -185,11 +189,16 @@ public class  Visual_LPA extends LPA_Star{
                     }
                 }
             } else if (stage == 2 || stage == 4 || stage == 5){
+
                 if (stage == 2) {
+
+                    System.out.println("underconsistent node: " + n);
                     n.update_G_Val(MAX_INT);
                     stage = 4;
                     checked_edges = new ArrayList<>();
+
                 } else if (stage == 4) {
+
                     if (checked_edges.size() != n.get_Connected().size() - 1) {
                         Edge e = n.get_Connected().get(checked_edges.size());
 
@@ -200,6 +209,7 @@ public class  Visual_LPA extends LPA_Star{
                         Node other_node = e.get_From();
                         if (e.get_From() == n) other_node = e.get_To();
                         update_Vertex(other_node);
+                        System.out.println("4 we updated vertex on node: " + other_node);
                         checked_edges.add(e);
 
                     } else {
@@ -209,9 +219,13 @@ public class  Visual_LPA extends LPA_Star{
                         color_Edge(e,-1, -1, 75);
 
                         //update neighboring vertex
+
+                        //WRONG NODE?
                         Node other_node = e.get_From();
                         if (e.get_From() == n) other_node = e.get_To();
                         update_Vertex(other_node);
+                        System.out.println("5 we updated vertex on node: " + other_node);
+                        checked_edges.add(e);
 
                         //go to stage 5
                         stage = 5;
@@ -236,6 +250,7 @@ public class  Visual_LPA extends LPA_Star{
     }
 
     void check_For_Edge_Change(){
+        System.out.println("check for edge change");
         for (Edge e : edge_update_map.keySet()) {
             if (edge_update_map.get(e) != -1) {
                 e.update_Weight(edge_update_map.get(e));
@@ -244,10 +259,9 @@ public class  Visual_LPA extends LPA_Star{
             update_Vertex(e.get_From());
 
             edge_update_map.remove(e);
-
-            break;
+            //used to be a break; here idk why
         }
-        //edge_update_map = new HashMap<>(); //broke it more somehow?
+        edge_update_map = new HashMap<>();
     }
 
     void color_Edge(Edge _e,int color1, int _color2, int _color3){
