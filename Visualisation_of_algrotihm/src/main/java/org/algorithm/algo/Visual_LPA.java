@@ -126,9 +126,7 @@ public class  Visual_LPA extends LPA_Star{
     private void color_Edge_On_Path() {
         Edge e = Util.find_Shared_Edge(edges_considered.get(0), edges_considered.get(1));
         if (e != null) {
-            e.color(-1,265,75);
-            Main.colored_edges.add(e);
-            Util.exchange(e);
+            color_Edge(e,-1,265,75);
         }
         edges_considered.removeFirst();
     }
@@ -161,9 +159,7 @@ public class  Visual_LPA extends LPA_Star{
                         //color the edge blue
                         //bug too
                         Edge e = n.get_Connected().get(checked_edges.size());
-                        e.color(-1, -1, 150);
-                        Main.colored_edges.add(e);
-                        Util.exchange(e);
+                        color_Edge(e,-1,-1,150);
 
                         //update neighboring vertex
                         Node other_node = e.get_From();
@@ -174,9 +170,8 @@ public class  Visual_LPA extends LPA_Star{
                     } else {
                         //color edge blue
                         Edge e = n.get_Connected().get(checked_edges.size());
-                        e.color(-1, -1, 150);
-                        Main.colored_edges.add(e);
-                        Util.exchange(e);
+
+                        color_Edge(e,-1, -1, 150);
 
                         //update neighboring vertex
                         Node other_node = e.get_From();
@@ -199,9 +194,7 @@ public class  Visual_LPA extends LPA_Star{
                         Edge e = n.get_Connected().get(checked_edges.size());
 
                         //color edge
-                        e.color(-1, -1, 75);
-                        Main.colored_edges.remove(e);
-                        Util.exchange(e);
+                        color_Edge(e,-1, -1, 75);
 
                         //update neighboring vertex
                         Node other_node = e.get_From();
@@ -213,9 +206,7 @@ public class  Visual_LPA extends LPA_Star{
                         Edge e = n.get_Connected().get(checked_edges.size());
 
                         //color edge
-                        e.color(-1, -1, 75);
-                        Main.colored_edges.remove(e);
-                        Util.exchange(e);
+                        color_Edge(e,-1, -1, 75);
 
                         //update neighboring vertex
                         Node other_node = e.get_From();
@@ -257,5 +248,11 @@ public class  Visual_LPA extends LPA_Star{
             break;
         }
         //edge_update_map = new HashMap<>(); //broke it more somehow?
+    }
+
+    void color_Edge(Edge _e,int color1, int _color2, int _color3){
+        _e.color(color1, _color2, _color3);
+        Main.colored_edges.remove(_e);
+        Util.Update_Edge_By_Exchange(_e);
     }
 }

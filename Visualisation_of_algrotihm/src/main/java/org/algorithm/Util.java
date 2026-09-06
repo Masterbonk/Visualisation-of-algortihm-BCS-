@@ -3,7 +3,6 @@ package org.algorithm;
 import org.algorithm.graph.edges.BiEdge;
 import org.algorithm.graph.edges.Edge;
 import org.algorithm.graph.Node;
-import org.algorithm.ui.Color_Scheme;
 import org.algorithm.ui.buttons.*;
 import processing.core.PApplet;
 
@@ -287,7 +286,7 @@ public class Util {
         }
     }
 
-    public static void exchange(Edge _a){
+    public static void Update_Edge_By_Exchange(Edge _a){
         edge_array.remove(_a);
         edge_array.add(_a);
     }

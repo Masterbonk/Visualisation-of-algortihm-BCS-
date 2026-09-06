@@ -91,7 +91,7 @@ public class Visual_Dijkstra extends Dijkstra{
             Edge tmp_edge = shortest_path.getLast();
             shortest_path.removeLast();
             tmp_edge.color(-1,265,75);
-            Util.exchange(tmp_edge);
+            Util.Update_Edge_By_Exchange(tmp_edge);
             stage = 4;
         }else if (stage == 3 && goal_node != null && prev.get(goal_node) == null) {
             stage = 0;
@@ -104,7 +104,7 @@ public class Visual_Dijkstra extends Dijkstra{
             Edge tmp_edge = shortest_path.getLast();
             shortest_path.removeLast();
             tmp_edge.color(-1,265,75);
-            Util.exchange(tmp_edge);
+            Util.Update_Edge_By_Exchange(tmp_edge);
             if (shortest_path.isEmpty()){
                 stage = 5;
             }
@@ -189,7 +189,7 @@ public class Visual_Dijkstra extends Dijkstra{
                         edges_considered.add(e);
                         e.color(-1, -1, 150);
                         Main.colored_edges.add(e);
-                        Util.exchange(e);
+                        Util.Update_Edge_By_Exchange(e);
 
                         //Gets the other node connected to edge e
                         Node v = u.help_Get_Opposite(e);

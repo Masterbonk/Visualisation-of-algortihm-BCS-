@@ -111,7 +111,7 @@ public class Visual_DStarLite extends Dynamic_Algorithm {
                     if (e != null) {
                         e.color(-1,-1,150);
                         Main.colored_edges.add(e);
-                        Util.exchange(e);
+                        Util.Update_Edge_By_Exchange(e);
                     }
                     start_node = find_Min_G_Node(start_node);
                     println("Moved start to node at x: "+start_node.get_X()+" y: "+start_node.get_Y());
