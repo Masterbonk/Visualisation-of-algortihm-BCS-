@@ -60,11 +60,11 @@ public class  Visual_LPA extends LPA_Star{
 
         //initilize stage
         if (stage == 0) {
-            /*
+
                 for (Edge e:Main.edge_array) {
                     e.color(75,75,75);
                 }
-            */
+
             initialize();
 
             Ui.get_Button("flag_b").lock();
@@ -111,13 +111,15 @@ public class  Visual_LPA extends LPA_Star{
             check_For_Edge_Change();
 
             for (Edge e:Main.colored_edges) {
-                e.color(-1,75,-1);
+                e.color(75,75,75); //grey
             }
 
 
             if (edge_update_map.isEmpty()) {
                 stage = 2;
             }
+
+
         }
 
         //Steps forward once before stopping itself again.
@@ -136,7 +138,7 @@ public class  Visual_LPA extends LPA_Star{
 
             Edge e = Util.find_Shared_Edge(edges_considered.get(0), edges_considered.get(1)); //edges are null
             if (e != null) {
-                color_Edge(e, -1, 265, 75);
+                color_Edge(e, -1, 265, 75); //green
             }
 
             edges_considered.removeFirst();
@@ -171,7 +173,7 @@ public class  Visual_LPA extends LPA_Star{
                         //color the edge blue
                         //bug too
                         Edge e = n.get_Connected().get(checked_edges.size());
-                        color_Edge(e,-1,-1,150);
+                        color_Edge(e,-1,-1,150); //blue
 
                         //update neighboring vertex
                         Node other_node = e.get_From();
@@ -183,7 +185,7 @@ public class  Visual_LPA extends LPA_Star{
                         //color edge blue
                         Edge e = n.get_Connected().get(checked_edges.size());
 
-                        color_Edge(e,-1, -1, 150);
+                        color_Edge(e,-1, -1, 150); //blue
 
                         //update neighboring vertex
                         Node other_node = e.get_From();
@@ -238,7 +240,7 @@ public class  Visual_LPA extends LPA_Star{
                         //go to stage 5
                         stage = 5;
                     }
-                    
+
                     //n = null;
                     //U.pop();
 
