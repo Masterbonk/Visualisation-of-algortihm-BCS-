@@ -1,6 +1,7 @@
 package org.algorithm;
 import org.algorithm.algo.Algorithm;
 import org.algorithm.algo.Visual_Dijkstra;
+import org.algorithm.algo.Visual_LPA;
 import org.algorithm.graph.*;
 import org.algorithm.graph.IO.Export_Handler;
 import org.algorithm.graph.IO.Parsing;
@@ -485,19 +486,27 @@ public class Main extends PApplet{
                             if (algorithm.get_Start() == n) algorithm.set_Start(null);
                             if (algorithm.get_Goal() == n) algorithm.set_Goal(null);
                             //remove all the edges, from our cpnnecting nodes
+                            node_array.remove(n);
+                            algorithm.remove_Node(n);
                             for (Edge e : n.get_Connected()) {
                                 Node tmp;
                                 if (e.get_From() == n) {
                                     tmp = e.get_To();
                                 } else tmp = e.get_From();
                                 tmp.get_Connected().remove(e);
+
                                 edge_array.remove(e);
                                 algorithm.edge_update_map.put(e,-1);
+
+                                if(algo_state == 3){
+                                    Visual_LPA tmp_algo = (Visual_LPA) algorithm;
+                                    tmp_algo.remove_from_checked_edges(e);
+                                }
                             }
+
                             //remove all edge from our node
                             n.make_new_Connected();
-                            node_array.remove(n);
-                            algorithm.remove_Node(n);
+
                             println("Clicked on node at point " + n.get_X() + ", " + n.get_Y());
                             break;
                         }
@@ -597,6 +606,12 @@ public class Main extends PApplet{
                             from.get_Connected().remove(e);
                             println("Edge was deleted");
                             algorithm.edge_update_map.put(e,-1);
+
+                            if(algo_state == 3){
+                                Visual_LPA tmp_algo = (Visual_LPA) algorithm;
+                                tmp_algo.remove_from_checked_edges(e);
+                            }
+
                             edge_array.remove(e);
                             break;
                         }
