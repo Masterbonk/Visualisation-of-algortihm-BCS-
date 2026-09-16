@@ -274,6 +274,7 @@ public class  Visual_LPA extends LPA_Star{
             update_Vertex(e.get_From());
 
             edge_update_map.remove(e);
+            break;
             //used to be a break; here idk why
         }
         edge_update_map = new HashMap<>();
@@ -283,5 +284,8 @@ public class  Visual_LPA extends LPA_Star{
         _e.color(color1, _color2, _color3);
         Main.colored_edges.remove(_e);
         Util.Update_Edge_By_Exchange(_e);
+    }
+    public void remove_from_checked_edges(Edge _e){
+        checked_edges.remove(_e);
     }
 }
