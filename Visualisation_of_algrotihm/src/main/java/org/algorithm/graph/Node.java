@@ -356,6 +356,10 @@ public class Node {
         return connected;
     }
 
+    public void make_new_Connected(){
+        connected = new ArrayList<>();
+    }
+
     public String get_Name(){return name;}
 
     public int get_Id(){

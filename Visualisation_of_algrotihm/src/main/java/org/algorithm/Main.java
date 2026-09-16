@@ -482,10 +482,9 @@ public class Main extends PApplet{
                     if (Ui.get_Button("cut").clicked && n.mouse_Over()) {
                         clicked_on_node = true;
                         if(n != algorithm.highlighted_node) {
-                            node_array.remove(n);
-                            algorithm.remove_Node(n);
                             if (algorithm.get_Start() == n) algorithm.set_Start(null);
                             if (algorithm.get_Goal() == n) algorithm.set_Goal(null);
+                            //remove all the edges, from our cpnnecting nodes
                             for (Edge e : n.get_Connected()) {
                                 Node tmp;
                                 if (e.get_From() == n) {
@@ -495,6 +494,10 @@ public class Main extends PApplet{
                                 edge_array.remove(e);
                                 algorithm.edge_update_map.put(e,-1);
                             }
+                            //remove all edge from our node
+                            n.make_new_Connected();
+                            node_array.remove(n);
+                            algorithm.remove_Node(n);
                             println("Clicked on node at point " + n.get_X() + ", " + n.get_Y());
                             break;
                         }
