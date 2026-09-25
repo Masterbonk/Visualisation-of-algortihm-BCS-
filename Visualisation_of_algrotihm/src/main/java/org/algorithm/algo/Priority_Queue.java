@@ -49,6 +49,10 @@ public abstract class Priority_Queue {
         return min;
     }
 
+    public Node peak(){
+        return heap.getFirst();
+    }
+
     /**
      * @return true if the given node n is in the queue
      * @param _n the node to check if it is in the queue
