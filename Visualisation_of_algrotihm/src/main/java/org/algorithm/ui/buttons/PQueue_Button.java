@@ -1,10 +1,10 @@
 package org.algorithm.ui.buttons;
 
+import org.algorithm.graph.Node;
 import org.algorithm.ui.Color_Scheme;
 import processing.core.PApplet;
 
-import static org.algorithm.Main.button_height;
-import static org.algorithm.Main.debug;
+import static org.algorithm.Main.*;
 import static org.algorithm.ui.Color_Scheme.text_button;
 import static org.algorithm.ui.Color_Scheme.text_button_hover;
 import static processing.core.PApplet.str;
@@ -17,6 +17,16 @@ public class PQueue_Button extends Button{
 
     public void click(){
         super.click();
+        if(debug){
+            for (Node n : algorithm.U.get_Heap()) {
+                println("node: " + n.get_Name());
+
+
+            }
+
+
+
+        }
     }
 
     public void visual_Render_Logic(){

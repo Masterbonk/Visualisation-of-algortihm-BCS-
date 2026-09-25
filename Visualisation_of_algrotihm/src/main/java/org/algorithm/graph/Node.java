@@ -290,9 +290,6 @@ public class Node {
         node_color = _color;
     }
 
-    public String getName(){
-        return name;
-    }
 
     public void change_In_PQ(boolean _valid){
         if(_valid){

@@ -89,6 +89,7 @@ public class LPA_Star extends Dynamic_Algorithm{
 
 
     public void update_Vertex(Node _n){
+        println("update Vertex on:" + _n);
         if (_n != start_node){
             _n.update_Rhs_Val(find_Min_G(_n));
         }

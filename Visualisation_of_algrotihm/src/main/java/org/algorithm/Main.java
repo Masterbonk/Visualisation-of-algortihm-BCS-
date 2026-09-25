@@ -10,6 +10,7 @@ import org.algorithm.graph.edges.Edge;
 import org.algorithm.graph.edges.Heuristic_Edge;
 import org.algorithm.ui.Color_Scheme;
 import org.algorithm.ui.UI;
+import org.algorithm.ui.buttons.Algo_Mode_Button;
 import processing.core.PApplet;
 import processing.core.PFont;
 
@@ -440,8 +441,13 @@ public class Main extends PApplet{
         if(debug){
             for (Node t : node_array) {
                 if (t.mouse_Over()) {
-                    println("Node edges "+ t.get_Connected());
+                    println("Node " + t + "'s edges "+ t.get_Connected());
                     println("Size of connected = "+t.get_Connected().size());
+                    for (Edge tmp_e : t.get_Connected()){
+                        println("To: "+ tmp_e.get_To().get_Name() + " From: " + tmp_e.get_From().get_Name());
+
+                    }
+
                 }
             }
 
@@ -485,9 +491,13 @@ public class Main extends PApplet{
                         if(n != algorithm.highlighted_node) {
                             if (algorithm.get_Start() == n) algorithm.set_Start(null);
                             if (algorithm.get_Goal() == n) algorithm.set_Goal(null);
+
                             //remove all the edges, from our cpnnecting nodes
-                            node_array.remove(n);
-                            algorithm.remove_Node(n);
+
+                            println("node name: " + n.get_Name());
+                            println("Clicked on node at point " + n.get_X() + ", " + n.get_Y());
+
+
                             for (Edge e : n.get_Connected()) {
                                 Node tmp;
                                 if (e.get_From() == n) {
@@ -503,11 +513,12 @@ public class Main extends PApplet{
                                     tmp_algo.remove_from_checked_edges(e);
                                 }
                             }
+                            node_array.remove(n);
+                            algorithm.remove_Node(n);
 
                             //remove all edge from our node
-                            n.make_new_Connected();
+                            // n.make_new_Connected();
 
-                            println("Clicked on node at point " + n.get_X() + ", " + n.get_Y());
                             break;
                         }
                     } else if (Ui.get_Button("line").clicked && n.mouse_Over()) {
@@ -661,6 +672,13 @@ public class Main extends PApplet{
 
         } else if (mouseButton == RIGHT){
             // right deselects any selected object
+
+            if (Ui.get_Button("algo_mode").mouse_Over()) {
+                clicked_on_button = true;
+                Algo_Mode_Button tmp_button = (Algo_Mode_Button) Ui.get_Button("algo_mode");
+                tmp_button.click(true);
+            }
+
             if (Ui.get_Button("line").clicked) {
                 node_1 = null;
             }

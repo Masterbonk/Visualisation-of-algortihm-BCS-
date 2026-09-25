@@ -168,7 +168,6 @@ public abstract class Button {
     protected void render_Tooltip(){
         if(mouse_Over()){
 
-            if (debug) sketch.circle(500,500,70);
 
         sketch.push();
         sketch.fill(text_button_hover);

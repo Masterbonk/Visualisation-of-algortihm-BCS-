@@ -14,6 +14,7 @@ import static org.algorithm.ui.Color_Scheme.text_button_hover;
 
 public class Algo_Mode_Button extends Button {
 
+    boolean right_click = false;
 
     public Algo_Mode_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
@@ -21,7 +22,11 @@ public class Algo_Mode_Button extends Button {
         super.tool_tip = "Change which algorithm is run. The program is currently using: " + text;
 
     }
-
+    public void click(boolean _right_click){
+        right_click = _right_click;
+        click();
+        right_click = false;
+    }
 
     public void click(){
         super.click();
@@ -30,9 +35,18 @@ public class Algo_Mode_Button extends Button {
 
         Ui.get_Button("reset").click();
 
-        algo_state++;
+        if(right_click) {
+            algo_state--;
+        } else {
+            algo_state++;
+        }
+
         if(algo_state>3){
             algo_state = 0;
+        }
+
+        if(algo_state<0){
+            algo_state = 3;
         }
 
         switch (algo_state) {

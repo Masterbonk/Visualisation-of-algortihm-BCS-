@@ -83,9 +83,16 @@ public abstract class Dynamic_Algorithm extends Algorithm {
      */
     public void remove_Node(Node n){
         set_of_nodes.remove(n);
+        try {
+            U.remove(n);
+        } catch (Exception ignored){
+
+        }
+        /*
         if(U != null){
             U.remove(n);
         }
+        */
     }
 
     public void update_Vertex(Node _n){

@@ -61,7 +61,9 @@ public abstract class Priority_Queue {
      * Removes the given node n from the queue
      * @param _n the given node to be removed
      * */
-    public void remove(Node _n) {}
+    public void remove(Node _n) {
+
+    }
 
     /**
      * @return the size of the queue
