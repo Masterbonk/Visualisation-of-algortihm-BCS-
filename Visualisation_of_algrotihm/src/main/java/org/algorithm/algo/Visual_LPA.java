@@ -160,7 +160,7 @@ public class  Visual_LPA extends LPA_Star{
             //println("Running pathfinding");
 
 
-            if (n == null) {
+            if (n == null && !U.is_empty()) {
                 n = U.peak();
                 highlighted_node = n;
             }
