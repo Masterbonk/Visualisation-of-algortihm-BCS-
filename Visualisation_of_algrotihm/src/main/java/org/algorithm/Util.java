@@ -190,7 +190,7 @@ public class Util {
 
             Node other_node = e.get_From();
             if (e.get_From() == _n) other_node = e.get_To();
-            println("to " + e.get_To() + " from "+ e.get_From().get_Name());
+            //println("to " + e.get_To() + " from "+ e.get_From().get_Name());
 
             if (other_node.get_G_Val() != MAX_INT) {
                 if (min > e.get_Weight()+other_node.get_G_Val() && e.get_Weight()+other_node.get_G_Val() > -1){
