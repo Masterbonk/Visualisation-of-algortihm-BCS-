@@ -447,7 +447,6 @@ public class Main extends PApplet{
                         println("To: "+ tmp_e.get_To().get_Name() + " From: " + tmp_e.get_From().get_Name());
 
                     }
-
                 }
             }
 
@@ -615,6 +614,7 @@ public class Main extends PApplet{
                             Node from = e.get_From();
                             to.get_Connected().remove(e);
                             from.get_Connected().remove(e);
+
                             println("Edge was deleted");
                             algorithm.edge_update_map.put(e,-1);
 

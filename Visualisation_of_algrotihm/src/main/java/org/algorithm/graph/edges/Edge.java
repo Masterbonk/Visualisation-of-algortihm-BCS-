@@ -70,6 +70,10 @@ public class Edge {
 
     public Node get_From(){return from;}
 
+    public void delete_To(){to = null;}
+
+    public void delete_From(){from = null;}
+
     public void render(){
 
         sketch.push();

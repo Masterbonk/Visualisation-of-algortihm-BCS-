@@ -165,27 +165,27 @@ public class  Visual_LPA extends LPA_Star{
                 highlighted_node = n;
             }
 
-            println("n = " + n + " PQ top = " + U.peak());
+            //println("n = " + n + " PQ top = " + U.peak());
 
 
             if ((n.get_G_Val() > n.get_Rhs_Val() && stage == 2) || stage == 3){
 
-                println("n = " + n + " PQ top = " + U.peak());
+                //println("n = " + n + " PQ top = " + U.peak());
 
                 if (stage == 2) {
 
-                    println("n = " + n + " PQ top = " + U.peak());
+                    //println("n = " + n + " PQ top = " + U.peak());
 
                     n.update_G_Val(n.get_Rhs_Val());
                     stage = 3;
                     checked_edges = new ArrayList<>();
                 } else if (stage == 3){
 
-                    println("n = " + n + " PQ top = " + U.peak());
+                    //println("n = " + n + " PQ top = " + U.peak());
 
                     if (checked_edges.size() != n.get_Connected().size() - 1) {
 
-                        println("n = " + n + " PQ top = " + U.peak());
+                        //println("n = " + n + " PQ top = " + U.peak());
 
                         //color the edge blue
                         //bug too
@@ -200,7 +200,7 @@ public class  Visual_LPA extends LPA_Star{
 
                     } else {
 
-                        println("n = " + n + " PQ top = " + U.peak());
+                        //println("n = " + n + " PQ top = " + U.peak());
 
                         //color edge blue
                         Edge e = n.get_Connected().get(checked_edges.size());
@@ -226,12 +226,12 @@ public class  Visual_LPA extends LPA_Star{
                 }
             } else if (stage == 2 || stage == 4 || stage == 5){
 
-                println("n = " + n + " PQ top = " + U.peak());
+                //println("n = " + n + " PQ top = " + U.peak());
 
 
                 if (stage == 2) {
 
-                    println("n = " + n + " PQ top = " + U.peak());
+                    //println("n = " + n + " PQ top = " + U.peak());
 
                     //System.out.println("underconsistent node: " + n);
                     n.update_G_Val(MAX_INT);
@@ -240,36 +240,41 @@ public class  Visual_LPA extends LPA_Star{
 
                 } else if (stage == 4) {
 
-                    println("n = " + n + " PQ top = " + U.peak());
+                    //println("n = " + n + " PQ top = " + U.peak());
 
-                    //if (checked_edges.size() < n.get_Connected().size() -1) { ?
+                    if (checked_edges.size() < n.get_Connected().size() -1) {
 
-                    if (checked_edges.size() != n.get_Connected().size() -1) {
+                    //if (checked_edges.size() != n.get_Connected().size() -1) {
 
-                        println("n = " + n + " PQ top = " + U.peak());
+                        //println("n = " + n + " PQ top = " + U.peak());
 
                         //println("checked edges size: " + checked_edges.size() + " n.get connected size: " + n.get_Connected().size());
                         //only get an edge if there is an edge to get, can try and fetch non-existent edges
                         if (!n.get_Connected().isEmpty()) {
 
-                            println("n = " + n + " PQ top = " + U.peak());
-
-                            Edge e = n.get_Connected().get(checked_edges.size()); //index out of bounce exception
-
+                            //println("n = " + n + " PQ top = " + U.peak());
+                            println("n connected " + n.get_Connected().size() + " checked edges " + checked_edges.size());
+                            println("n connected edges" + n.get_Connected() + checked_edges);
+                            Edge e;
+                            if (n.get_Connected().size() == 1 && checked_edges.size() == 1) {
+                                 e = n.get_Connected().getFirst();
+                            } else {
+                                 e = n.get_Connected().get(checked_edges.size());  //index out of bounce exception
+                            }
                         //color edge
-                        color_Edge(e,-1, -1, 75);
+                            color_Edge(e,-1, -1, 75);
 
-                        //update neighboring vertex
-                        Node other_node = e.get_From();
-                        if (e.get_From() == n) other_node = e.get_To();
-                        update_Vertex(other_node);
-                        //System.out.println("4 we updated vertex on node: " + other_node);
-                        checked_edges.add(e);
+                            //update neighboring vertex
+                            Node other_node = e.get_From();
+                            if (e.get_From() == n) other_node = e.get_To();
+                            update_Vertex(other_node);
+                            //System.out.println("4 we updated vertex on node: " + other_node);
+                            checked_edges.add(e);
                         }
 
                     } else {
 
-                        println("n = " + n + " PQ top = " + U.peak());
+                        //println("n = " + n + " PQ top = " + U.peak());
 
                         Edge e = n.get_Connected().get(checked_edges.size());
 
@@ -294,7 +299,7 @@ public class  Visual_LPA extends LPA_Star{
 
                 } else if (stage == 5){
 
-                    println("n = " + n + " PQ top = " + U.peak());
+                    //println("n = " + n + " PQ top = " + U.peak());
 
 
                     //reset tmp & n
@@ -311,7 +316,7 @@ public class  Visual_LPA extends LPA_Star{
             }
         } else {
 
-            println("n = " + n + " PQ top = " + U.peak());
+            //println("n = " + n + " PQ top = " + U.peak());
 
             //compute shortest path done / not running
             //unlock buttons here
@@ -328,9 +333,13 @@ public class  Visual_LPA extends LPA_Star{
         for (Edge e : edge_update_map.keySet()) {
             if (edge_update_map.get(e) != -1) {
                 e.update_Weight(edge_update_map.get(e));
+
             }
-            update_Vertex(e.get_To());
-            update_Vertex(e.get_From());
+            if(node_array.contains(e.get_To())) update_Vertex(e.get_To());
+            if(node_array.contains(e.get_From())) update_Vertex(e.get_From());
+            e.delete_To();
+            e.delete_From();
+
 
             //the break and remove structure was to try and check for edges changed in a stepwise manner, but led to more issues than help with this implementation i think
             //edge_update_map.remove(e);
