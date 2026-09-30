@@ -81,42 +81,40 @@ public class Edge {
     public void render(){
 
         sketch.push();
-        if (Ui.get_Button("cut").clicked){
-            if(mouseOver() || to.mouse_Over() || from.mouse_Over()){
+
+
+
+
+        if(Ui.get_Button("cut").clicked){
+            if (mouseOver() || to.mouse_Over() || from.mouse_Over()) {
                 sketch.color(Color_Scheme.edge_delete_hover);
                 sketch.stroke(Color_Scheme.edge_delete_hover);
-                //never gets to here
-
             } else {
                 sketch.color(Color_Scheme.edge_idle);
                 sketch.stroke(Color_Scheme.edge_idle);
             }
-        }
-        if (Ui.get_Button("weight").clicked){
-            if(mouseOver()){
+        } else if(Ui.get_Button("weight").clicked){
+            if (mouseOver() || (display_edge_weight_ui && activeEdge == this)) {
                 sketch.color(Color_Scheme.edge_weight_hover);
                 sketch.stroke(Color_Scheme.edge_weight_hover);
-            } else if(display_edge_weight_ui && activeEdge == this){
-                sketch.color(Color_Scheme.edge_weight_hover);
-                sketch.stroke(Color_Scheme.edge_weight_hover);
-            }else {
+            } else {
                 sketch.color(Color_Scheme.edge_idle);
                 sketch.stroke(Color_Scheme.edge_idle);
             }
-        } if (edge_state == Egde_State.finalpath) {
+        } else if (edge_state == Egde_State.finalpath) {
             sketch.color(Color_Scheme.edge_final_path);
             sketch.strokeWeight(20);
             sketch.stroke(Color_Scheme.edge_final_path);
-        } if (edge_state == Egde_State.considered) {
+        } else if (edge_state == Egde_State.considered) {
             sketch.color(Color_Scheme.edge_considered);
             sketch.strokeWeight(20);
             sketch.stroke(Color_Scheme.edge_considered);
-        } if (edge_state == Egde_State.idle) {
+        } else if (edge_state == Egde_State.idle) {
             sketch.color(Color_Scheme.edge_idle);
             sketch.stroke(Color_Scheme.edge_idle);
         }
 
-        sketch.strokeWeight(20);
+        //sketch.strokeWeight(20);
 
         sketch.line(from.get_X(),from.get_Y(), to.get_X(), to.get_Y());
         sketch.pop();
