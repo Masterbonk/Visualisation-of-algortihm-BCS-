@@ -111,11 +111,11 @@ public class Node {
         }  else if (in_PQ){
             color(Color_Scheme.in_PQ_node);
         } else if(debug && (g != MAX_INT || rhs != MAX_INT)) {
-            color(Color_Scheme.touched_node);
+            color(Color_Scheme.debug_node);
         } else if (/*!algorithm.dynamic && */algorithm.highlighted_node == this){
             color(Color_Scheme.node_highlighted);
         }else{
-            color(Color_Scheme.node);
+            color(Color_Scheme.node_idle);
         }
         sketch.push();
         dim = 50;

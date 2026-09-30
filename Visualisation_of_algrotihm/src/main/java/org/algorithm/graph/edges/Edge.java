@@ -1,6 +1,8 @@
 package org.algorithm.graph.edges;
 
+import org.algorithm.Egde_State;
 import org.algorithm.graph.Node;
+import org.algorithm.ui.Color_Scheme;
 import processing.core.PApplet;
 
 import static org.algorithm.Main.*;
@@ -14,6 +16,8 @@ public class Edge {
     private int weight;
     int r = 75, g = 75, b = 75;
     private int id;
+
+    protected Egde_State edge_state = Egde_State.idle;
 
 
     public Edge(PApplet _sketch, Node _from, Node _to, int _weight){
@@ -79,27 +83,41 @@ public class Edge {
         sketch.push();
         if (Ui.get_Button("cut").clicked){
             if(mouseOver() || to.mouse_Over() || from.mouse_Over()){
-                color(265,-1,-1);
+                sketch.color(Color_Scheme.edge_delete_hover);
+                sketch.stroke(Color_Scheme.edge_delete_hover);
+                //never gets to here
 
             } else {
-                color(75,-1,-1);
+                sketch.color(Color_Scheme.edge_idle);
+                sketch.stroke(Color_Scheme.edge_idle);
             }
         }
         if (Ui.get_Button("weight").clicked){
             if(mouseOver()){
-                color(150,-1,-1);
+                sketch.color(Color_Scheme.edge_weight_hover);
+                sketch.stroke(Color_Scheme.edge_weight_hover);
             } else if(display_edge_weight_ui && activeEdge == this){
-                color(150,-1,-1);
+                sketch.color(Color_Scheme.edge_weight_hover);
+                sketch.stroke(Color_Scheme.edge_weight_hover);
             }else {
-                color(75,-1,-1);
+                sketch.color(Color_Scheme.edge_idle);
+                sketch.stroke(Color_Scheme.edge_idle);
             }
-        } else{
-            //color(-1,75,-1);
-        }
-        sketch.stroke(r,g,b);
-        if(b >= 150 || g >= 150){
+        } if (edge_state == Egde_State.finalpath) {
+            sketch.color(Color_Scheme.edge_final_path);
             sketch.strokeWeight(20);
+            sketch.stroke(Color_Scheme.edge_final_path);
+        } if (edge_state == Egde_State.considered) {
+            sketch.color(Color_Scheme.edge_considered);
+            sketch.strokeWeight(20);
+            sketch.stroke(Color_Scheme.edge_considered);
+        } if (edge_state == Egde_State.idle) {
+            sketch.color(Color_Scheme.edge_idle);
+            sketch.stroke(Color_Scheme.edge_idle);
         }
+
+        sketch.strokeWeight(20);
+
         sketch.line(from.get_X(),from.get_Y(), to.get_X(), to.get_Y());
         sketch.pop();
 
@@ -108,6 +126,7 @@ public class Edge {
     }
 
     public void render_Weight(){
+        //implement color shceme
         if (Ui.get_Button("Edge_display").clicked) {
 
 
@@ -133,20 +152,6 @@ public class Edge {
         }
     }
 
-
-    //Renders the update edge weight ui and text
-
-    public void color(int _r, int _g, int _b){
-        if(_r > -1 ){
-            r = _r;
-        }
-        if(_g > -1 ){
-            g = _g;
-        }
-        if(_b > -1 ){
-            b = _b;
-        }
-    }
 
 
     /**
@@ -252,6 +257,10 @@ public class Edge {
         }
         //returns the complete binary, if the point is inside the box, we have 0000 as a value, else it's outside of it.
         return out;
+    }
+
+    public void set_Enum(Egde_State _state) {
+        edge_state = _state;
     }
 }
 

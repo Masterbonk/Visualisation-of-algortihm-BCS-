@@ -10,9 +10,8 @@ import org.algorithm.graph.Node;
 import org.algorithm.ui.Color_Scheme;
 import processing.core.PApplet;
 
+import static org.algorithm.Egde_State.idle;
 import static org.algorithm.Main.*;
-import static org.algorithm.ui.Color_Scheme.text_button;
-import static org.algorithm.ui.Color_Scheme.text_button_hover;
 
 public class Reset_Button extends Button {
     public Reset_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
@@ -47,10 +46,10 @@ public class Reset_Button extends Button {
 
 
         for (Edge e: Main.edge_array) {
-            e.color(75,75,75);
+            e.set_Enum(idle);
         }
         for (Node n : algorithm.set_of_nodes){
-            n.color(Color_Scheme.node);
+            n.color(Color_Scheme.node_idle);
             n.change_In_PQ(false);
         }
         if (algorithm != null && algorithm.get_U() != null) {

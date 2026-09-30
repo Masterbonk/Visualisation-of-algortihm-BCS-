@@ -14,9 +14,10 @@ public class Color_Scheme {
     public static int text_button_clicked;
     public static int bg_button_clicked;
     public static  int border_button;
+
+    public static int node_idle;
     public static int line;
-    public static int node;
-    public static int touched_node;
+    public static int debug_node;
     public static  int cut_node;
     public static  int hover_node;
     public static int in_PQ_node;
@@ -24,8 +25,23 @@ public class Color_Scheme {
     public static int bg_button_algo_one;
     public static int bg_button_algo_two;
     public static int bg_button_algo_three;
-
     public static int node_highlighted;
+
+    public static int edge_idle;
+    public static int edge_considered;
+    public static int edge_final_path;
+    public static int edge_delete_hover;
+    public static int edge_weight_hover;
+
+    public static int button_idle;
+    public static int button_hovering;
+    public static int button_clicked;
+
+    public static int node_hovering;
+    public static int node_deleting_hovering;
+    public static int node_in_PQ_highlight;
+    public static int node_debug;
+
 
     public Color_Scheme(PApplet _sketch){
         sketch = _sketch;
@@ -37,11 +53,13 @@ public class Color_Scheme {
             //make colors pink
             update_Button_Colors(true);
             update_Node_Colors(true);
+            update_Edge_Colors(true);
         } else {
             //default colors
             bg = sketch.color(204);
             update_Button_Colors(false);
             update_Node_Colors(false);
+            update_Edge_Colors(false);
 
             //buttons
 
@@ -50,8 +68,8 @@ public class Color_Scheme {
 
     private void update_Node_Colors(boolean _pink){
         if (_pink){
-            node = sketch.color(247,126,196);
-            touched_node = sketch.color(181, 3, 252);
+            node_idle = sketch.color(247,126,196);
+            debug_node = sketch.color(181, 3, 252);
             cut_node = sketch.color(119,1,62);
             hover_node = sketch.color(207,99,249);
             in_PQ_node = sketch.color(252,183,200);
@@ -60,13 +78,24 @@ public class Color_Scheme {
 
         } else{
             //default
-            node = sketch.color(232,25,25);
-            touched_node = sketch.color(181, 3, 252);
+            node_idle = sketch.color(232,25,25);
+            debug_node = sketch.color(181, 3, 252);
             cut_node = sketch.color(160, 4, 4);
             hover_node = sketch.color(24,204,24);
             in_PQ_node = sketch.color(238,218,18);
             node_highlighted = sketch.color(47, 163, 1);
         }
+    }
+
+    private void  update_Edge_Colors(boolean _pink){
+
+            edge_idle = sketch.color(75,75,75);
+            edge_considered = sketch.color(75,75,150);
+            edge_final_path = sketch.color(75, 265, 75);
+            edge_delete_hover = sketch.color(265,75,75);
+            edge_weight_hover = sketch.color(150,75,75);
+
+
     }
 
     private void update_Button_Colors(boolean _pink){

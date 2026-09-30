@@ -1,19 +1,24 @@
 package org.algorithm.algo;
 
+import org.algorithm.Egde_State;
 import org.algorithm.Main;
 import org.algorithm.Util;
 import org.algorithm.graph.edges.Edge;
 import org.algorithm.graph.Node;
+import org.algorithm.Egde_State;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import static org.algorithm.Egde_State.*;
 import static org.algorithm.Main.*;
+import static org.algorithm.ui.Color_Scheme.edge_final_path;
 import static processing.core.PApplet.print;
 import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
+
 
 public class  Visual_LPA extends LPA_Star{
     //Stage meanings:
@@ -61,7 +66,7 @@ public class  Visual_LPA extends LPA_Star{
         if (stage == 0) {
 
                 for (Edge e:Main.edge_array) {
-                    e.color(75,75,75);
+                    e.set_Enum(idle);
                 }
 
             initialize();
@@ -79,13 +84,13 @@ public class  Visual_LPA extends LPA_Star{
             lock_Buttons();
             compute_Shortest_Path();
             for (Edge e: Main.colored_edges){
-                e.color(-1, 75, 150); //blue?
+                e.set_Enum(considered);
             }
         } else if (stage == 6) {
             edges_considered = super.get_Shortest_Path(goal_node);
 
             for (Edge e: Main.colored_edges) {
-                e.color(-1, 75, 150); //blue?
+                e.set_Enum(considered);
             }
 
             if(edges_considered == null) {
@@ -109,7 +114,7 @@ public class  Visual_LPA extends LPA_Star{
             check_For_Edge_Change();
 
             for (Edge e:Main.colored_edges) {
-                e.color(75,75,75); //grey
+                e.set_Enum(idle);
             }
 
 
@@ -140,7 +145,7 @@ public class  Visual_LPA extends LPA_Star{
 
         Edge e = Util.find_Shared_Edge(edges_considered.get(0), edges_considered.get(1)); //edges are null
         if (e != null) {
-            color_Edge(e, -1, 265, 75); //green
+            e.set_Enum(finalpath);
         }
 
         edges_considered.removeFirst();
@@ -177,7 +182,7 @@ public class  Visual_LPA extends LPA_Star{
 
                         //color the edge blue
                         Edge e = n.get_Connected().get(checked_edges.size());
-                        color_Edge(e,-1,-1,150); //blue
+                        e.set_Enum(considered);
 
                         //update neighboring vertex
                         Node other_node = e.get_From();
@@ -190,7 +195,7 @@ public class  Visual_LPA extends LPA_Star{
                         //color edge blue
                         Edge e = n.get_Connected().get(checked_edges.size());
 
-                        color_Edge(e,-1, -1, 150); //blue
+                        e.set_Enum(considered);
 
                         //update neighboring vertex
                         Node other_node = e.get_From();
@@ -227,7 +232,8 @@ public class  Visual_LPA extends LPA_Star{
                                  e = n.get_Connected().get(checked_edges.size());
                             }
                             //color edge grey
-                            color_Edge(e,-1, -1, 75);
+                            e.set_Enum(idle);
+
 
                             //update neighboring vertex
                             Node other_node = e.get_From();
@@ -245,7 +251,8 @@ public class  Visual_LPA extends LPA_Star{
                             e = n.get_Connected().get(checked_edges.size());
                         }
                         //color edge grey
-                        color_Edge(e,-1, -1, 75);
+                        e.set_Enum(idle);
+
 
                         //update neighboring vertex
                         Node other_node = e.get_From();
@@ -304,11 +311,6 @@ public class  Visual_LPA extends LPA_Star{
         edge_update_map = new HashMap<>();
     }
 
-    void color_Edge(Edge _e,int color1, int _color2, int _color3){
-        _e.color(color1, _color2, _color3);
-        Main.colored_edges.remove(_e);
-        Util.Update_Edge_By_Exchange(_e);
-    }
     public void remove_from_checked_edges(Edge _e){
         checked_edges.remove(_e);
     }

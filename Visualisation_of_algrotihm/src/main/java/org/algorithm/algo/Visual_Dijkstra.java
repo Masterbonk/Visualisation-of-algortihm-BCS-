@@ -1,5 +1,6 @@
 package org.algorithm.algo;
 
+import org.algorithm.Egde_State;
 import org.algorithm.Main;
 import org.algorithm.Util;
 import org.algorithm.graph.Node;
@@ -86,7 +87,7 @@ public class Visual_Dijkstra extends Dijkstra{
             shortest_path = get_Shortest_Path_Edges();
             Edge tmp_edge = shortest_path.getLast();
             shortest_path.removeLast();
-            tmp_edge.color(-1,265,75);
+            tmp_edge.set_Enum(Egde_State.finalpath);
             Util.Update_Edge_By_Exchange(tmp_edge);
             stage = 4;
         }else if (stage == 3 && goal_node != null && prev.get(goal_node) == null) {
@@ -99,7 +100,7 @@ public class Visual_Dijkstra extends Dijkstra{
 
             Edge tmp_edge = shortest_path.getLast();
             shortest_path.removeLast();
-            tmp_edge.color(-1,265,75);
+            tmp_edge.set_Enum(Egde_State.finalpath);
             Util.Update_Edge_By_Exchange(tmp_edge);
             if (shortest_path.isEmpty()){
                 stage = 5;
@@ -124,14 +125,14 @@ public class Visual_Dijkstra extends Dijkstra{
                 //lock_Buttons();
                 stage = 1;
                 for (Edge e: colored_edges){
-                    e.color(-1, 75, 150);
+                    e.set_Enum(Egde_State.considered);
                 }
                 //Ui.get_Button("reset").click();
             } else if (former_goal_node != goal_node){
                 //lock_Buttons();
                 stage = 3;
                 for (Edge e: colored_edges){
-                    e.color(-1, 75, 150);
+                    e.set_Enum(Egde_State.considered);
                 }
             }
         }
@@ -183,7 +184,7 @@ public class Visual_Dijkstra extends Dijkstra{
                     if (e != null) {
                         checked.add(e);
                         edges_considered.add(e);
-                        e.color(-1, -1, 150);
+                        e.set_Enum(Egde_State.considered);
                         Main.colored_edges.add(e);
                         Util.Update_Edge_By_Exchange(e);
 

@@ -8,6 +8,8 @@ import org.algorithm.graph.Node;
 import java.util.HashMap;
 
 import static java.lang.Math.min;
+import static org.algorithm.Egde_State.considered;
+import static org.algorithm.Egde_State.idle;
 import static org.algorithm.Util.*;
 import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
@@ -40,7 +42,7 @@ public class Visual_DStarLite extends Dynamic_Algorithm {
 
         if (Main.initial_start_node == start_node) {
             for (Edge e : Main.colored_edges) {
-                e.color(75, 75, 75);
+                e.set_Enum(idle);
             }
         }
         //if (start == null) throw new NullPointerException("Start not set!");
@@ -109,7 +111,7 @@ public class Visual_DStarLite extends Dynamic_Algorithm {
                     if (!U.get_Heap().isEmpty()) U.get_Heap().getFirst().change_In_PQ(false);
                     Edge e = find_Shared_Edge(start_node, find_Min_G_Node(start_node));
                     if (e != null) {
-                        e.color(-1,-1,150);
+                        e.set_Enum(considered);
                         Main.colored_edges.add(e);
                         Util.Update_Edge_By_Exchange(e);
                     }

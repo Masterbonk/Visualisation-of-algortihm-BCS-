@@ -1,5 +1,6 @@
 package org.algorithm.algo;
 
+import org.algorithm.Egde_State;
 import org.algorithm.Main;
 import org.algorithm.Util;
 import org.algorithm.graph.Node;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import static org.algorithm.Egde_State.idle;
 import static org.algorithm.Main.*;
 
 public class Visual_AStar extends A_Star{
@@ -89,7 +91,7 @@ public class Visual_AStar extends A_Star{
                 shortest_path = get_Shortest_Path_Edges();
                 Edge tmp_edge = shortest_path.getLast();
                 shortest_path.removeLast();
-                tmp_edge.color(-1, 265, 75);
+                tmp_edge.set_Enum(Egde_State.finalpath);
                 Util.Update_Edge_By_Exchange(tmp_edge);
                 stage = 4;
             } else if (stage == 3 && goal_node != null && prev.get(goal_node) == null) {
@@ -102,7 +104,7 @@ public class Visual_AStar extends A_Star{
 
                 Edge tmp_edge = shortest_path.getLast();
                 shortest_path.removeLast();
-                tmp_edge.color(-1, 265, 75);
+                tmp_edge.set_Enum(Egde_State.finalpath);
                 Util.Update_Edge_By_Exchange(tmp_edge);
                 if (shortest_path.isEmpty()) {
                     stage = 5;
@@ -125,7 +127,7 @@ public class Visual_AStar extends A_Star{
                     lock_Buttons();
                     stage = 0;
                     for (Edge e : colored_edges) {
-                        e.color(-1, 75, 75);
+                        e.set_Enum(idle);
                     }
                     Ui.get_Button("reset").click();
                 }
@@ -180,7 +182,7 @@ public class Visual_AStar extends A_Star{
                     if (e != null) {
                         checked.add(e);
                         edges_considered.add(e);
-                        e.color(-1, -1, 150);
+                        e.set_Enum(Egde_State.considered);
                         Main.colored_edges.add(e);
                         Util.Update_Edge_By_Exchange(e);
 
