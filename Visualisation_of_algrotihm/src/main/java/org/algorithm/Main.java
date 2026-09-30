@@ -441,8 +441,8 @@ public class Main extends PApplet{
         if(debug){
             for (Node t : node_array) {
                 if (t.mouse_Over()) {
-                    println("Node " + t + "'s edges "+ t.get_Connected());
-                    println("Size of connected = "+t.get_Connected().size());
+                    //println("Node " + t + "'s edges "+ t.get_Connected());
+                    //println("Size of connected = "+t.get_Connected().size());
                     for (Edge tmp_e : t.get_Connected()){
                         println("To: "+ tmp_e.get_To().get_Name() + " From: " + tmp_e.get_From().get_Name());
 

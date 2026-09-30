@@ -54,8 +54,6 @@ public class  Visual_LPA extends LPA_Star{
     public void Main(){
         println("Current stage is: " + stage);
 
-        //System.out.println("We are ressearching Node: " + n);
-
 
         if (start_node == null || goal_node == null){ println("Start and or goal are null"); return;}
 
@@ -91,7 +89,6 @@ public class  Visual_LPA extends LPA_Star{
             }
 
             if(edges_considered == null) {
-                //println("Entering stage 2");
                 stage = 2;
                 return; //do not remove, we now need to do pathfinding
             }
@@ -137,12 +134,16 @@ public class  Visual_LPA extends LPA_Star{
             return;
         }
 
-            Edge e = Util.find_Shared_Edge(edges_considered.get(0), edges_considered.get(1)); //edges are null
-            if (e != null) {
-                color_Edge(e, -1, 265, 75); //green
-            }
+        //reset to blue or grey?
 
-            edges_considered.removeFirst();
+        //then color green
+
+        Edge e = Util.find_Shared_Edge(edges_considered.get(0), edges_considered.get(1)); //edges are null
+        if (e != null) {
+            color_Edge(e, -1, 265, 75); //green
+        }
+
+        edges_considered.removeFirst();
 
     }
 
@@ -157,38 +158,24 @@ public class  Visual_LPA extends LPA_Star{
     public void compute_Shortest_Path(){
 
         if ((U.top_Key().compareTo(calculate_Key(goal_node)) < 0 || goal_node.get_Rhs_Val() != goal_node.get_G_Val() ) &&  !U.get_Heap().isEmpty()){
-            //println("Running pathfinding");
-
 
             if (n == null && !U.is_empty()) {
                 n = U.peak();
                 highlighted_node = n;
             }
 
-            //println("n = " + n + " PQ top = " + U.peak() + " getfirst vs " + U.get_Heap().getFirst());
-
-
             if ((n.get_G_Val() > n.get_Rhs_Val() && stage == 2) || stage == 3){
 
-                //println("n = " + n + " PQ top = " + U.peak() + " getfirst vs " + U.get_Heap().getFirst());
-
                 if (stage == 2) {
-
-                    //println("n = " + n + " PQ top = " + U.peak() + " getfirst vs " + U.get_Heap().getFirst());
 
                     n.update_G_Val(n.get_Rhs_Val());
                     stage = 3;
                     checked_edges = new ArrayList<>();
                 } else if (stage == 3){
 
-                    //println("n = " + n + " PQ top = " + U.peak() + " getfirst vs " + U.get_Heap().getFirst());
-
                     if (checked_edges.size() != n.get_Connected().size() - 1) {
 
-                        //println("n = " + n + " PQ top = " + U.peak() + " getfirst vs " + U.get_Heap().getFirst());
-
                         //color the edge blue
-                        //bug too
                         Edge e = n.get_Connected().get(checked_edges.size());
                         color_Edge(e,-1,-1,150); //blue
 
@@ -199,8 +186,6 @@ public class  Visual_LPA extends LPA_Star{
                         checked_edges.add(e);
 
                     } else {
-
-                        //println("n = " + n + " PQ top = " + U.peak() + " getfirst vs " + U.get_Heap().getFirst());
 
                         //color edge blue
                         Edge e = n.get_Connected().get(checked_edges.size());
@@ -215,80 +200,57 @@ public class  Visual_LPA extends LPA_Star{
                         //set stage back to 2
                         stage = 2;
 
-                        println("n is " + n);
-
                         n = null;
+                        U.pop();
 
-                        Node tmp = U.pop();
-
-                        println("we pop " + tmp);
                     }
                 }
             } else if (stage == 2 || stage == 4 || stage == 5){
 
-                //println("n = " + n + " PQ top = " + U.peak() + " getfirst vs " + U.get_Heap().getFirst());
-
-
                 if (stage == 2) {
 
-                    //println("n = " + n + " PQ top = " + U.peak() + " getfirst vs " + U.get_Heap().getFirst());
-
-                    //System.out.println("underconsistent node: " + n);
                     n.update_G_Val(MAX_INT);
                     stage = 4;
                     checked_edges = new ArrayList<>();
 
                 } else if (stage == 4) {
 
-                    //println("n = " + n + " PQ top = " + U.peak() + " getfirst vs " + U.get_Heap().getFirst());
-
                     if (checked_edges.size() < n.get_Connected().size() -1) {
 
-                    //if (checked_edges.size() != n.get_Connected().size() -1) {
-
-                        //println("n = " + n + " PQ top = " + U.peak() + " getfirst vs " + U.get_Heap().getFirst());
-
-                        //println("checked edges size: " + checked_edges.size() + " n.get connected size: " + n.get_Connected().size());
                         //only get an edge if there is an edge to get, can try and fetch non-existent edges
                         if (!n.get_Connected().isEmpty()) {
 
-                            //println("n = " + n + " PQ top = " + U.peak() + " getfirst vs " + U.get_Heap().getFirst());
-                            //println("n connected " + n.get_Connected().size() + " checked edges " + checked_edges.size());
-                            //println("n connected edges" + n.get_Connected() + checked_edges);
                             Edge e;
                             if (n.get_Connected().size() == 1 && checked_edges.size() == 1) {
                                  e = n.get_Connected().getFirst();
                             } else {
-                                 e = n.get_Connected().get(checked_edges.size());  //index out of bounce exception
+                                 e = n.get_Connected().get(checked_edges.size());
                             }
-                        //color edge
+                            //color edge grey
                             color_Edge(e,-1, -1, 75);
 
                             //update neighboring vertex
                             Node other_node = e.get_From();
                             if (e.get_From() == n) other_node = e.get_To();
                             update_Vertex(other_node);
-                            //System.out.println("4 we updated vertex on node: " + other_node);
                             checked_edges.add(e);
                         }
 
                     } else {
 
-                        //any other out of bounds? i hope not
                         Edge e;
                         if (checked_edges.size() == n.get_Connected().size()) {
                              e = n.get_Connected().getFirst();
                         } else {
                             e = n.get_Connected().get(checked_edges.size());
                         }
-                        //color edge
+                        //color edge grey
                         color_Edge(e,-1, -1, 75);
 
                         //update neighboring vertex
                         Node other_node = e.get_From();
                         if (e.get_From() == n) other_node = e.get_To();
                         update_Vertex(other_node);
-                        //System.out.println("5 we updated vertex on node: " + other_node);
                         checked_edges.add(e);
 
                         //go to stage 5
@@ -296,30 +258,19 @@ public class  Visual_LPA extends LPA_Star{
                     }
 
                     n = null;
-                    //U.pop();
-
-
 
                 } else if (stage == 5){
-
-                    //println("n = " + n + " PQ top = " + U.peak() + " getfirst vs " + U.get_Heap().getFirst());
-
 
                     //reset tmp & n
                     Node tmp = n;
                     println("stage 5 - n is " + n);
                     n = null;
                     U.pop();
-                    //Node tmp1 = U.pop();
-
-                    //println("stage 5 - we pop " + tmp1);
                     update_Vertex(tmp);
                     stage = 2;
                 }
             }
         } else {
-
-            //println("n = " + n + " PQ top = " + U.peak() + " getfirst vs " + U.get_Heap().getFirst());
 
             //compute shortest path done / not running
             //unlock buttons here
@@ -330,32 +281,24 @@ public class  Visual_LPA extends LPA_Star{
     }
 
     void check_For_Edge_Change(){
-        //System.out.println("check for edge change");
+
         n = null;
+
         for (Edge e : edge_update_map.keySet()) {
             if (edge_update_map.get(e) != -1) {
                 e.update_Weight(edge_update_map.get(e));
 
             }
             if(node_array.contains(e.get_To())) {
-                println(e.get_To().get_Name());
-                println(e.get_To().get_G_Val() + " " + e.get_To().get_Rhs_Val());
-
                 update_Vertex(e.get_To());
             }
             if(node_array.contains(e.get_From())) {
-                println(e.get_To().get_Name());
-                println(e.get_To().get_G_Val() + " " + e.get_To().get_Rhs_Val());
                 update_Vertex(e.get_From());
             }
+
             e.delete_To();
             e.delete_From();
 
-
-            //the break and remove structure was to try and check for edges changed in a stepwise manner, but led to more issues than help with this implementation i think
-            //edge_update_map.remove(e);
-            //break;
-            //used to be a break; here idk why
         }
 
         edge_update_map = new HashMap<>();
