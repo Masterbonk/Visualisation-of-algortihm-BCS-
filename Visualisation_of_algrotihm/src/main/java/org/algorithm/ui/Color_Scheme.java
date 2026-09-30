@@ -92,7 +92,7 @@ public class Color_Scheme {
             edge_idle = sketch.color(75,75,75);
             edge_considered = sketch.color(75,75,150);
             edge_final_path = sketch.color(75, 265, 75);
-            edge_delete_hover = sketch.color(265,75,75);
+            edge_delete_hover = sketch.color(255,75,75);
             edge_weight_hover = sketch.color(150,75,75);
 
 

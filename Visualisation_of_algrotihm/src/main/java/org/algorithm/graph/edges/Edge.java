@@ -14,7 +14,6 @@ public class Edge {
     protected Node to;
     PApplet sketch;
     private int weight;
-    int r = 75, g = 75, b = 75;
     private int id;
 
     protected Egde_State edge_state = Egde_State.idle;
