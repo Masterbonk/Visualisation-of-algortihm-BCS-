@@ -15,6 +15,18 @@ public class Color_Scheme {
     public static int bg_button_clicked;
     public static  int border_button;
 
+    //above/below buttons
+    public static int hover;
+    public static int hover_text;
+    public static int hover_stroke;
+
+
+    public static int weight_button_field_box;
+    public static int weight_button_inner_field_box;
+    public static int weight_box_stroke;
+    public static int weight_box_text_color;
+
+
     public static int node_idle;
     public static int line;
     public static int debug_node;
@@ -32,18 +44,6 @@ public class Color_Scheme {
     public static int edge_final_path;
     public static int edge_delete_hover;
     public static int edge_weight_hover;
-
-    public static int button_idle;
-    public static int button_hovering;
-    public static int button_clicked;
-
-    public static int node_hovering;
-    public static int node_deleting_hovering;
-    public static int node_in_PQ_highlight;
-    public static int node_debug;
-
-
-
 
 
     public Color_Scheme(PApplet _sketch){
@@ -113,13 +113,23 @@ public class Color_Scheme {
     }
 
     private void update_Button_Colors(Color_Scheme_Enum _color_enum){
+        bg_button_algo_zero = sketch.color(220,220,60); //Yellow
+        bg_button_algo_one = sketch.color(40,40,178); //Blue
+        bg_button_algo_two = sketch.color(80,220,65); //Green
+        bg_button_algo_three = sketch.color(224,60,60); //Red
+
         if (_color_enum == Color_Scheme_Enum.pink_mode){
             //debug
             debug_text_button = sketch.color(255, 255, 255);
 
             //hover
+            hover = sketch.color(88,41,85);
+            hover_text = sketch.color(32,11,46);
+            hover_stroke = sketch.color(32,11,46);
+
+            //hover on button
             text_button_hover = sketch.color(201,116,322);
-            bg_button_hover = sketch.color(90,29,109);
+            bg_button_hover = sketch.color(162,115,144);
 
             //clicked
             text_button_clicked = sketch.color(255,255,255);
@@ -130,11 +140,22 @@ public class Color_Scheme {
             bg_button = sketch.color(145,50, 129);
             text_button = sketch.color(252,164,237);
 
+            //weight button
+            weight_button_field_box = sketch.color(145,50, 129);
+            weight_box_stroke = sketch.color(0);
+            weight_button_inner_field_box = sketch.color(140,85,147);
+            weight_box_text_color = sketch.color(252,164,237);
+
         } else  if (_color_enum == Color_Scheme_Enum.base_mode) {
             //debug
             debug_text_button = sketch.color(255, 255, 255);
 
             //hover
+            hover = sketch.color(100);
+            hover_text = sketch.color(0f);
+            hover_stroke = sketch.color(75);
+
+            //hover on button
             text_button_hover = sketch.color(255f);
             bg_button_hover = sketch.color(0f);
 
@@ -144,15 +165,14 @@ public class Color_Scheme {
 
             //normal
             border_button = sketch.color(162f,162f,162f);
-
-            bg_button_algo_zero = sketch.color(220,220,60); //Yellow
-            bg_button_algo_one = sketch.color(40,40,178); //Blue
-            bg_button_algo_two = sketch.color(80,220,65); //Green
-            bg_button_algo_three = sketch.color(224,60,60); //Red
-
             bg_button = sketch.color(80f);
-
             text_button = sketch.color(255f);
+
+            //weight button
+            weight_button_field_box = sketch.color(255);
+            weight_box_stroke = sketch.color(100);
+            weight_button_inner_field_box = sketch.color(100);
+            weight_box_text_color = sketch.color(0);
 
         }
     }

@@ -11,6 +11,7 @@ import processing.core.PApplet;
 import java.util.*;
 
 import static org.algorithm.Main.*;
+import static org.algorithm.ui.Color_Scheme.*;
 
 public class UI {
 
@@ -143,7 +144,7 @@ public class UI {
 
             sketch.push();
             sketch.noStroke();
-            sketch.fill(255);
+            sketch.fill(weight_button_field_box);
             sketch.rectMode(CENTER);
             String tmp = ""+9999999;
             sketch.push();
@@ -161,8 +162,8 @@ public class UI {
 
             );
             sketch.push();
-            sketch.fill(100);
-            sketch.stroke(100);
+            sketch.fill(weight_button_inner_field_box);
+            sketch.stroke(weight_box_stroke);
             //this is the "text" field" of the ui
             sketch.rect(
                     (sketch.displayWidth/2f),
@@ -176,7 +177,7 @@ public class UI {
             sketch.pop();
 
             // Draw input
-            sketch.fill(0);
+            sketch.fill(weight_box_text_color);
 
             //this renders the text input
             for (char c : currentInput) {

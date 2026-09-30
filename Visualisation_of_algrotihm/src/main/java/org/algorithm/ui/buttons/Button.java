@@ -4,7 +4,7 @@ import org.algorithm.ui.Color_Scheme;
 import processing.core.PApplet;
 
 import static org.algorithm.Main.*;
-import static org.algorithm.ui.Color_Scheme.text_button_hover;
+import static org.algorithm.ui.Color_Scheme.*;
 
 
 public abstract class Button {
@@ -70,7 +70,7 @@ public abstract class Button {
         //hover
         if (mouse_Over()) {
             sketch.push();
-            sketch.fill(Color_Scheme.bg_button_hover);
+            sketch.fill(bg_button_hover);
             sketch.rect(x_pos + changeVal, y_pos + changeVal, x_size - changeVal * 2, y_size - changeVal * 2);
             sketch.fill(Color_Scheme.text_button_hover); //Text color
 
@@ -170,8 +170,8 @@ public abstract class Button {
 
 
         sketch.push();
-        sketch.fill(text_button_hover);
-        sketch.fill(255,255,255);
+        //sketch.fill(hover);
+        sketch.fill(hover_text);
         sketch.textSize(25);
         //sketch.textSize(16);
         sketch.textAlign(CENTER,CENTER);
@@ -179,9 +179,9 @@ public abstract class Button {
         //sketch.text(tmp,x-sketch.textWidth(tmp)/2,((y+dim/2f)+sketch.getGraphics().textSize)-25f);
 
         sketch.push();
-        sketch.fill(100);
+        sketch.fill(hover);
         //sketch.noStroke();
-        sketch.stroke(100);
+        sketch.stroke(hover_stroke);
         sketch.strokeWeight(5);
 
         float top = y_pos + 1.5f * button_height;
