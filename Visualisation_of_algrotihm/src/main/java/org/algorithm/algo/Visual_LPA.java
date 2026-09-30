@@ -312,10 +312,7 @@ public class  Visual_LPA extends LPA_Star{
             if (edge_update_map.get(e) != -1) {
                 e.update_Weight(edge_update_map.get(e));
 
-            } else {
-                e.delete_To();
-                e.delete_From();
-            }
+            } 
             if(node_array.contains(e.get_To())) {
                 update_Vertex(e.get_To());
             }
