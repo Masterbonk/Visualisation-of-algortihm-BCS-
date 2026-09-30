@@ -618,7 +618,7 @@ public class Main extends PApplet{
                             println("Edge was deleted");
                             algorithm.edge_update_map.put(e,-1);
 
-                            if(algo_state == 3){
+                            if(algo_state == 3 && algorithm.getClass() == Visual_LPA.class){
                                 Visual_LPA tmp_algo = (Visual_LPA) algorithm;
                                 tmp_algo.remove_from_checked_edges(e);
                             }
