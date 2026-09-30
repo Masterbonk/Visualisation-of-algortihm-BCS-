@@ -67,6 +67,8 @@ public class  Visual_LPA extends LPA_Star{
 
                 for (Edge e:Main.edge_array) {
                     e.set_Enum(idle);
+                    edge_state_set.put(e,idle);
+
                 }
 
             initialize();
@@ -85,12 +87,16 @@ public class  Visual_LPA extends LPA_Star{
             compute_Shortest_Path();
             for (Edge e: Main.colored_edges){
                 e.set_Enum(considered);
+                edge_state_set.put(e,considered);
+
             }
         } else if (stage == 6) {
             edges_considered = super.get_Shortest_Path(goal_node);
 
             for (Edge e: Main.colored_edges) {
                 e.set_Enum(considered);
+                edge_state_set.put(e,considered);
+
             }
 
             if(edges_considered == null) {
@@ -115,6 +121,8 @@ public class  Visual_LPA extends LPA_Star{
 
             for (Edge e:Main.colored_edges) {
                 e.set_Enum(idle);
+                edge_state_set.put(e,idle);
+
             }
 
 
@@ -146,6 +154,7 @@ public class  Visual_LPA extends LPA_Star{
         Edge e = Util.find_Shared_Edge(edges_considered.get(0), edges_considered.get(1)); //edges are null
         if (e != null) {
             e.set_Enum(finalpath);
+            edge_state_set.put(e,finalpath);
         }
 
         edges_considered.removeFirst();
@@ -183,6 +192,8 @@ public class  Visual_LPA extends LPA_Star{
                         //color the edge blue
                         Edge e = n.get_Connected().get(checked_edges.size());
                         e.set_Enum(considered);
+                        edge_state_set.put(e,considered);
+
 
                         //update neighboring vertex
                         Node other_node = e.get_From();
@@ -196,6 +207,8 @@ public class  Visual_LPA extends LPA_Star{
                         Edge e = n.get_Connected().get(checked_edges.size());
 
                         e.set_Enum(considered);
+                        edge_state_set.put(e,considered);
+
 
                         //update neighboring vertex
                         Node other_node = e.get_From();
@@ -233,6 +246,8 @@ public class  Visual_LPA extends LPA_Star{
                             }
                             //color edge grey
                             e.set_Enum(idle);
+                            edge_state_set.put(e,idle);
+
 
 
                             //update neighboring vertex
@@ -252,6 +267,8 @@ public class  Visual_LPA extends LPA_Star{
                         }
                         //color edge grey
                         e.set_Enum(idle);
+                        edge_state_set.put(e,idle);
+
 
 
                         //update neighboring vertex
@@ -295,6 +312,9 @@ public class  Visual_LPA extends LPA_Star{
             if (edge_update_map.get(e) != -1) {
                 e.update_Weight(edge_update_map.get(e));
 
+            } else {
+                e.delete_To();
+                e.delete_From();
             }
             if(node_array.contains(e.get_To())) {
                 update_Vertex(e.get_To());
@@ -303,8 +323,7 @@ public class  Visual_LPA extends LPA_Star{
                 update_Vertex(e.get_From());
             }
 
-            e.delete_To();
-            e.delete_From();
+
 
         }
 

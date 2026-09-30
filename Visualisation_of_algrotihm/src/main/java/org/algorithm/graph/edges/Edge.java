@@ -1,6 +1,7 @@
 package org.algorithm.graph.edges;
 
 import org.algorithm.Egde_State;
+import org.algorithm.Main;
 import org.algorithm.graph.Node;
 import org.algorithm.ui.Color_Scheme;
 import processing.core.PApplet;
@@ -16,7 +17,7 @@ public class Edge {
     private int weight;
     private int id;
 
-    protected Egde_State edge_state = Egde_State.idle;
+    private Egde_State edge_state = Egde_State.idle;
 
 
     public Edge(PApplet _sketch, Node _from, Node _to, int _weight){
@@ -81,25 +82,29 @@ public class Edge {
 
         sketch.push();
 
-
-
-
         if(Ui.get_Button("cut").clicked){
             if (mouseOver() || to.mouse_Over() || from.mouse_Over()) {
-                sketch.color(Color_Scheme.edge_delete_hover);
-                sketch.stroke(Color_Scheme.edge_delete_hover);
+                edge_state = Egde_State.deletehover;
             } else {
-                sketch.color(Color_Scheme.edge_idle);
-                sketch.stroke(Color_Scheme.edge_idle);
+              edge_state = edge_state_set.get(this);
             }
         } else if(Ui.get_Button("weight").clicked){
-            if (mouseOver() || (display_edge_weight_ui && activeEdge == this)) {
-                sketch.color(Color_Scheme.edge_weight_hover);
-                sketch.stroke(Color_Scheme.edge_weight_hover);
-            } else {
-                sketch.color(Color_Scheme.edge_idle);
-                sketch.stroke(Color_Scheme.edge_idle);
+            if (mouseOver()) {
+                edge_state = Egde_State.weighthover;
+            } else if(display_edge_weight_ui && activeEdge == this){
+                edge_state = Egde_State.weighthover;
             }
+            else {
+                edge_state = edge_state_set.get(this);
+            }
+        }
+
+        if (edge_state == Egde_State.deletehover) {
+            sketch.color(Color_Scheme.edge_delete_hover);
+            sketch.stroke(Color_Scheme.edge_delete_hover);
+        } else if (edge_state == Egde_State.weighthover) {
+            sketch.color(Color_Scheme.edge_weight_hover);
+            sketch.stroke(Color_Scheme.edge_weight_hover);
         } else if (edge_state == Egde_State.finalpath) {
             sketch.color(Color_Scheme.edge_final_path);
             sketch.strokeWeight(20);
@@ -259,5 +264,10 @@ public class Edge {
     public void set_Enum(Egde_State _state) {
         edge_state = _state;
     }
+
+    public Egde_State get_Edge_state(){
+        return edge_state;
+    }
+
 }
 

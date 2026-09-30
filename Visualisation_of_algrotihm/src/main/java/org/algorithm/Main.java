@@ -17,6 +17,7 @@ import processing.core.PFont;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
 
@@ -85,7 +86,7 @@ public class Main extends PApplet{
     public static boolean importing = false;
     public static int algo_state = 0;
 
-
+    public static HashMap<Edge,Egde_State> edge_state_set = new HashMap<>();
 
     /**
      * Main function starts the sketch
@@ -604,6 +605,11 @@ public class Main extends PApplet{
                     }
                 }
 
+                if(Ui.get_Button("cut").clicked){
+                    for (Edge e : Main.edge_array){
+                        Main.edge_state_set.put(e,e.get_Edge_state());
+                    }
+                }
 
                 if (Ui.get_Button("cut").clicked && !clicked_on_node) {
                     display_edge_weight_ui = false;

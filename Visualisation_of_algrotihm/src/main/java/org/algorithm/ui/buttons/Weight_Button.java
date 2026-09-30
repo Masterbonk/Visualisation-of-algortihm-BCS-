@@ -1,5 +1,7 @@
 package org.algorithm.ui.buttons;
 
+import org.algorithm.Main;
+import org.algorithm.graph.edges.Edge;
 import processing.core.PApplet;
 
 import static org.algorithm.Main.button_height;
@@ -13,7 +15,13 @@ public class Weight_Button extends Button {
 
     }
 
-    public void click(){super.click();
+    public void click(){
+        super.click();
+
+        for (Edge e : Main.edge_array){
+            Main.edge_state_set.put(e,e.get_Edge_state());
+        }
+
     }
 
 
