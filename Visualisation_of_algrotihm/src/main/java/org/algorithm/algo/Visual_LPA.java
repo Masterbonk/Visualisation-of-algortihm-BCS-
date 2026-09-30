@@ -308,11 +308,18 @@ public class  Visual_LPA extends LPA_Star{
 
         n = null;
 
+        for (Edge e1 : edge_state_set.keySet()){
+           if(e1.get_Edge_state() == finalpath ){
+              e1.set_Enum(idle);
+              edge_state_set.put(e1, idle);//unkown if should be idle or considered
+           }
+        }
+
         for (Edge e : edge_update_map.keySet()) {
             if (edge_update_map.get(e) != -1) {
                 e.update_Weight(edge_update_map.get(e));
 
-            } 
+            }
             if(node_array.contains(e.get_To())) {
                 update_Vertex(e.get_To());
             }
