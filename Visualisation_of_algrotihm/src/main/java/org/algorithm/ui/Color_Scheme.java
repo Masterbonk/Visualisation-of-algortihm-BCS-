@@ -43,31 +43,34 @@ public class Color_Scheme {
     public static int node_debug;
 
 
+
+
+
     public Color_Scheme(PApplet _sketch){
         sketch = _sketch;
     }
     //bla
-    public void changeColors(boolean pink){
-        if (pink){
+    public void changeColors(Color_Scheme_Enum _color_enum){
+        if (_color_enum == Color_Scheme_Enum.pink_mode){
             bg = sketch.color(226,204,211);
             //make colors pink
-            update_Button_Colors(true);
-            update_Node_Colors(true);
-            update_Edge_Colors(true);
-        } else {
+            update_Button_Colors(_color_enum);
+            update_Node_Colors(_color_enum);
+            update_Edge_Colors(_color_enum);
+        } else if (_color_enum == Color_Scheme_Enum.base_mode) {
             //default colors
             bg = sketch.color(204);
-            update_Button_Colors(false);
-            update_Node_Colors(false);
-            update_Edge_Colors(false);
+            update_Button_Colors(_color_enum);
+            update_Node_Colors(_color_enum);
+            update_Edge_Colors(_color_enum);
 
             //buttons
 
         }
     }
 
-    private void update_Node_Colors(boolean _pink){
-        if (_pink){
+    private void update_Node_Colors(Color_Scheme_Enum _color_enum){
+        if (_color_enum == Color_Scheme_Enum.pink_mode){
             node_idle = sketch.color(247,126,196);
             debug_node = sketch.color(181, 3, 252);
             cut_node = sketch.color(119,1,62);
@@ -76,7 +79,7 @@ public class Color_Scheme {
 
             node_highlighted = sketch.color(249, 52, 216);
 
-        } else{
+        } else if (_color_enum == Color_Scheme_Enum.base_mode){
             //default
             node_idle = sketch.color(232,25,25);
             debug_node = sketch.color(181, 3, 252);
@@ -87,19 +90,30 @@ public class Color_Scheme {
         }
     }
 
-    private void  update_Edge_Colors(boolean _pink){
+    private void  update_Edge_Colors(Color_Scheme_Enum _color_enum){
 
-            edge_idle = sketch.color(75,75,75);
-            edge_considered = sketch.color(75,75,150);
+        if (_color_enum == Color_Scheme_Enum.pink_mode) {
+
+            edge_idle = sketch.color(90, 71, 103);
+            edge_considered = sketch.color(150, 122, 247);
+            edge_final_path = sketch.color(254, 0, 255);
+            edge_delete_hover = sketch.color(146, 40, 62);
+            edge_weight_hover = sketch.color(224, 113, 180);
+
+        } else if (_color_enum == Color_Scheme_Enum.base_mode){
+            edge_idle = sketch.color(75, 75, 75);
+            edge_considered = sketch.color(75, 75, 150);
             edge_final_path = sketch.color(75, 265, 75);
-            edge_delete_hover = sketch.color(255,75,75);
-            edge_weight_hover = sketch.color(150,75,75);
+            edge_delete_hover = sketch.color(255, 75, 75);
+            edge_weight_hover = sketch.color(150, 75, 75);
+        }
+
 
 
     }
 
-    private void update_Button_Colors(boolean _pink){
-        if (_pink){
+    private void update_Button_Colors(Color_Scheme_Enum _color_enum){
+        if (_color_enum == Color_Scheme_Enum.pink_mode){
             //debug
             debug_text_button = sketch.color(255, 255, 255);
 
@@ -116,7 +130,7 @@ public class Color_Scheme {
             bg_button = sketch.color(145,50, 129);
             text_button = sketch.color(252,164,237);
 
-        } else{
+        } else  if (_color_enum == Color_Scheme_Enum.base_mode) {
             //debug
             debug_text_button = sketch.color(255, 255, 255);
 

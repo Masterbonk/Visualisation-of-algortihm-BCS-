@@ -9,6 +9,7 @@ import org.algorithm.graph.edges.BiEdge;
 import org.algorithm.graph.edges.Edge;
 import org.algorithm.graph.edges.Heuristic_Edge;
 import org.algorithm.ui.Color_Scheme;
+import org.algorithm.ui.Color_Scheme_Enum;
 import org.algorithm.ui.UI;
 import org.algorithm.ui.buttons.Algo_Mode_Button;
 import processing.core.PApplet;
@@ -50,7 +51,7 @@ public class Main extends PApplet{
     
     public static PFont font;
     public static PFont mono;
-    private boolean pink_mode;
+    private Color_Scheme_Enum colorSchemeEnum;
 
 
     public static int button_height = 50;
@@ -96,9 +97,6 @@ public class Main extends PApplet{
         Main main = new Main();
         PApplet.runSketch(processingArgs, main);
 
-
-
-
     }
 
 
@@ -119,7 +117,7 @@ public class Main extends PApplet{
         }
         util = new Util(this,button_height);
         cs = new Color_Scheme(this);
-        pink_mode = false;
+        colorSchemeEnum = Color_Scheme_Enum.base_mode;
 
         //program always starts as Dijkstra
         //algorithm = new Visual_DStarLite();
@@ -171,7 +169,7 @@ public class Main extends PApplet{
      */
 
     public void draw(){
-        cs.changeColors(pink_mode);
+        cs.changeColors(colorSchemeEnum);
         background(Color_Scheme.bg);
         //background(204); //Draws over everything on screen clearing it for the next frame
 
@@ -653,9 +651,9 @@ public class Main extends PApplet{
             }
 
             if(Ui.get_Button("color_scheme").clicked){
-                pink_mode = true;
+                colorSchemeEnum = Color_Scheme_Enum.pink_mode;
             } else{
-                pink_mode = false;
+                colorSchemeEnum = Color_Scheme_Enum.base_mode;
             }
 
             //close file menu if click outside it while it is open
