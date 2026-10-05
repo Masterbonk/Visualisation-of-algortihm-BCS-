@@ -19,8 +19,10 @@ public class Pause_Button extends Button {
     public void click(){
         if (!clicked) {
             text = "⏸"; //start
-        } else text = "⏯"; //Pause
-
+        } else text = "▶"; //Pause
+        if ((algo_state == 0 || algo_state == 1) && this.clicked && algorithm.get_Start() != initial_start_node) {
+            Ui.get_Button("reset").click();
+        }
         Algorithm.has_been_paused = !Algorithm.has_been_paused;
 
 

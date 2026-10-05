@@ -33,12 +33,19 @@ public class Reset_Button extends Button {
         }
         Ui.unlock_All_Buttons();
 
-        if (algorithm.getClass().equals(Visual_Dijkstra.class)){
-            algorithm = new Visual_Dijkstra();
-        } else if (algorithm.getClass().equals(Visual_AStar.class)) {
-            algorithm = new Visual_AStar();
-        } else if (algorithm.getClass().equals(Visual_LPA.class)){
-            algorithm = new Visual_LPA();
+        switch (algo_state) {
+            case 0:
+                algorithm = new Visual_Dijkstra();
+                break;
+            case 1:
+                algorithm = new Visual_AStar();
+                break;
+            case 2:
+                algorithm = new Visual_LPA();
+                break;
+            case 3:
+                algorithm = new Visual_DStarLite();
+                break;
         }
 
         algorithm.set_Start(initial_start_node);

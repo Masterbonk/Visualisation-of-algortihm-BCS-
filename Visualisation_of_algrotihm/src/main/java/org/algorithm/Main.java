@@ -506,7 +506,7 @@ public class Main extends PApplet{
                                 edge_array.remove(e);
                                 algorithm.edge_update_map.put(e,-1);
 
-                                if(algo_state == 3){
+                                if(algo_state == 2){
                                     Visual_LPA tmp_algo = (Visual_LPA) algorithm;
                                     tmp_algo.remove_from_checked_edges(e);
                                 }
@@ -548,22 +548,21 @@ public class Main extends PApplet{
 
                     } else if(Ui.get_Button("flag_a").clicked && algorithm.get_Goal() != n && n.mouse_Over()){
                         //so we don't crash lpa* but can move goal
-                        if (Ui.get_Button("algo_mode").text.equals("LPA*")){
+                        if (algo_state == 2){
                             Ui.get_Button("reset").click();
-
                         }
                         clicked_on_node = true;
                         algorithm.first_run = true;
                         algorithm.set_Start(n);
                         initial_start_node = n;
 
-                    } else if(Ui.get_Button("flag_b").clicked && algorithm.get_Start() != n && n.mouse_Over()){
+                    } /* else if(Ui.get_Button("flag_b").clicked && algorithm.get_Start() != n && n.mouse_Over()){
 
                         clicked_on_node = true;
                         algorithm.first_run = true;
                         algorithm.set_Goal(n);
                         initial_goal_node = n;
-                    }
+                    } */
                 }
 
                 if (!clicked_on_node && Ui.get_Button("flag_a").clicked) {
@@ -576,6 +575,7 @@ public class Main extends PApplet{
                     algorithm.first_run = true;
                     if(!Ui.get_Button("pause").clicked) Ui.get_Button("pause").click();
                 }
+                /*
                 if (!clicked_on_node && Ui.get_Button("flag_b").clicked) {
                     algorithm.set_Goal(null);
                     initial_goal_node = null;
@@ -585,7 +585,7 @@ public class Main extends PApplet{
                     }
                     if(!Ui.get_Button("pause").clicked) Ui.get_Button("pause").click();
                     algorithm.first_run = true;
-                }
+                } */
 
 
                 //When we have line, and click outside a node
@@ -622,7 +622,7 @@ public class Main extends PApplet{
                             println("Edge was deleted");
                             algorithm.edge_update_map.put(e,-1);
 
-                            if(algo_state == 3 && algorithm.getClass() == Visual_LPA.class){
+                            if(algo_state == 2 && algorithm.getClass() == Visual_LPA.class){
                                 Visual_LPA tmp_algo = (Visual_LPA) algorithm;
                                 tmp_algo.remove_from_checked_edges(e);
                             }
@@ -634,6 +634,7 @@ public class Main extends PApplet{
                 }
 
                 if (Ui.get_Button("weight").clicked && !clicked_on_node) {
+
                     for (Edge e : edge_array) {
                         if (e.mouseOver()) {
                             currentInput = new ArrayList<Character>();
@@ -676,7 +677,26 @@ public class Main extends PApplet{
 
         } else if (mouseButton == RIGHT){
             // right deselects any selected object
+            for (Node n : node_array) {
+                if (Ui.get_Button("flag_a").clicked && algorithm.get_Start() != n && n.mouse_Over()) {
 
+                    clicked_on_node = true;
+                    algorithm.first_run = true;
+                    algorithm.set_Goal(n);
+                    initial_goal_node = n;
+                }
+
+                if (!clicked_on_node && Ui.get_Button("flag_a").clicked) {
+                    algorithm.set_Goal(null);
+                    initial_goal_node = null;
+                    if(h != null){
+                        h.set_To(null);
+                        h.set_From(null);
+                    }
+                    if(!Ui.get_Button("pause").clicked) Ui.get_Button("pause").click();
+                    algorithm.first_run = true;
+                }
+            }
             if (Ui.get_Button("algo_mode").mouse_Over()) {
                 clicked_on_button = true;
                 Algo_Mode_Button tmp_button = (Algo_Mode_Button) Ui.get_Button("algo_mode");

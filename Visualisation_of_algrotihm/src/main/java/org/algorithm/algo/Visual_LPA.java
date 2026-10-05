@@ -57,7 +57,7 @@ public class  Visual_LPA extends LPA_Star{
     }
 
     public void Main(){
-        println("Current stage is: " + stage);
+        //println("Current stage is: " + stage);
 
 
         if (start_node == null || goal_node == null){ println("Start and or goal are null"); return;}
@@ -73,8 +73,8 @@ public class  Visual_LPA extends LPA_Star{
 
             initialize();
 
-            Ui.get_Button("flag_b").lock();
-            Ui.get_Button("flag_b").clicked = false;
+            Ui.get_Button("flag_a").lock();
+            Ui.get_Button("flag_a").clicked = false;
 
             if (first_run && Ui.get_Button("forward").clicked){
                 first_run =false;
@@ -287,7 +287,6 @@ public class  Visual_LPA extends LPA_Star{
 
                     //reset tmp & n
                     Node tmp = n;
-                    println("stage 5 - n is " + n);
                     n = null;
                     U.pop();
                     update_Vertex(tmp);
