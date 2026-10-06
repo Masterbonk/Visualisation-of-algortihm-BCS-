@@ -713,29 +713,7 @@ public class Main extends PApplet{
 
     public void mouseDragged(){
         if(mouseButton == RIGHT) {
-            boolean is_over_ui = false;
-            for (String s : Ui.get_Map().keySet()) {
-                if (Ui.get_Button(s).mouse_Over()) {
-                    is_over_ui = true;
-                    break;
-                }
-            }
-            if (!is_over_ui) {
-                if (mouse_x_start_of_pan == -1 || mouse_y_start_of_pan == -1) {
-                    mouse_x_start_of_pan = mouseX;
-                    mouse_y_start_of_pan = mouseY;
-                } else {
-
-
-                    translate_x += mouseX - mouse_x_start_of_pan;
-                    translate_y += mouseY - mouse_y_start_of_pan;
-                    //println("Translate_x = " + translate_x + ". mouseX = " + mouseX + ". mouse_x_start_of_pan = " + mouse_x_start_of_pan);
-                    //println("Translate_y = " + translate_y + ". mouseY = " + mouseY + ". mouse_y_start_of_pan = " + mouse_y_start_of_pan);
-
-                    mouse_x_start_of_pan = mouseX;
-                    mouse_y_start_of_pan = mouseY;
-                }
-            }
+            panning();
         }
     }
 
