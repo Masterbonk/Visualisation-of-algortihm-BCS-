@@ -548,21 +548,18 @@ public class Main extends PApplet{
 
                     } else if(Ui.get_Button("flag_a").clicked && algorithm.get_Goal() != n && n.mouse_Over()){
                         //so we don't crash lpa* but can move goal
-                        if (algo_state == 2){
-                            Ui.get_Button("reset").click();
-                        }
+
                         clicked_on_node = true;
                         algorithm.first_run = true;
                         algorithm.set_Start(n);
                         initial_start_node = n;
 
-                    } /* else if(Ui.get_Button("flag_b").clicked && algorithm.get_Start() != n && n.mouse_Over()){
+                        if (algo_state == 0 || algo_state == 1 || algo_state == 2){
+                            Ui.get_Button("reset").click();
+                            Ui.get_Button("flag_a").click();
+                        }
 
-                        clicked_on_node = true;
-                        algorithm.first_run = true;
-                        algorithm.set_Goal(n);
-                        initial_goal_node = n;
-                    } */
+                    }
                 }
 
                 if (!clicked_on_node && Ui.get_Button("flag_a").clicked) {
@@ -693,8 +690,7 @@ public class Main extends PApplet{
                         h.set_To(null);
                         h.set_From(null);
                     }
-                    if(!Ui.get_Button("pause").clicked) Ui.get_Button("pause").click();
-                    algorithm.first_run = true;
+
                 }
             }
             if (Ui.get_Button("algo_mode").mouse_Over()) {
@@ -751,6 +747,32 @@ public class Main extends PApplet{
         if (mouseButton == RIGHT){
             mouse_x_start_of_pan = -1;
             mouse_y_start_of_pan = -1;
+        }
+    }
+
+    public void panning(){
+        boolean is_over_ui = false;
+        for (String s : Ui.get_Map().keySet()) {
+            if (Ui.get_Button(s).mouse_Over()) {
+                is_over_ui = true;
+                break;
+            }
+        }
+        if (!is_over_ui) {
+            if (mouse_x_start_of_pan == -1 || mouse_y_start_of_pan == -1) {
+                mouse_x_start_of_pan = mouseX;
+                mouse_y_start_of_pan = mouseY;
+            } else {
+
+
+                translate_x += mouseX - mouse_x_start_of_pan;
+                translate_y += mouseY - mouse_y_start_of_pan;
+                //println("Translate_x = " + translate_x + ". mouseX = " + mouseX + ". mouse_x_start_of_pan = " + mouse_x_start_of_pan);
+                //println("Translate_y = " + translate_y + ". mouseY = " + mouseY + ". mouse_y_start_of_pan = " + mouse_y_start_of_pan);
+
+                mouse_x_start_of_pan = mouseX;
+                mouse_y_start_of_pan = mouseY;
+            }
         }
     }
 
