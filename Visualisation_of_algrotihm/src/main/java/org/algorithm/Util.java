@@ -8,6 +8,8 @@ import processing.core.PApplet;
 
 import java.util.ArrayList;
 
+import static org.algorithm.Egde_State.finalpath;
+import static org.algorithm.Egde_State.idle;
 import static org.algorithm.Main.*;
 import static processing.core.PApplet.print;
 import static processing.core.PApplet.println;
@@ -302,5 +304,14 @@ public class Util {
 
         // Return of closest of two
         return (n - a >= b - n)? b : a;
+    }
+
+    public static void clear_Edge_Colors(){
+        for (Edge e1 : edge_state_set.keySet()){
+            if(e1.get_Edge_state() == finalpath ){
+                e1.set_Enum(idle);
+                edge_state_set.put(e1, idle);//unkown if should be idle or considered
+            }
+        }
     }
 }

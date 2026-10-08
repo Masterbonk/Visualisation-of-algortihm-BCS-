@@ -14,6 +14,7 @@ import java.util.HashSet;
 
 import static org.algorithm.Egde_State.*;
 import static org.algorithm.Main.*;
+import static org.algorithm.Util.clear_Edge_Colors;
 import static org.algorithm.ui.Color_Scheme.edge_final_path;
 import static processing.core.PApplet.print;
 import static processing.core.PApplet.println;
@@ -31,6 +32,7 @@ public class  Visual_LPA extends LPA_Star{
 
     private Node n = null;
     private ArrayList<Edge> checked_edges;
+    private Node last_goal;
 
 
     public Visual_LPA(){
@@ -65,11 +67,13 @@ public class  Visual_LPA extends LPA_Star{
         //initilize stage
         if (stage == 0) {
 
-                for (Edge e:Main.edge_array) {
-                    e.set_Enum(idle);
-                    edge_state_set.put(e,idle);
+            for (Edge e:Main.edge_array) {
+                e.set_Enum(idle);
+                edge_state_set.put(e,idle);
 
-                }
+            }
+
+            last_goal = goal_node;
 
             initialize();
 
@@ -80,6 +84,7 @@ public class  Visual_LPA extends LPA_Star{
                 first_run =false;
                 compute_Shortest_Path();
             }
+
             stage = 2;
 
         } else if (stage == 2 || stage == 3 || stage == 4 || stage == 5) {
@@ -117,6 +122,7 @@ public class  Visual_LPA extends LPA_Star{
                 stage = 8;
             }
         } else if (stage == 8 && !edge_update_map.isEmpty()) {
+
             check_For_Edge_Change();
 
             for (Edge e:Main.colored_edges) {
@@ -131,6 +137,11 @@ public class  Visual_LPA extends LPA_Star{
             }
 
 
+        } else if (stage == 8 && last_goal != goal_node) {
+            update_Vertex(goal_node);
+            clear_Edge_Colors();
+            last_goal = goal_node;
+            stage = 2;
         }
 
         //Steps forward once before stopping itself again.
@@ -307,12 +318,7 @@ public class  Visual_LPA extends LPA_Star{
 
         n = null;
 
-        for (Edge e1 : edge_state_set.keySet()){
-           if(e1.get_Edge_state() == finalpath ){
-              e1.set_Enum(idle);
-              edge_state_set.put(e1, idle);//unkown if should be idle or considered
-           }
-        }
+        clear_Edge_Colors();
 
         for (Edge e : edge_update_map.keySet()) {
             if (edge_update_map.get(e) != -1) {
