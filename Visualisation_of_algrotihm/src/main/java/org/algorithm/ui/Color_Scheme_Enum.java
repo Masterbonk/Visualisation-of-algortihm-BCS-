@@ -4,4 +4,6 @@ public enum Color_Scheme_Enum {
     base_mode,
     pink_mode,
 
+    monotone_mode
+
 }

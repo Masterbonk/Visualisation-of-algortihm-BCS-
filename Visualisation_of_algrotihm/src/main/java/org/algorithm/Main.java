@@ -118,7 +118,7 @@ public class Main extends PApplet{
         }
         util = new Util(this,button_height);
         cs = new Color_Scheme(this);
-        colorSchemeEnum = Color_Scheme_Enum.base_mode;
+        colorSchemeEnum = Color_Scheme_Enum.monotone_mode;
 
         //program always starts as Dijkstra
         //algorithm = new Visual_DStarLite();
@@ -659,7 +659,7 @@ public class Main extends PApplet{
             if(Ui.get_Button("color_scheme").clicked){
                 colorSchemeEnum = Color_Scheme_Enum.pink_mode;
             } else{
-                colorSchemeEnum = Color_Scheme_Enum.base_mode;
+                colorSchemeEnum = Color_Scheme_Enum.monotone_mode;
             }
 
             //close file menu if click outside it while it is open

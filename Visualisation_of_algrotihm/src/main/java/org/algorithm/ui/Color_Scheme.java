@@ -65,7 +65,11 @@ public class Color_Scheme {
             update_Edge_Colors(_color_enum);
 
             //buttons
-
+        } else if (_color_enum == Color_Scheme_Enum.monotone_mode){
+            bg = sketch.color(250,255,255);
+            update_Button_Colors(_color_enum);
+            update_Node_Colors(_color_enum);
+            update_Edge_Colors(_color_enum);
         }
     }
 
@@ -87,6 +91,14 @@ public class Color_Scheme {
             hover_node = sketch.color(24,204,24);
             in_PQ_node = sketch.color(238,218,18);
             node_highlighted = sketch.color(47, 163, 1);
+
+        } else if (_color_enum == Color_Scheme_Enum.monotone_mode){
+            node_idle = sketch.color(250,25,25);
+            debug_node = sketch.color(181, 3, 252);
+            cut_node = sketch.color(160, 4, 4);
+            hover_node = sketch.color(253,99,105);
+            in_PQ_node = sketch.color(75, 75, 150);
+            node_highlighted = sketch.color(47, 163, 1);
         }
     }
 
@@ -94,7 +106,7 @@ public class Color_Scheme {
 
         if (_color_enum == Color_Scheme_Enum.pink_mode) {
 
-            edge_idle = sketch.color(90, 71, 103);
+            edge_idle = sketch.color(90,70,130);
             edge_considered = sketch.color(150, 122, 247);
             edge_final_path = sketch.color(254, 0, 255);
             edge_delete_hover = sketch.color(146, 40, 62);
@@ -106,9 +118,14 @@ public class Color_Scheme {
             edge_final_path = sketch.color(75, 265, 75);
             edge_delete_hover = sketch.color(255, 75, 75);
             edge_weight_hover = sketch.color(150, 75, 75);
+
+        } else if (_color_enum == Color_Scheme_Enum.monotone_mode) {
+            edge_idle = sketch.color(110);
+            edge_considered = sketch.color(85, 101, 186);
+            edge_final_path = sketch.color(65, 194, 57);
+            edge_delete_hover = sketch.color(255, 75, 75);
+
         }
-
-
 
     }
 
@@ -123,13 +140,13 @@ public class Color_Scheme {
             debug_text_button = sketch.color(255, 255, 255);
 
             //hover
-            hover = sketch.color(88,41,85);
+            hover = sketch.color(98,51,95);
             hover_text = sketch.color(32,11,46);
             hover_stroke = sketch.color(32,11,46);
 
             //hover on button
             text_button_hover = sketch.color(201,116,322);
-            bg_button_hover = sketch.color(162,115,144);
+            bg_button_hover = sketch.color(78,31,75);
 
             //clicked
             text_button_clicked = sketch.color(255,255,255);
@@ -172,6 +189,34 @@ public class Color_Scheme {
             weight_button_field_box = sketch.color(255);
             weight_box_stroke = sketch.color(100);
             weight_button_inner_field_box = sketch.color(100);
+            weight_box_text_color = sketch.color(0);
+
+        } else  if (_color_enum == Color_Scheme_Enum.monotone_mode) {
+            //debug
+            debug_text_button = sketch.color(255, 255, 255);
+
+            //hover
+            hover = sketch.color(130);
+            hover_text = sketch.color(0f);
+            hover_stroke = sketch.color(100);
+
+            //hover on button
+            text_button_hover = sketch.color(255f);
+            bg_button_hover = sketch.color(50f);
+
+            //clicked
+            text_button_clicked = sketch.color(0f);
+            bg_button_clicked = sketch.color(132,204,116);
+
+            //normal
+            border_button = sketch.color(168f,168f,168f);
+            bg_button = sketch.color(204);
+            text_button = sketch.color(0f);
+
+            //weight pop up button
+            weight_button_field_box = sketch.color(100);
+            weight_box_stroke = sketch.color(94);
+            weight_button_inner_field_box = sketch.color(150);
             weight_box_text_color = sketch.color(0);
 
         }
