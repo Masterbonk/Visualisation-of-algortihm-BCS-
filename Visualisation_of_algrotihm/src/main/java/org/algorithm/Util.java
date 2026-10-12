@@ -8,6 +8,8 @@ import processing.core.PApplet;
 
 import java.util.ArrayList;
 
+import static org.algorithm.Egde_State.finalpath;
+import static org.algorithm.Egde_State.idle;
 import static org.algorithm.Main.*;
 import static processing.core.PApplet.print;
 import static processing.core.PApplet.println;
@@ -49,18 +51,17 @@ public class Util {
 
         Ui.add_Button("line", _sketch.displayWidth/9f*5f, _sketch.displayHeight-_button_height, _sketch.displayWidth/9f, _button_height,"\\", Line_Button.class, true);
 
-        Ui.add_Button("flag_a", _sketch.displayWidth/9f*6f, _sketch.displayHeight-_button_height, _sketch.displayWidth/9f, _button_height,"⚑", Flag_A_Button.class, true);
+        Ui.add_Button("flag_a", _sketch.displayWidth/9f*6f, _sketch.displayHeight-_button_height, _sketch.displayWidth/9f, _button_height,"⚑ | ⚐", Flag_A_Button.class, true);
 
-        Ui.add_Button("flag_b", _sketch.displayWidth/9f*7f, _sketch.displayHeight-_button_height, _sketch.displayWidth/9f, _button_height,"⚐", Flag_B_Button.class, true);
+        Ui.add_Button("weight", _sketch.displayWidth/9f*7f, _sketch.displayHeight-_button_height, _sketch.displayWidth/9f, _button_height,"Weight", Weight_Button.class, true);
 
-        Ui.add_Button("weight", _sketch.displayWidth/9f*8f, _sketch.displayHeight-_button_height, _sketch.displayWidth/9f, _button_height,"Weight", Weight_Button.class, true);
+        Ui.add_Button("clear",(_sketch.displayWidth)/9f*8f, _sketch.displayHeight-_button_height, _sketch.displayWidth/9f, _button_height,"Clear", Clear_Button.class, false);
+
 
         //top ui
         Button file = Ui.add_Button("file", 0, 0, _sketch.displayWidth/9f, _button_height,"File", Dropdown_Button.class, false);
 
         //CORRECT X & Y COORDINATES DO NOT CHNAGE
-
-        Ui.add_Button("clear",(_sketch.displayWidth)/9f*5f, 0, _sketch.displayWidth/9f, _button_height,"Clear", Clear_Button.class, false);
 
         Button graph_Button = Ui.add_Button("Graph_Button",(_sketch.displayWidth)/9f*6f, 0, _sketch.displayWidth/9f, _button_height,"Graphs", Dropdown_Button.class, false);
         Ui.add_Button("Square", (_sketch.displayWidth)/9f*6f,_button_height+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"Square 5x5", Square_Graph_Button.class, false, graph_Button);
@@ -300,5 +301,14 @@ public class Util {
 
         // Return of closest of two
         return (n - a >= b - n)? b : a;
+    }
+
+    public static void clear_Edge_Colors(){
+        for (Edge e1 : edge_state_set.keySet()){
+            if(e1.get_Edge_state() == finalpath ){
+                e1.set_Enum(idle);
+                edge_state_set.put(e1, idle);//unkown if should be idle or considered
+            }
+        }
     }
 }

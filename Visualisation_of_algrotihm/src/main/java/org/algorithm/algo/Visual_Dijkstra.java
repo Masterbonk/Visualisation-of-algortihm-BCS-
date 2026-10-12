@@ -117,7 +117,9 @@ public class Visual_Dijkstra extends Dijkstra{
         } else if (stage == 5){
             //We go to last stage which does nothing but open the chance to make changes to the graph again.
             //unlock_Buttons();
-            Ui.get_Button("flag_b").unlock();
+            Ui.get_Button("flag_a").unlock();
+            //
+
 
 
             //This allows us to detect that the goal node has been changed, meaning we will search for a new shortest path

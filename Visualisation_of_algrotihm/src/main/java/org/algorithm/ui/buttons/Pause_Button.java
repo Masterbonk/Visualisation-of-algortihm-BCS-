@@ -19,8 +19,7 @@ public class Pause_Button extends Button {
     public void click(){
         if (!clicked) {
             text = "⏸"; //start
-        } else text = "⏯"; //Pause
-
+        } else text = "▶"; //Pause
         Algorithm.has_been_paused = !Algorithm.has_been_paused;
 
 
