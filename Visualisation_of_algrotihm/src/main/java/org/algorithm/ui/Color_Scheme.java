@@ -147,24 +147,26 @@ public class Color_Scheme {
     public void ColorEdgeAlgoConsidered(Color_Algo_State _color_Algo){
         switch(_color_Algo){
             case Djikstra:
-                edge_considered = sketch.color(85, 101, 186);
-                edge_final_path = sketch.color(65, 194, 57);
-                break;
-
-            case LPAstar:
-                edge_considered = sketch.color(85, 101, 186);
-                edge_final_path = sketch.color(65, 194, 57);
-                break;
-
-            case DstarLite:
-                edge_considered = sketch.color(85, 101, 186);
-                edge_final_path = sketch.color(65, 194, 57);
+                edge_considered = sketch.color(58, 60,140);
+                edge_final_path = sketch.color(32,40,255);
                 break;
 
             case Astar:
-                edge_considered = sketch.color(85, 101, 186);
-                edge_final_path = sketch.color(65, 194, 57);
+                edge_considered = sketch.color(66,117,168);
+                edge_final_path = sketch.color(14,135,255);
                 break;
+
+            case LPAstar:
+                edge_considered = sketch.color(163, 88, 134);
+                edge_final_path = sketch.color(255, 41, 171);
+                break;
+
+            case DstarLite:
+                edge_considered = sketch.color(141,86,191);
+                edge_final_path = sketch.color(147, 30, 255);
+                break;
+
+
         }
     }
 
