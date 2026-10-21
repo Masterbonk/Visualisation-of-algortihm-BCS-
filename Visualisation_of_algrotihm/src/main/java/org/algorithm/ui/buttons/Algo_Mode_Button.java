@@ -25,10 +25,14 @@ public class Algo_Mode_Button extends Button {
         super.tool_tip = "Change which algorithm is run. The program is currently using: " + text;
 
     }
+
     public void click(boolean _right_click){
         right_click = _right_click;
         click();
         right_click = false;
+    }
+    public boolean mouse_Over(){
+        return false;
     }
 
     public void click(){
