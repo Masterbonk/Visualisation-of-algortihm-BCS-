@@ -57,6 +57,8 @@ public abstract class Button {
         sketch.rect(x_pos, y_pos, x_size, y_size);
 
         int changeVal = 5;
+
+        
         if (debug) {
             sketch.push();
             sketch.fill(Color_Scheme.debug_text_button); //Text color

@@ -1,9 +1,9 @@
 package org.algorithm.graph.edges;
 
 import org.algorithm.Egde_State;
-import org.algorithm.Main;
 import org.algorithm.graph.Node;
 import org.algorithm.ui.Color_Scheme;
+import org.algorithm.ui.Text_Box;
 import processing.core.PApplet;
 
 import static org.algorithm.Main.*;
@@ -19,11 +19,15 @@ public class Edge {
 
     private Egde_State edge_state = Egde_State.idle;
 
+    private Text_Box weight_box;
+
 
     public Edge(PApplet _sketch, Node _from, Node _to, int _weight){
         sketch = _sketch;
         from = _from;
         to = _to;
+
+        weight_box = new Text_Box(sketch,( (from.get_X() + to.get_X()) / 2f), ( (from.get_Y() + to.get_Y()) / 2f), Integer.toString(weight));
 
         update_Weight(_weight);
 
@@ -33,13 +37,14 @@ public class Edge {
         id = edge_array.size();
         algorithm.edge_update_map.put(this,weight);
 
-
     }
 
     public Edge(PApplet _sketch, Node _from, Node _to, int _weight, boolean _is_this_dijkstra){
         sketch = _sketch;
         from = _from;
         to = _to;
+
+        weight_box = new Text_Box(sketch,( (from.get_X() + to.get_X()) / 2f), ( (from.get_Y() + to.get_Y()) / 2f), Integer.toString(weight));
 
         update_Weight(_weight);
 
@@ -60,6 +65,8 @@ public class Edge {
                 weight = (int) Math.ceil(tmp);
             } else weight = _i;
         }
+
+        weight_box.update_Text(Integer.toString(weight));
     }
 
     public int get_Weight(){
@@ -131,7 +138,9 @@ public class Edge {
         //implement color shceme
         if (Ui.get_Button("Edge_display").clicked) {
 
+            weight_box.render();
 
+/*
             sketch.push();
             sketch.textSize(30);
             sketch.fill(100);
@@ -151,6 +160,7 @@ public class Edge {
             sketch.fill(255);
             sketch.text("" + weight, ((from.get_X() + to.get_X()) / 2f), ((from.get_Y() + to.get_Y()) / 2f));
             sketch.pop();
+            */
         }
     }
 
