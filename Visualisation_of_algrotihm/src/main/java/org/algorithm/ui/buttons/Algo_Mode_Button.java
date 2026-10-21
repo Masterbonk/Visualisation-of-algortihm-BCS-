@@ -75,6 +75,21 @@ public class Algo_Mode_Button extends Button {
     }
 
     public void render(){
+
+        switch (algo_state) {
+            case 0:
+                text = "Dijkstra";
+                break;
+            case 1:
+                text = "A*";
+                break;
+            case 2:
+                text = "LPA*";
+                break;
+            case 3:
+                text = "D* Lite";
+                break;
+        }
         sketch.fill(Color_Scheme.border_button);
         sketch.rect(x_pos,y_pos, x_size, y_size);
 

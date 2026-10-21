@@ -4,6 +4,10 @@ import org.algorithm.graph.edges.BiEdge;
 import org.algorithm.graph.edges.Edge;
 import org.algorithm.graph.Node;
 import org.algorithm.ui.buttons.*;
+import org.algorithm.ui.buttons.algo_state_buttons.A_Star_Button;
+import org.algorithm.ui.buttons.algo_state_buttons.D_Star_Lite_Button;
+import org.algorithm.ui.buttons.algo_state_buttons.Dijkstra_Button;
+import org.algorithm.ui.buttons.algo_state_buttons.LPA_Star_Button;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
@@ -67,7 +71,16 @@ public class Util {
         Ui.add_Button("Square", (_sketch.displayWidth)/9f*6f,_button_height+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"Square 5x5", Square_Graph_Button.class, false, graph_Button);
         Ui.add_Button("Diagonal", (_sketch.displayWidth)/9f*6f,_button_height*2+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"Diagonal 5x5", Diagonal_Graph_Button.class, false, graph_Button);
 
-        Ui.add_Button("algo_mode",(_sketch.displayWidth)/9f*7f, 0, _sketch.displayWidth/9f, _button_height,"Dijkstra", Algo_Mode_Button.class, false);
+
+        Button algo_Button = Ui.add_Button("Algo_Button",(_sketch.displayWidth)/9f*7f, 0, _sketch.displayWidth/9f, _button_height,"Algorithms", Dropdown_Button.class, false);
+        Ui.add_Button("Dijkstra", (_sketch.displayWidth)/9f*7f,_button_height+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"Dijkstra", Dijkstra_Button.class, false, algo_Button);
+        Ui.add_Button("A*", (_sketch.displayWidth)/9f*7f,_button_height*2+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"A*", A_Star_Button.class, false, algo_Button);
+        Ui.add_Button("LPA*", (_sketch.displayWidth)/9f*7f,_button_height*3+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"LPA*", LPA_Star_Button.class, false, algo_Button);
+        Ui.add_Button("D* Lite", (_sketch.displayWidth)/9f*7f,_button_height*4+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"D* Lite", D_Star_Lite_Button.class, false, algo_Button);
+
+
+
+        Ui.add_Button("algo_mode",(_sketch.displayWidth)/9f*5f, 0, _sketch.displayWidth/9f, _button_height,"Dijkstra", Algo_Mode_Button.class, false);
 
         Button display_button = Ui.add_Button("Display_parameter", (_sketch.displayWidth) / 9f*8f, 0, _sketch.displayWidth/9f, _button_height, "Display...", Dropdown_Button.class, false);
 
