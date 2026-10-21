@@ -1,10 +1,12 @@
 package org.algorithm.ui.buttons.algo_state_buttons;
 
+import org.algorithm.Color_Algo_State;
 import org.algorithm.Main;
 import org.algorithm.algo.Visual_Dijkstra;
 import org.algorithm.ui.buttons.Button;
 import processing.core.PApplet;
 
+import static org.algorithm.Color_Algo_State.Djikstra;
 import static org.algorithm.Main.algorithm;
 
 public class Dijkstra_Button extends Button {
@@ -27,6 +29,7 @@ public class Dijkstra_Button extends Button {
     @Override
     public void click() {
         Main.algo_state = 0;
+        Main.color_algo_state = Djikstra;
         Main.Ui.get_Button("reset").click();
         if (!clicked) {
             Main.Ui.get_Button("A*").clicked = false;

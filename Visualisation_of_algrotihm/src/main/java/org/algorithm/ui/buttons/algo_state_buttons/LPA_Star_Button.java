@@ -5,6 +5,7 @@ import org.algorithm.algo.Visual_LPA;
 import org.algorithm.ui.buttons.Button;
 import processing.core.PApplet;
 
+import static org.algorithm.Color_Algo_State.LPAstar;
 import static org.algorithm.Main.algorithm;
 
 public class LPA_Star_Button extends Button {
@@ -27,6 +28,7 @@ public class LPA_Star_Button extends Button {
     @Override
     public void click() {
         Main.algo_state = 2;
+        Main.color_algo_state = LPAstar;
         Main.Ui.get_Button("reset").click();
 
         if (!clicked) {

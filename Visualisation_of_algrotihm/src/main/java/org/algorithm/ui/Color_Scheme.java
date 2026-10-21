@@ -1,6 +1,9 @@
 package org.algorithm.ui;
 
+import org.algorithm.Color_Algo_State;
 import processing.core.PApplet;
+
+import static org.algorithm.Color_Algo_State.*;
 
 public class Color_Scheme {
     PApplet sketch;
@@ -50,26 +53,26 @@ public class Color_Scheme {
         sketch = _sketch;
     }
     //bla
-    public void changeColors(Color_Scheme_Enum _color_enum){
+    public void changeColors(Color_Scheme_Enum _color_enum, Color_Algo_State _color_algo){
         if (_color_enum == Color_Scheme_Enum.pink_mode){
             bg = sketch.color(226,204,211);
             //make colors pink
             update_Button_Colors(_color_enum);
             update_Node_Colors(_color_enum);
-            update_Edge_Colors(_color_enum);
+            update_Edge_Colors(_color_enum, _color_algo);
         } else if (_color_enum == Color_Scheme_Enum.base_mode) {
             //default colors
             bg = sketch.color(204);
             update_Button_Colors(_color_enum);
             update_Node_Colors(_color_enum);
-            update_Edge_Colors(_color_enum);
+            update_Edge_Colors(_color_enum, _color_algo);
 
             //buttons
         } else if (_color_enum == Color_Scheme_Enum.monotone_mode){
             bg = sketch.color(250,255,255);
             update_Button_Colors(_color_enum);
             update_Node_Colors(_color_enum);
-            update_Edge_Colors(_color_enum);
+            update_Edge_Colors(_color_enum, _color_algo);
         }
     }
 
@@ -102,7 +105,7 @@ public class Color_Scheme {
         }
     }
 
-    private void  update_Edge_Colors(Color_Scheme_Enum _color_enum){
+    private void  update_Edge_Colors(Color_Scheme_Enum _color_enum, Color_Algo_State _color_algo){
 
         if (_color_enum == Color_Scheme_Enum.pink_mode) {
 
@@ -122,11 +125,36 @@ public class Color_Scheme {
         } else if (_color_enum == Color_Scheme_Enum.monotone_mode) {
             edge_idle = sketch.color(110);
             edge_considered = sketch.color(85, 101, 186);
-            edge_final_path = sketch.color(65, 194, 57);
-            edge_delete_hover = sketch.color(255, 75, 75);
+            //edge_final_path = sketch.color(65, 194, 57);
+            //edge_delete_hover = sketch.color(255, 75, 75);
+            ColorEdgeAlgoConsidered(_color_algo);
 
         }
 
+    }
+
+    public void ColorEdgeAlgoConsidered(Color_Algo_State _color_Algo){
+        switch(_color_Algo){
+            case Djikstra:
+                edge_considered = sketch.color(85, 101, 186);
+                edge_final_path = sketch.color(65, 194, 57);
+                break;
+
+            case LPAstar:
+                edge_considered = sketch.color(85, 101, 186);
+                edge_final_path = sketch.color(65, 194, 57);
+                break;
+
+            case DstarLite:
+                edge_considered = sketch.color(85, 101, 186);
+                edge_final_path = sketch.color(65, 194, 57);
+                break;
+
+            case Astar:
+                edge_considered = sketch.color(85, 101, 186);
+                edge_final_path = sketch.color(65, 194, 57);
+                break;
+        }
     }
 
     private void update_Button_Colors(Color_Scheme_Enum _color_enum){

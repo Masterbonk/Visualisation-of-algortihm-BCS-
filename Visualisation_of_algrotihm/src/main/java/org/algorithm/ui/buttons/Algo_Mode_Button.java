@@ -12,6 +12,9 @@ import static org.algorithm.Main.*;
 import static org.algorithm.ui.Color_Scheme.text_button;
 import static org.algorithm.ui.Color_Scheme.text_button_hover;
 
+
+// Not used anymore
+
 public class Algo_Mode_Button extends Button {
 
     boolean right_click = false;
