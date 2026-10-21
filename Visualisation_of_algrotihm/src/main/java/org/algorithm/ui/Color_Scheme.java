@@ -48,6 +48,10 @@ public class Color_Scheme {
     public static int edge_delete_hover;
     public static int edge_weight_hover;
 
+    public static int text_box_background;
+    public static int text_box_text;
+    public static int text_box_border;
+
 
     public Color_Scheme(PApplet _sketch){
         sketch = _sketch;
@@ -56,24 +60,31 @@ public class Color_Scheme {
     public void changeColors(Color_Scheme_Enum _color_enum, Color_Algo_State _color_algo){
         if (_color_enum == Color_Scheme_Enum.pink_mode){
             bg = sketch.color(226,204,211);
-            //make colors pink
-            update_Button_Colors(_color_enum);
-            update_Node_Colors(_color_enum);
-            update_Edge_Colors(_color_enum, _color_algo);
         } else if (_color_enum == Color_Scheme_Enum.base_mode) {
-            //default colors
             bg = sketch.color(204);
-            update_Button_Colors(_color_enum);
-            update_Node_Colors(_color_enum);
-            update_Edge_Colors(_color_enum, _color_algo);
-
-            //buttons
         } else if (_color_enum == Color_Scheme_Enum.monotone_mode){
             bg = sketch.color(250,255,255);
-            update_Button_Colors(_color_enum);
-            update_Node_Colors(_color_enum);
-            update_Edge_Colors(_color_enum, _color_algo);
         }
+
+        update_Button_Colors(_color_enum);
+        update_Node_Colors(_color_enum);
+        update_Edge_Colors(_color_enum, _color_algo);
+        update_Text_Box_Colors(_color_enum);
+    }
+
+    private void update_Text_Box_Colors(Color_Scheme_Enum _color_enum){
+        if(_color_enum == Color_Scheme_Enum.pink_mode){
+            text_box_background = sketch.color(145,50, 129);
+            text_box_text = sketch.color(252,164,237);
+        } else if (_color_enum == Color_Scheme_Enum.base_mode){
+            text_box_background = sketch.color(0);
+            text_box_text = sketch.color(100);
+        } else if (_color_enum == Color_Scheme_Enum.monotone_mode){
+            text_box_background = sketch.color(204);
+            text_box_text = sketch.color(0f);
+            text_box_border = sketch.color(124);
+        }
+
     }
 
     private void update_Node_Colors(Color_Scheme_Enum _color_enum){

@@ -2,13 +2,15 @@ package org.algorithm.ui;
 
 import processing.core.PApplet;
 
+import static org.algorithm.ui.Color_Scheme.*;
+
 public class Text_Box {
 
     PApplet sketch;
     float x, y, size_x, size_y;
     String text;
     int text_size = 30;
-    int stroke = 5;
+    int stroke = 3;
 
     public Text_Box(PApplet _sketch, float _x, float _y, String _text){
         sketch = _sketch;
@@ -47,8 +49,8 @@ public class Text_Box {
         sketch.push();
 
         //color
-        sketch.fill(0);
-        sketch.stroke(100);
+        sketch.fill(text_box_background);
+        sketch.stroke(text_box_border);
 
 
         sketch.textSize(text_size);
@@ -67,7 +69,7 @@ public class Text_Box {
 
         );
 
-        sketch.fill(255);
+        sketch.fill(text_box_text);
 
         sketch.text(text, x, y);
 
