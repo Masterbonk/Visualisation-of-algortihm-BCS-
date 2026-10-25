@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import static org.algorithm.Egde_State.finalpath;
 import static org.algorithm.Egde_State.idle;
 import static org.algorithm.Main.*;
+import static org.algorithm.ui.Color_Scheme.weight_button_field_box;
 import static processing.core.PApplet.print;
 import static processing.core.PApplet.println;
 
@@ -22,6 +23,7 @@ import static processing.core.PApplet.println;
 public class Util {
     PApplet sketch;
     int button_height;
+    public static Close_Button close_button;
 
 
     Util(PApplet _sketch, int _button_height){
@@ -45,7 +47,7 @@ public class Util {
         //bottom ui
         Ui.add_Button("reset", 0, _sketch.displayHeight-_button_height, _sketch.displayWidth/9f, _button_height,"↺", Reset_Button.class, true);
 
-        Ui.add_Button("pause", (_sketch.displayWidth)/9f, _sketch.displayHeight-_button_height, _sketch.displayWidth/9f, _button_height,"⏯", Pause_Button.class, true);
+        Ui.add_Button("pause", (_sketch.displayWidth)/9f, _sketch.displayHeight-_button_height, _sketch.displayWidth/9f, _button_height,"▶", Pause_Button.class, true);
 
         Ui.add_Button("forward", _sketch.displayWidth/9f*2f, _sketch.displayHeight-_button_height, _sketch.displayWidth/9f, _button_height,"⏵", Forward_Button.class, true);
 
@@ -82,6 +84,8 @@ public class Util {
 
         Ui.add_Button("algo_mode",(_sketch.displayWidth)/9f*5f, 0, _sketch.displayWidth/9f, _button_height,"Dijkstra", Algo_Mode_Button.class, false);
 
+
+        //Under Display
         Button display_button = Ui.add_Button("Display_parameter", (_sketch.displayWidth) / 9f*8f, 0, _sketch.displayWidth/9f, _button_height, "Display...", Dropdown_Button.class, false);
 
         Ui.add_Button("Name_display", (_sketch.displayWidth)/9f*8f,_button_height+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"Name", Name_Button.class, false, display_button);
@@ -96,10 +100,23 @@ public class Util {
 
         Ui.add_Button("color_scheme",(_sketch.displayWidth)/9f*8f, _button_height*6+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"Pink mode", Color_Scheme_Button.class, false, display_button);
 
+        Ui.add_Button("node_highlight",(_sketch.displayWidth)/9f*8f, _button_height*7+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"PQ Node", Color_Scheme_Button.class, false, display_button);
+
+
         //Under File
         Ui.add_Button("save", 0, _button_height+_button_height/10f, _sketch.displayWidth/9f ,_button_height-_button_height/10f,"Save", Save_Button.class, false, file);
 
         Ui.add_Button("import", 0, _button_height*2+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"Import", Import_Button.class, false, file);
+
+        close_button = new Close_Button(
+                _sketch,
+                (_sketch.displayWidth * 0.5475f),
+                (_sketch.displayHeight * 0.433f),
+                25,
+                25,
+                " X ",
+                false,
+                25f);
 
         //debugging slash testing
         //System.out.println("display: " + _sketch.displayWidth + ", " + _sketch.displayHeight);

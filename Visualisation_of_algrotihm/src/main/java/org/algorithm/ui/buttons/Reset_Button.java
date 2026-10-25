@@ -22,6 +22,23 @@ public class Reset_Button extends Button {
     public void click(){
         super.click();
         println("Clicked reset");
+        switch (algo_state) {
+            case 0:
+                algorithm = new Visual_Dijkstra();
+                break;
+            case 1:
+                algorithm = new Visual_AStar();
+                break;
+            case 2:
+                algorithm = new Visual_LPA();
+                algorithm.initialize();
+                break;
+            case 3:
+                algorithm = new Visual_DStarLite();
+                algorithm.initialize();
+                break;
+        }
+
         algorithm.first_run = true;
         if(algorithm.get_Start() != null && algorithm.get_Goal() != null) {
             algorithm.set_Start(initial_start_node);
@@ -33,20 +50,7 @@ public class Reset_Button extends Button {
         }
         Ui.unlock_All_Buttons();
 
-        switch (algo_state) {
-            case 0:
-                algorithm = new Visual_Dijkstra();
-                break;
-            case 1:
-                algorithm = new Visual_AStar();
-                break;
-            case 2:
-                algorithm = new Visual_LPA();
-                break;
-            case 3:
-                algorithm = new Visual_DStarLite();
-                break;
-        }
+
 
         algorithm.set_Start(initial_start_node);
         algorithm.set_Goal(initial_goal_node);

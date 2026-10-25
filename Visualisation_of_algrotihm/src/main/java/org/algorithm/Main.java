@@ -374,8 +374,9 @@ public class Main extends PApplet{
 
                 }
 
+                currentInput =  new ArrayList<Character>();
                 display_edge_weight_ui = false;
-                currentInput = new ArrayList<Character>();
+                activeEdge = null;
             }
         } else {
             activeEdge = null;
@@ -606,7 +607,10 @@ public class Main extends PApplet{
                 }
 
                 if (Ui.get_Button("cut").clicked && !clicked_on_node) {
+
+                    currentInput =  new ArrayList<Character>();
                     display_edge_weight_ui = false;
+                    activeEdge = null;
 
                     for (Edge e : edge_array) {
                         if (e.mouseOver()) {
@@ -638,9 +642,9 @@ public class Main extends PApplet{
                             activeEdge = e;
                             break;
                         } else if (!e.mouseOver()) {
-                            currentInput =  new ArrayList<Character>();
-                            display_edge_weight_ui = false;
-                            activeEdge = null;
+//                            currentInput =  new ArrayList<Character>();
+//                            display_edge_weight_ui = false;
+//                            activeEdge = null;
 
                         }
                     }
@@ -705,9 +709,9 @@ public class Main extends PApplet{
             }
 
             if (Ui.get_Button("weight").clicked) {
-                activeEdge = null;
-                currentInput =  new ArrayList<Character>();
-                display_edge_weight_ui = false;
+//                activeEdge = null;
+//                currentInput =  new ArrayList<Character>();
+//                display_edge_weight_ui = false;
             }
         }
     }
