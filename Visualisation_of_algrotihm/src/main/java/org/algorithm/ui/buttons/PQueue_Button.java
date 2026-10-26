@@ -13,6 +13,7 @@ public class PQueue_Button extends Button{
     public PQueue_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text) {
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
         super.tool_tip = "Shows the Priority Queue live while the algorithm is running";
+        super.tool_tip_box.update_Text(tool_tip);
     }
 
     public void click(){

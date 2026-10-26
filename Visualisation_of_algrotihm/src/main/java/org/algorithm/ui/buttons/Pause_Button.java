@@ -13,7 +13,7 @@ public class Pause_Button extends Button {
         super(_sketch,_x_pos, _y_pos, _x_size, _y_size, _text);
         clicked = true;
         super.tool_tip = "Pause the algorithm";
-
+        super.tool_tip_box.update_Text(tool_tip);
     }
 
     public void click(){

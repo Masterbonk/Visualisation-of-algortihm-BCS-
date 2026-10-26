@@ -5,6 +5,7 @@ import processing.core.PApplet;
 
 import static org.algorithm.Main.*;
 import static org.algorithm.ui.Color_Scheme.*;
+import org.algorithm.ui.Text_Box;
 
 
 public abstract class Button {
@@ -14,6 +15,8 @@ public abstract class Button {
     public boolean bottom;
     public Button dropdown_control_button = null;
     public String tool_tip = "";
+
+    protected Text_Box tool_tip_box;
 
     private boolean locked = false;
 
@@ -29,6 +32,8 @@ public abstract class Button {
      */
     public Button(PApplet _sketch,float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         sketch = _sketch; x_pos = _x_pos; y_pos = _y_pos; x_size = _x_size; y_size = _y_size; text = _text;
+
+        tool_tip_box = new Text_Box(sketch, x_pos, y_pos,tool_tip, this);
     }
 
     public void add_Dropdown_Control_Button(Button _dropdown_button){
@@ -58,7 +63,7 @@ public abstract class Button {
 
         int changeVal = 5;
 
-        
+
         if (debug) {
             sketch.push();
             sketch.fill(Color_Scheme.debug_text_button); //Text color
@@ -73,7 +78,7 @@ public abstract class Button {
         if (mouse_Over()) {
             sketch.push();
             sketch.fill(bg_button_hover);
-            sketch.rect(x_pos + changeVal, y_pos + changeVal, x_size - changeVal * 2, y_size - changeVal * 2);
+            sketch.rect(x_pos + changeVal, y_pos + changeVal, x_size - changeVal * 2, y_size - changeVal * 2, 5);
             sketch.fill(Color_Scheme.text_button_hover); //Text color
 
             if (dropdown_control_button == null) {
@@ -88,7 +93,7 @@ public abstract class Button {
 
             sketch.push();
             sketch.fill(Color_Scheme.bg_button_clicked);
-            sketch.rect(x_pos + changeVal, y_pos + changeVal, x_size - changeVal * 2, y_size - changeVal * 2);
+            sketch.rect(x_pos + changeVal, y_pos + changeVal, x_size - changeVal * 2, y_size - changeVal * 2, 5);
             sketch.fill(Color_Scheme.text_button_clicked); //Text color
 
             if (dropdown_control_button == null) {
@@ -170,7 +175,9 @@ public abstract class Button {
     protected void render_Tooltip(){
         if(mouse_Over()){
 
+        tool_tip_box.render();
 
+        /*
         sketch.push();
         //sketch.fill(hover);
         sketch.fill(hover_text);
@@ -259,6 +266,7 @@ public abstract class Button {
             }
         }
         sketch.pop();
+        */
         }
     }
 

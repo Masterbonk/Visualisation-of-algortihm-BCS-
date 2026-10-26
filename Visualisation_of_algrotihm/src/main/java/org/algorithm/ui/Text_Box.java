@@ -1,6 +1,11 @@
 package org.algorithm.ui;
 
+import org.algorithm.ui.buttons.Button;
 import processing.core.PApplet;
+
+import static org.algorithm.Main.Ui;
+import static org.algorithm.Main.button_height;
+import static processing.core.PApplet.println;
 
 public class Text_Box {
 
@@ -9,12 +14,23 @@ public class Text_Box {
     String text;
     int text_size = 30;
     int stroke = 5;
+    int max_text_width = 20;
+    Button button;
+    float alt_x, alt_y;
 
     public Text_Box(PApplet _sketch, float _x, float _y, String _text){
         sketch = _sketch;
         x = _x;
         y = _y;
         text = _text;
+    }
+
+    public Text_Box(PApplet _sketch, float _x, float _y, String _text, Button _button){
+        sketch = _sketch;
+        x = _x;
+        y = _y;
+        text = _text;
+        button = _button;
     }
 
     public Text_Box(PApplet _sketch, float _x, float _y, String _text, int _stroke){
@@ -50,26 +66,80 @@ public class Text_Box {
         sketch.fill(0);
         sketch.stroke(100);
 
-
         sketch.textSize(text_size);
         sketch.strokeWeight(stroke);
 
+        double lines = 1;
+
+        float text_box_width = sketch.textWidth(text) + 10;
+
+
+        if (max_text_width > 0) {
+
+            println("'" + text + "' text width: " +sketch.textWidth(text));
+
+            lines = sketch.textWidth(text) / ((sketch.textWidth(text) / text.length()) * max_text_width);
+            lines = Math.floor(lines);
+            if (lines <= 0) lines = 1;
+
+            if (sketch.textWidth(text) > (sketch.textWidth(text) / text.length()) * max_text_width + 10) {
+                text_box_width = (sketch.textWidth(text) / text.length()) * max_text_width + 10;
+            }
+
+            println("text box width: " + text_box_width);
+
+            println("line count: " + lines);
+        }
+
+        float text_box_height = sketch.getGraphics().textSize * (float)lines;
+        println("text box height: " + text_box_height);
+
 
         sketch.textAlign(sketch.CENTER);
-        sketch.rectMode(sketch.CENTER);
+        //sketch.rectMode(sketch.CENTER);
+
+
+
+
+        if (Ui.top_ui.contains((button.name)) /*top*/){
+
+            // add to y to adjust down
+            println("top");
+
+            if (button.getX_pos() < sketch.width/2f /*left*/){
+                // add to x to adjust right
+                println("left");
+            } else {
+                //subtract from x to adjust left
+                println("right");
+            }
+
+        } else {
+            println("bottom");
+
+            alt_y = y - button_height/2;
+            //subtract form 'y' to adjust up
+
+        }
 
         sketch.rect(
                 x,
-                y - sketch.getGraphics().textSize * 0.35f,
-                sketch.textWidth(text) * 1.1f,
-                sketch.getGraphics().textSize * 1.1f,
+                alt_y - sketch.getGraphics().textSize,
+                text_box_width,
+                text_box_height,
                 5
 
         );
 
         sketch.fill(255);
 
-        sketch.text(text, x, y);
+        sketch.text(
+                text,
+                x,
+                alt_y - sketch.getGraphics().textSize,
+                text_box_width,
+                text_box_height
+        );
 
         sketch.pop();
     }
@@ -94,101 +164,5 @@ public class Text_Box {
         text_size = _text_size;
     }
 
-    /*
-    * protected void render_Tooltip(){
-        if(mouse_Over()){
-
-
-        sketch.push();
-        //sketch.fill(hover);
-        sketch.fill(hover_text);
-        sketch.textSize(25);
-        //sketch.textSize(16);
-        sketch.textAlign(CENTER,CENTER);
-
-        //sketch.text(tmp,x-sketch.textWidth(tmp)/2,((y+dim/2f)+sketch.getGraphics().textSize)-25f);
-
-        sketch.push();
-        sketch.fill(hover);
-        //sketch.noStroke();
-        sketch.stroke(hover_stroke);
-        sketch.strokeWeight(5);
-
-        float top = y_pos + 1.5f * button_height;
-        float bottom = y_pos - 0.5f * button_height;
-
-        float textbox_width = sketch.textWidth(tool_tip)*0.65f;
-        float textbox_height = sketch.getGraphics().textSize;
-
-        float v = sketch.textWidth(tool_tip) / textbox_width;
-        int lines = (int) Math.ceil(v);
-
-        if(y_pos <= sketch.displayHeight/2f) {
-
-            if (dropdown_control_button == null) {
-                //if (!clicked) sketch.rect(x_pos, top,textbox_width,textbox_height*(v+2));
-                if(x_pos >= sketch.displayWidth * 0.80) {
-                    if(!clicked) sketch.rect(x_pos, top,textbox_width,textbox_height*(v+2));
-                } else
-                    if(x_pos >= sketch.displayWidth * 0.75) {
-                        sketch.rect(x_pos- textbox_width/2, top,textbox_width,textbox_height*(v+2));
-                    }
-                else {
-                        if (!clicked) sketch.rect(x_pos, top,textbox_width,textbox_height*(v+2));
-                }
-
-            } else {
-
-                if(x_pos <= sketch.displayWidth/2f) {
-                    //if(debug) sketch.rect(x_pos, top,textbox_width*100,textbox_height*(v+2));
-                    sketch.rect(x_pos + x_size, y_pos,textbox_width,textbox_height*(v+2));
-
-                }else {
-                    //if(debug) sketch.rect(x_pos, top,textbox_width*100,textbox_height*(v+2));
-                    sketch.rect(x_pos - textbox_width, y_pos,textbox_width,textbox_height*(v+2));
-                }
-            }
-
-        }else{
-            if(x_pos >= sketch.displayWidth * 0.80) {
-                sketch.rect(x_pos-textbox_width/2, bottom - ((textbox_height * lines) * 1.5f), textbox_width, textbox_height * (v + 2));
-            }else {
-                sketch.rect(x_pos, bottom - ((textbox_height * lines) * 1.5f), textbox_width, textbox_height * (v + 2));
-            }
-        }
-        sketch.pop();
-        if(y_pos <= sketch.displayHeight/2f){
-            if (dropdown_control_button == null) {
-                //if (!clicked) sketch.text(tool_tip, x_pos, top, textbox_width, textbox_height * (v + 2));
-                if(x_pos >= sketch.displayWidth * 0.80) {
-                    if (!clicked) sketch.text(tool_tip, x_pos, top, textbox_width, textbox_height * (v + 2));
-                } else
-                if(x_pos >= sketch.displayWidth * 0.75) {
-                    sketch.text(tool_tip, x_pos - textbox_width/2, top, textbox_width, textbox_height * (v + 2));
-                }
-                else {
-                    if (!clicked) sketch.text(tool_tip, x_pos, top, textbox_width, textbox_height * (v + 2));
-                }
-            }else {
-                if(x_pos <= sketch.displayWidth/2f){
-                    sketch.text(tool_tip, x_pos + x_size, y_pos, textbox_width, textbox_height * (v + 2));
-
-                }else {sketch.text(tool_tip, x_pos - textbox_width, y_pos, textbox_width, textbox_height * (v + 2));}
-
-            }
-
-
-        }else{
-//            sketch.text(tool_tip, x_pos, bottom - (textbox_height * lines) ,textbox_width,textbox_height*(v+2));
-            if(x_pos >= sketch.displayWidth * 0.80) {
-                sketch.text(tool_tip, x_pos-textbox_width/2, bottom - ((textbox_height * lines) * 1.5f),textbox_width,textbox_height*(v+2));
-            }else {
-                sketch.text(tool_tip, x_pos, bottom - ((textbox_height * lines) * 1.5f),textbox_width,textbox_height*(v+2));
-            }
-        }
-        sketch.pop();
-        }
-    }
-    * */
 }
 

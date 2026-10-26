@@ -10,6 +10,7 @@ import org.algorithm.graph.edges.Edge;
 import org.algorithm.graph.edges.Heuristic_Edge;
 import org.algorithm.ui.Color_Scheme;
 import org.algorithm.ui.Color_Scheme_Enum;
+import org.algorithm.ui.Text_Box;
 import org.algorithm.ui.UI;
 import org.algorithm.ui.buttons.Algo_Mode_Button;
 import processing.core.PApplet;
@@ -89,6 +90,9 @@ public class Main extends PApplet{
 
     public static HashMap<Edge,Egde_State> edge_state_set = new HashMap<>();
 
+    Text_Box tmp_box;
+    Text_Box tmp_box_1;
+
     /**
      * Main function starts the sketch
      * @param args
@@ -156,6 +160,9 @@ public class Main extends PApplet{
 
         Util.Make_UI(this, button_height);
         Util.Make_Graph(this,5,5);
+
+        tmp_box = new Text_Box(this,width/2f,height/2f,"This is a sentance for Testing, if we do not test we will never know if testing works so we must always ");
+        tmp_box_1 = new Text_Box(this,width/2f,height/4f,"Test");
 
 
         // Set the dash-gap pattern in pixels
@@ -227,6 +234,11 @@ public class Main extends PApplet{
 
         if (!Ui.get_Button("pause").clicked){
             algorithm.Main();
+        }
+
+        if (debug){
+            tmp_box.render();
+            tmp_box_1.render();
         }
     }
 
