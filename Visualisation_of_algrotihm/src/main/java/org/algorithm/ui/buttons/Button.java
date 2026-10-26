@@ -15,6 +15,7 @@ public abstract class Button {
     public boolean bottom;
     public Button dropdown_control_button = null;
     public String tool_tip = "";
+    boolean has_tool_tip = true;
 
     protected Text_Box tool_tip_box;
 
@@ -34,6 +35,10 @@ public abstract class Button {
         sketch = _sketch; x_pos = _x_pos; y_pos = _y_pos; x_size = _x_size; y_size = _y_size; text = _text;
 
         tool_tip_box = new Text_Box(sketch, x_pos, y_pos,tool_tip, this);
+    }
+
+    public Button(PApplet _sketch,float _x_pos, float _y_pos, float _x_size, float _y_size, String _text, boolean _has_tool_tip){
+        sketch = _sketch; x_pos = _x_pos; y_pos = _y_pos; x_size = _x_size; y_size = _y_size; text = _text; has_tool_tip = _has_tool_tip;
     }
 
     public void add_Dropdown_Control_Button(Button _dropdown_button){
@@ -128,8 +133,7 @@ public abstract class Button {
             sketch.line(x_pos+x_size, y_pos, x_pos, y_pos+y_size);//Top right to bottom left
             sketch.pop();
         }
-
-        render_Tooltip();
+        if (has_tool_tip) render_Tooltip();
     }
 
 

@@ -6,6 +6,7 @@ import org.algorithm.algo.Integer_Priority_Queue;
 import org.algorithm.algo.Tuple;
 import org.algorithm.graph.Node;
 import org.algorithm.ui.buttons.Button;
+import org.algorithm.ui.buttons.Close_Button;
 import processing.core.PApplet;
 
 import java.util.*;
@@ -26,6 +27,7 @@ public class UI {
      */
     public UI(PApplet _sketch){
         sketch = _sketch;
+
 
     }
 
@@ -100,6 +102,10 @@ public class UI {
         println(_name);
     }
 
+    public void remove_Button(String _name){
+        button_map.remove(_name);
+    }
+
     /**
      * returns the button with the given name from the map
      * @param _name name of the button we fetch
@@ -124,7 +130,7 @@ public class UI {
         if (!bottom_ui.contains(_button.name)) return;
         for (String s : bottom_ui) {
             if (button_map.get(s) != _button) {
-                if (s.equals("pause")) continue;
+                if (s.equals("pause") || s.equals("node_highlight")) continue;
                 button_map.get(s).clicked = false;
             }
         }
@@ -137,23 +143,28 @@ public class UI {
      * */
     private void render_Edge_Weight_UI() {
 
+
         sketch.push();
         sketch.textSize(30);
         StringBuilder inputStr = new StringBuilder();
         if (display_edge_weight_ui) { // if the display is active we render it
 
+            add_Button("close", Util.close_button, false);
+
             sketch.push();
             sketch.noStroke();
             sketch.fill(weight_button_field_box);
             sketch.rectMode(CENTER);
-            String tmp = ""+9999999;
+            String tmp = "" + 9999999;
             sketch.push();
             sketch.textSize(16);
             float fontSize = sketch.getGraphics().textSize;
             sketch.pop();
             float boxheight = (sketch.getGraphics().textSize) *1.7f;
+
             //this is the outer box for the ui
             //the rect dimensions are based of the text size
+
             sketch.rect(
                     (sketch.displayWidth/2f),
                     (sketch.displayHeight/2f) - (sketch.getGraphics().textSize/2) - fontSize,
@@ -194,6 +205,8 @@ public class UI {
             sketch.textAlign(LEFT);
             sketch.text(inputStr.toString(),
                     sketch.displayWidth/2f-sketch.textWidth(tmp)/2, sketch.displayHeight/2f);
+        } else {
+            Ui.remove_Button("close");
         }
         sketch.pop();
 
@@ -234,12 +247,13 @@ public class UI {
                     tmp.change_In_PQ(false);
                     //algorithm.get_U().get_Heap().getFirst().change_In_PQ(false);
                 }
-
-                sketch.push();
-                sketch.fill(238,218,18);
-                int tmp = Util.round_To_10(sketch.textWidth( algorithm.get_U().get_Heap().getFirst().toString()));
-                sketch.circle(sketch.displayWidth-280 - tmp, 192,20);
-                sketch.pop();
+                if(Ui.get_Button("node_highlight").clicked) {
+                    sketch.push();
+                    sketch.fill(Color_Scheme.in_PQ_node);
+                    int tmp = Util.round_To_10(sketch.textWidth( algorithm.get_U().get_Heap().getFirst().toString()));
+                    sketch.circle(sketch.displayWidth-280 - tmp, 192,20);
+                    sketch.pop();
+                }
 
                 for (int i = 0; i < Math.min(algorithm.get_U().get_Heap().size(), 11); i++){
                     //getting the elements in the queue
