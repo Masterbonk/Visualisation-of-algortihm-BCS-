@@ -98,28 +98,30 @@ public class Text_Box {
         sketch.textAlign(sketch.CENTER);
         //sketch.rectMode(sketch.CENTER);
 
+        alt_y = y;
+        alt_x = x;
 
+        if (button != null) {
+            if (Ui.top_ui.contains((button.name)) /*top*/){
 
+                // add to y to adjust down
+                println("top");
 
-        if (Ui.top_ui.contains((button.name)) /*top*/){
+                if (button.getX_pos() < sketch.width/2f /*left*/){
+                    // add to x to adjust right
+                    println("left");
+                } else {
+                    //subtract from x to adjust left
+                    println("right");
+                }
 
-            // add to y to adjust down
-            println("top");
-
-            if (button.getX_pos() < sketch.width/2f /*left*/){
-                // add to x to adjust right
-                println("left");
             } else {
-                //subtract from x to adjust left
-                println("right");
+                println("bottom");
+
+                alt_y = y - button_height/2;
+                //subtract form 'y' to adjust up
+
             }
-
-        } else {
-            println("bottom");
-
-            alt_y = y - button_height/2;
-            //subtract form 'y' to adjust up
-
         }
 
         sketch.rect(
