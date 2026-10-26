@@ -12,6 +12,9 @@ import static org.algorithm.Main.*;
 import static org.algorithm.ui.Color_Scheme.text_button;
 import static org.algorithm.ui.Color_Scheme.text_button_hover;
 
+
+// Not used anymore
+
 public class Algo_Mode_Button extends Button {
 
     boolean right_click = false;
@@ -22,8 +25,12 @@ public class Algo_Mode_Button extends Button {
         super.tool_tip = "Change which algorithm is run. The program is currently using: " + text;
         super.tool_tip_box.update_Text(tool_tip);
     }
+
     public void click(boolean _right_click){
 
+    }
+    public boolean mouse_Over(){
+        return false;
     }
 
     public void click(){

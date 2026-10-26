@@ -5,6 +5,7 @@ import org.algorithm.algo.Visual_AStar;
 import org.algorithm.ui.buttons.Button;
 import processing.core.PApplet;
 
+import static org.algorithm.Color_Algo_State.Astar;
 import static org.algorithm.Main.algorithm;
 
 public class A_Star_Button extends Button {
@@ -27,6 +28,7 @@ public class A_Star_Button extends Button {
     @Override
     public void click() {
         Main.algo_state = 1;
+        Main.color_algo_state = Astar;
         Main.Ui.get_Button("reset").click();
 
         if (!clicked) {

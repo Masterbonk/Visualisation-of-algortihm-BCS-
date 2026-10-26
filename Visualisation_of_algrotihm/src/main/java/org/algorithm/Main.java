@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
 
+import static org.algorithm.Color_Algo_State.Djikstra;
 import static org.algorithm.Util.generate_Name;
 
 //used this code to implement zoom feature https://forum.processing.org/one/topic/zooming-in-and-zooming-out.html
@@ -87,6 +88,7 @@ public class Main extends PApplet{
 
     public static boolean importing = false;
     public static int algo_state = 0;
+    public static Color_Algo_State color_algo_state = Djikstra;
 
     public static HashMap<Edge,Egde_State> edge_state_set = new HashMap<>();
 
@@ -123,6 +125,7 @@ public class Main extends PApplet{
         util = new Util(this,button_height);
         cs = new Color_Scheme(this);
         colorSchemeEnum = Color_Scheme_Enum.monotone_mode;
+
 
         //program always starts as Dijkstra
         //algorithm = new Visual_DStarLite();
@@ -177,7 +180,7 @@ public class Main extends PApplet{
      */
 
     public void draw(){
-        cs.changeColors(colorSchemeEnum);
+        cs.changeColors(colorSchemeEnum, color_algo_state);
         background(Color_Scheme.bg);
         //background(204); //Draws over everything on screen clearing it for the next frame
 
@@ -710,11 +713,12 @@ public class Main extends PApplet{
                 }
 
             }
+            /*
             if (Ui.get_Button("algo_mode").mouse_Over()) {
                 clicked_on_button = true;
                 Algo_Mode_Button tmp_button = (Algo_Mode_Button) Ui.get_Button("algo_mode");
                 tmp_button.click(true);
-            }
+            }*/
 
             if (Ui.get_Button("line").clicked) {
                 node_1 = null;

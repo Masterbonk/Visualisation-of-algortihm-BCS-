@@ -3,6 +3,8 @@ package org.algorithm.ui;
 import org.algorithm.ui.buttons.Button;
 import processing.core.PApplet;
 
+import static org.algorithm.ui.Color_Scheme.*;
+
 import static org.algorithm.Main.Ui;
 import static org.algorithm.Main.button_height;
 import static processing.core.PApplet.println;
@@ -13,7 +15,7 @@ public class Text_Box {
     float x, y, size_x, size_y;
     String text;
     int text_size = 30;
-    int stroke = 5;
+    int stroke = 3;
     int max_text_width = 20;
     Button button;
     float alt_x, alt_y;
@@ -63,8 +65,9 @@ public class Text_Box {
         sketch.push();
 
         //color
-        sketch.fill(0);
-        sketch.stroke(100);
+        sketch.fill(text_box_background);
+        sketch.stroke(text_box_border);
+
 
         sketch.textSize(text_size);
         sketch.strokeWeight(stroke);
@@ -133,7 +136,7 @@ public class Text_Box {
 
         );
 
-        sketch.fill(255);
+        sketch.fill(text_box_text);
 
         sketch.text(
                 text,
