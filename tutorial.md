@@ -15,7 +15,7 @@ In order to run the algorithm, a start and goal flag must have been placed. Left
 <img width="272" height="160" alt="image" src="https://github.com/user-attachments/assets/568032e1-55ac-4817-93ab-ff15c50648cf" />
 <br/><br/>
 
-Now either the play button or forward button can be pressed. The forward button steps through the algorithm step by step. The darkest color is the final path, while the lighter color is the edges considered during the algorithms run. 
+Now either the play button or forward button can be pressed. The forward button steps through the algorithm step by step. The darkest color is the final path, while the lighter color is the edges considered during the algorithm's run. 
 <br/><br/>
 <img width="397" height="242" alt="image" src="https://github.com/user-attachments/assets/323807c1-8824-45bb-9d65-fdbb430ec268" />
 
@@ -24,8 +24,8 @@ Now either the play button or forward button can be pressed. The forward button 
 There are several ways to restart the program.
 - restart button
 - clear button (which deletes the entire graph)
+- graph button (which makes a new graph)
 - changing algorithm mode
-- changing start and/or goal node manually. (Must be paused, otherwise the algorithm will update immediately.
 
 ## Nodes
 One can add nodes and delete them as preferred. This can be done regardless of the algorithm is active.
