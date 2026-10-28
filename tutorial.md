@@ -63,9 +63,8 @@ Clicking the display button allows you to toggle on:
 - Pink mode (visuals become pink)
 - Priority Queue node (highligts the top node in priority queue)
 
-<img width="1439" height="899" alt="image" src="https://github.com/user-attachments/assets/3a0a2b14-3383-4129-8f42-78c4eb405294" />
+<img width="1439" height="899" alt="image" src="https://github.com/user-attachments/assets/bd07d79c-4801-4e35-8d8c-c80cd4494936" />
 <img width="1439" height="899" alt="image" src="https://github.com/user-attachments/assets/72c030bc-6b8f-41df-8bef-70ed35564bf3" />
-
 
 ## Priority Queue
 It is possible to see how the chosen algorithm finds the shortest path. The priority queue(PQ), is that priority queue the given algorithms uses. Depending on the algorithms different calculations is used to update the PQ.
@@ -73,18 +72,21 @@ It is possible to see how the chosen algorithm finds the shortest path. The prio
 _explanation for the different algorithms PQ to come_
 
 ## Export
-A specfic graph can be saved for later. By clicking export the file graph.xml will be updated.
-<img width="565" height="355" alt="image" src="https://github.com/user-attachments/assets/73e0e605-da0e-4726-97ff-ed777a33f5fc" />
+A specific graph can be saved for later. By clicking save under the file button, the current graph will be saved as a new file in the export folder of the program.
+<img width="1439" height="899" alt="image" src="https://github.com/user-attachments/assets/d75eea6d-1255-4efa-b178-962913cde22d" />
 
 ## Import
-We support two input types: osm and specific xml formats (meaning only our own). It might take a short while for the graph to load.
-<br/><br/>
-To import a prevoiusly saved graph simply click the import button, and find the file graph.xml
-<br/><br/>
-<img width="490" height="275" alt="image" src="https://github.com/user-attachments/assets/31213c0c-015a-47e4-b5a7-03e04592eeca" />
-<img width="490" height="275" alt="image" src="https://github.com/user-attachments/assets/80a919cf-0ae8-44b4-bee6-3453e5c1f185" />
+We support two input types of import: 
+- osm files
+- the graph files that you can save to the export folder (aka our own xml type)
 
-To import osm files, simply find the osm you wish to import. It's is recommened to import smaller osm files.
+It might take a short moment for the program to load an imported file. It is recommended using smaller osm files, as there currently is a limit of zooming out.
+
+<br/><br/>
+To import a prevoiusly saved graph simply click the import button, and find your file in the export folder.
+<br/><br/>
+
+To import osm files, simply find the osm you wish to import. 
 Second image is from https://www.openstreetmap.org/#map=16/55.65957/12.59312 from which the osm file was downloaded.
 <br/><br/>
 <img width="480" height="300" alt="image" src="https://github.com/user-attachments/assets/afbcab3f-3a39-4811-b2c5-2f37705a75ca" />
