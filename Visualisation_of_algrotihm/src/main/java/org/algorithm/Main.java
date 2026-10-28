@@ -569,7 +569,7 @@ public class Main extends PApplet{
                         algorithm.set_Start(n);
                         initial_start_node = n;
 
-                        if (algo_state == 0 || algo_state == 1 || algo_state == 2){
+                        if (algo_state == 0 || algo_state == 1 || algo_state == 2 || algo_state == 3){
                             Ui.get_Button("reset").click();
                             Ui.get_Button("flag_a").click();
                         }
@@ -637,7 +637,7 @@ public class Main extends PApplet{
                             println("Edge was deleted");
                             algorithm.edge_update_map.put(e,-1);
 
-                            if(algo_state == 2 && algorithm.getClass() == Visual_LPA.class){
+                            if(algo_state == 2){
                                 Visual_LPA tmp_algo = (Visual_LPA) algorithm;
                                 tmp_algo.remove_from_checked_edges(e);
                             }

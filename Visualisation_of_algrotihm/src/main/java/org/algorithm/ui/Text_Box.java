@@ -79,7 +79,7 @@ public class Text_Box {
 
         if (max_text_width > 0) {
 
-            println("'" + text + "' text width: " +sketch.textWidth(text));
+            //println("'" + text + "' text width: " +sketch.textWidth(text));
 
             lines = sketch.textWidth(text) / ((sketch.textWidth(text) / text.length()) * max_text_width);
             lines = Math.floor(lines);
@@ -89,13 +89,13 @@ public class Text_Box {
                 text_box_width = (sketch.textWidth(text) / text.length()) * max_text_width + 10;
             }
 
-            println("text box width: " + text_box_width);
+            //println("text box width: " + text_box_width);
 
-            println("line count: " + lines);
+            //println("line count: " + lines);
         }
 
         float text_box_height = sketch.getGraphics().textSize * (float)lines;
-        println("text box height: " + text_box_height);
+        //println("text box height: " + text_box_height);
 
 
         sketch.textAlign(sketch.CENTER);
@@ -108,18 +108,18 @@ public class Text_Box {
             if (Ui.top_ui.contains((button.name)) /*top*/){
 
                 // add to y to adjust down
-                println("top");
+                //println("top");
 
                 if (button.getX_pos() < sketch.width/2f /*left*/){
                     // add to x to adjust right
-                    println("left");
+                    //println("left");
                 } else {
                     //subtract from x to adjust left
-                    println("right");
+                    //println("right");
                 }
 
             } else {
-                println("bottom");
+                //println("bottom");
 
                 alt_y = y - button_height/2;
                 //subtract form 'y' to adjust up

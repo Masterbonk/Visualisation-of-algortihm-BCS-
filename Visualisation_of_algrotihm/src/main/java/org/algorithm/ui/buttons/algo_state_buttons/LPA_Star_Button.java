@@ -29,7 +29,6 @@ public class LPA_Star_Button extends Button {
     public void click() {
         Main.algo_state = 2;
         Main.color_algo_state = LPAstar;
-        Main.Ui.get_Button("reset").click();
 
         if (!clicked) {
 
@@ -38,6 +37,10 @@ public class LPA_Star_Button extends Button {
             Main.Ui.get_Button("D* Lite").clicked = false;
         }
         algorithm = new Visual_LPA();
+
+        Main.Ui.get_Button("reset").click();
+
+
 
         super.click();
     }

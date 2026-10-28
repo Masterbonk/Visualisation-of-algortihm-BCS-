@@ -7,6 +7,7 @@ import org.algorithm.ui.buttons.Button;
 import processing.core.PApplet;
 
 import static org.algorithm.Color_Algo_State.Djikstra;
+import static org.algorithm.Main.Ui;
 import static org.algorithm.Main.algorithm;
 
 public class Dijkstra_Button extends Button {
@@ -31,13 +32,21 @@ public class Dijkstra_Button extends Button {
     public void click() {
         Main.algo_state = 0;
         Main.color_algo_state = Djikstra;
-        Main.Ui.get_Button("reset").click();
+
+
         if (!clicked) {
             Main.Ui.get_Button("A*").clicked = false;
             Main.Ui.get_Button("LPA*").clicked = false;
             Main.Ui.get_Button("D* Lite").clicked = false;
         }
+
+        if (Ui.get_Button("heuristic").clicked){
+            Ui.get_Button("heuristic").click();
+        }
+
         algorithm = new Visual_Dijkstra();
+
+        Main.Ui.get_Button("reset").click();
 
         super.click();
     }

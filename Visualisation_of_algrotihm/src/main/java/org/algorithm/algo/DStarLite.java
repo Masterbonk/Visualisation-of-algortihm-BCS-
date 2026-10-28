@@ -20,6 +20,9 @@ public class DStarLite extends Dynamic_Algorithm {
     }
 
     public void initialize(){
+        println("D* init");
+        println(start_node + " - " + goal_node);
+
         if (start_node == null) throw new NullPointerException("start not set!");
         if (goal_node == null) throw new NullPointerException("goal not set!");
 

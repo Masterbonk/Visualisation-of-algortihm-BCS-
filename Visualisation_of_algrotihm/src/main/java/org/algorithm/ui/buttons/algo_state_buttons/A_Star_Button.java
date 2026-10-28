@@ -6,6 +6,7 @@ import org.algorithm.ui.buttons.Button;
 import processing.core.PApplet;
 
 import static org.algorithm.Color_Algo_State.Astar;
+import static org.algorithm.Main.Ui;
 import static org.algorithm.Main.algorithm;
 
 public class A_Star_Button extends Button {
@@ -29,14 +30,21 @@ public class A_Star_Button extends Button {
     public void click() {
         Main.algo_state = 1;
         Main.color_algo_state = Astar;
-        Main.Ui.get_Button("reset").click();
+
 
         if (!clicked) {
             Main.Ui.get_Button("Dijkstra").clicked = false;
             Main.Ui.get_Button("LPA*").clicked = false;
             Main.Ui.get_Button("D* Lite").clicked = false;
         }
+
+        if (Ui.get_Button("heuristic").clicked){
+            Ui.get_Button("heuristic").click();
+        }
+
         algorithm = new Visual_AStar();
+
+        Main.Ui.get_Button("reset").click();
 
 
         super.click();

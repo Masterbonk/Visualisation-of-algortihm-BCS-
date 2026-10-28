@@ -50,10 +50,12 @@ public class  Visual_LPA extends LPA_Star{
 
 
     public void initialize(){
+
         for(Node n: node_array){
             n.update_G_Val(MAX_INT);
             n.update_Rhs_Val(MAX_INT);
         }
+
         super.initialize();
         n = null;
     }

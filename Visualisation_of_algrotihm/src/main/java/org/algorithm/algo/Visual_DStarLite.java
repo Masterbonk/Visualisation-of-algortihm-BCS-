@@ -10,6 +10,7 @@ import java.util.HashMap;
 import static java.lang.Math.min;
 import static org.algorithm.Egde_State.*;
 import static org.algorithm.Main.edge_state_set;
+import static org.algorithm.Main.node_array;
 import static org.algorithm.Util.*;
 import static processing.core.PApplet.println;
 import static processing.core.PConstants.MAX_INT;
@@ -35,10 +36,8 @@ public class Visual_DStarLite extends Dynamic_Algorithm {
      * Then it add the goal node to the priority queue.
      */
     public void initialize(){
-        if (start_node == null || goal_node == null) {
-            println("start and/or goal are null");
-            return;
-        }
+
+        println("visual D* init");
 
         if (Main.initial_start_node == start_node) {
             for (Edge e : Main.colored_edges) {
@@ -47,11 +46,12 @@ public class Visual_DStarLite extends Dynamic_Algorithm {
 
             }
         }
-        //if (start == null) throw new NullPointerException("Start not set!");
-        //if (goal == null) throw new NullPointerException("Goal not set!");
 
-        //To change between counting, switch these two
-        //U = new Priority_Queue();
+        for(Node n: node_array){
+            n.update_G_Val(MAX_INT);
+            n.update_Rhs_Val(MAX_INT);
+        }
+
         U = new Key_Priority_Queue();
 
         km = 0;
@@ -60,11 +60,12 @@ public class Visual_DStarLite extends Dynamic_Algorithm {
             n.update_G_Val(MAX_INT);
             n.update_Rhs_Val(MAX_INT);
         }
-
-        goal_node.update_Rhs_Val(0);
+        try {  goal_node.update_Rhs_Val(0);
 
         U.insert(goal_node, calculate_Key(goal_node));
+        } catch (Exception e) {}
 
+       super.initialize();
     }
 
     /**
@@ -80,8 +81,12 @@ public class Visual_DStarLite extends Dynamic_Algorithm {
      * It has been given the ability to pause right before it checks for changes.
      */
     public void Main(){
-        if (first_run && start_node != null && goal_node != null){
+        if (start_node == null || goal_node == null) {
+            println("start and/or goal are null | Visual D*");
+            return;
+        } else if (first_run){
             last = start_node;
+            println("init D* ");
             initialize();
             compute_Shortest_Path();
             first_run = false;
@@ -96,6 +101,7 @@ public class Visual_DStarLite extends Dynamic_Algorithm {
         if (!part_one_d_main && !first_run){
             //println("Running while loop");
             while (start_node != goal_node){
+                println("looping");
 
                 if (start_node.get_G_Val() == MAX_INT) {
                     println("No valid path to start");
@@ -109,10 +115,11 @@ public class Visual_DStarLite extends Dynamic_Algorithm {
                 }
 
                 if (!has_been_paused && paused_once) {
-
+                    println("looping 1");
                     if (!U.get_Heap().isEmpty()) U.get_Heap().getFirst().change_In_PQ(false);
                     Edge e = find_Shared_Edge(start_node, find_Min_G_Node(start_node));
                     if (e != null) {
+                        println("looping 1.1");
                         e.set_Enum(considered);
                         edge_state_set.put(e,considered);
                         Main.colored_edges.add(e);
@@ -124,6 +131,7 @@ public class Visual_DStarLite extends Dynamic_Algorithm {
 
 
                 if(Main.Ui.get_Button("pause").clicked || Main.Ui.get_Button("forward").clicked && paused_once){
+                    println("looping 2");
                     has_been_paused = true;
                     paused_once = false;
                     Main.Ui.get_Button("forward").clicked = false;
@@ -138,6 +146,7 @@ public class Visual_DStarLite extends Dynamic_Algorithm {
                 //When we click forward it needs to do the check above once before it stops and breaks, this
                 //statement makes sure of it.
                 if (Main.Ui.get_Button("forward").clicked || !Main.Ui.get_Button("pause").clicked) {
+                    //println("looping 3");
                     paused_once = true;
                 }
             }

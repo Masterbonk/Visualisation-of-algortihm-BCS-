@@ -6,6 +6,7 @@ import org.algorithm.ui.buttons.Button;
 import processing.core.PApplet;
 
 import static org.algorithm.Color_Algo_State.DstarLite;
+import static org.algorithm.Main.Ui;
 import static org.algorithm.Main.algorithm;
 
 public class D_Star_Lite_Button extends Button {
@@ -29,14 +30,20 @@ public class D_Star_Lite_Button extends Button {
     public void click() {
         Main.algo_state = 3;
         Main.color_algo_state = DstarLite;
-        Main.Ui.get_Button("reset").click();
+
+
 
         if (!clicked) {
             Main.Ui.get_Button("Dijkstra").clicked = false;
             Main.Ui.get_Button("A*").clicked = false;
             Main.Ui.get_Button("LPA*").clicked = false;
         }
+
+
         algorithm = new Visual_DStarLite();
+
+        Main.Ui.get_Button("reset").click();
+
 
         super.click();
     }
