@@ -147,23 +147,27 @@ public class Color_Scheme {
     public void ColorEdgeAlgoConsidered(Color_Algo_State _color_Algo){
         switch(_color_Algo){
             case Djikstra:
-                edge_considered = sketch.color(58, 60,140);
+                edge_considered = sketch.color(131,131,199);
                 edge_final_path = sketch.color(32,40,255);
                 break;
 
             case Astar:
-                edge_considered = sketch.color(66,117,168);
+                edge_considered = sketch.color(157,195,233);
                 edge_final_path = sketch.color(14,135,255);
                 break;
 
             case LPAstar:
-                edge_considered = sketch.color(163, 88, 134);
-                edge_final_path = sketch.color(255, 41, 171);
+                edge_considered = sketch.color(141, 221, 161);
+                edge_final_path = sketch.color(10, 240, 11);
+                //edge_considered = sketch.color(163, 88, 134);
+                //edge_final_path = sketch.color(255, 41, 171);
                 break;
 
             case DstarLite:
-                edge_considered = sketch.color(141,86,191);
-                edge_final_path = sketch.color(147, 30, 255);
+                edge_considered = sketch.color(99,158,97);
+                edge_final_path = sketch.color(41,163,10);
+                //edge_considered = sketch.color(141,86,191);
+                //edge_final_path = sketch.color(147, 30, 255);
                 break;
 
 
@@ -171,10 +175,10 @@ public class Color_Scheme {
     }
 
     private void update_Button_Colors(Color_Scheme_Enum _color_enum){
-        bg_button_algo_zero = sketch.color(220,220,60); //Yellow
-        bg_button_algo_one = sketch.color(40,40,178); //Blue
-        bg_button_algo_two = sketch.color(80,220,65); //Green
-        bg_button_algo_three = sketch.color(224,60,60); //Red
+        bg_button_algo_zero = sketch.color(131,131,199); //dark blue
+        bg_button_algo_one = sketch.color(157,195,233); //light blue
+        bg_button_algo_two = sketch.color(255, 41, 171);
+        bg_button_algo_three = sketch.color(147, 30, 255);
 
         if (_color_enum == Color_Scheme_Enum.pink_mode){
             //debug

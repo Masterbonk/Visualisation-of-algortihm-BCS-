@@ -713,7 +713,7 @@ public class Main extends PApplet{
                 }
 
             }
-            /*
+            /* not used anymore
             if (Ui.get_Button("algo_mode").mouse_Over()) {
                 clicked_on_button = true;
                 Algo_Mode_Button tmp_button = (Algo_Mode_Button) Ui.get_Button("algo_mode");
