@@ -10,7 +10,7 @@ public class Flag_A_Button extends Button {
     public Flag_A_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch, _x_pos, _y_pos, _x_size, _y_size, _text);
         super.tool_tip = "Left click to set the start node and right click to set the goal";
-
+        super.tool_tip_box.update_Text(tool_tip);
     }
 
 

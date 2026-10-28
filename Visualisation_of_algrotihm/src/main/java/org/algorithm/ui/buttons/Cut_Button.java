@@ -12,7 +12,7 @@ public class Cut_Button extends Button {
     public Cut_Button(PApplet _sketch, float _x_pos, float _y_pos, float _x_size, float _y_size, String _text){
         super(_sketch,_x_pos, _y_pos, _x_size, _y_size, _text);
         super.tool_tip = "Delete nodes or lines from the graph";
-
+        super.tool_tip_box.update_Text(tool_tip);
     }
 
     @Override
