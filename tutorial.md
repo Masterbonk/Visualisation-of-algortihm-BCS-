@@ -2,16 +2,18 @@ This is a tutorial of using our software.
 Once the program is runnning, follow this guide.
 
 ## Start
-This is the first thing that is shown. A graph & buttons. By default the program is set to run the d* lite algorithm.
-Hover over buttons to see what they do, activate them by clicking.
+This is the first thing that is shown. A graph & buttons. By default the program is set to run the Dijkstra algorithm. The algorithm run can be changed to A*, LPA* or D* Lite, by clicking the 'Algorithms' button.
+You can hover over all the buttons to see what they do, or read through the entire tutorial.
 
-<img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/2d0ae253-36d6-464c-9a6b-8e71c2eb4698" />
+<img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/452b553f-1ce3-4309-ad92-071db320be82" />
+
 
 ## Run
 In order to run the algorithm, a start and goal flag must have been placed. The white flag is the start, the black flag is the goal. In order to place the flags, the buttons must be activated.
 <br/><br/>
-<img width="250" height="148" alt="image" src="https://github.com/user-attachments/assets/0c4b1e31-1ad3-4379-9bdc-6b6c728b7066" />
-<img width="339" height="148" alt="image" src="https://github.com/user-attachments/assets/7b0952a1-5a01-483c-a418-856b2a758bac" />
+<img width="207" height="82" alt="image" src="https://github.com/user-attachments/assets/cf74e05a-2ccc-4707-b8e1-e0b1d635f356" />
+<img width="545" height="320" alt="image" src="https://github.com/user-attachments/assets/568032e1-55ac-4817-93ab-ff15c50648cf" />
+<br/><br/>
 
 Now either the pause button or forward button can be pressed. When unpausing the entire algorithm is run, and the start flag moves to the goal flag. The forward button steps through the algorithm step by step. For more information refer to the Priority Queue explanation.
 <br/><br/>
