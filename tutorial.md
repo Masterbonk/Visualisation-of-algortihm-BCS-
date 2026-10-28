@@ -4,6 +4,7 @@ Once the program is runnning, follow this guide.
 ## Start
 This is the first thing that is shown. A graph & buttons. By default the program is set to run the Dijkstra algorithm. The algorithm run can be changed to A*, LPA* or D* Lite, by clicking the 'Algorithms' button.
 You can hover over all the buttons to see what they do, or read through the entire tutorial.
+Right click the screen to pan, use our mousepad, mouse-wheel or '+' & '-' to zoom in and out.
 
 <img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/452b553f-1ce3-4309-ad92-071db320be82" />
 
@@ -87,18 +88,13 @@ To import a prevoiusly saved graph simply click the import button, and find your
 <br/><br/>
 
 To import osm files, simply find the osm you wish to import. 
-Second image is from https://www.openstreetmap.org/#map=16/55.65957/12.59312 from which the osm file was downloaded.
+Second image is from https://www.openstreetmap.org/export#map=17/55.658727/12.592885 where the osm file was downloaded.
 <br/><br/>
-<img width="480" height="300" alt="image" src="https://github.com/user-attachments/assets/afbcab3f-3a39-4811-b2c5-2f37705a75ca" />
-<img width="480" height="300" alt="image" src="https://github.com/user-attachments/assets/caa8bb68-7d2b-4373-9a2c-334e3863d752" />
+<img width="2880" height="1800" alt="image" src="https://github.com/user-attachments/assets/29fc9e7d-86d8-4771-82b1-4bacb778e99d" />
+<img width="2880" height="1618" alt="image" src="https://github.com/user-attachments/assets/f19f3626-6766-4a66-835f-3aaff8745124" />
 
-## LPA*
-LPA* listens for changes in the graph, but does not move the start flag as shown. 
-<br/><br/>
-<img width="287" height="190" alt="image" src="https://github.com/user-attachments/assets/fd821c16-66e3-4b2c-91af-0f1fe20d2206" />
-<img width="287" height="190" alt="image" src="https://github.com/user-attachments/assets/cdb8f4f9-5430-4452-bebf-48e37ccc94eb" />
-<img width="287" height="190" alt="image" src="https://github.com/user-attachments/assets/c9f1d2a8-11d9-4ef5-872b-b153007af73c" />
-
+## Algorithms
+_potentially some more information about the algorithms here_
 
 
 
