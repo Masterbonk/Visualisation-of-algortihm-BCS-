@@ -63,23 +63,14 @@ Clicking the display button allows you to toggle on:
 - Pink mode (visuals become pink)
 - Priority Queue node (highligts the top node in priority queue)
 
-<img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/f454bc92-c19c-4a8d-8eab-faa5e5c11498" />
-<img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/7ec06976-ff2c-4333-a2c7-0dc0c6e58f38" />
-<img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/c1ae7315-3c60-4ead-8c96-1fb0baa60abc" />
-<img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/55923775-d22a-4913-a885-fb224bf6ecb7" />
-<img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/f37ded36-63e2-46b0-a57f-5e608d41b129" />
-<img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/0708c5a2-2fe5-4adc-a453-70c274116e95" />
-<img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/62d73815-ba28-441c-b5b1-528d5f22f55c" />
-<img width="278" height="170" alt="image" src="https://github.com/user-attachments/assets/1bd4265c-552b-4584-8fd5-fb9d27186a6b" />
+<img width="1439" height="899" alt="image" src="https://github.com/user-attachments/assets/3a0a2b14-3383-4129-8f42-78c4eb405294" />
+<img width="1439" height="899" alt="image" src="https://github.com/user-attachments/assets/72c030bc-6b8f-41df-8bef-70ed35564bf3" />
+
 
 ## Priority Queue
-As prevoiusly mentioned, one can see how the algorihtm finds the shortest path. This is done with a priority queue. The yellow colored node is the top node in the priority queue, meaning the one closest to start (d* lite does backwards search), and therfore the next node that will be evaluated. 
+It is possible to see how the chosen algorithm finds the shortest path. The priority queue(PQ), is that priority queue the given algorithms uses. Depending on the algorithms different calculations is used to update the PQ.
 
-The nodes are inserted in the priority queue with the key consisting of **rhs value + the heurtstic between current node and start**  and the **rhs value**
-
-<img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/109c8d0e-324f-4fcc-aae0-8879d2a8d065" />
-
-Specifically Node B is in the priority queue with the key: k1 = 880 and k2 = 247
+_explanation for the different algorithms PQ to come_
 
 ## Export
 A specfic graph can be saved for later. By clicking export the file graph.xml will be updated.
