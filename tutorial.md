@@ -53,6 +53,16 @@ Deletion:
 Edges can be deleted. If a nodes has edges and is deleted, the edges are deleted as well. The deletion (scissor) button works for edges as well as nodes
 
 ## Display
+It's possible to change the program to pink mode. It's also possible to see different elements of the graph and/or algorithm, while it is running.
+Clicking the display button allows you to toggle on:
+- Name of the nodes
+- Dist() or F() or g & rhs values of the nodes, depending on which algorithm is run
+- Weight of the edges
+- Heuristic between the start and goal flag
+- Priority Queue
+- Pink mode (visuals become pink)
+- Priority Queue node (highligts the top node in priority queue)
+
 <img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/f454bc92-c19c-4a8d-8eab-faa5e5c11498" />
 <img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/7ec06976-ff2c-4333-a2c7-0dc0c6e58f38" />
 <img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/c1ae7315-3c60-4ead-8c96-1fb0baa60abc" />
