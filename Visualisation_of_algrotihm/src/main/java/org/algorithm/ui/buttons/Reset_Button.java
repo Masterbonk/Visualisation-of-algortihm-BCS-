@@ -63,6 +63,8 @@ public class Reset_Button extends Button {
         for (Node n : algorithm.set_of_nodes){
             n.color(Color_Scheme.node_idle);
             n.change_In_PQ(false);
+            n.update_G_Val(MAX_INT);
+            n.update_Rhs_Val(MAX_INT);
         }
         if (algorithm != null && algorithm.get_U() != null) {
             algorithm.get_U().clear_Heap();
