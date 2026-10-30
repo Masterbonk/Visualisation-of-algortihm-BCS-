@@ -21,20 +21,21 @@ public class Node_Button extends Button {
             case 0:
                 Ui.get_Button("Node_display").text = "Dist";
                 Ui.get_Button("Node_display").tool_tip = "Display the dist and prev values of the nodes";
+                Ui.get_Button("Node_display").tool_tip_box.update_Text("Display the dist and prev values of the nodes");
                 break;
             case 1:
                 Ui.get_Button("Node_display").text = "F()";
                 Ui.get_Button("Node_display").tool_tip = "Display the dist and prev values of the nodes";
+                Ui.get_Button("Node_display").tool_tip_box.update_Text("Display the dist and prev values of the nodes");
                 break;
-            case 2:
+            case 2, 3:
                 Ui.get_Button("Node_display").text = "Rhs & g";
                 Ui.get_Button("Node_display").tool_tip = "Display the G & RHS values of the nodes";
-                break;
-            case 3:
-                Ui.get_Button("Node_display").text = "Rhs & g";
-                Ui.get_Button("Node_display").tool_tip = "Display the G & RHS values of the nodes";
+                Ui.get_Button("Node_display").tool_tip_box.update_Text("Display the G & RHS values of the nodes");
                 break;
         }
+
+        tool_tip_box.update_Text(tool_tip);
 
     }
 

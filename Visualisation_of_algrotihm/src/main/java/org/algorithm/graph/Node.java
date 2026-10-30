@@ -4,6 +4,7 @@ import org.algorithm.algo.Visual_AStar;
 import org.algorithm.algo.Visual_Dijkstra;
 import org.algorithm.graph.edges.*;
 import org.algorithm.ui.Color_Scheme;
+import org.algorithm.ui.Text_Box;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ public class Node {
     private String name;
     int node_color;
     boolean in_PQ;
+
+    private Text_Box info_box;
 
     private int id;
 
@@ -59,6 +62,20 @@ public class Node {
         node_array.add(this);
 
         id = node_array.size();
+        info_box = new Text_Box(sketch, x,y, "test", true);
+
+        switch (algo_state){
+            case 0:
+                info_box.update_Text("dist(Na) prev(Na)");
+                break;
+            case 1:
+                info_box.update_Text("f(Na) prev(Na)");
+                break;
+            case 2,3:
+                info_box.update_Text("g(Na) rhs(Na)");
+                break;
+        }
+
     }
 
     public Node(PApplet _sketch, int _x, int _y, boolean _is_this_dijkstra){
@@ -77,6 +94,7 @@ public class Node {
 
         id = node_array.size();
 
+        info_box = new Text_Box(sketch, x,y, "test", true);
     }
 
     public int get_Rhs_Val(){
@@ -93,6 +111,7 @@ public class Node {
         } else {
             rhs = _rhs;
         }
+        info_box.update_Text("g(" + display_Infinity(g) + ") rhs(" + display_Infinity(rhs) + ")");
     }
 
     public void update_G_Val(int _g) {
@@ -101,6 +120,7 @@ public class Node {
         } else {
             g = _g;
         }
+        info_box.update_Text("g(" + display_Infinity(g) + ") rhs(" + display_Infinity(rhs) + ")");
     }
 
     public void render(){
@@ -151,11 +171,13 @@ public class Node {
             sketch.pop();
         }
 
-        if (algorithm.dynamic) {
-            render_g_and_rhs();
-        } else if (algorithm.getClass().equals(Visual_Dijkstra.class)) {
-            render_dist();
-        } else render_f();
+//        if (algorithm.dynamic) {
+//            render_g_and_rhs();
+//        } else if (algorithm.getClass().equals(Visual_Dijkstra.class)) {
+//            render_dist();
+//        } else render_f();
+
+        render_g_and_rhs();
         render_Name();
 
 
@@ -165,24 +187,39 @@ public class Node {
 
     public void render_g_and_rhs(){
         if (Ui.get_Button("Node_display").clicked){
-            sketch.push();
-            sketch.fill(255,255,255);
-            sketch.textSize(25);
-            sketch.textAlign(LEFT,TOP);
-            String tmp = "g(" + display_Infinity(g) + "), rhs(" + display_Infinity(rhs) + ")";
-            sketch.push();
-            sketch.fill(100);
-            sketch.stroke(100);
-            sketch.strokeWeight(5);
-            sketch.rect(
-                    x-sketch.textWidth(tmp)/2,((y+dim/2f)+sketch.getGraphics().textSize)-25f,
-                    sketch.textWidth(tmp),
-                    (sketch.getGraphics().textSize)
 
-            );
-            sketch.pop();
-            sketch.text(tmp,x-sketch.textWidth(tmp)/2,((y+dim/2f)+sketch.getGraphics().textSize)-25f);
-            sketch.pop();
+            if (algo_state == 0 ) {
+                Visual_Dijkstra tmp_algo = (Visual_Dijkstra) algorithm;
+                Integer value = tmp_algo.dist.get(this);
+                Node previous = tmp_algo.prev.get(this);
+                info_box.update_Text("dist(" + display_Infinity(value) + ") prev(" + display_Previous_Node(previous) + ")");
+            }else if (algo_state == 1) {
+                Visual_AStar tmp_algo = (Visual_AStar) algorithm;
+                Integer value = tmp_algo.dist.get(this);
+                Node previous = tmp_algo.prev.get(this);
+                info_box.update_Text("f(" + display_Infinity(value) + ") prev(" + display_Previous_Node(previous) + ")");
+
+            }
+            info_box.render();
+
+//            sketch.push();
+//            sketch.fill(255,255,255);
+//            sketch.textSize(25);
+//            sketch.textAlign(LEFT,TOP);
+//            String tmp = "g(" + display_Infinity(g) + "), rhs(" + display_Infinity(rhs) + ")";
+//            sketch.push();
+//            sketch.fill(100);
+//            sketch.stroke(100);
+//            sketch.strokeWeight(5);
+//            sketch.rect(
+//                    x-sketch.textWidth(tmp)/2,((y+dim/2f)+sketch.getGraphics().textSize)-25f,
+//                    sketch.textWidth(tmp),
+//                    (sketch.getGraphics().textSize)
+//
+//            );
+//            sketch.pop();
+//            sketch.text(tmp,x-sketch.textWidth(tmp)/2,((y+dim/2f)+sketch.getGraphics().textSize)-25f);
+//            sketch.pop();
         }
     }
 

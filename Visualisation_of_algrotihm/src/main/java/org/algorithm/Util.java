@@ -100,7 +100,7 @@ public class Util {
 
         Ui.add_Button("color_scheme",(_sketch.displayWidth)/9f*8f, _button_height*6+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"Pink mode", Color_Scheme_Button.class, false, display_button);
 
-        Ui.add_Button("node_highlight",(_sketch.displayWidth)/9f*8f, _button_height*7+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"PQ Node", Color_Scheme_Button.class, false, display_button);
+        Ui.add_Button("node_highlight",(_sketch.displayWidth)/9f*8f, _button_height*7+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"PQ Node", PQ_Highlight_Node_Button.class, false, display_button);
 
 
         //Under File

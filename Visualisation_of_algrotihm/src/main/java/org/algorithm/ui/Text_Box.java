@@ -8,6 +8,7 @@ import static org.algorithm.ui.Color_Scheme.*;
 import static org.algorithm.Main.Ui;
 import static org.algorithm.Main.button_height;
 import static processing.core.PApplet.println;
+import static processing.core.PApplet.reverse;
 
 public class Text_Box {
 
@@ -16,9 +17,13 @@ public class Text_Box {
     String text;
     int text_size = 30;
     int stroke = 3;
-    int max_text_width = 20;
+    float max_text_width = 20;
     Button button;
     float alt_x, alt_y;
+    float text_box_width;
+    float text_box_height;
+    boolean node;
+
 
     public Text_Box(PApplet _sketch, float _x, float _y, String _text){
         sketch = _sketch;
@@ -33,6 +38,14 @@ public class Text_Box {
         y = _y;
         text = _text;
         button = _button;
+    }
+
+    public Text_Box(PApplet _sketch, float _x, float _y, String _text, boolean _node){
+        sketch = _sketch;
+        x = _x;
+        y = _y;
+        text = _text;
+        node = _node;
     }
 
     public Text_Box(PApplet _sketch, float _x, float _y, String _text, int _stroke){
@@ -60,9 +73,14 @@ public class Text_Box {
         stroke = _stroke;
     }
 
+
+
     public void render(){
 
+        if(text.isEmpty()) return;
+
         sketch.push();
+
 
         //color
         sketch.fill(text_box_background);
@@ -71,96 +89,83 @@ public class Text_Box {
 
         sketch.textSize(text_size);
         sketch.strokeWeight(stroke);
-
-        double lines = 1;
-
-        float text_box_width = sketch.textWidth(text) + 10;
-
-
-        if (max_text_width > 0) {
-
-            //println("'" + text + "' text width: " +sketch.textWidth(text));
-
-            lines = sketch.textWidth(text) / ((sketch.textWidth(text) / text.length()) * max_text_width);
-            lines = Math.floor(lines);
-            if (lines <= 0) lines = 1;
-
-            if (sketch.textWidth(text) > (sketch.textWidth(text) / text.length()) * max_text_width + 10) {
-                text_box_width = (sketch.textWidth(text) / text.length()) * max_text_width + 10;
-            }
-
-            //println("text box width: " + text_box_width);
-
-            //println("line count: " + lines);
-        }
-
-        float text_box_height = sketch.getGraphics().textSize * (float)lines;
-        //println("text box height: " + text_box_height);
-
+        //sketch.noStroke();
 
         sketch.textAlign(sketch.CENTER);
-        //sketch.rectMode(sketch.CENTER);
+        sketch.rectMode(sketch.CENTER);
 
-        alt_y = y;
-        alt_x = x;
+
 
         if (button != null) {
-            if (button.dropdown_control_button != null){
+            max_text_width = button.getX_size();
+        }
 
-                alt_y = y + button.getY_size() ;
 
-                if (button.getX_pos() < sketch.width/2f /*left*/){
-                    // add to x to adjust right
-                    alt_x = x + button.getX_size() + 10;
-                    println("left");
-                } else {
-                    alt_x = x - (text_box_width + 10) ;
-                    println("right");
-                }
 
-            } else if (Ui.top_ui.contains((button.name)) /*top*/){
 
-                // add to y to adjust down
-                //println("top");
+        text_box_width = max_text_width;
 
-                if (button.getX_pos() < sketch.width/2f /*left*/){
-                    // add to x to adjust right
-                    //println("left");
-                } else {
-                    //subtract from x to adjust left
-                    //println("right");
-                }
+        int lines = 1;
 
-            } else if (!Ui.top_ui.contains((button.name))) {
-                println("bottom");
+        if (button != null || node) {
+            String[] split_text = text.split(" ");
+            StringBuilder tmp = new StringBuilder();
 
-                if (button.getY_size() < text_box_height) {
-                    alt_y = y - text_box_height;
-                } else {
-                    alt_y = y - button.getY_size()/2;
-                }
-            } else {
-                //println("bottom");
+            for (String _text : split_text){
+                tmp.append(_text).append(" ");
+                if (sketch.textWidth(tmp.toString()) > (max_text_width+5)) {
+                    lines++;
+                    tmp = new StringBuilder();
+                    tmp.append(_text).append(" ");
 
-                alt_y = y - button_height/2;
-                //subtract form 'y' to adjust up
-                if (button.getX_pos() < sketch.width/2f /*left*/){
-                    // add to x to adjust right
-
-                    println("left");
-                } else {
-                    //subtract from x to adjust left
-                    alt_x = x - button.getX_size()/2;
-                    println("right");
                 }
             }
         }
+
+        if (button != null) {
+
+             if(text_box_width < sketch.textWidth(text)) {
+                text_box_height = (sketch.getGraphics().textSize * 1.15f) * lines;
+            } else {
+                text_box_height = sketch.getGraphics().textSize;
+            }
+
+            if (button.dropdown_control_button != null){
+
+                if (x > sketch.width/2f) {
+                    alt_x = x - button.getX_size()/2 - 10;
+                } else {
+                    alt_x = x + button.getX_size() * 1.5f + 10;
+                }
+
+                alt_y = y + text_box_height/2;
+            }
+            else if (y > sketch.height/2f) {
+                alt_x = x + button.getX_size()/2;
+                alt_y = y - text_box_height/2;
+            } else {
+                alt_x = x + button.getX_size()/2;
+                alt_y = y + text_box_height;
+            }
+        } else if (node) {
+            text_box_width = sketch.textWidth(text)/2 + 22;
+            text_box_height = sketch.getGraphics().textSize * 2.5f ;
+            alt_x = x;
+            alt_y = y + text_box_height;
+        } else {
+            alt_x = x;
+            alt_y = y;
+
+            text_box_height = sketch.getGraphics().textSize + 5;
+            text_box_width = sketch.textWidth(text) + 10;
+        }
+
 
         sketch.rect(
                 alt_x,
-                alt_y - sketch.getGraphics().textSize,
+                alt_y + 2,
                 text_box_width,
-                text_box_height,
+                text_box_height + 5,
                 5
 
         );
@@ -170,7 +175,7 @@ public class Text_Box {
         sketch.text(
                 text,
                 alt_x,
-                alt_y - sketch.getGraphics().textSize,
+                (lines > 1 ? alt_y + 5 : alt_y + 10),
                 text_box_width,
                 text_box_height
         );

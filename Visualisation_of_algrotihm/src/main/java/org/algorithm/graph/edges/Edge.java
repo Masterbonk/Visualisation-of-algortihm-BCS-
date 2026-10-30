@@ -140,27 +140,6 @@ public class Edge {
 
             weight_box.render();
 
-/*
-            sketch.push();
-            sketch.textSize(30);
-            sketch.fill(100);
-            sketch.stroke(100);
-            sketch.strokeWeight(10);
-            sketch.textAlign(sketch.CENTER);
-            sketch.rectMode(sketch.CENTER);
-
-            String tmp = ""+weight;
-            sketch.rect(
-                    ((from.get_X() + to.get_X()) / 2f),
-                    ((from.get_Y() + to.get_Y()) / 2f - (sketch.getGraphics().textSize/2)),
-                    sketch.textWidth(tmp),
-                    (sketch.getGraphics().textSize)
-
-            );
-            sketch.fill(255);
-            sketch.text("" + weight, ((from.get_X() + to.get_X()) / 2f), ((from.get_Y() + to.get_Y()) / 2f));
-            sketch.pop();
-            */
         }
     }
 
