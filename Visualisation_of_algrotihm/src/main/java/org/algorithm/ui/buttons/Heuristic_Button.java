@@ -1,5 +1,6 @@
 package org.algorithm.ui.buttons;
 
+import org.algorithm.Main;
 import processing.core.PApplet;
 
 import static org.algorithm.Main.algo_state;
@@ -21,6 +22,12 @@ public class Heuristic_Button extends Button {
             this.lock();
         } else {
             this.unlock();
+        }
+
+        if (Main.algorithm.get_Start() == null || Main.algorithm.get_Goal() == null){
+            this.lock();
+        } else {
+            unlock();
         }
     }
 
