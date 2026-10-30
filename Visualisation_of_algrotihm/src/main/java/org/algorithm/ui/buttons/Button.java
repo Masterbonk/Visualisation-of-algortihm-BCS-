@@ -281,6 +281,13 @@ public abstract class Button {
         return y_pos;
     }
 
+    public float getX_size(){
+        return x_size;
+    }
+    public float getY_size(){
+        return y_size;
+    }
+
     public void lock(){
         locked = true;
     }

@@ -61,7 +61,7 @@ public class Util {
 
         Ui.add_Button("weight", _sketch.displayWidth/9f*7f, _sketch.displayHeight-_button_height, _sketch.displayWidth/9f, _button_height,"Weight", Weight_Button.class, true);
 
-        Ui.add_Button("clear",(_sketch.displayWidth)/9f*8f, _sketch.displayHeight-_button_height, _sketch.displayWidth/9f, _button_height,"Clear", Clear_Button.class, false);
+        Ui.add_Button("clear",(_sketch.displayWidth)/9f*8f, _sketch.displayHeight-_button_height, _sketch.displayWidth/9f, _button_height,"Clear", Clear_Button.class, true);
 
 
         //top ui

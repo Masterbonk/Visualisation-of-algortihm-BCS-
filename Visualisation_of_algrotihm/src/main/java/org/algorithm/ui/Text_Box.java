@@ -102,10 +102,24 @@ public class Text_Box {
         alt_x = x;
 
         if (button != null) {
-            if (Ui.top_ui.contains((button.name)) /*top*/){
+            if (button.dropdown_control_button != null){
+
+                alt_y = y + button.getY_size() ;
+
+                if (button.getX_pos() < sketch.width/2f /*left*/){
+                    // add to x to adjust right
+                    alt_x = x + button.getX_size() + 10;
+                    println("left");
+                } else {
+                    alt_x = x - (text_box_width + 10) ;
+                    println("right");
+                }
+
+            } else if (Ui.top_ui.contains((button.name)) /*top*/){
 
                 // add to y to adjust down
                 println("top");
+                alt_y = y + button.getY_size() * 2;
 
                 if (button.getX_pos() < sketch.width/2f /*left*/){
                     // add to x to adjust right
@@ -115,17 +129,29 @@ public class Text_Box {
                     println("right");
                 }
 
-            } else {
+            } else if (!Ui.top_ui.contains((button.name))) {
                 println("bottom");
 
-                alt_y = y - button_height/2;
+                if (button.getY_size() < text_box_height) {
+                    alt_y = y - text_box_height;
+                } else {
+                    alt_y = y - button.getY_size()/2;
+                }
                 //subtract form 'y' to adjust up
+                if (button.getX_pos() < sketch.width/2f /*left*/){
+                    // add to x to adjust right
 
+                    println("left");
+                } else {
+                    //subtract from x to adjust left
+                    alt_x = x - button.getX_size()/2;
+                    println("right");
+                }
             }
         }
 
         sketch.rect(
-                x,
+                alt_x,
                 alt_y - sketch.getGraphics().textSize,
                 text_box_width,
                 text_box_height,
@@ -137,7 +163,7 @@ public class Text_Box {
 
         sketch.text(
                 text,
-                x,
+                alt_x,
                 alt_y - sketch.getGraphics().textSize,
                 text_box_width,
                 text_box_height
