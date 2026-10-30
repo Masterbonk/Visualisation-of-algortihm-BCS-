@@ -20,14 +20,10 @@ public class Heuristic_Button extends Button {
 
         if (algo_state == 0){
             this.lock();
-        } else {
-            this.unlock();
-        }
-
-        if (Main.algorithm.get_Start() == null || Main.algorithm.get_Goal() == null){
+        } else if(Main.algorithm.get_Start() == null || Main.algorithm.get_Goal() == null) {
             this.lock();
-        } else {
-            unlock();
+        } else{
+            this.unlock();
         }
     }
 

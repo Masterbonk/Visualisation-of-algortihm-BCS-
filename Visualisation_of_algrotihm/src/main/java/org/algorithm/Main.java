@@ -667,9 +667,8 @@ public class Main extends PApplet{
             }
 
             if(Ui.get_Button("heuristic").clicked && algorithm.get_Start() != null && algorithm.get_Goal() != null){
-                if (h == null) {
-                    h = new Heuristic_Edge(this, algorithm.get_Start(), algorithm.get_Goal());
-                }
+                h = new Heuristic_Edge(this, algorithm.get_Start(), algorithm.get_Goal());
+
             }
 
             if(Ui.get_Button("color_scheme").clicked){
@@ -685,7 +684,8 @@ public class Main extends PApplet{
             }
 
             //close display menu if click outside it while it is open
-            if (!Ui.get_Button("Display_parameter").mouse_Over() && !Ui.get_Button("Name_display").mouse_Over() && !Ui.get_Button("Node_display").mouse_Over() && !Ui.get_Button("Edge_display").mouse_Over() && !Ui.get_Button("heuristic").mouse_Over() && !Ui.get_Button("PQ_display").mouse_Over() && !Ui.get_Button("color_scheme").mouse_Over() && Ui.get_Button("Display_parameter").clicked) {
+            if (!Ui.get_Button("Display_parameter").mouse_Over() && !Ui.get_Button("Name_display").mouse_Over() && !Ui.get_Button("Node_display").mouse_Over() &&
+                    !Ui.get_Button("Edge_display").mouse_Over() && !Ui.get_Button("heuristic").mouse_Over() && !Ui.get_Button("PQ_display").mouse_Over() && !Ui.get_Button("color_scheme").mouse_Over() && Ui.get_Button("Display_parameter").clicked) {
                 Ui.get_Button("Display_parameter").clicked = false;
             }
 
