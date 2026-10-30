@@ -177,8 +177,8 @@ public class Color_Scheme {
     private void update_Button_Colors(Color_Scheme_Enum _color_enum){
         bg_button_algo_zero = sketch.color(131,131,199); //dark blue
         bg_button_algo_one = sketch.color(157,195,233); //light blue
-        bg_button_algo_two = sketch.color(255, 41, 171);
-        bg_button_algo_three = sketch.color(147, 30, 255);
+        bg_button_algo_two = sketch.color(10, 240, 11); //light green
+        bg_button_algo_three = sketch.color(41,163,10); //green
 
         if (_color_enum == Color_Scheme_Enum.pink_mode){
             //debug

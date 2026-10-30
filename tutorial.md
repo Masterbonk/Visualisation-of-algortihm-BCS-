@@ -2,109 +2,99 @@ This is a tutorial of using our software.
 Once the program is runnning, follow this guide.
 
 ## Start
-This is the first thing that is shown. A graph & buttons. By default the program is set to run the d* lite algorithm.
-Hover over buttons to see what they do, activate them by clicking.
+This is the first thing that is shown. A graph & buttons. By default the program is set to run the Dijkstra algorithm. The algorithm run can be changed to A*, LPA* or D* Lite, by clicking the 'Algorithms' button.
+You can hover over all the buttons to see what they do, or read through the entire tutorial.
+Right click the screen to pan, use our mousepad, mouse-wheel or '+' & '-' to zoom in and out.
 
-<img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/2d0ae253-36d6-464c-9a6b-8e71c2eb4698" />
+<img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/452b553f-1ce3-4309-ad92-071db320be82" />
+
 
 ## Run
-In order to run the algorithm, a start and goal flag must have been placed. The white flag is the start, the black flag is the goal. In order to place the flags, the buttons must be activated.
+In order to run the algorithm, a start and goal flag must have been placed. Left-click a node to place the start flag, right-click a node to set the goal flag.
 <br/><br/>
-<img width="250" height="148" alt="image" src="https://github.com/user-attachments/assets/0c4b1e31-1ad3-4379-9bdc-6b6c728b7066" />
-<img width="339" height="148" alt="image" src="https://github.com/user-attachments/assets/7b0952a1-5a01-483c-a418-856b2a758bac" />
+<img width="207" height="82" alt="image" src="https://github.com/user-attachments/assets/cf74e05a-2ccc-4707-b8e1-e0b1d635f356" />
+<img width="272" height="160" alt="image" src="https://github.com/user-attachments/assets/568032e1-55ac-4817-93ab-ff15c50648cf" />
+<br/><br/>
 
-Now either the pause button or forward button can be pressed. When unpausing the entire algorithm is run, and the start flag moves to the goal flag. The forward button steps through the algorithm step by step. For more information refer to the Priority Queue explanation.
+Now either the play button or forward button can be pressed. The forward button steps through the algorithm step by step. The darkest color is the final path, while the lighter color is the edges considered during the algorithm's run. The big triangle is the run button while the small triangle is the step through button.
 <br/><br/>
-<img width="313" height="183" alt="image" src="https://github.com/user-attachments/assets/e5f9bc5e-f690-4505-993e-f22d16db382c" />
-<img width="351" height="172" alt="image" src="https://github.com/user-attachments/assets/ca17a6f0-1efe-4d7f-be0d-a9d1493c99c7" />
-<img width="300" height="100" alt="image" src="https://github.com/user-attachments/assets/7aa00c78-84d0-43dd-b9be-baf8fa6ed9f3" />
+<img width="338" height="81" alt="image" src="https://github.com/user-attachments/assets/a22e32bb-64e8-43b2-acdf-aaf5f3ef43b9" />
+<img width="397" height="242" alt="image" src="https://github.com/user-attachments/assets/323807c1-8824-45bb-9d65-fdbb430ec268" />
+
 
 ## Restart
 There are several ways to restart the program.
 - restart button
 - clear button (which deletes the entire graph)
+- graph button (which makes a new graph)
 - changing algorithm mode
-- changing start and/or goal node manually. (Must be paused, otherwise the algorithm will update immediately.
 
 ## Nodes
-One can add nodes and delete them as preferred. This can be done regardless of the algorithm is active.
+It's possible to delete or add nodes to the graph. The algorithm must be pause in order to do so. (However not if you are running LPA* in which case the algorithm is running indefinitely)
 The cut (scissor) button will delete a node that's clicked on by the mouse.
-The node button will add a node on the screen where the mouse has been clicked.
+The node (circle) button will add a node on the screen where the mouse has been clicked.
 <br/><br/>
-<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/265310c7-5752-405d-9a7d-2ed6c96dedd8" />
-<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/f883a655-584a-40ba-b37b-0cba0c24b086" />
-<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/38c02299-6a71-40b1-a3bd-101133f570e9" />
+<img width="1439" height="899" alt="image" src="https://github.com/user-attachments/assets/343aaa9b-3145-47e2-a4b9-abe81ed7e10f" />
+
 
 ## Edges
-Edges can be added: 
+Edges can be added by clicking the line button: 
 - between two existing nodes 
 - between one existing node and clicking somewhere on the screen
 - clicking two different places on the screen
-<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/fbc805f6-20aa-47f7-95ba-fcfd21a66ba8" />
-<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/5df3102f-af6c-4a76-b0fd-3451a82c6e60" />
-<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/c1f5995c-f87c-47b5-ab40-a328d5c503e6" />
-<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/6290d517-5442-42e9-adc6-f20cc285203f" />
+<img width="1439" height="899" alt="image" src="https://github.com/user-attachments/assets/0051a33b-adf4-4c6a-88a5-2d60ad628392" />
 
 <br/><br/>
-Furthermore edge's weight can be altered, which by default is the actual pixel distance. Turn on display E to see the weights of edges.
-The weight cannot be smaller than the actual pixel distance.
+Furthermore an edge's weight can be altered, which by default is the actual pixel distance. Click display, then weight, to see the edge's weight. Click weight button in the buttom UI, to change an edge's weight. The weight cannot be smaller than the actual pixel distance.
 <br/><br/>
-<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/2e990219-7ef1-4d08-86f0-87695597d5f6" />
-<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/65bfc990-d3ea-4216-8446-c4aed0f443e7" />
-<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/ac4dce39-ac1f-485b-86ba-2b131ad733f2" />
+<img width="1439" height="899" alt="image" src="https://github.com/user-attachments/assets/ecfee348-5d21-4d11-97ec-5160c58de89f" />
+
 <br/><br/>
 Deletion:
-Edges can be deleted. If a nodes has edges and is deleted, the edges are deleted as well.
-<br/><br/>
-<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/4cef02d3-cc4b-41b9-9ca9-1ed11c39a857" />
-<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/85bae99d-913d-4baa-b4fa-22061fd99c54" />
-<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/ffce44b3-bf05-48a3-be86-8a46ad26f781" />
-<img width="235" height="187" alt="image" src="https://github.com/user-attachments/assets/1f5fe8bc-5719-4506-b61e-9373a6eae2bb" />
+Edges can be deleted. If a nodes has edges and is deleted, the edges are deleted as well. The deletion (scissor) button works for edges as well as nodes
 
 ## Display
-<img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/f454bc92-c19c-4a8d-8eab-faa5e5c11498" />
-<img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/7ec06976-ff2c-4333-a2c7-0dc0c6e58f38" />
-<img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/c1ae7315-3c60-4ead-8c96-1fb0baa60abc" />
-<img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/55923775-d22a-4913-a885-fb224bf6ecb7" />
-<img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/f37ded36-63e2-46b0-a57f-5e608d41b129" />
-<img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/0708c5a2-2fe5-4adc-a453-70c274116e95" />
-<img width="255" height="170" alt="image" src="https://github.com/user-attachments/assets/62d73815-ba28-441c-b5b1-528d5f22f55c" />
-<img width="278" height="170" alt="image" src="https://github.com/user-attachments/assets/1bd4265c-552b-4584-8fd5-fb9d27186a6b" />
+It's possible to change the program to pink mode. It's also possible to see different elements of the graph and/or algorithm, while it is running.
+Clicking the display button allows you to toggle on:
+- Name of the nodes
+- Dist() or F() or g & rhs values of the nodes, depending on which algorithm is run
+- Weight of the edges
+- Heuristic between the start and goal flag
+- Priority Queue
+- Pink mode (visuals become pink)
+- Priority Queue node (highligts the top node in priority queue)
+
+<img width="1439" height="899" alt="image" src="https://github.com/user-attachments/assets/bd07d79c-4801-4e35-8d8c-c80cd4494936" />
+<img width="1439" height="899" alt="image" src="https://github.com/user-attachments/assets/72c030bc-6b8f-41df-8bef-70ed35564bf3" />
 
 ## Priority Queue
-As prevoiusly mentioned, one can see how the algorihtm finds the shortest path. This is done with a priority queue. The yellow colored node is the top node in the priority queue, meaning the one closest to start (d* lite does backwards search), and therfore the next node that will be evaluated. 
+It is possible to see how the chosen algorithm finds the shortest path. The priority queue(PQ), is that priority queue the given algorithms uses. Depending on the algorithms different calculations is used to update the PQ.
 
-The nodes are inserted in the priority queue with the key consisting of **rhs value + the heurtstic between current node and start**  and the **rhs value**
-
-<img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/109c8d0e-324f-4fcc-aae0-8879d2a8d065" />
-
-Specifically Node B is in the priority queue with the key: k1 = 880 and k2 = 247
+_explanation for the different algorithms PQ to come_
 
 ## Export
-A specfic graph can be saved for later. By clicking export the file graph.xml will be updated.
-<img width="565" height="355" alt="image" src="https://github.com/user-attachments/assets/73e0e605-da0e-4726-97ff-ed777a33f5fc" />
+A specific graph can be saved for later. By clicking save under the file button, the current graph will be saved as a new file in the export folder of the program.
+<img width="1439" height="899" alt="image" src="https://github.com/user-attachments/assets/d75eea6d-1255-4efa-b178-962913cde22d" />
 
 ## Import
-We support two input types: osm and specific xml formats (meaning only our own). It might take a short while for the graph to load.
-<br/><br/>
-To import a prevoiusly saved graph simply click the import button, and find the file graph.xml
-<br/><br/>
-<img width="490" height="275" alt="image" src="https://github.com/user-attachments/assets/31213c0c-015a-47e4-b5a7-03e04592eeca" />
-<img width="490" height="275" alt="image" src="https://github.com/user-attachments/assets/80a919cf-0ae8-44b4-bee6-3453e5c1f185" />
+We support two input types of import: 
+- osm files
+- the graph files that you can save to the export folder (aka our own xml type)
 
-To import osm files, simply find the osm you wish to import. It's is recommened to import smaller osm files.
-Second image is from https://www.openstreetmap.org/#map=16/55.65957/12.59312 from which the osm file was downloaded.
-<br/><br/>
-<img width="480" height="300" alt="image" src="https://github.com/user-attachments/assets/afbcab3f-3a39-4811-b2c5-2f37705a75ca" />
-<img width="480" height="300" alt="image" src="https://github.com/user-attachments/assets/caa8bb68-7d2b-4373-9a2c-334e3863d752" />
+It might take a short moment for the program to load an imported file. It is recommended using smaller osm files, as there currently is a limit of zooming out.
 
-## LPA*
-LPA* listens for changes in the graph, but does not move the start flag as shown. 
 <br/><br/>
-<img width="287" height="190" alt="image" src="https://github.com/user-attachments/assets/fd821c16-66e3-4b2c-91af-0f1fe20d2206" />
-<img width="287" height="190" alt="image" src="https://github.com/user-attachments/assets/cdb8f4f9-5430-4452-bebf-48e37ccc94eb" />
-<img width="287" height="190" alt="image" src="https://github.com/user-attachments/assets/c9f1d2a8-11d9-4ef5-872b-b153007af73c" />
+To import a prevoiusly saved graph simply click the import button, and find your file in the export folder.
+<br/><br/>
 
+To import osm files, simply find the osm you wish to import. 
+Second image is from https://www.openstreetmap.org/export#map=17/55.658727/12.592885 where the osm file was downloaded.
+<br/><br/>
+<img width="960" height="600" alt="image" src="https://github.com/user-attachments/assets/29fc9e7d-86d8-4771-82b1-4bacb778e99d" />
+<img width="960" height="600" alt="image" src="https://github.com/user-attachments/assets/f19f3626-6766-4a66-835f-3aaff8745124" />
+
+## Algorithms
+_potentially some more information about the algorithms here_
 
 
 
