@@ -30,22 +30,24 @@ public class LPA_Star extends Dynamic_Algorithm{
     }
     
     public void initialize(){
-       if (start_node == null || goal_node == null) {
-            println("start and/or goal are null");
-            return;
-       }
-       //To change between counting, switch these two
-       //U = new Priority_Queue();
-        U = new Key_Priority_Queue();
+
+       //U = new Priority_Queue()
+
+       U = new Key_Priority_Queue();
 
        for(Node n: set_of_nodes){
-            n.update_G_Val(MAX_INT);
-            n.update_Rhs_Val(MAX_INT);
+           n.update_G_Val(MAX_INT);
+           n.update_Rhs_Val(MAX_INT);
        }
 
-       start_node.update_Rhs_Val(0);
+       try {
+            start_node.update_Rhs_Val(0);
 
-       U.insert(start_node, calculate_Key(start_node));
+            U.insert(start_node, calculate_Key(start_node));
+       } catch (Exception e) {
+           println("start null");
+       }
+
     }
 
     public Tuple calculate_Key(Node _n){

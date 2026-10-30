@@ -142,12 +142,16 @@ public abstract class Dynamic_Algorithm extends Algorithm {
     public void reset(){
 
         for(Node n: set_of_nodes){
-            println("reseting node " + n.toString());
+            //println("reseting node " + n.toString());
             n.update_G_Val(MAX_INT);
             n.update_Rhs_Val(MAX_INT);
         }
 
 
+    }
+
+    public void set_paused_once(boolean bool){
+        paused_once = bool;
     }
 
 }

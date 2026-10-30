@@ -1,10 +1,7 @@
 package org.algorithm.ui.buttons;
 
 import org.algorithm.Main;
-import org.algorithm.algo.Visual_AStar;
-import org.algorithm.algo.Visual_DStarLite;
-import org.algorithm.algo.Visual_Dijkstra;
-import org.algorithm.algo.Visual_LPA;
+import org.algorithm.algo.*;
 import org.algorithm.graph.edges.Edge;
 import org.algorithm.graph.Node;
 import org.algorithm.ui.Color_Scheme;
@@ -22,7 +19,7 @@ public class Reset_Button extends Button {
 
     public void click(){
         super.click();
-        println("Clicked reset");
+        zoom_level = 1f;
         switch (algo_state) {
             case 0:
                 algorithm = new Visual_Dijkstra();
@@ -35,22 +32,24 @@ public class Reset_Button extends Button {
                 algorithm.initialize();
                 break;
             case 3:
+                println("d* reset");
+                if (!Ui.get_Button("pause").clicked) Main.Ui.get_Button("pause").click();
+
                 algorithm = new Visual_DStarLite();
+
+                algorithm.first_run = true;
+
+
+                algorithm.set_Start(initial_start_node);
+                algorithm.set_Goal(initial_goal_node);
+
+
                 algorithm.initialize();
+
                 break;
         }
 
-        algorithm.first_run = true;
-        if(algorithm.get_Start() != null && algorithm.get_Goal() != null) {
-            algorithm.set_Start(initial_start_node);
-            algorithm.set_Goal(initial_goal_node);
-            if (algorithm.dynamic && algorithm.getClass().equals(Visual_DStarLite.class)) {
-                algorithm.initialize();
-            }
-
-        }
         Ui.unlock_All_Buttons();
-
 
 
         algorithm.set_Start(initial_start_node);
@@ -63,6 +62,8 @@ public class Reset_Button extends Button {
         for (Node n : algorithm.set_of_nodes){
             n.color(Color_Scheme.node_idle);
             n.change_In_PQ(false);
+            n.update_G_Val(MAX_INT);
+            n.update_Rhs_Val(MAX_INT);
         }
         if (algorithm != null && algorithm.get_U() != null) {
             algorithm.get_U().clear_Heap();

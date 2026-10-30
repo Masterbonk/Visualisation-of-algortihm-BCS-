@@ -127,11 +127,11 @@ public abstract class Button {
 
         if (locked){
             sketch.push();
-            sketch.fill(Color_Scheme.line);
-            sketch.strokeWeight(4);
-            sketch.line(x_pos, y_pos, x_pos+x_size, y_pos+y_size);//Top left to bottom right
-            sketch.line(x_pos+x_size, y_pos, x_pos, y_pos+y_size);//Top right to bottom left
+            // the color, the transparency
+            sketch.fill(100, 150);
+            sketch.rect(x_pos, y_pos, x_size, y_size);
             sketch.pop();
+
         }
         if (has_tool_tip) render_Tooltip();
     }

@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
 
+import static org.algorithm.Color_Algo_State.Djikstra;
 import static org.algorithm.Util.generate_Name;
 
 //used this code to implement zoom feature https://forum.processing.org/one/topic/zooming-in-and-zooming-out.html
@@ -87,8 +88,11 @@ public class Main extends PApplet{
 
     public static boolean importing = false;
     public static int algo_state = 0;
+    public static Color_Algo_State color_algo_state = Djikstra;
 
     public static HashMap<Edge,Egde_State> edge_state_set = new HashMap<>();
+
+    public static boolean flag_one = false;
 
     Text_Box tmp_box;
     Text_Box tmp_box_1;
@@ -123,6 +127,7 @@ public class Main extends PApplet{
         util = new Util(this,button_height);
         cs = new Color_Scheme(this);
         colorSchemeEnum = Color_Scheme_Enum.monotone_mode;
+
 
         //program always starts as Dijkstra
         //algorithm = new Visual_DStarLite();
@@ -177,7 +182,7 @@ public class Main extends PApplet{
      */
 
     public void draw(){
-        cs.changeColors(colorSchemeEnum);
+        cs.changeColors(colorSchemeEnum, color_algo_state);
         background(Color_Scheme.bg);
         //background(204); //Draws over everything on screen clearing it for the next frame
 
@@ -234,6 +239,10 @@ public class Main extends PApplet{
 
         if (!Ui.get_Button("pause").clicked){
             algorithm.Main();
+        }
+
+        else if (!Ui.get_Button("flag_a").clicked && flag_one){
+            flag_one = false;
         }
 
         if (debug){
@@ -559,31 +568,74 @@ public class Main extends PApplet{
 
                         //algorithm starts:
 
-                    } else if(Ui.get_Button("flag_a").clicked && algorithm.get_Goal() != n && n.mouse_Over()){
+                    } else if(Ui.get_Button("flag_a").clicked) {
 
-                        clicked_on_node = true;
-                        algorithm.first_run = true;
-                        algorithm.set_Start(n);
-                        initial_start_node = n;
+//                        if (n.mouse_Over() && algorithm.get_Start() == n){
+//                            flag_one = false;
+//                        } else if (n.mouse_Over() && algorithm.get_Goal() == n) {
+//                            flag_one = true;
+//                        }
 
-                        if (algo_state == 0 || algo_state == 1 || algo_state == 2){
-                            Ui.get_Button("reset").click();
-                            Ui.get_Button("flag_a").click();
+                        if (!flag_one) {
+                            if (n.mouse_Over()){
+                                if(algorithm.get_Goal() == n) {
+                                    algorithm.set_Goal(null);
+                                }
+                                flag_one = true;
+                                clicked_on_node = true;
+                                algorithm.first_run = true;
+                                algorithm.set_Start(n);
+                                initial_start_node = n;
+
+                                if (algo_state == 0 || algo_state == 1 || algo_state == 2 || algo_state == 3){
+                                    Ui.get_Button("reset").click();
+                                    Ui.get_Button("flag_a").click();
+                                }
+                            }
+                        } else {
+                            if (n.mouse_Over() && algorithm.get_Start() != n){
+
+                                flag_one = false;
+                                clicked_on_node = true;
+                                algorithm.first_run = true;
+                                algorithm.set_Goal(n);
+                                initial_goal_node = n;
+                            }
+
+
                         }
 
                     }
+
+
+
+
+             /*       if (!clicked_on_node && Ui.get_Button("flag_a").clicked) {
+                        //flag_one = false;
+                        algorithm.set_Start(null);
+                        initial_start_node = null;
+                        if(h != null){
+                            h.set_To(null);
+                            h.set_From(null);
+                        }
+                        algorithm.first_run = true;
+
+                        if(!Ui.get_Button("pause").clicked) Ui.get_Button("pause").click();
+
+                    }
+
+                    if (!clicked_on_node && Ui.get_Button("flag_a").clicked ) {
+                            algorithm.set_Goal(null);
+                            initial_goal_node = null;
+                            if(h != null){
+                                h.set_To(null);
+                                h.set_From(null);
+                            }
+
+                        }*/
                 }
 
-                if (!clicked_on_node && Ui.get_Button("flag_a").clicked) {
-                    algorithm.set_Start(null);
-                    initial_start_node = null;
-                    if(h != null){
-                        h.set_To(null);
-                        h.set_From(null);
-                    }
-                    algorithm.first_run = true;
-                    if(!Ui.get_Button("pause").clicked) Ui.get_Button("pause").click();
-                }
+
                 /*
                 if (!clicked_on_node && Ui.get_Button("flag_b").clicked) {
                     algorithm.set_Goal(null);
@@ -634,7 +686,7 @@ public class Main extends PApplet{
                             println("Edge was deleted");
                             algorithm.edge_update_map.put(e,-1);
 
-                            if(algo_state == 2 && algorithm.getClass() == Visual_LPA.class){
+                            if(algo_state == 2){
                                 Visual_LPA tmp_algo = (Visual_LPA) algorithm;
                                 tmp_algo.remove_from_checked_edges(e);
                             }
@@ -664,9 +716,8 @@ public class Main extends PApplet{
             }
 
             if(Ui.get_Button("heuristic").clicked && algorithm.get_Start() != null && algorithm.get_Goal() != null){
-                if (h == null) {
-                    h = new Heuristic_Edge(this, algorithm.get_Start(), algorithm.get_Goal());
-                }
+                h = new Heuristic_Edge(this, algorithm.get_Start(), algorithm.get_Goal());
+
             }
 
             if(Ui.get_Button("color_scheme").clicked){
@@ -682,7 +733,8 @@ public class Main extends PApplet{
             }
 
             //close display menu if click outside it while it is open
-            if (!Ui.get_Button("Display_parameter").mouse_Over() && !Ui.get_Button("Name_display").mouse_Over() && !Ui.get_Button("Node_display").mouse_Over() && !Ui.get_Button("Edge_display").mouse_Over() && !Ui.get_Button("heuristic").mouse_Over() && !Ui.get_Button("PQ_display").mouse_Over() && !Ui.get_Button("color_scheme").mouse_Over() && Ui.get_Button("Display_parameter").clicked) {
+            if (!Ui.get_Button("Display_parameter").mouse_Over() && !Ui.get_Button("Name_display").mouse_Over() && !Ui.get_Button("Node_display").mouse_Over() &&
+                    !Ui.get_Button("Edge_display").mouse_Over() && !Ui.get_Button("heuristic").mouse_Over() && !Ui.get_Button("PQ_display").mouse_Over() && !Ui.get_Button("color_scheme").mouse_Over() && Ui.get_Button("Display_parameter").clicked) {
                 Ui.get_Button("Display_parameter").clicked = false;
             }
 
@@ -690,31 +742,15 @@ public class Main extends PApplet{
         } else if (mouseButton == RIGHT){
             // right deselects any selected object
             for (Node n : node_array) {
-                if (Ui.get_Button("flag_a").clicked && algorithm.get_Start() != n && n.mouse_Over()) {
 
-                    clicked_on_node = true;
-                    algorithm.first_run = true;
-                    algorithm.set_Goal(n);
-                    initial_goal_node = n;
-
-                }
-
-                if (!clicked_on_node && Ui.get_Button("flag_a").clicked ) {
-                    algorithm.set_Goal(null);
-                    initial_goal_node = null;
-                    if(h != null){
-                        h.set_To(null);
-                        h.set_From(null);
-                    }
-
-                }
 
             }
+            /* not used anymore
             if (Ui.get_Button("algo_mode").mouse_Over()) {
                 clicked_on_button = true;
                 Algo_Mode_Button tmp_button = (Algo_Mode_Button) Ui.get_Button("algo_mode");
                 tmp_button.click(true);
-            }
+            }*/
 
             if (Ui.get_Button("line").clicked) {
                 node_1 = null;
