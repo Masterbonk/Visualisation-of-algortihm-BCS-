@@ -1,5 +1,6 @@
 package org.algorithm.ui.buttons;
 
+import org.algorithm.Main;
 import processing.core.PApplet;
 
 import static org.algorithm.Main.Ui;
@@ -15,6 +16,7 @@ public class Clear_Button extends Button {
         super.tool_tip_box.update_Text(tool_tip);
     }
     public void click(){
+        Main.zoom_level = 1f;
         if (Ui.get_Button("pause").clicked){
             delete_Graph();
         } else {

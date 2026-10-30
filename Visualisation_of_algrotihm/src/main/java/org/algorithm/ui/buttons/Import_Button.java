@@ -16,6 +16,7 @@ public class Import_Button extends Button{
     public void click(){
         super.click();
 
+
         if(!Main.Ui.get_Button("pause").clicked){
             Main.Ui.get_Button("pause").click();
         }

@@ -1,5 +1,6 @@
 package org.algorithm.ui.buttons;
 
+import org.algorithm.Main;
 import org.algorithm.Util;
 import processing.core.PApplet;
 
@@ -12,6 +13,7 @@ public class Square_Graph_Button extends Button{
     }
 
     public void click(){
+        Main.zoom_level = 1f;
         Util.delete_Graph();
         Util.Make_Graph(sketch,5,5);
     }
