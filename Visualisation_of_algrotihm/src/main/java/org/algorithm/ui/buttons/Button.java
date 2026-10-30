@@ -131,7 +131,7 @@ public abstract class Button {
             sketch.fill(100, 150);
             sketch.rect(x_pos, y_pos, x_size, y_size);
             sketch.pop();
-            
+
         }
         if (has_tool_tip) render_Tooltip();
     }

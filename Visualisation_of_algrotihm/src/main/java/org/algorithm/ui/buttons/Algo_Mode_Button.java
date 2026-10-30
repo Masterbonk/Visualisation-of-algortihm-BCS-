@@ -56,6 +56,8 @@ public class Algo_Mode_Button extends Button {
         sketch.fill(Color_Scheme.border_button);
         sketch.rect(x_pos,y_pos, x_size, y_size);
 
+        this.lock();
+
         int changeVal = 5;
         if (debug) {
             sketch.push();
@@ -109,6 +111,8 @@ public class Algo_Mode_Button extends Button {
             sketch.text(text, (x_pos+changeVal)+(x_size-changeVal*2)/2f, (y_pos+changeVal)+(y_size-changeVal*2)/2f+10);
             sketch.pop();
         }
+
+        this.lock();
 
         /*
 
