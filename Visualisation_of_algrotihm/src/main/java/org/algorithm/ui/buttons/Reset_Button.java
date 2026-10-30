@@ -19,6 +19,7 @@ public class Reset_Button extends Button {
 
     public void click(){
         super.click();
+        zoom_level = 1f;
         println("Clicked reset");
         switch (algo_state) {
             case 0:
