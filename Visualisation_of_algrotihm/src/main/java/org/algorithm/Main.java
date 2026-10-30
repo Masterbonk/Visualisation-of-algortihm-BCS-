@@ -92,6 +92,8 @@ public class Main extends PApplet{
 
     public static HashMap<Edge,Egde_State> edge_state_set = new HashMap<>();
 
+    public static boolean flag_one = false;
+
     Text_Box tmp_box;
     Text_Box tmp_box_1;
 
@@ -237,6 +239,10 @@ public class Main extends PApplet{
 
         if (!Ui.get_Button("pause").clicked){
             algorithm.Main();
+        }
+
+        else if (!Ui.get_Button("flag_a").clicked && flag_one){
+            flag_one = false;
         }
 
         if (debug){
@@ -562,31 +568,74 @@ public class Main extends PApplet{
 
                         //algorithm starts:
 
-                    } else if(Ui.get_Button("flag_a").clicked && algorithm.get_Goal() != n && n.mouse_Over()){
+                    } else if(Ui.get_Button("flag_a").clicked) {
 
-                        clicked_on_node = true;
-                        algorithm.first_run = true;
-                        algorithm.set_Start(n);
-                        initial_start_node = n;
+//                        if (n.mouse_Over() && algorithm.get_Start() == n){
+//                            flag_one = false;
+//                        } else if (n.mouse_Over() && algorithm.get_Goal() == n) {
+//                            flag_one = true;
+//                        }
 
-                        if (algo_state == 0 || algo_state == 1 || algo_state == 2 || algo_state == 3){
-                            Ui.get_Button("reset").click();
-                            Ui.get_Button("flag_a").click();
+                        if (!flag_one) {
+                            if (n.mouse_Over()){
+                                if(algorithm.get_Goal() == n) {
+                                    algorithm.set_Goal(null);
+                                }
+                                flag_one = true;
+                                clicked_on_node = true;
+                                algorithm.first_run = true;
+                                algorithm.set_Start(n);
+                                initial_start_node = n;
+
+                                if (algo_state == 0 || algo_state == 1 || algo_state == 2 || algo_state == 3){
+                                    Ui.get_Button("reset").click();
+                                    Ui.get_Button("flag_a").click();
+                                }
+                            }
+                        } else {
+                            if (n.mouse_Over() && algorithm.get_Start() != n){
+
+                                flag_one = false;
+                                clicked_on_node = true;
+                                algorithm.first_run = true;
+                                algorithm.set_Goal(n);
+                                initial_goal_node = n;
+                            }
+
+
                         }
 
                     }
+
+
+
+
+             /*       if (!clicked_on_node && Ui.get_Button("flag_a").clicked) {
+                        //flag_one = false;
+                        algorithm.set_Start(null);
+                        initial_start_node = null;
+                        if(h != null){
+                            h.set_To(null);
+                            h.set_From(null);
+                        }
+                        algorithm.first_run = true;
+
+                        if(!Ui.get_Button("pause").clicked) Ui.get_Button("pause").click();
+
+                    }
+
+                    if (!clicked_on_node && Ui.get_Button("flag_a").clicked ) {
+                            algorithm.set_Goal(null);
+                            initial_goal_node = null;
+                            if(h != null){
+                                h.set_To(null);
+                                h.set_From(null);
+                            }
+
+                        }*/
                 }
 
-                if (!clicked_on_node && Ui.get_Button("flag_a").clicked) {
-                    algorithm.set_Start(null);
-                    initial_start_node = null;
-                    if(h != null){
-                        h.set_To(null);
-                        h.set_From(null);
-                    }
-                    algorithm.first_run = true;
-                    if(!Ui.get_Button("pause").clicked) Ui.get_Button("pause").click();
-                }
+
                 /*
                 if (!clicked_on_node && Ui.get_Button("flag_b").clicked) {
                     algorithm.set_Goal(null);
@@ -693,24 +742,7 @@ public class Main extends PApplet{
         } else if (mouseButton == RIGHT){
             // right deselects any selected object
             for (Node n : node_array) {
-                if (Ui.get_Button("flag_a").clicked && algorithm.get_Start() != n && n.mouse_Over()) {
 
-                    clicked_on_node = true;
-                    algorithm.first_run = true;
-                    algorithm.set_Goal(n);
-                    initial_goal_node = n;
-
-                }
-
-                if (!clicked_on_node && Ui.get_Button("flag_a").clicked ) {
-                    algorithm.set_Goal(null);
-                    initial_goal_node = null;
-                    if(h != null){
-                        h.set_To(null);
-                        h.set_From(null);
-                    }
-
-                }
 
             }
             /* not used anymore

@@ -1,5 +1,6 @@
 package org.algorithm.ui.buttons;
 
+import org.algorithm.Main;
 import processing.core.PApplet;
 
 import static org.algorithm.Main.button_height;
@@ -13,5 +14,8 @@ public class Flag_A_Button extends Button {
         super.tool_tip_box.update_Text(tool_tip);
     }
 
-
+    @Override
+    public void click() {
+        super.click();
+    }
 }

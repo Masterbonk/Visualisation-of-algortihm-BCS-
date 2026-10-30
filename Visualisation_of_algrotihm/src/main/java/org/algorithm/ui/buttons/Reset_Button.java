@@ -19,7 +19,7 @@ public class Reset_Button extends Button {
 
     public void click(){
         super.click();
-        println("Clicked reset");
+
         switch (algo_state) {
             case 0:
                 algorithm = new Visual_Dijkstra();
