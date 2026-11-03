@@ -62,14 +62,14 @@ public class Main extends PApplet{
     public static Node node_1;
 
     //zoom functionality
-    public static float zoom_level = 1f;
-    final float zoom_increase = 0.1f;
+    public static float zoom_level = 1.05f;
+    float zoom_increase = 1.0f;
 
     //Pan functionality
-    public static int translate_x = 0;
-    public static int translate_y = 0;
-    public int mouse_x_start_of_pan = -1;
-    public int mouse_y_start_of_pan = -1;
+    public static float translate_x = 0;
+    public static float translate_y = 0;
+    public float mouse_x_start_of_pan = -1;
+    public float mouse_y_start_of_pan = -1;
 
 
     Util util;
@@ -93,6 +93,8 @@ public class Main extends PApplet{
     public static HashMap<Edge,Egde_State> edge_state_set = new HashMap<>();
 
     public static boolean flag_one = false;
+
+    int while_zooming = 0;
 
     Text_Box tmp_box;
     Text_Box tmp_box_1;
@@ -151,8 +153,6 @@ public class Main extends PApplet{
         // The font must be located in the sketch's
         // "data" directory to load successfully
 
-
-
         surface.setResizable(true);
         surface.setLocation(0,0);
 
@@ -190,13 +190,14 @@ public class Main extends PApplet{
         zoom();
         pushMatrix();
         translate(translate_x,translate_y);
-
+        scale(zoom_increase);
 
         //line formatting
         push();
         strokeWeight(10);
         textSize(30);
-        scale(zoom_level);
+
+
         if(!importing){
             for (Edge edge : edge_array) {
                 edge.render();
@@ -207,7 +208,7 @@ public class Main extends PApplet{
 
 
         push();
-        scale(zoom_level);
+
 
         if(!importing) {
             for (Node node : node_array) {
@@ -324,17 +325,29 @@ public class Main extends PApplet{
         }
     }
 
+    public void reset_zoom(){
+        zoom_increase = 1.0f;
+        translate_x = 0.0f;
+        translate_y = 0.0f;
+    }
+
     /** Zoom functionality works when scrolling the mouse wheel (on an actual mouse)
+     *
+     * <a href="https://stackoverflow.com/questions/20126028/how-to-zoom-in-to-the-point-under-the-mouse-cursor-processing">...</a>
      * */
     public void mouseWheel(processing.event.MouseEvent _mouse_event){
         float wheel_number = _mouse_event.getCount();
+        float delta = wheel_number < 0 ? 1.1f : wheel_number > 0 ? 1.0f/1.1f : 1.0f;
 
-        if(zoom_level < 3 && wheel_number < 0) {
-                zoom_level += zoom_increase;
-        }
-        if(zoom_level > 0.1 && wheel_number > 0) {
-            zoom_level -= zoom_increase;
-        }
+         translate_x -= mouseX;
+         translate_y -= mouseY;
+
+         zoom_increase *= delta;
+         translate_x *= delta;
+         translate_y *= delta;
+
+         translate_x += mouseX;
+         translate_y += mouseY;
     }
 
 
@@ -355,6 +368,8 @@ public class Main extends PApplet{
             //print("key pressed p");
             debug = !debug;
         }
+
+
 
         if (keyCode == UP){
             translate_y -= 10;
