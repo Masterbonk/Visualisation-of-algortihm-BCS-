@@ -89,21 +89,35 @@ public class Edge {
 
         sketch.push();
 
+        Egde_State tmp = Egde_State.idle;
+
         if(Ui.get_Button("cut").clicked){
+
             if (mouseOver() || to.mouse_Over() || from.mouse_Over()) {
+
                 edge_state = Egde_State.deletehover;
             } else {
+
               edge_state = edge_state_set.get(this);
+              edge_state = tmp;
             }
+
         } else if(Ui.get_Button("weight").clicked){
+
+            tmp = edge_state;
+
             if (mouseOver()) {
                 edge_state = Egde_State.weighthover;
+
             } else if(display_edge_weight_ui && activeEdge == this){
                 edge_state = Egde_State.weighthover;
+
             }
             else {
                 edge_state = edge_state_set.get(this);
             }
+        } else if(!Ui.get_Button("weight").clicked){
+            edge_state = tmp;
         }
 
         if (edge_state == Egde_State.deletehover) {

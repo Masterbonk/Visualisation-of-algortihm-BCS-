@@ -124,7 +124,7 @@ public class Node {
     }
 
     public void render(){
-        if (mouse_Over() && debug || mouse_Over() && Ui.get_Button("line").clicked || node_1 == this ) {
+        if (mouse_Over() && debug || mouse_Over() && (Ui.get_Button("line").clicked || Ui.get_Button("flag_a").clicked)  || node_1 == this ) {
             color(Color_Scheme.hover_node);
         } else if (mouse_Over() && Ui.get_Button("cut").clicked) {
             color(Color_Scheme.cut_node);
