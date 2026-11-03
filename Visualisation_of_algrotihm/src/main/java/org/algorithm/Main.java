@@ -190,7 +190,7 @@ public class Main extends PApplet{
         zoom();
         pushMatrix();
         translate(translate_x,translate_y);
-        scale(zoom_increase);
+        scale(zoom_level);
 
         //line formatting
         push();
@@ -337,14 +337,14 @@ public class Main extends PApplet{
      * */
     public void mouseWheel(processing.event.MouseEvent _mouse_event){
         float wheel_number = _mouse_event.getCount();
-        float delta = wheel_number < 0 ? 1.1f : wheel_number > 0 ? 1.0f/1.1f : 1.0f;
+        zoom_increase = wheel_number < 0 ? 1.1f : wheel_number > 0 ? 1.0f/1.1f : 1.0f;
 
          translate_x -= mouseX;
          translate_y -= mouseY;
 
-         zoom_increase *= delta;
-         translate_x *= delta;
-         translate_y *= delta;
+         zoom_level *= zoom_increase;
+         translate_x *= zoom_increase;
+         translate_y *= zoom_increase;
 
          translate_x += mouseX;
          translate_y += mouseY;
