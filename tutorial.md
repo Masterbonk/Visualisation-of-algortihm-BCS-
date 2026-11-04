@@ -70,7 +70,11 @@ Clicking the display button allows you to toggle on:
 ## Priority Queue
 It is possible to see how the chosen algorithm finds the shortest path. The priority queue(PQ), is that priority queue the given algorithms uses. Depending on the algorithms different calculations is used to update the PQ.
 
-_explanation for the different algorithms PQ to come_
+- Dijkstra uses the edge's weights to prioritize the smallest distance.
+- A* uses the edge's weight and heuristic to prioritize the smallest distance.
+- LPA* uses the nodes g and rhs values, which is calculated using the edge's weight and heuristic
+- D* Lite uses the nodes g and rhs values, which is calculated using the edge's weight and heuristic, 
+  along with a value k, which is how the algorithm is able to "move".
 
 ## Export
 A specific graph can be saved for later. By clicking save under the file button, the current graph will be saved as a new file in the export folder of the program.
