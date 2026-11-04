@@ -76,9 +76,11 @@ public class Color_Scheme {
         if(_color_enum == Color_Scheme_Enum.pink_mode){
             text_box_background = sketch.color(145,50, 129);
             text_box_text = sketch.color(252,164,237);
+            text_box_border = sketch.color(32,11,46);
         } else if (_color_enum == Color_Scheme_Enum.base_mode){
             text_box_background = sketch.color(0);
             text_box_text = sketch.color(100);
+            text_box_border = sketch.color(124);
         } else if (_color_enum == Color_Scheme_Enum.monotone_mode){
             text_box_background = sketch.color(204);
             text_box_text = sketch.color(0f);
