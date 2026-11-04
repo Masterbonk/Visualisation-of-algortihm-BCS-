@@ -99,6 +99,7 @@ Second image is from https://www.openstreetmap.org/export#map=17/55.658727/12.59
 
 ## Algorithms
 [You can read more about LPA* here](https://proceedings.neurips.cc/paper_files/paper/2001/file/a591024321c5e2bdbd23ed35f0574dde-Paper.pdf)
+
 [You can read more about D* Lite here](https://idm-lab.org/bib/abstracts/papers/aaai02b.pdf)
 
 
