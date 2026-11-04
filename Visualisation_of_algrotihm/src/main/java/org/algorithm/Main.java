@@ -118,14 +118,13 @@ public class Main extends PApplet{
     public void settings(){ //Setup
 
         String[] modeFile = loadStrings("mode.txt");
-        fullscreen = modeFile != null && modeFile[0].equals("fullscreen");
+        //fullscreen = modeFile != null && modeFile[0].equals("fullscreen");
 
-        if (fullscreen) {
+        //if (fullscreen) {
             fullScreen();
-        } else {
-            size(900, 600);
-
-        }
+        //} else {
+        //            size(900, 600);
+        //      }
         util = new Util(this,button_height);
         cs = new Color_Scheme(this);
         colorSchemeEnum = Color_Scheme_Enum.monotone_mode;
