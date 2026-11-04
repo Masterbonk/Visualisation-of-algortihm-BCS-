@@ -98,7 +98,8 @@ Second image is from https://www.openstreetmap.org/export#map=17/55.658727/12.59
 <img width="960" height="600" alt="image" src="https://github.com/user-attachments/assets/f19f3626-6766-4a66-835f-3aaff8745124" />
 
 ## Algorithms
-_potentially some more information about the algorithms here_
+[You can read more about LPA* here](https://proceedings.neurips.cc/paper_files/paper/2001/file/a591024321c5e2bdbd23ed35f0574dde-Paper.pdf)
+[You can read more about D* Lite here](https://idm-lab.org/bib/abstracts/papers/aaai02b.pdf)
 
 
 
