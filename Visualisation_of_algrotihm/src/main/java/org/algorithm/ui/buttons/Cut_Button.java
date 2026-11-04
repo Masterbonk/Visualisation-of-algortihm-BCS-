@@ -4,6 +4,7 @@ import org.algorithm.Main;
 import org.algorithm.graph.edges.Edge;
 import processing.core.PApplet;
 
+import static org.algorithm.Main.Ui;
 import static org.algorithm.Main.button_height;
 import static org.algorithm.ui.Color_Scheme.*;
 
@@ -17,11 +18,15 @@ public class Cut_Button extends Button {
 
     @Override
     public void click() {
+        if (!Ui.get_Button("weight").clicked) {
+            for (Edge e : Main.edge_array){
+                Main.edge_state_set.put(e,e.get_Edge_state());
+            }
+        }
+
+
         super.click();
 
-        for (Edge e : Main.edge_array){
-            Main.edge_state_set.put(e,e.get_Edge_state());
-        }
 
     }
 }

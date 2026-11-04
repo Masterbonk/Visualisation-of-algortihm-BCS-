@@ -8,6 +8,7 @@ import processing.core.PApplet;
 
 import static org.algorithm.Main.*;
 import static org.algorithm.Util.heuristic;
+import static org.algorithm.ui.Color_Scheme.edge_weight_hover;
 
 
 public class Edge {
@@ -98,8 +99,11 @@ public class Edge {
                 edge_state = Egde_State.deletehover;
             } else {
 
-              edge_state = edge_state_set.get(this);
-              edge_state = tmp;
+//                if (Egde_State.deletehover == edge_state_set.get(this)) {
+//                }
+                edge_state = edge_state_set.get(this);
+
+                //edge_state = tmp;
             }
 
         } else if(Ui.get_Button("weight").clicked){
@@ -116,7 +120,7 @@ public class Edge {
             else {
                 edge_state = edge_state_set.get(this);
             }
-        } else if(!Ui.get_Button("weight").clicked){
+        } else if(( !Ui.get_Button("weight").clicked ) && (Ui.get_Button("pause").clicked || Ui.get_Button("forward").clicked)){
             edge_state = tmp;
         }
 
@@ -124,8 +128,8 @@ public class Edge {
             sketch.color(Color_Scheme.edge_delete_hover);
             sketch.stroke(Color_Scheme.edge_delete_hover);
         } else if (edge_state == Egde_State.weighthover) {
-            sketch.color(Color_Scheme.edge_weight_hover);
-            sketch.stroke(Color_Scheme.edge_weight_hover);
+            sketch.color(edge_weight_hover);
+            sketch.stroke(edge_weight_hover);
         } else if (edge_state == Egde_State.finalpath) {
             sketch.color(Color_Scheme.edge_final_path);
             sketch.strokeWeight(20);
