@@ -146,32 +146,46 @@ public class UI {
 
         sketch.push();
         sketch.textSize(30);
+
         StringBuilder inputStr = new StringBuilder();
+
         if (display_edge_weight_ui) { // if the display is active we render it
 
             add_Button("close", Util.close_button, false);
 
             sketch.push();
             sketch.noStroke();
-            sketch.fill(weight_button_field_box);
             sketch.rectMode(CENTER);
+
             String tmp = "" + 9999999;
+
             sketch.push();
             sketch.textSize(16);
             float fontSize = sketch.getGraphics().textSize;
             sketch.pop();
+
             float boxheight = (sketch.getGraphics().textSize) *1.7f;
 
             //this is the outer box for the ui
             //the rect dimensions are based of the text size
 
+            sketch.push();
+
+            sketch.fill(text_box_background);
+            sketch.stroke(text_box_border);
+            sketch.strokeWeight(5);
+
             sketch.rect(
                     (sketch.displayWidth/2f),
                     (sketch.displayHeight/2f) - (sketch.getGraphics().textSize/2) - fontSize,
                     sketch.textWidth(tmp) *2,
-                    boxheight + (fontSize*2)
+                    boxheight + (fontSize*2),
+                    5
 
             );
+
+            sketch.pop();
+
             sketch.push();
             sketch.fill(weight_button_inner_field_box);
             sketch.stroke(weight_box_stroke);
@@ -203,8 +217,22 @@ public class UI {
 
 
             sketch.textAlign(LEFT);
-            sketch.text(inputStr.toString(),
-                    sketch.displayWidth/2f-sketch.textWidth(tmp)/2, sketch.displayHeight/2f);
+            sketch.text(
+                    inputStr.toString(),
+                    sketch.displayWidth/2f-sketch.textWidth(tmp)/2,
+                    sketch.displayHeight/2f - 1
+            );
+
+            sketch.push();
+            sketch.strokeWeight(2);
+            sketch.stroke(0);
+
+
+
+            sketch.line(sketch.displayWidth/2f-sketch.textWidth(tmp)/2 + sketch.textWidth(inputStr.toString()) + 2, sketch.displayHeight/2f - 1, sketch.displayWidth/2f-sketch.textWidth(tmp)/2 + sketch.textWidth(inputStr.toString()) + 2, sketch.displayHeight/2f - sketch.getGraphics().textSize);
+
+
+            sketch.pop();
         } else {
             Ui.remove_Button("close");
         }
