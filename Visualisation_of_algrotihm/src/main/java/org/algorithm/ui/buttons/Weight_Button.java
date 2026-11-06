@@ -21,8 +21,10 @@ public class Weight_Button extends Button {
     public void click(){
         super.click();
 
-        for (Edge e : Main.edge_array){
-            Main.edge_state_set.put(e,e.get_Edge_state());
+        if (clicked) {
+            for (Edge e : Main.edge_array){
+                Main.edge_state_set.put(e,e.get_Edge_state());
+            }
         }
 
     }

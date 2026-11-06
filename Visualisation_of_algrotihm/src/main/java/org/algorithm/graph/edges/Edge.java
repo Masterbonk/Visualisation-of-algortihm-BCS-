@@ -37,6 +37,7 @@ public class Edge {
         edge_array.add(this);
         id = edge_array.size();
         algorithm.edge_update_map.put(this,weight);
+        edge_state_set.put(this,edge_state);
 
     }
 
@@ -53,7 +54,7 @@ public class Edge {
         to.get_Connected().add(this);
         edge_array.add(this);
         id = edge_array.size();
-
+        edge_state_set.put(this,edge_state);
 
     }
 
@@ -102,20 +103,12 @@ public class Edge {
 
             }
 
-        } else if(Ui.get_Button("weight").clicked){
-
-
-            if (mouseOver()) {
+        } else if(Ui.get_Button("weight").clicked && (mouseOver() || (display_edge_weight_ui && activeEdge == this)) ){
                 edge_state = Egde_State.weighthover;
 
-            } else if(display_edge_weight_ui && activeEdge == this){
-                edge_state = Egde_State.weighthover;
-
-            }
-            else {
+        } else {
                 edge_state = edge_state_set.get(this);
             }
-        }
 
         if (edge_state == Egde_State.deletehover) {
             sketch.color(Color_Scheme.edge_delete_hover);
@@ -144,6 +137,7 @@ public class Edge {
         render_Weight() ;
 
     }
+
 
     public void render_Weight(){
         //implement color shceme

@@ -136,8 +136,6 @@ public class UI {
         }
     }
 
-
-
     /**
      * Renders the Edge Weight UI input display
      * */

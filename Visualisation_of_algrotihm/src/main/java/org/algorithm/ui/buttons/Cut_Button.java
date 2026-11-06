@@ -18,11 +18,11 @@ public class Cut_Button extends Button {
 
     @Override
     public void click() {
-        if (!Ui.get_Button("weight").clicked) {
-            for (Edge e : Main.edge_array){
-                Main.edge_state_set.put(e,e.get_Edge_state());
-            }
-        }
+//        if (!Ui.get_Button("weight").clicked) {
+//            for (Edge e : Main.edge_array){
+//                Main.edge_state_set.put(e,e.get_Edge_state());
+//            }
+//        }
 
 
         super.click();
