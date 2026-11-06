@@ -186,7 +186,6 @@ public class Main extends PApplet{
         //background(204); //Draws over everything on screen clearing it for the next frame
 
         //zoom functionality
-        zoom();
         pushMatrix();
         translate(translate_x,translate_y);
         scale(zoom_level);
