@@ -260,6 +260,8 @@ public class  Visual_LPA extends LPA_Star{
                             //color edge grey
                             e.set_Enum(idle);
                             edge_state_set.put(e,idle);
+                            colored_edges.remove(e);
+
 
 
 
@@ -281,6 +283,8 @@ public class  Visual_LPA extends LPA_Star{
                         //color edge grey
                         e.set_Enum(idle);
                         edge_state_set.put(e,idle);
+                        colored_edges.remove(e);
+
 
 
 
