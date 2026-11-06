@@ -90,7 +90,6 @@ public class Edge {
 
         sketch.push();
 
-        Egde_State tmp = Egde_State.idle;
 
         if(Ui.get_Button("cut").clicked){
 
@@ -99,16 +98,12 @@ public class Edge {
                 edge_state = Egde_State.deletehover;
             } else {
 
-//                if (Egde_State.deletehover == edge_state_set.get(this)) {
-//                }
                 edge_state = edge_state_set.get(this);
 
-                //edge_state = tmp;
             }
 
         } else if(Ui.get_Button("weight").clicked){
 
-            tmp = edge_state;
 
             if (mouseOver()) {
                 edge_state = Egde_State.weighthover;
@@ -120,8 +115,6 @@ public class Edge {
             else {
                 edge_state = edge_state_set.get(this);
             }
-        } else if(( !Ui.get_Button("weight").clicked ) && (Ui.get_Button("pause").clicked || Ui.get_Button("forward").clicked)){
-            edge_state = tmp;
         }
 
         if (edge_state == Egde_State.deletehover) {
