@@ -160,8 +160,6 @@ public class  Visual_LPA extends LPA_Star{
             return;
         }
 
-        //reset to blue or grey?
-
         //then color green
 
         Edge e = Util.find_Shared_Edge(edges_considered.get(0), edges_considered.get(1)); //edges are null
@@ -169,7 +167,7 @@ public class  Visual_LPA extends LPA_Star{
             e.set_Enum(finalpath);
             edge_state_set.put(e,finalpath);
         }
-
+        System.out.println(edges_considered.getFirst());
         edges_considered.removeFirst();
 
     }
@@ -216,7 +214,7 @@ public class  Visual_LPA extends LPA_Star{
 
                     } else {
 
-                        //color edge blue
+                        //color checked edges
                         Edge e = n.get_Connected().get(checked_edges.size());
 
                         e.set_Enum(considered);
