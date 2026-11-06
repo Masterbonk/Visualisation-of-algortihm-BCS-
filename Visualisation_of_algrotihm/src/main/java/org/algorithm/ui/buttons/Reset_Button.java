@@ -1,5 +1,6 @@
 package org.algorithm.ui.buttons;
 
+import org.algorithm.Egde_State;
 import org.algorithm.Main;
 import org.algorithm.algo.*;
 import org.algorithm.graph.edges.Edge;
@@ -19,6 +20,13 @@ public class Reset_Button extends Button {
 
     public void click(){
         super.click();
+
+        //restart colors
+        for (Edge e : edge_state_set.keySet()){
+            e.set_Enum(Egde_State.idle);
+            edge_state_set.put(e,Egde_State.idle);
+        }
+
         //zoom_level = 1f;
         switch (algo_state) {
             case 0:

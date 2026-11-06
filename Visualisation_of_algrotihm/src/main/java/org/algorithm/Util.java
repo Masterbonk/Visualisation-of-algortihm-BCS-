@@ -279,7 +279,7 @@ public class Util {
             old = null;
         }
 
-        new BiEdge(_sketch, node_array.getFirst(),node_array.get(_y),1);
+        //new BiEdge(_sketch, node_array.getFirst(),node_array.get(_y),1);
 
     }
 
