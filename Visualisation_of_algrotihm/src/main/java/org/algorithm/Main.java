@@ -314,6 +314,7 @@ public class Main extends PApplet{
     /** This function ensures that the zoom level updates
      * and that there is min & max zoom
      * */
+    /*
     public void zoom(){
         if(keyPressed) {
             if (key == '+' && zoom_level < 3) {
@@ -322,7 +323,7 @@ public class Main extends PApplet{
                 zoom_level -= zoom_increase;
             }
         }
-    }
+    } */
 
     public void reset_zoom(){
         zoom_increase = 1.0f;
@@ -341,9 +342,11 @@ public class Main extends PApplet{
          translate_x -= mouseX;
          translate_y -= mouseY;
 
+
          zoom_level *= zoom_increase;
          translate_x *= zoom_increase;
          translate_y *= zoom_increase;
+
 
          translate_x += mouseX;
          translate_y += mouseY;
