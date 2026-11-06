@@ -167,7 +167,8 @@ public class  Visual_LPA extends LPA_Star{
             e.set_Enum(finalpath);
             edge_state_set.put(e,finalpath);
         }
-        System.out.println(edges_considered.getFirst());
+        //System.out.println(edges_considered.getFirst());
+        //System.out.println(edges_considered.size());
         edges_considered.removeFirst();
 
     }
