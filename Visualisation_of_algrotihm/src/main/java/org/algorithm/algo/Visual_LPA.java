@@ -96,6 +96,7 @@ public class  Visual_LPA extends LPA_Star{
                 e.set_Enum(considered);
                 edge_state_set.put(e,considered);
 
+
             }
         } else if (stage == 6) {
             edges_considered = super.get_Shortest_Path(goal_node);
@@ -111,7 +112,7 @@ public class  Visual_LPA extends LPA_Star{
                 return; //do not remove, we now need to do pathfinding
             }
 
-
+            System.out.println("i am state 6, func call");
             color_Edge_On_Path();
             if (edges_considered.size() > 1) {
                 stage = 7;
@@ -119,6 +120,7 @@ public class  Visual_LPA extends LPA_Star{
                 stage = 8;
             }
         } else if (stage == 7) {
+            System.out.println("i am state 7, func call");
             color_Edge_On_Path();
             if (edges_considered.size() == 1) {
                 stage = 8;
@@ -167,8 +169,8 @@ public class  Visual_LPA extends LPA_Star{
             e.set_Enum(finalpath);
             edge_state_set.put(e,finalpath);
         }
-        //System.out.println(edges_considered.getFirst());
-        //System.out.println(edges_considered.size());
+        System.out.println(edges_considered.getFirst());
+        System.out.println(edges_considered.size());
         edges_considered.removeFirst();
 
     }
@@ -259,7 +261,7 @@ public class  Visual_LPA extends LPA_Star{
                             //color edge grey
                             e.set_Enum(idle);
                             edge_state_set.put(e,idle);
-                            colored_edges.remove(e);
+                            //colored_edges.remove(e);
 
 
 
@@ -282,7 +284,7 @@ public class  Visual_LPA extends LPA_Star{
                         //color edge grey
                         e.set_Enum(idle);
                         edge_state_set.put(e,idle);
-                        colored_edges.remove(e);
+                        //colored_edges.remove(e);
 
 
 

@@ -88,6 +88,7 @@ public class Visual_Dijkstra extends Dijkstra{
             Edge tmp_edge = shortest_path.getLast();
             shortest_path.removeLast();
             tmp_edge.set_Enum(Egde_State.finalpath);
+            edge_state_set.put(tmp_edge,Egde_State.finalpath);
             Util.Update_Edge_By_Exchange(tmp_edge);
             stage = 4;
         }else if (stage == 3 && goal_node != null && prev.get(goal_node) == null) {
@@ -101,6 +102,7 @@ public class Visual_Dijkstra extends Dijkstra{
             Edge tmp_edge = shortest_path.getLast();
             shortest_path.removeLast();
             tmp_edge.set_Enum(Egde_State.finalpath);
+            edge_state_set.put(tmp_edge,Egde_State.finalpath);
             Util.Update_Edge_By_Exchange(tmp_edge);
             if (shortest_path.isEmpty()){
                 stage = 5;
@@ -128,6 +130,7 @@ public class Visual_Dijkstra extends Dijkstra{
                 stage = 1;
                 for (Edge e: colored_edges){
                     e.set_Enum(Egde_State.considered);
+                    edge_state_set.put(e,Egde_State.considered);
                 }
                 //Ui.get_Button("reset").click();
             } else if (former_goal_node != goal_node){
@@ -135,6 +138,7 @@ public class Visual_Dijkstra extends Dijkstra{
                 stage = 3;
                 for (Edge e: colored_edges){
                     e.set_Enum(Egde_State.considered);
+                    edge_state_set.put(e,Egde_State.considered);
                 }
             }
         }
@@ -187,6 +191,7 @@ public class Visual_Dijkstra extends Dijkstra{
                         checked.add(e);
                         edges_considered.add(e);
                         e.set_Enum(Egde_State.considered);
+                        edge_state_set.put(e,Egde_State.considered);
                         Main.colored_edges.add(e);
                         Util.Update_Edge_By_Exchange(e);
 
