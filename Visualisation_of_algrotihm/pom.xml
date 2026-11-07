@@ -59,6 +59,13 @@
             <version>1.37</version>
         </dependency>
 
+        <dependency>
+            <groupId>garciadelcastillo</groupId>
+            <artifactId>dashedlines</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+
     </dependencies>
 
 
