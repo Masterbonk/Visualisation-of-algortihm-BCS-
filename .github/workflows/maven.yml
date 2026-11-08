@@ -24,7 +24,7 @@ jobs:
       - name: Install local dashedlines library
         run: >
           mvn org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file
-          -Dfile=Visualisation_of_algrotihm/lib/dashedlines-1.0.jar
+          -Dfile=dashedlines/library/dashedlines.jar
           -DgroupId=garciadelcastillo
           -DartifactId=dashedlines
           -Dversion=1.0
