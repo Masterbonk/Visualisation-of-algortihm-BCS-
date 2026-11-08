@@ -15,5 +15,6 @@ public class Diagonal_Graph_Button extends Button {
         Main.zoom_level = 1f;
         Util.delete_Graph();
         Util.Make_Graph(sketch,5,5, true);
+        Main.Ui.get_Button("reset").click();
     }
 }
