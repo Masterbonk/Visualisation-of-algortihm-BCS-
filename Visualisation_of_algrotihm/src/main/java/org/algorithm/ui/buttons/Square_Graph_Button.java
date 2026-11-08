@@ -16,7 +16,5 @@ public class Square_Graph_Button extends Button{
         Main.zoom_level = 1f;
         Util.delete_Graph();
         Util.Make_Graph(sketch,5,5);
-        Main.Ui.get_Button("reset").click();
-
     }
 }
