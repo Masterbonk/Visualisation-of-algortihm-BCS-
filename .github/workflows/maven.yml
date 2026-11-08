@@ -37,7 +37,7 @@ jobs:
           -DgeneratePom=true
 
       - name: Build with Maven (skip tests)
-          working-directory: Visualisation_of_algrotihm
+          working-directory: ./Visualisation_of_algrotihm
           run: mvn -B -DskipTests package
 
       - name: Attach JAR to GitHub release
