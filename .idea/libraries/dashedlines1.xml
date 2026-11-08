@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="dashedlines1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../dashedlines/library/dashedlines.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
