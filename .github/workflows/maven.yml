@@ -37,7 +37,7 @@ jobs:
           -DgeneratePom=true
 
       - name: Build with Maven (skip tests)
-        run: mvn -B -DskipTests package --file Visualisation-of-algortihm-BCS-/Visualisation_of_algrotihm/pom.xml
+        run: mvn -B -DskipTests package --file Visualisation_of_algrotihm/pom.xml
 
       - name: Attach JAR to GitHub release
         if: github.event_name == 'release'
