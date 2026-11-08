@@ -5,6 +5,11 @@ on:
     branches: ["github-actions"]
   pull_request:
     branches: ["github-actions"]
+  release:
+    types: [published]
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -31,8 +36,15 @@ jobs:
           -Dpackaging=jar
           -DgeneratePom=true
 
-      - name: Build with Maven
-        run: mvn -B package --file Visualisation_of_algrotihm/pom.xml
+      - name: Build with Maven (skip tests)
+        run: mvn -B -DskipTests package --file Visualisation_of_algrotihm/pom.xml
+
+      - name: Attach JAR to GitHub release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: Visualisation_of_algrotihm/target/*.jar
 
       - name: Update dependency graph
+        if: github.event_name != 'release'
         uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
