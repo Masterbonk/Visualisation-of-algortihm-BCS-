@@ -3,6 +3,7 @@ package org.algorithm.ui.buttons.algo_state_buttons;
 import org.algorithm.Color_Algo_State;
 import org.algorithm.Main;
 import org.algorithm.algo.Visual_Dijkstra;
+import org.algorithm.ui.Color_Scheme;
 import org.algorithm.ui.buttons.Button;
 import processing.core.PApplet;
 
@@ -26,6 +27,11 @@ public class Dijkstra_Button extends Button {
         super.tool_tip = "Change the algorithm to Dijkstra";
         super.tool_tip_box.update_Text(tool_tip);
         clicked = true;
+    }
+
+    @Override
+    public int clicked_color(){
+        return Color_Scheme.bg_button_algo_zero;
     }
 
     @Override

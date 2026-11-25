@@ -97,7 +97,7 @@ public abstract class Button {
         } else if (clicked) {
 
             sketch.push();
-            sketch.fill(Color_Scheme.bg_button_clicked);
+            sketch.fill(clicked_color());
             sketch.rect(x_pos + changeVal, y_pos + changeVal, x_size - changeVal * 2, y_size - changeVal * 2, 5);
             sketch.fill(Color_Scheme.text_button_clicked); //Text color
 
@@ -134,6 +134,10 @@ public abstract class Button {
 
         }
         if (has_tool_tip) render_Tooltip();
+    }
+
+    public int clicked_color(){
+        return Color_Scheme.bg_button_clicked;
     }
 
 
