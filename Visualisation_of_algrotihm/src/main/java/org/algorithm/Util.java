@@ -74,11 +74,14 @@ public class Util {
         Ui.add_Button("Diagonal", (_sketch.displayWidth)/9f*6f,_button_height*2+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"Diagonal 5x5", Diagonal_Graph_Button.class, false, graph_Button);
 
 
+        //algorithms button
         Button algo_Button = Ui.add_Button("Algo_Button",(_sketch.displayWidth)/9f*7f, 0, _sketch.displayWidth/9f, _button_height,"Algorithms", Dropdown_Button.class, false);
         Ui.add_Button("Dijkstra", (_sketch.displayWidth)/9f*7f,_button_height+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"Dijkstra", Dijkstra_Button.class, false, algo_Button);
         Ui.add_Button("A*", (_sketch.displayWidth)/9f*7f,_button_height*2+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"A*", A_Star_Button.class, false, algo_Button);
-        Ui.add_Button("LPA*", (_sketch.displayWidth)/9f*7f,_button_height*3+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"LPA*", LPA_Star_Button.class, false, algo_Button);
-        Ui.add_Button("D* Lite", (_sketch.displayWidth)/9f*7f,_button_height*4+_button_height/10f, _sketch.displayWidth/9f, _button_height-_button_height/10f,"D* Lite", D_Star_Lite_Button.class, false, algo_Button);
+        if(!simpleVersionOfProgram) {
+            Ui.add_Button("LPA*", (_sketch.displayWidth) / 9f * 7f, _button_height * 3 + _button_height / 10f, _sketch.displayWidth / 9f, _button_height - _button_height / 10f, "LPA*", LPA_Star_Button.class, false, algo_Button);
+            Ui.add_Button("D* Lite", (_sketch.displayWidth) / 9f * 7f, _button_height * 4 + _button_height / 10f, _sketch.displayWidth / 9f, _button_height - _button_height / 10f, "D* Lite", D_Star_Lite_Button.class, false, algo_Button);
+        }
 
 
 

@@ -36,8 +36,10 @@ public class Dijkstra_Button extends Button {
 
         if (!clicked) {
             Main.Ui.get_Button("A*").clicked = false;
-            Main.Ui.get_Button("LPA*").clicked = false;
-            Main.Ui.get_Button("D* Lite").clicked = false;
+            if(!Main.simpleVersionOfProgram) {
+                Main.Ui.get_Button("LPA*").clicked = false;
+                Main.Ui.get_Button("D* Lite").clicked = false;
+            }
         }
 
         if (Ui.get_Button("heuristic").clicked){

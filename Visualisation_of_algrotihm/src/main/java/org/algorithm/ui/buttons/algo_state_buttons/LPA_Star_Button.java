@@ -34,7 +34,9 @@ public class LPA_Star_Button extends Button {
 
             Main.Ui.get_Button("Dijkstra").clicked = false;
             Main.Ui.get_Button("A*").clicked = false;
-            Main.Ui.get_Button("D* Lite").clicked = false;
+            if(!Main.simpleVersionOfProgram) {
+                Main.Ui.get_Button("D* Lite").clicked = false;
+            }
         }
         algorithm = new Visual_LPA();
 

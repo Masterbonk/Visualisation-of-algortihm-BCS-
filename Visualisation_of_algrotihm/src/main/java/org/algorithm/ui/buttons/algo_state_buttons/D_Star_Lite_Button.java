@@ -36,7 +36,9 @@ public class D_Star_Lite_Button extends Button {
         if (!clicked) {
             Main.Ui.get_Button("Dijkstra").clicked = false;
             Main.Ui.get_Button("A*").clicked = false;
-            Main.Ui.get_Button("LPA*").clicked = false;
+            if(!Main.simpleVersionOfProgram) {
+                Main.Ui.get_Button("LPA*").clicked = false;
+            }
         }
 
 
