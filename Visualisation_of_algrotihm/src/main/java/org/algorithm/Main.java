@@ -32,6 +32,7 @@ import static org.algorithm.Util.generate_Name;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main extends PApplet{
 
+    public static boolean simpleVersionOfProgram = true;
     public static boolean fullscreen = true;
     public static boolean debug = false;
 
